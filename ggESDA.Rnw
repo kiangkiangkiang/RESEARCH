@@ -9,14 +9,14 @@
 \usepackage{framed}
 
 %% new custom commands
-%\newcommand{\class}[1]{`\code{#1}'}
-%\newcommand{\fct}[1]{\code{#1()}}
+\newcommand{\class}[1]{`\code{#1}'}
+\newcommand{\fct}[1]{\code{#1()}}
 
 %% For Sweave-based articles about R packages:
 %% need no \usepackage{Sweave}
 %\SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-#options(prompt = "R> ", continue = "+  ", width = 70, #useFancyQuotes = FALSE)
+#options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 #library("MASS")
 @
 
@@ -28,25 +28,25 @@
 %% - Separate authors by \And or \AND (in \author) or by comma (in \Plainauthor).
 %% - \AND starts a new line, \And does not.
 \author{Bo-Syue Jiang\\National Taipei University}
-%\Plainauthor{Bo-Syue Jiang}
+\Plainauthor{Bo-Syue Jiang}
 
 %% - \title{} in title case
 %% - \Plaintitle{} without LaTeX markup (if any)
 %% - \Shorttitle{} with LaTeX markup (if any), used as running title
 \title{ggESDA: An \proglang{R} Package for Exploratory Symbolic Data Analysis using \pkg{ggplot2}}
-%Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
-%\Shorttitle{A Short Demo Article in \proglang{R}}
+\Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
+\Shorttitle{A Short Demo Article in \proglang{R}}
 
 %% - \Abstract{} almost as usual
 \Abstract{
-  This paper presents the \pkg{ggESDA} package,which we developed for exploratory symbolic data analysis in \proglang{R}.Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar.In addition, a general ,customized and user-friendly transformation function \code{classic2sym()} is implemented 
+  This paper presents the \pkg{ggESDA} package, which we developed for exploratory symbolic data analysis in \proglang{R}. Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar. In addition, a general and  customized transformation function \code{classic2sym()} is implemented for generating a symbolic data table by clustering algorithm, \pkg{RSDA} \cite{Rojas:2015} function and user-defined method.
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
 %% - \Plainkeywords{} without LaTeX markup (if necessary)
 %% - Should be comma-separated and in sentence case.
 \Keywords{SDA, EDA, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, \proglang{R}}
-\Plainkeywords{JSS, style guide, comma-separated, not capitalized, R}
+\Plainkeywords{SDA, EDA, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, R}
 
 %% - \Address{} of at least one author
 %% - May contain multiple affiliations for each author
@@ -56,105 +56,13 @@
 
 
 \begin{document}
-%\SweaveOpts{concordance=TRUE} modify this
+%\SweaveOpts{concordance=TRUE} 
 
+modify this
 
-%% -- Introduction -------------------------------------------------------------
-
-%% - In principle "as usual".
-%% - But should typically have some discussion of both _software_ and _methods_.
-%% - Use \proglang{}, \pkg{}, and \code{} markup throughout the manuscript.
-%% - If such markup is in (sub)section titles, a plain text version has to be
-%%   added as well.
-%% - All software mentioned should be properly \cite-d.
-%% - All abbreviations should be introduced.
-%% - Unless the expansions of abbreviations are proper names (like "Journal
-%%   of Statistical Software" above) they should be in sentence case (like
-%%   "generalized linear models" below).
-
-
-%% -- Manuscript ---------------------------------------------------------------
-
-%% - In principle "as usual" again.
-%% - When using equations (e.g., {equation}, {eqnarray}, {align}, etc.
-%%   avoid empty lines before and after the equation (which would signal a new
-%%   paragraph.
-%% - When describing longer chunks of code that are _not_ meant for execution
-%%   (e.g., a function synopsis or list of arguments), the environment {Code}
-%%   is recommended. Alternatively, a plain {verbatim} can also be used.
-%%   (For executed code see the next section.)
-
-
-
-
-%% -- Illustrations ------------------------------------------------------------
-
-%% - Virtually all JSS manuscripts list source code along with the generated
-%%   output. The style files provide dedicated environments for this.
-%% - In R, the environments {Sinput} and {Soutput} - as produced by Sweave() or
-%%   or knitr using the render_sweave() hook - are used (without the need to
-%%   load Sweave.sty).
-%% - Equivalently, {CodeInput} and {CodeOutput} can be used.
-%% - The code input should use "the usual" command prompt in the respective
-%%   software system.
-%% - For R code, the prompt "R> " should be used with "+  " as the
-%%   continuation prompt.
-%% - Comments within the code chunks should be avoided - these should be made
-%%   within the regular LaTeX text.
-
-
-%
-<<code bloc ID>>=
-#R code in here
-@
-%
-
-<<visualization, echo=FALSE, fig=TRUE, height=5.2, width=7>>=
-#R plot here (remember use begin{figure} to include)
-@
-
-
-
-
-%
-
-
-
-
-
-%% -- Summary/conclusions/discussion -------------------------------------------
-
-
-
-
-%% -- Optional special unnumbered sections -------------------------------------
-
-
-
-%% -- Bibliography -------------------------------------------------------------
-%% - References need to be provided in a .bib BibTeX database.
-%% - All references should be made with \cite, \citet, \citep, \citealp etc.
-%%   (and never hard-coded). See the FAQ for details.
-%% - JSS-specific markup (\proglang, \pkg, \code) should be used in the .bib.
-%% - Titles in the .bib should be in title case.
-%% - DOIs should be included where available.
+test whether nothing change
 
 \bibliography{refs}
 
 
-%% -- Appendix (if any) --------------------------------------------------------
-%% - After the bibliography with page break.
-%% - With proper section titles and _not_ just "Appendix".
-
-\newpage
-
-\begin{appendix}
-
-(wait for edit)
-
-\end{appendix}
-
-%% -----------------------------------------------------------------------------
-
-%test
 \end{document}
