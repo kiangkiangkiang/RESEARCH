@@ -9,15 +9,15 @@
 \usepackage{framed}
 
 %% new custom commands
-\newcommand{\class}[1]{`\code{#1}'}
-\newcommand{\fct}[1]{\code{#1()}}
+%\newcommand{\class}[1]{`\code{#1}'}
+%\newcommand{\fct}[1]{\code{#1()}}
 
 %% For Sweave-based articles about R packages:
 %% need no \usepackage{Sweave}
-\SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
+%\SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
-library("MASS")
+#options(prompt = "R> ", continue = "+  ", width = 70, #useFancyQuotes = FALSE)
+#library("MASS")
 @
 
 
@@ -27,20 +27,19 @@ library("MASS")
 %% - \Plainauthor{} without affiliations
 %% - Separate authors by \And or \AND (in \author) or by comma (in \Plainauthor).
 %% - \AND starts a new line, \And does not.
-\author{Bo-Syue Jiang\\University Taipei
-   \And Han-Ming Wu\\wait for edit}
-\Plainauthor{Bo-Syue Jiang, Han-Ming Wu}
+\author{Bo-Syue Jiang\\National Taipei University}
+%\Plainauthor{Bo-Syue Jiang}
 
 %% - \title{} in title case
 %% - \Plaintitle{} without LaTeX markup (if any)
 %% - \Shorttitle{} with LaTeX markup (if any), used as running title
-\title{ggESDA: An \proglang{R} Package for exploratory symbolic data analysis using \pkg{ggplot2}}
-\Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
-\Shorttitle{A Short Demo Article in \proglang{R}}
+\title{ggESDA: An \proglang{R} Package for Exploratory Symbolic Data Analysis using \pkg{ggplot2}}
+%Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
+%\Shorttitle{A Short Demo Article in \proglang{R}}
 
 %% - \Abstract{} almost as usual
 \Abstract{
-  This paper presents the \pkg{ggESDA} package,which we developed for exploratory symbolic data analysis in \proglang{R}.Based on \pkg{ggplot2} \cite{Wickham:2009},the \pkg{ggESDA} package provides a tools for visualizing 
+  This paper presents the \pkg{ggESDA} package,which we developed for exploratory symbolic data analysis in \proglang{R}.Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar.In addition, a general ,customized and user-friendly transformation function \code{classic2sym()} is implemented 
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
@@ -54,9 +53,7 @@ library("MASS")
 %%   (in extra lines, separated by \emph{and}\\).
 %% - May contain multiple authors for the same affiliation
 %%   (in the same first line, separated by comma).
-\Address{
-  myaddress
-}
+
 
 \begin{document}
 %\SweaveOpts{concordance=TRUE} modify this
@@ -75,18 +72,6 @@ library("MASS")
 %%   of Statistical Software" above) they should be in sentence case (like
 %%   "generalized linear models" below).
 
-\section[Introduction: xxx(wait for edit)]{Introduction: xxx(wait for edit)} \label{sec:intro}
-
-\begin{leftbar}
-1..... (wait for edit)
-
-2..... (wait for edit)
-\end{leftbar}
-
-3..... (wait for edit)
-
-4..... (wait for edit)
-
 
 %% -- Manuscript ---------------------------------------------------------------
 
@@ -99,58 +84,7 @@ library("MASS")
 %%   is recommended. Alternatively, a plain {verbatim} can also be used.
 %%   (For executed code see the next section.)
 
-\section{sec title (wait for edit)} \label{sec:models}
 
-(wait for edit)
-
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
-
-\proglang{R} (wait for edit) \fct{glm} \citep{Chambers+Hastie:1992} in the
-\pkg{stats} package. 
-\begin{Code}
-glm(formula, data, subset, na.action, weights, offset,
-  family = gaussian, start = NULL, control = glm.control(...),
-  model = TRUE, y = TRUE, x = FALSE, ...)
-\end{Code}
-
-(wait for edit)
-
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
-
-\begin{table}[t!]
-\centering
-\begin{tabular}{lllp{7.4cm}}
-\hline
-Type           & Distribution & Method   & Description \\ \hline
-GLM            & Poisson      & ML       & Poisson regression: classical GLM,
-                                           estimated by maximum likelihood (ML) \\
-               &              & Quasi    & ``Quasi-Poisson regression'':
-                                           same mean function, estimated by
-                                           quasi-ML (QML) or equivalently
-                                           generalized estimating equations (GEE),
-                                           inference adjustment via estimated
-                                           dispersion parameter \\
-               &              & Adjusted & ``Adjusted Poisson regression'':
-                                           same mean function, estimated by
-                                           QML/GEE, inference adjustment via
-                                           sandwich covariances\\
-               & NB           & ML       & NB regression: extended GLM,
-                                           estimated by ML including additional
-                                           shape parameter \\ \hline
-Zero-augmented & Poisson      & ML       & Zero-inflated Poisson (ZIP),
-                                           hurdle Poisson \\
-               & NB           & ML       & Zero-inflated NB (ZINB),
-                                           hurdle NB \\ \hline
-\end{tabular}
-\caption{\label{tab:overview} Overview of various count regression models. The
-table is usually placed at the top of the page (\texttt{[t!]}), centered
-(\texttt{centering}), has a caption below the table, column headers and captions
-are in sentence style, and if possible vertical lines should be avoided.}
-\end{table}
 
 
 %% -- Illustrations ------------------------------------------------------------
@@ -168,89 +102,33 @@ are in sentence style, and if possible vertical lines should be avoided.}
 %% - Comments within the code chunks should be avoided - these should be made
 %%   within the regular LaTeX text.
 
-\section{third title (wait for edit)} \label{sec:illustrations}
 
-(wait for edit)
 %
-<<data>>=
-data("quine", package = "MASS")
+<<code bloc ID>>=
+#R code in here
 @
 %
-and a basic frequency distribution of the response variable is displayed in
-Figure~\ref{fig:quine}.
 
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
-
-\begin{figure}[t!]
-\centering
 <<visualization, echo=FALSE, fig=TRUE, height=5.2, width=7>>=
-par(mar = c(4, 4, 1, 1))
-plot(table(quine$Days), xlab = "Days", ylab = "Frequency", axes = FALSE)
-axis(2)
-axis(1, at = 0:16 * 5, labels = FALSE)
-axis(1, at = 0:8 * 10)
-box()
+#R plot here (remember use begin{figure} to include)
 @
-\caption{\label{fig:quine} Frequency distribution for number of days absent
-from school.}
-\end{figure}
 
-(wait for edit)
+
+
+
 %
-<<poisson>>=
-m_pois <- glm(Days ~ (Eth + Sex + Age + Lrn)^2, data = quine,
-  family = poisson)
-@
-%
-To account for potential overdispersion we also consider a negative binomial
-GLM.
-%
-<<negbin>>=
-library("MASS")
-m_nbin <- glm.nb(Days ~ (Eth + Sex + Age + Lrn)^2, data = quine)
-@
-%
-In a comparison with the BIC the latter model is clearly preferred.
-%
-<<comparison>>=
-BIC(m_pois, m_nbin)
-@
-%
-Hence, the full summary of that model is shown below.
-%
-<<summary>>=
-summary(m_nbin)
-@
+
+
 
 
 
 %% -- Summary/conclusions/discussion -------------------------------------------
 
-\section{Summary and discussion} \label{sec:summary}
 
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
 
 
 %% -- Optional special unnumbered sections -------------------------------------
 
-\section*{Computational details}
-
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
-
-(wait for edit)
-
-
-\section*{Acknowledgments}
-
-\begin{leftbar}
-(wait for edit)
-\end{leftbar}
 
 
 %% -- Bibliography -------------------------------------------------------------
