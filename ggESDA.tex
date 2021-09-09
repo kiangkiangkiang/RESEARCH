@@ -1,0 +1,333 @@
+\documentclass[article]{jss}
+
+%% -- LaTeX packages and custom commands ---------------------------------------
+
+%% recommended packages
+\usepackage{thumbpdf,lmodern}
+
+%% another package (only for this demo article)
+\usepackage{framed}
+
+%% new custom commands
+\newcommand{\class}[1]{`\code{#1}'}
+\newcommand{\fct}[1]{\code{#1()}}
+
+%% For Sweave-based articles about R packages:
+%% need no \usepackage{Sweave}
+
+
+
+%% -- Article metainformation (author, title, ...) -----------------------------
+
+%% - \author{} with primary affiliation
+%% - \Plainauthor{} without affiliations
+%% - Separate authors by \And or \AND (in \author) or by comma (in \Plainauthor).
+%% - \AND starts a new line, \And does not.
+\author{Bo-Syue Jiang\\University Taipei
+   \And Han-Ming Wu\\wait for edit}
+\Plainauthor{Bo-Syue Jiang, Han-Ming Wu}
+
+%% - \title{} in title case
+%% - \Plaintitle{} without LaTeX markup (if any)
+%% - \Shorttitle{} with LaTeX markup (if any), used as running title
+\title{ggESDA: An \proglang{R} Package for exploratory symbolic data analysis using \pkg{ggplot2}}
+\Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
+\Shorttitle{A Short Demo Article in \proglang{R}}
+
+%% - \Abstract{} almost as usual
+\Abstract{
+  This paper presents the \pkg{ggESDA} package,which we developed for exploratory symbolic data analysis in \proglang{R}.Based on \pkg{ggplot2} \cite{Wickham:2009}
+}
+
+%% - \Keywords{} with LaTeX markup, at least one required
+%% - \Plainkeywords{} without LaTeX markup (if necessary)
+%% - Should be comma-separated and in sentence case.
+\Keywords{SDA, EDA, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, \proglang{R}}
+\Plainkeywords{JSS, style guide, comma-separated, not capitalized, R}
+
+%% - \Address{} of at least one author
+%% - May contain multiple affiliations for each author
+%%   (in extra lines, separated by \emph{and}\\).
+%% - May contain multiple authors for the same affiliation
+%%   (in the same first line, separated by comma).
+\Address{
+  myaddress
+}
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE} modify this
+
+
+%% -- Introduction -------------------------------------------------------------
+
+%% - In principle "as usual".
+%% - But should typically have some discussion of both _software_ and _methods_.
+%% - Use \proglang{}, \pkg{}, and \code{} markup throughout the manuscript.
+%% - If such markup is in (sub)section titles, a plain text version has to be
+%%   added as well.
+%% - All software mentioned should be properly \cite-d.
+%% - All abbreviations should be introduced.
+%% - Unless the expansions of abbreviations are proper names (like "Journal
+%%   of Statistical Software" above) they should be in sentence case (like
+%%   "generalized linear models" below).
+
+\section[Introduction: xxx(wait for edit)]{Introduction: xxx(wait for edit)} \label{sec:intro}
+
+\begin{leftbar}
+1..... (wait for edit)
+
+2..... (wait for edit)
+\end{leftbar}
+
+3..... (wait for edit)
+
+4..... (wait for edit)
+
+
+%% -- Manuscript ---------------------------------------------------------------
+
+%% - In principle "as usual" again.
+%% - When using equations (e.g., {equation}, {eqnarray}, {align}, etc.
+%%   avoid empty lines before and after the equation (which would signal a new
+%%   paragraph.
+%% - When describing longer chunks of code that are _not_ meant for execution
+%%   (e.g., a function synopsis or list of arguments), the environment {Code}
+%%   is recommended. Alternatively, a plain {verbatim} can also be used.
+%%   (For executed code see the next section.)
+
+\section{sec title (wait for edit)} \label{sec:models}
+
+(wait for edit)
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+\proglang{R} (wait for edit) \fct{glm} \citep{Chambers+Hastie:1992} in the
+\pkg{stats} package. 
+\begin{Code}
+glm(formula, data, subset, na.action, weights, offset,
+  family = gaussian, start = NULL, control = glm.control(...),
+  model = TRUE, y = TRUE, x = FALSE, ...)
+\end{Code}
+
+(wait for edit)
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+\begin{table}[t!]
+\centering
+\begin{tabular}{lllp{7.4cm}}
+\hline
+Type           & Distribution & Method   & Description \\ \hline
+GLM            & Poisson      & ML       & Poisson regression: classical GLM,
+                                           estimated by maximum likelihood (ML) \\
+               &              & Quasi    & ``Quasi-Poisson regression'':
+                                           same mean function, estimated by
+                                           quasi-ML (QML) or equivalently
+                                           generalized estimating equations (GEE),
+                                           inference adjustment via estimated
+                                           dispersion parameter \\
+               &              & Adjusted & ``Adjusted Poisson regression'':
+                                           same mean function, estimated by
+                                           QML/GEE, inference adjustment via
+                                           sandwich covariances\\
+               & NB           & ML       & NB regression: extended GLM,
+                                           estimated by ML including additional
+                                           shape parameter \\ \hline
+Zero-augmented & Poisson      & ML       & Zero-inflated Poisson (ZIP),
+                                           hurdle Poisson \\
+               & NB           & ML       & Zero-inflated NB (ZINB),
+                                           hurdle NB \\ \hline
+\end{tabular}
+\caption{\label{tab:overview} Overview of various count regression models. The
+table is usually placed at the top of the page (\texttt{[t!]}), centered
+(\texttt{centering}), has a caption below the table, column headers and captions
+are in sentence style, and if possible vertical lines should be avoided.}
+\end{table}
+
+
+%% -- Illustrations ------------------------------------------------------------
+
+%% - Virtually all JSS manuscripts list source code along with the generated
+%%   output. The style files provide dedicated environments for this.
+%% - In R, the environments {Sinput} and {Soutput} - as produced by Sweave() or
+%%   or knitr using the render_sweave() hook - are used (without the need to
+%%   load Sweave.sty).
+%% - Equivalently, {CodeInput} and {CodeOutput} can be used.
+%% - The code input should use "the usual" command prompt in the respective
+%%   software system.
+%% - For R code, the prompt "R> " should be used with "+  " as the
+%%   continuation prompt.
+%% - Comments within the code chunks should be avoided - these should be made
+%%   within the regular LaTeX text.
+
+\section{third title (wait for edit)} \label{sec:illustrations}
+
+(wait for edit)
+%
+\begin{Schunk}
+\begin{Sinput}
+R> data("quine", package = "MASS")
+\end{Sinput}
+\end{Schunk}
+%
+and a basic frequency distribution of the response variable is displayed in
+Figure~\ref{fig:quine}.
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+\begin{figure}[t!]
+\centering
+\includegraphics{ggESDA-visualization}
+\caption{\label{fig:quine} Frequency distribution for number of days absent
+from school.}
+\end{figure}
+
+(wait for edit)
+%
+\begin{Schunk}
+\begin{Sinput}
+R> m_pois <- glm(Days ~ (Eth + Sex + Age + Lrn)^2, data = quine,
++    family = poisson)
+\end{Sinput}
+\end{Schunk}
+%
+To account for potential overdispersion we also consider a negative binomial
+GLM.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> library("MASS")
+R> m_nbin <- glm.nb(Days ~ (Eth + Sex + Age + Lrn)^2, data = quine)
+\end{Sinput}
+\end{Schunk}
+%
+In a comparison with the BIC the latter model is clearly preferred.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> BIC(m_pois, m_nbin)
+\end{Sinput}
+\begin{Soutput}
+       df      BIC
+m_pois 18 2046.851
+m_nbin 19 1157.235
+\end{Soutput}
+\end{Schunk}
+%
+Hence, the full summary of that model is shown below.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> summary(m_nbin)
+\end{Sinput}
+\begin{Soutput}
+Call:
+glm.nb(formula = Days ~ (Eth + Sex + Age + Lrn)^2, data = quine, 
+    init.theta = 1.60364105, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0857  -0.8306  -0.2620   0.4282   2.0898  
+
+Coefficients: (1 not defined because of singularities)
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.00155    0.33709   8.904  < 2e-16 ***
+EthN        -0.24591    0.39135  -0.628  0.52977    
+SexM        -0.77181    0.38021  -2.030  0.04236 *  
+AgeF1       -0.02546    0.41615  -0.061  0.95121    
+AgeF2       -0.54884    0.54393  -1.009  0.31296    
+AgeF3       -0.25735    0.40558  -0.635  0.52574    
+LrnSL        0.38919    0.48421   0.804  0.42153    
+EthN:SexM    0.36240    0.29430   1.231  0.21818    
+EthN:AgeF1  -0.70000    0.43646  -1.604  0.10876    
+EthN:AgeF2  -1.23283    0.42962  -2.870  0.00411 ** 
+EthN:AgeF3   0.04721    0.44883   0.105  0.91622    
+EthN:LrnSL   0.06847    0.34040   0.201  0.84059    
+SexM:AgeF1   0.02257    0.47360   0.048  0.96198    
+SexM:AgeF2   1.55330    0.51325   3.026  0.00247 ** 
+SexM:AgeF3   1.25227    0.45539   2.750  0.00596 ** 
+SexM:LrnSL   0.07187    0.40805   0.176  0.86019    
+AgeF1:LrnSL -0.43101    0.47948  -0.899  0.36870    
+AgeF2:LrnSL  0.52074    0.48567   1.072  0.28363    
+AgeF3:LrnSL       NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(1.6036) family taken to be 1)
+
+    Null deviance: 235.23  on 145  degrees of freedom
+Residual deviance: 167.53  on 128  degrees of freedom
+AIC: 1100.5
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  1.604 
+          Std. Err.:  0.214 
+
+ 2 x log-likelihood:  -1062.546 
+\end{Soutput}
+\end{Schunk}
+
+
+
+%% -- Summary/conclusions/discussion -------------------------------------------
+
+\section{Summary and discussion} \label{sec:summary}
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+
+%% -- Optional special unnumbered sections -------------------------------------
+
+\section*{Computational details}
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+(wait for edit)
+
+
+\section*{Acknowledgments}
+
+\begin{leftbar}
+(wait for edit)
+\end{leftbar}
+
+
+%% -- Bibliography -------------------------------------------------------------
+%% - References need to be provided in a .bib BibTeX database.
+%% - All references should be made with \cite, \citet, \citep, \citealp etc.
+%%   (and never hard-coded). See the FAQ for details.
+%% - JSS-specific markup (\proglang, \pkg, \code) should be used in the .bib.
+%% - Titles in the .bib should be in title case.
+%% - DOIs should be included where available.
+
+\bibliography{refs}
+
+
+%% -- Appendix (if any) --------------------------------------------------------
+%% - After the bibliography with page break.
+%% - With proper section titles and _not_ just "Appendix".
+
+\newpage
+
+\begin{appendix}
+
+(wait for edit)
+
+\end{appendix}
+
+%% -----------------------------------------------------------------------------
+
+
+\end{document}
