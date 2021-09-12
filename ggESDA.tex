@@ -23,8 +23,9 @@
 %% - \Plainauthor{} without affiliations
 %% - Separate authors by \And or \AND (in \author) or by comma (in \Plainauthor).
 %% - \AND starts a new line, \And does not.
-\author{Bo-Syue Jiang\\National Taipei University}
-\Plainauthor{Bo-Syue Jiang}
+\author{Bo-Syue Jiang\\National Taipei University
+\And Han-Ming Wu\\wait for edit}
+\Plainauthor{Bo-Syue Jiang,Han-Ming Wu}
 
 %% - \title{} in title case
 %% - \Plaintitle{} without LaTeX markup (if any)
@@ -35,14 +36,14 @@
 
 %% - \Abstract{} almost as usual
 \Abstract{
-  This paper presents the \pkg{ggESDA} package, which we developed for exploratory symbolic data analysis in \proglang{R}. Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar. In addition, a general and  customized transformation function \code{classic2sym()} is implemented for generating a symbolic data table by clustering algorithm, \pkg{RSDA} \cite{Rojas:2015} function and user-defined method.
+  This paper presents the \pkg{ggESDA} package, which we developed for exploratory symbolic data analysis in \proglang{R}. Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar plot. In addition, a general and  customized transformation function \code{classic2sym()} is implemented for generating a symbolic data table from classical data frame by clustering algorithm, \pkg{RSDA} \cite{Rojas:2015} function and user-defined method. wait for edit......
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
 %% - \Plainkeywords{} without LaTeX markup (if necessary)
 %% - Should be comma-separated and in sentence case.
-\Keywords{SDA, EDA, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, \proglang{R}}
-\Plainkeywords{SDA, EDA, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, R}
+\Keywords{data visualization, symbolic data analysis, exploratory data analysis, \pkg{ggplot2} extensions, interval-valued data, \proglang{R}}
+\Plainkeywords{data visualization, symbolic data analysis, exploratory data analysis, ggplot2 extensions, interval-valued data, R}
 
 %% - \Address{} of at least one author
 %% - May contain multiple affiliations for each author
@@ -53,10 +54,25 @@
 
 \begin{document}
 %\SweaveOpts{concordance=TRUE} 
+\section{Introduction}
+"In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." \cite{Diday:2018}. The statement indicates that not only conventional data but the unstructured data, also known as symbolic data, is important for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms.
 
-modify this
+SDA aim....
 
-test whether nothing change
+interval-valued data...
+
+EDA...
+
+trend...
+
+compare...
+
+
+The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to
+
+
+
+
 
 \bibliography{refs}
 
