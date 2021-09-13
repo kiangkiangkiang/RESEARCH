@@ -1,0 +1,62 @@
+---
+title: "ggESDA Contents"
+output:  
+  pdf_document:
+    number_sections: true
+    highlight: tango
+fontsize: 12pt 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+* what is SDA
+
+* why is SDA (Trend figure)
+
+* introduce interval-valued data (one of the most common
+symbolic data type.....)
+
+* how to do SDA (introduce EDA, using EDA to analyze interval-valued data)
+
+# Prominent SDA packages
+
+(preface..., overview all packages in python and R,then state the first three package.....)
+
+## RSDA
+
+## symbolicDA
+
+## HistDAWass
+
+(summarize with table)
+
+(none of the above analyze interval-valued data with EDA using ggplot2)
+
+# the ggESDA package
+
+(introduce feature : classic2sym() function can convert yourself...,ggplot2 base....,visualize with multiple type plot...)
+
+## classic2sym() function
+
+## plot function
+
+## PCA function
+
+# Application to real datasets
+
+(like usage..., introduce data and transformation)
+
+## univariate
+
+## bivariate
+
+## multivariate
+
+
+# Conclusion
+
+
