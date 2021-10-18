@@ -59,7 +59,7 @@
 \begin{document}
 %\SweaveOpts{concordance=TRUE} 
 \section{Introduction}
-"In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." \cite{Diday:2018}. The statement indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application   aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
+"In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." \cite{Diday:2018}. The statement indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
 \begin{figure}[h]	
   		\centering	 			 	 
  	 		\includegraphics[width=1\textwidth]{\imgdir Trend_SDA_1998_to_2020.png} 
@@ -82,20 +82,33 @@ Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what 
 
 \section{Prominent SDA packages}
 
-
 \subsection[RSDA]{\pkg{RSDA}}
 
 \subsection[symbolicDA]{\pkg{symbolicDA}}
 
 \subsection[HistDAWass]{\pkg{HistDAWass}}
 
-\section[The ggESDA package]{The \pkg{ggESDA} package}
 
-\subsection[classic2sym() function]{\code{classic2sym()} function}
 
-\subsection{plot function}
 
-\subsection{Principal Components Analysis (PCA)}
+\section[Basic usage of ggESDA]{Basic usage of \pkg{ggESDA}}
+
+\pkg{ggESDA} is now available from the Github at \url{https://github.com/kiangkiangkiang/ggESDA}. All reference manual documented by exported functions and introduction vignettes can also be download here. In the following section, we are going to illustrate the functionalities and syntaxes about \pkg{ggESDA}.
+
+\subsection[Transformation function]
+
+
+
+
+
+
+
+\subsection{General principles}
+
+\subsection{Multiple plot}
+
+\subsection{Package dependencies}
+
 
 \section{Application to real datasets}
 
