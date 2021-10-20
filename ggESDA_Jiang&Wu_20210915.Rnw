@@ -55,6 +55,16 @@
 %% - May contain multiple authors for the same affiliation
 %%   (in the same first line, separated by comma).
 
+<<dataPrepare, echo=FALSE, results=hide>>=
+library(ggESDA)
+library(grid)
+library(gridExtra)
+set.seed(20211020)
+myDiamonds <- diamonds
+myDiamonds.i <- classic2sym(myDiamonds)$intervalData
+@
+
+
 
 \begin{document}
 %\SweaveOpts{concordance=TRUE} 
@@ -122,7 +132,48 @@ Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what 
 \section{Conclusion}
 
 
+
+\section{why SDA plot (weakness of classical plot)}
+\subsection{sol overstike}
+For the conventional exploratory data analysis, it is always a severe challenge to deal with enormous datasets because conventional displays suffered from overstrikes of data points representing the value (scatterplot type displays) or overstrikes of line segments connecting values of neighboring variables. As a consequence, exploratory symbolic data analysis (SDA) becomes a preliminary yet essential tool for summarizing the main characteristics of a data set before appropriate statistical modeling can be applied. Besides escaping the problem mentioned above, SDA can effectively reduce observations in data, which will make the study focus on what we interesting instead of unnecessary information such as Figure~\ref{fig:compare}.
+
+\begin{figure}[H]
+\centering
+<<compare, echo=FALSE, fig=TRUE, height=5.2, width=7>>=
+myOrder <- c(5, 4, 3, 1, 2)
+myCol <- RColorBrewer::brewer.pal(5, "Blues")
+
+a <- ggplot(myDiamonds, aes(x = carat, y = price))+
+  geom_point() + theme_bw()
+b <- ggInterval_scatter(myDiamonds.i, aes(x = carat, y = price)) + 
+  scale_fill_manual(values = myCol[myOrder], 
+                    name="Kmeans-Group", 
+                    labels = c(1:5)) + theme_bw()
+
+grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
+@
+\caption{\label{fig:compare} Compare classical data and symbolic data}
+\end{figure}
+
+In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{Jin:2010}. 
+
+
+\subsection{full information}
+
+In the past, we would like to use barplot to visualize the frequency of categorical data, but that was merely represented the distribution of full data in that category. It cannot lead researchers to explore more details in what they are interesting such as a particular part of data, so aggregation methods play a vital role to merge the data we interesting.
+
+However, the conventional categorical data after merging will usually be represented by mode, which will be unmeaningful to visualize and cause the loss of information that may become larger when the data or the number of factors in that category is growing on. SDA will build a histogram by calculating each factor of the category of frequency as bins to solve this kind of problem as a result. In that way, a categorical variable will never be shown as a single value at all, instead, a complete information histogram will be substituted.
+
+
+
+
+
+
 \bibliography{refs}
+
+
+
+
 
 
 \end{document}
