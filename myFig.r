@@ -4,8 +4,6 @@ tools::texi2pdf("ggESDA_Jiang&Wu_20210915.tex")
 library(ggESDA)
 library(grid)
 library(gridExtra)
-testData <- data.table::fread("doc/data.csv")
-
 #Fig:compare
 myDiamonds <- diamonds
 set.seed(20211020)
@@ -26,6 +24,52 @@ marrangeGrob(list(a, b), ncol = 2, nrow = 1)
 plot_grid(a, b, ncol = 2, rel_heights = c(1/4, 1/4, 1/2))
 grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
 #end Fig:compare
+
+#show_breastData_attr
+breastData <- data.table::fread("doc/data.csv")
+dim(breastData)
+colnames(breastData)
+#end show_breastData_attr
+
+
+#classic2sym_kmeans
+breastData <- dplyr::select(breastData, -id)
+breastData.sym <- classic2sym(breastData, groupby = "kmeans", k = 5)
+breastData.sym.i <- breastData.sym$intervalData
+head(breastData.sym.i[, 1:4], 5)
+#end classic2sym_kmeans
+
+
+?kmeans
+
+
+
+
+?data.table::unique
+
+b<-rbind(mtcars,mtcars[1:5,])
+
+b[33,1]<-22
+
+#base::duplicated(b)
+
+test <- b[, -which(colnames(b)=="mpg")]
+
+duplicated(test)
+
+test[!duplicated(test), ]
+
+aaa <- mtcars
+
+gsub(1, "fuck", aaa$mpg)
+gsub()
+aaa$mpg
+
+cl <- apply(aaa, 2, class)
+
+bbb <- sapply(aaa, gsub, pattern = 1, replacement = "fuck", invert=F);bbb
+
+?gsub
 
 
 

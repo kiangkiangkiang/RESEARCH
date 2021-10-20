@@ -62,6 +62,7 @@ library(gridExtra)
 set.seed(20211020)
 myDiamonds <- diamonds
 myDiamonds.i <- classic2sym(myDiamonds)$intervalData
+breastData <- data.table::fread("doc/data.csv")
 @
 
 
@@ -133,6 +134,8 @@ Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what 
 
 
 
+
+
 \section{why SDA plot (weakness of classical plot)}
 \subsection{sol overstike}
 For the conventional exploratory data analysis, it is always a severe challenge to deal with enormous datasets because conventional displays suffered from overstrikes of data points representing the value (scatterplot type displays) or overstrikes of line segments connecting values of neighboring variables. As a consequence, exploratory symbolic data analysis (SDA) becomes a preliminary yet essential tool for summarizing the main characteristics of a data set before appropriate statistical modeling can be applied. Besides escaping the problem mentioned above, SDA can effectively reduce observations in data, which will make the study focus on what we interesting instead of unnecessary information such as Figure~\ref{fig:compare}.
@@ -165,15 +168,39 @@ In the past, we would like to use barplot to visualize the frequency of categori
 However, the conventional categorical data after merging will usually be represented by mode, which will be unmeaningful to visualize and cause the loss of information that may become larger when the data or the number of factors in that category is growing on. SDA will build a histogram by calculating each factor of the category of frequency as bins to solve this kind of problem as a result. In that way, a categorical variable will never be shown as a single value at all, instead, a complete information histogram will be substituted.
 
 
+\section{classical data to symbolic data}
 
+\subsection{datasets}
 
+We will apply the breast mass dataset, which is computed from a digitized image of a fine needle aspirate (FNA), to demonstrate how does a classical dataset transforms into a symbolic dataset. The breast mass dataset describe characteristics of the cell nuclei present in the image. It can be downloaded from the kaggle at \url{https://www.kaggle.com/uciml/breast-cancer-wisconsin-data?select=data.csv}. There are 569 observations and 32 variables in the dataset. We are going to store this dataset in \code{breastData} as data frame type in \proglang{R}, and the variables will be shown as follows:
+<<show_breastData_attr>>=
+colnames(breastData)
+@
+
+Except for the first two variables, they are all composed of mean, standard error, and "worst" in their own field respectively.
+
+\subsection{kmeans}
+
+K-means clustering is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean. In \pkg{ggESDA}, the algorithm will be based on the \pkg{stats} package, and the number of k is a parameter that user can define themself:
+
+<<classic2sym_kmeans>>=
+breastData <- dplyr::select(breastData, -id)
+breastData.sym <- classic2sym(breastData, groupby = "kmeans", k = 5)
+breastData.sym.i <- breastData.sym$intervalData
+as.data.frame(head(breastData.sym.i[, 1:4], 5))
+@
+
+The \code{id} is unused in this case, so we remove it by \pkg{dplyr}. Then using \code{classic2sym} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
+
+The \code{groupby} is a parameter that determine what kind of aggregation methods will be used. Whenever the K-means method is applied, the consequent \code{k} will become meaningful, whereas the other situation is not. It is also a default method when users have no input arguments in \code{groupby}.
+
+\subsection{hierachical}
+
+\subsection{particular variable}
+
+\subsection{user defined}
 
 
 \bibliography{refs}
-
-
-
-
-
 
 \end{document}
