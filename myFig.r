@@ -71,39 +71,49 @@ as.data.frame(head(demoData.sym.i, 5))
 
 
 
-?hclust
-?kmeans
 
 
 
 
-?data.table::unique
 
-b<-rbind(mtcars,mtcars[1:5,])
+#testtttttttttttttttttttttttttt
+#symbolicDA 下個版本才有example
+library(HistDAWass)
+#get the second variable and its histogram data
+BLOOD[,2]@M[[1]]
+abc<- HistDAWass::data2hist(iris[,3])
+edf<- HistDAWass::data2hist(iris[,2])
+?HistDAWass::register
+mydist1 <- new("distributionH", c(1, 2, 3), c(0, 0.4, 1))
+class(HistDAWass::plot(abc))
 
-b[33,1]<-22
-
-#base::duplicated(b)
-
-test <- b[, -which(colnames(b)=="mpg")]
-
-duplicated(test)
-
-test[!duplicated(test), ]
-
-aaa <- mtcars
-
-gsub(1, "fuck", aaa$mpg)
-gsub()
-aaa$mpg
-
-cl <- apply(aaa, 2, class)
-
-bbb <- sapply(aaa, gsub, pattern = 1, replacement = "fuck", invert=F);bbb
-
-?gsub
+a<- get.MatH.stats(BLOOD, stat = "min")
+b<- get.MatH.stats(BLOOD, stat = "max")
+d <- data.frame(a, b)
+d.sym <- classic2sym(d, groupby = "customize",
+            minData = d[,2:4],
+            maxData = d[,6:8])
+mycolNames <- get.MatH.main.info(BLOOD)$varnames
+d.i <- d.sym$intervalData
+colnames(d.i) <- mycolNames
+d.i
 
 
 
+MAINT.Data::AbaloneIdt
+str(MAINT.Data::AbaloneIdt)
+#取中位數 @midp
+#沒取就是最大最小值
+#取range @LogR
+MAINT.Data::AbaloneIdt[,1]@LogR
+MAINT.Data::AbaloneIdt$Shucked_weight
+
+
+myrange <- exp(MAINT.Data::AbaloneIdt@LogR)
+mymid <- MAINT.Data::AbaloneIdt@MidP
+
+#end testttttttttttttt
+
+?get.MatH.stats
 
 

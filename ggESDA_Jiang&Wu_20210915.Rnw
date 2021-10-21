@@ -242,6 +242,16 @@ Then choose the \code{customize} argument in \code{groupby}, input which data ar
 In order to simplify the process and make the preprocessing friendly, we develop this method and let the people who want to analyze symbolic data easier.
 
 
+
+\section{Generalization and Extension}
+
+\subsection{general principal}
+
+\subsection{general principal}
+
+\subsection{general principal}
+
+
 \bibliography{refs}
 
 \end{document}
