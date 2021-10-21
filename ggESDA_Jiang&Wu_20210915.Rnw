@@ -179,7 +179,7 @@ colnames(breastData)
 
 Except for the first two variables, they are all composed of mean, standard error, and "worst" in their own field respectively.
 
-\subsection{kmeans}
+\subsection{K-means}
 
 K-means clustering is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean. In \pkg{ggESDA}, the algorithm will be based on the \pkg{stats} package, and the number of k is a parameter that user can define themself:
 
@@ -194,11 +194,37 @@ The \code{id} is unused in this case, so we remove it by \pkg{dplyr}. Then using
 
 The \code{groupby} is a parameter that determine what kind of aggregation methods will be used. Whenever the K-means method is applied, the consequent \code{k} will become meaningful, whereas the other situation is not. It is also a default method when users have no input arguments in \code{groupby}.
 
-\subsection{hierachical}
+\subsection{Hierarchical}
+
+The second well-known clustering algorithm is called Hierarchical clustering \cite{Cecil:1966}, also called hierarchical cluster analysis or HCA. It can be performed with a distance matrix
+calculated by raw data and used to present the distance of each cluster. In basic \proglang{R} package, it is also realized by \pkg{stats}, which the \pkg{ggESDA} is based on for implementing HCA:
+
+<<classic2sym_hclust>>=
+breastData.sym <- classic2sym(breastData, groupby = "hclust")
+breastData.sym.i <- breastData.sym$intervalData
+@
+
+Remark that the \code{k} parameter is not meaningful in the case without K-means clustering. In \code{classic2sym}, the keywords of HCA is called \code{hclust}.
 
 \subsection{particular variable}
 
+Using a particular variable to merge different data is a common way for data analysis, too. \pkg{ggESDA} provides such as this concept in \code{classic2sym} to analyze different factors of category variables, and merge the same factor into the symbolic data type:
+
+<<classic2sym_parVar>>=
+breastData.sym <- classic2sym(breastData, groupby = "diagnosis")
+breastData.sym.i <- breastData.sym$intervalData
+head(breastData.sym.i[, 1:4], 5)
+@
+
+In \code{breastData}, the only category variable is \code{diagnosis}, which means the diagnosis of breast tissues (M = malignant, B = benign). We put it as an input argument in \code{groupby} for merging different diagnosis results, and the interval-valued data of result sets will display its factor levels in row names.
+
+
 \subsection{user defined}
+
+In general, users may not always use the aggregation methods we provide, thus, besides generating a particular variable for the group, \pkg{ggESDA} facilitates the process through the min data and max data that user-defined.
+
+For the demonstration, 
+
 
 
 \bibliography{refs}
