@@ -235,6 +235,34 @@ In \code{breastData}, the only category variable is \code{diagnosis}, which mean
 
 \subsection{user defined}
 
+In general, users may not always use the aggregation methods we provide, thus, besides generating a particular variable for the group, \pkg{ggESDA} facilitates the process through the min data and max data that user-defined.
+
+For the demonstration, we will build both min data and max data using \code{runif}. Generate a uniform random variable to make sure that all min data are smaller than max data:
+
+\begin{Schunk}
+\begin{Sinput}
+> minData <- runif(100, -100, -50)
+> maxData <- runif(100, 50, 100)
+> demoData <- data.frame(min = minData, max = maxData)
+> demoData.sym <- classic2sym(demoData, groupby = "customize", 
++                             minData = demoData$min,
++                             maxData = demoData$max)
+> demoData.sym.i <- demoData.sym$intervalData
+> as.data.frame(head(demoData.sym.i, 5))
+\end{Sinput}
+\begin{Soutput}
+                V1
+1 [-75.85 : 63.98]
+2 [-93.71 : 85.33]
+3 [-64.99 : 94.69]
+4 [-57.34 : 66.03]
+5 [-66.02 : 50.95]
+\end{Soutput}
+\end{Schunk}
+
+Then choose the \code{customize} argument in \code{groupby}, input which data are \code{minData} or \code{maxData}, and the transformation will be simply completed.
+
+In order to simplify the process and make the preprocessing friendly, we develop this method and let the people who want to analyze symbolic data easier.
 
 
 \bibliography{refs}

@@ -60,18 +60,13 @@ head(breastData.sym.i[, 1:4], 5)
 #classic2sym_userDefined
 minData <- runif(100, -100, -50)
 maxData <- runif(100, 50, 100)
-categoryData <- as.factor(sample(letters[1:5], 100, replace = TRUE))
-
-demoData <- data.frame(min = minData,
-                       max = maxData,
-                       group = categoryData)
-
+demoData <- data.frame(min = minData, max = maxData)
 demoData.sym <- classic2sym(demoData, groupby = "customize", 
                             minData = demoData$min,
                             maxData = demoData$max)
 
 demoData.sym.i <- demoData.sym$intervalData
-
+as.data.frame(head(demoData.sym.i, 5))
 #end classic2sym_userDefined
 
 
