@@ -71,6 +71,58 @@ as.data.frame(head(demoData.sym.i, 5))
 
 
 
+#HistDAWass_getData
+library(HistDAWass)
+
+# Get min and max data
+blood.min <- get.MatH.stats(BLOOD, stat = "min")
+blood.max <- get.MatH.stats(BLOOD, stat = "max")
+blood <- data.frame(blood.min, blood.max)
+
+# Reorganized and Build ggESDA obj.
+blood.sym <- classic2sym(blood, groupby = "customize",
+                     minData = blood[, 2:4],
+                     maxData = blood[, 6:8])
+
+# Make names
+blood.names <- get.MatH.main.info(BLOOD)$varnames
+blood.i <- blood.sym$intervalData
+colnames(blood.i) <- blood.names
+head(as.data.frame(blood.i), 5)
+
+
+#end HistDAWass_getData
+
+
+#MAINT.Data_getData
+library(MAINT.Data)
+library(tibble)
+#get data interval-valued data in AbaloneIdt
+Aba.range <- exp(AbaloneIdt@LogR)
+Aba.mid <- AbaloneIdt@MidP
+
+
+#make a necessary transformation for build min max data
+Aba <- data.frame(Aba.min = Aba.mid - Aba.range / 2,
+                  Aba.max = Aba.mid + Aba.range / 2)
+
+
+# Reorganized and Build ggESDA obj.
+Aba.sym<- classic2sym(Aba, groupby = "customize",
+                      minData = Aba[, 1:7],
+                      maxData = Aba[, 8:14])
+
+
+# Make names
+colnames(Aba.sym$intervalData) <- AbaloneIdt@VarNames
+Aba.i <- Aba.sym$intervalData %>% 
+  cbind(Aba.obs = AbaloneIdt@ObsNames) %>% 
+  column_to_rownames(var = "Aba.obs")
+
+head(Aba.i[, 1:4], 5)
+#end MAINT.Data
+
+
 
 
 
@@ -106,14 +158,27 @@ str(MAINT.Data::AbaloneIdt)
 #沒取就是最大最小值
 #取range @LogR
 MAINT.Data::AbaloneIdt[,1]@LogR
-MAINT.Data::AbaloneIdt$Shucked_weight
+#MAINT.Data::AbaloneIdt$Shucked_weight
 
 
 myrange <- exp(MAINT.Data::AbaloneIdt@LogR)
 mymid <- MAINT.Data::AbaloneIdt@MidP
+mymin <- mymid - myrange/2
+mymax <- mymid + myrange/2
+d<-data.frame(mymin,mymax)
+mynames <- MAINT.Data::AbaloneIdt@VarNames
+myRnames <- MAINT.Data::AbaloneIdt@ObsNames
+d.sym<- classic2sym(d,groupby = "customize",
+            minData = d[,1:7],
+            maxData = d[,8:14])
+d.i <- d.sym$intervalData
+colnames(d.i) <- mynames
+rownames(d.i)<-myRnames
+iData<-tibble::rownames_to_column(d.i)
+iData<-tibble::column_to_rownames(iData, var = "rowname")
 
 #end testttttttttttttt
 
 ?get.MatH.stats
-
-
+a <- classic2sym(mtcars,groupby=c("cyl","vs"))
+a$intervalData

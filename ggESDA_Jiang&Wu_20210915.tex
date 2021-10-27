@@ -1,7 +1,9 @@
 \documentclass[article]{jss}
 
 %% -- LaTeX packages and custom commands ---------------------------------------
-
+%% my packages
+\usepackage{graphicx} % table rotate
+\usepackage{array} %table height
 %% recommended packages
 \usepackage{thumbpdf,lmodern}
 
@@ -195,7 +197,7 @@ K-means clustering is a method of vector quantization, originally from signal pr
 \end{Soutput}
 \end{Schunk}
 
-The \code{id} is unused in this case, so we remove it by \pkg{dplyr}. Then using \code{classic2sym} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
+The \code{id} is unused in this case, so we remove it by \pkg{dplyr}. Then using \code{classic2sym()} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
 
 The \code{groupby} is a parameter that determine what kind of aggregation methods will be used. Whenever the K-means method is applied, the consequent \code{k} will become meaningful, whereas the other situation is not. It is also a default method when users have no input arguments in \code{groupby}.
 
@@ -211,11 +213,11 @@ calculated by raw data and used to present the distance of each cluster. In basi
 \end{Sinput}
 \end{Schunk}
 
-Remark that the \code{k} parameter is not meaningful in the case without K-means clustering. In \code{classic2sym}, the keywords of HCA is called \code{hclust}.
+Remark that the \code{k} parameter is not meaningful in the case without K-means clustering. In \code{classic2sym()}, the keywords of HCA is called \code{hclust}.
 
 \subsection{particular variable}
 
-Using a particular variable to merge different data is a common way for data analysis, too. \pkg{ggESDA} provides such as this concept in \code{classic2sym} to analyze different factors of category variables, and merge the same factor into the symbolic data type:
+Using a particular variable to merge different data is a common way for data analysis, too. \pkg{ggESDA} provides such as this concept in \code{classic2sym()} to analyze different factors of category variables, and merge the same factor into the symbolic data type:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -233,7 +235,7 @@ M [10.95 : 28.11] [10.38 : 39.28] [71.90 : 188.50] [361.60 : 2,501.00]
 In \code{breastData}, the only category variable is \code{diagnosis}, which means the diagnosis of breast tissues (M = malignant, B = benign). We put it as an input argument in \code{groupby} for merging different diagnosis results, and the interval-valued data of result sets will display its factor levels in row names.
 
 
-\subsection{user defined}
+\subsection{user defined}\label{userDef}
 
 In general, users may not always use the aggregation methods we provide, thus, besides generating a particular variable for the group, \pkg{ggESDA} facilitates the process through the min data and max data that user-defined.
 
@@ -263,6 +265,133 @@ For the demonstration, we will build both min data and max data using \code{runi
 Then choose the \code{customize} argument in \code{groupby}, input which data are \code{minData} or \code{maxData}, and the transformation will be simply completed.
 
 In order to simplify the process and make the preprocessing friendly, we develop this method and let the people who want to analyze symbolic data easier.
+
+
+%begin : this is my table for package_compare 
+
+\begin{table}[htbp]
+  \centering
+  \caption{Compare with \proglang{R} packages}
+  %\rotatebox[origin=c]{90}{
+  \setlength{\extrarowheight}{6pt}
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|c|c|ccc|c|c|c|}
+    \hline
+    \toprule
+    \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ R(4.1.0)}} & \multicolumn{1}{c}{\textbf{Transformation}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
+    \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Reference} & Available & Transform to sym & One variable & Two variables & Multivariable & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
+    RSDA  & Rojas (2015) & V     & V     & 0     & 1     & 0     & 3     & 2*    & 1* \\
+    symbolicDA & Dudek (2013) & V     &       & 0     & 0     & 2*    & 2     & 1     & 1* \\
+    HistDAWass & Irpino (2015) & V     & V     & 4     & 0     & 0     & 3     & 1     & 1* \\\hline
+    \midrule
+    MAINT.Data & Silva (2011) & V     &       & 0     & 0     & 0     & 7*    & 0     & 1* \\
+    iRegression & Neto (2011) & V     &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    intReg & Toomet (2012) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    ISDA.R & Filho (2012) &       &       & 1     & 0     & 1     & 1     & 0     & 0 \\
+    GPCSIV & Brahim (2013) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    GraphPCA & Brahim (2014) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\\hline
+    \midrule
+    ggESDA & Jiang (2021) & V     & V     & 8*    & 4*    & 2*    & 1     & 0     & 0 \\\hline
+    \bottomrule
+    \end{tabular}}%
+  \label{tab:pkgCompare}%
+\end{table}%
+%end : this is my table for package_compare 
+
+\section{Generalization and Extension}
+
+As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. The following will discuss these explicitly. 
+
+\subsection{General principle}\label{genPrin}
+
+Generally, it is not merely the well-known packages in \proglang{R} that can make a plot using it. As long as keeping some principle, it will be easily performed:
+
+\begin{enumerate}
+  \item Understand the data structure clearly if it is an object from other packages.
+  \item Extract the min data and max data from it or make some necessary transformation.
+  \item Classify the data you extract belong.
+  \item Reorganized it and use \code{classic2sym()} for the final transformation.
+  \item Visualize the front result using \pgk{ggESDA}.
+\end{enumerate}
+
+Because of the interval-valued data, all SDA packages studying in the same field will store and deal with the min and max data. Hence, the transformation method in section \ref{userDef} plays a important role.
+With the connection being built, it can be compatible with all other tools in \proglang{R}.
+
+
+\subsection{Example for generalization}
+
+For the demonstration, we consider two famous \proglang{R} packages for SDA, \pkg{HistDAWass} \cite{irpino2015} and \pkg{MAINT.Data} \cite{Silva2011}. Both of these make lots of contributions to the statistics of SDA, so we tend to make some analysis using these and plot the result with \pkg{ggESDA}.
+
+\subsubsection[HistDAWass]{\pkg{HistDAWass}}
+
+We use the principle in section \ref{genPrin} to process \code{BLOOD} data in \pkg{HistDAWass}, first. With the method \pkg{HistDAWass} provided, it will be more convenient to get min and max data:
+
+\begin{Schunk}
+\begin{Sinput}
+> library(HistDAWass)
+> # Get min and max data
+> blood.min <- get.MatH.stats(BLOOD, stat = "min")
+> blood.max <- get.MatH.stats(BLOOD, stat = "max")
+> blood <- data.frame(blood.min, blood.max)
+> # Reorganized and Build ggESDA obj.
+> blood.sym <- classic2sym(blood, groupby = "customize",
++                      minData = blood[, 2:4],
++                      maxData = blood[, 6:8])
+> # Make names
+> blood.names <- get.MatH.main.info(BLOOD)$varnames
+> blood.i <- blood.sym$intervalData
+> colnames(blood.i) <- blood.names
+> head(as.data.frame(blood.i), 5)
+\end{Sinput}
+\begin{Soutput}
+        Cholesterol      Hemoglobin      Hematocrit
+1  [80.00 : 240.00] [12.00 : 15.00] [35.00 : 47.00]
+2  [80.00 : 240.00] [10.50 : 14.00] [31.00 : 44.00]
+3  [95.00 : 245.00] [10.50 : 14.00] [31.00 : 43.50]
+4 [105.00 : 260.00] [10.50 : 14.00] [31.00 : 42.50]
+5 [115.00 : 260.00] [10.80 : 13.60] [31.00 : 42.50]
+\end{Soutput}
+\end{Schunk}
+
+After getting the necessary data, classifying data belonging is vital for reorganization, which means that differentiating the min data and max data. For instance, \code{minData = blood[, 2:4]} represents the min data are the columns of $2,3,4$ in this case.
+
+\subsubsection[MAINT.Data]{\pkg{MAINT.Data}}
+
+However, it is also a common way to store interval-valued data by median and range. In \pkg{MAINT.Data}, the data will exist in this form. Fortunately, a median-range form is not difficult to deal with. We can do the necessary conversion directly to get the data we expect:
+
+\begin{Schunk}
+\begin{Sinput}
+> library(MAINT.Data)
+> library(tibble)
+> #get data interval-valued data in AbaloneIdt
+> Aba.range <- AbaloneIdt@LogR
+> Aba.mid <- AbaloneIdt@MidP
+> #make a necessary transformation for build min max data
+> Aba <- data.frame(Aba.min = Aba.mid - exp(Aba.range) / 2,
++                   Aba.max = Aba.mid + exp(Aba.range) / 2)
+> # Reorganized and Build ggESDA obj.
+> Aba.sym<- classic2sym(Aba, groupby = "customize",
++                       minData = Aba[, 1:7],
++                       maxData = Aba[, 8:14])
+> # Make names
+> colnames(Aba.sym$intervalData) <- AbaloneIdt@VarNames
+> Aba.i <- Aba.sym$intervalData %>% 
++   cbind(Aba.obs = AbaloneIdt@ObsNames) %>% 
++   column_to_rownames(var = "Aba.obs")
+> head(Aba.i[, 1:4], 5)
+\end{Sinput}
+\begin{Soutput}
+               Length      Diameter        Height  Whole_weight
+F-10-12 [0.34 : 0.78] [0.26 : 0.63] [0.06 : 0.23] [0.21 : 2.66]
+F-13-15 [0.39 : 0.82] [0.30 : 0.65] [0.10 : 0.25] [0.27 : 2.51]
+F-16-18 [0.40 : 0.74] [0.32 : 0.60] [0.10 : 0.24] [0.35 : 2.20]
+F-19-21 [0.49 : 0.72] [0.36 : 0.58] [0.12 : 0.21] [0.68 : 2.12]
+F-23-24 [0.45 : 0.80] [0.38 : 0.63] [0.14 : 0.22] [0.64 : 2.53]
+\end{Soutput}
+\end{Schunk}
+
+In brief, following the general principle in section \ref{genPrin} may facilitate the integration, extend utilize of \pkg{ggESDA} and generalize to all SDA studies.
+
 
 
 \bibliography{refs}
