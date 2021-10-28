@@ -4,6 +4,9 @@
 %% my packages
 \usepackage{graphicx} % table rotate
 \usepackage{array} %table height
+\usepackage{pdfpages} %include pdf
+
+
 %% recommended packages
 \usepackage{thumbpdf,lmodern}
 
@@ -58,9 +61,12 @@
 %%   (in the same first line, separated by comma).
 
 <<dataPrepare, echo=FALSE, results=hide>>=
-library(ggESDA)
-library(grid)
-library(gridExtra)
+myLibrary <- c("ggESDA", "ggplot2", "ggthemes",
+               "data.table", "grid", "gridExtra",
+               "tibble", "stringr", "dplyr",
+               "extrafont")
+lapply(myLibrary, require, character.only = TRUE)
+
 set.seed(20211020)
 myDiamonds <- diamonds
 myDiamonds.i <- classic2sym(myDiamonds)$intervalData
@@ -73,16 +79,80 @@ breastData <- data.table::fread("doc/data.csv")
 %\SweaveOpts{concordance=TRUE} 
 \section{Introduction}
 "In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." \cite{Diday:2018}. The statement indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
+
+
+
 \begin{figure}[h]	
   		\centering	 			 	 
- 	 		\includegraphics[width=1\textwidth]{\imgdir Trend_SDA_1998_to_2020.png} 
+ 	 		%\includegraphics[width=1\textwidth]{\imgdir Trend_SDA_1998_to_2020.png} 
+<<TrendFig, echo=FALSE, fig=TRUE, height=7, width=14>>=
+mySymTop <- textGrob("Trend of symbolic data analysis", gp=gpar(fontsize=20))
+d1_scienceDirect<-fread("doc\\scienceDirect_full2.csv")
+sd_trend <- as.data.frame(d1_scienceDirect[,2:3])
+sd_trend <- sd_trend[complete.cases(sd_trend),]
+sd_trend <- sd_trend[2:24,]#without 2021
+sd_trend$count <- as.numeric(str_replace(sd_trend$count, ",", ""))
+#sd_trend$count <- as.numeric(sd_trend$count)
+sd_trend_plot<-ggplot(data=sd_trend,aes(x=year,y=count))+geom_line(col="blue",size=1.05)+
+  geom_point(size=1.3)+
+  labs(title="scienceDirect")+
+  scale_x_continuous(breaks=c(1998,2000,2005,2010,2015,2020))+theme_stata()+
+  scale_y_continuous(breaks=c(min(sd_trend$count),400,600,800,1000,max(sd_trend$count)))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour="grey"),
+        text = element_text(size=16))
+
+d1_PubMed<-fread("doc\\PubMed_Timeline_Results_by_Year_adjusted.csv")
+PubMed <- as.data.frame(d1_PubMed[4:26,])
+colnames(PubMed) <- c("year","count")
+PubMed$year<-as.numeric(PubMed$year)
+PubMed$count <- as.numeric(PubMed$count)
+PubMed_plot<-ggplot(data=PubMed,aes(x=year,y=count))+geom_line(col="blue",size=1.05)+
+  geom_point(size=1.3)+
+  labs(title="PubMed")+
+  scale_x_continuous(breaks=c(1998,2000,2005,2010,2015,2020))+theme_stata()+
+  scale_y_continuous(breaks=c(min(PubMed$count),15,25,35,max(PubMed$count)))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_line(colour="grey"),
+        text = element_text(size=16))
+marrangeGrob(list(sd_trend_plot,PubMed_plot),nrow=1,ncol=2,top=mySymTop)
+@
   		\caption{The number of "symbolic data analysis" or "interval-valued data" related articles in researches and applications according to PubMed and ScienceDirect online database over time from 1998 to 2020.}   		
   		\label{fig:trend}   			 		 
 \end{figure}
+
 Among ScienceDirect, Engineering and Computer Science lead the subject areas obviously, shown in Figure \ref{fig:subjectAreas}.
+
 \begin{figure}[h]	
   		\centering	 			 	 
- 	 		\includegraphics[width=1\textwidth]{\imgdir subjectAreas_scienceDirect.png} 
+ 	 		%\includegraphics[width=1\textwidth]{\imgdir subjectAreas_scienceDirect.png} 
+<<subjectFig, echo=FALSE, fig=TRUE, height=7, width=14>>=
+subject_areas <- as.data.frame(d1_scienceDirect[,4:5] )
+subject_areas <- subject_areas[1:10,]
+subject_areas$sum <- as.numeric(str_replace(subject_areas$sum, ",", ""))
+subject_areas<-as.data.frame(arrange(subject_areas,sum))
+total<-sum(subject_areas$sum)
+prop<-unlist(lapply(subject_areas$sum,FUN=function(x) round((x/total)*100,2)))
+subject_areas[,"myLabels"] <- paste(subject_areas$sum,paste0("(",paste0(prop,"%"),')'))
+loadfonts(device = "win")
+ggplot(subject_areas,aes(x=as.factor(1:10),y=sum))+
+  geom_bar(stat="identity",col="black",fill="grey70",width=0.8)+
+  geom_text(aes(label=myLabels), hjust=-0.1, size=4)+
+  scale_x_discrete(labels=subject_areas$name)+
+  scale_y_continuous(limits = c(0,5000),breaks=seq(0,5000,500))+
+  coord_flip()+
+  labs(title = "Subject areas of scienceDirect from 1998 to 2020",x="Fields",y="Publish")+
+  theme(panel.grid.major.y = element_blank(),
+         panel.grid.minor.y = element_blank(),
+         panel.grid.major.x = element_line(colour="grey"),
+        panel.grid.minor.x = element_blank(),
+         text = element_text(size=20,family="serif"),
+        plot.background = element_rect(fill = "grey97"),
+        axis.line = element_line(colour = "black",size = 0.4,linetype = "solid"),
+        panel.background = element_rect(fill = "white",linetype = "solid"))
+@
   		\caption{Top 10 researches and applications domains for SDA or interval-valued data (ScienceDirect) from 1998 to 2020} 
   		\label{fig:subjectAreas}   			 		 
 \end{figure}
@@ -330,7 +400,6 @@ However, it is also a common way to store interval-valued data by median and ran
 
 <<MAINT.Data_getData>>=
 library(MAINT.Data)
-library(tibble)
 #get data interval-valued data in AbaloneIdt
 Aba.range <- AbaloneIdt@LogR
 Aba.mid <- AbaloneIdt@MidP
@@ -356,6 +425,18 @@ head(Aba.i[, 1:4], 5)
 @
 
 In brief, following the general principle in section \ref{genPrin} may facilitate the integration, extend utilize of \pkg{ggESDA} and generalize to all SDA studies.
+
+
+
+\begin{figure}[h]	
+  		\centering	 			 	
+  		%\includepdf[width=1\textwidth]{doc/packageStructure.pdf}
+  		%\includesvg[width=1\textwidth]{doc/packageStructure}
+ 	 		\includegraphics[width=1\textwidth]{doc/packageStructure.png} 
+  		\caption{Package Structure and Diagram for the Transformation Flow} 
+  		\label{fig:pkgStr}   			 		 
+\end{figure}
+
 
 
 

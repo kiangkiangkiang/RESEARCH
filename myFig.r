@@ -182,3 +182,14 @@ iData<-tibble::column_to_rownames(iData, var = "rowname")
 ?get.MatH.stats
 a <- classic2sym(mtcars,groupby=c("cyl","vs"))
 a$intervalData
+
+
+#install.packages("BiocManager")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("EBImage")
+#install.packages("EBImage")
+library(EBImage) # (Repositories: BioC Software)
+a <- readImage("doc/packageStructure.png")
+image(a)
+
