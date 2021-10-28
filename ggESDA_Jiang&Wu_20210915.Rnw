@@ -5,7 +5,7 @@
 \usepackage{graphicx} % table rotate
 \usepackage{array} %table height
 \usepackage{pdfpages} %include pdf
-
+%\usepackage{svg}
 
 %% recommended packages
 \usepackage{thumbpdf,lmodern}
@@ -431,8 +431,8 @@ In brief, following the general principle in section \ref{genPrin} may facilitat
 \begin{figure}[h]	
   		\centering	 			 	
   		%\includepdf[width=1\textwidth]{doc/packageStructure.pdf}
-  		%\includesvg[width=1\textwidth]{doc/packageStructure}
- 	 		\includegraphics[width=1\textwidth]{doc/packageStructure.png} 
+  		%\includesvg[width=1\textwidth]{doc/packageStructure.eps}
+ 	 		\includegraphics[width=1\textwidth]{doc/packageStructure.eps} 
   		\caption{Package Structure and Diagram for the Transformation Flow} 
   		\label{fig:pkgStr}   			 		 
 \end{figure}
