@@ -145,7 +145,7 @@ For the conventional exploratory data analysis, it is always a severe challenge 
 \caption{\label{fig:compare} Compare classical data and symbolic data}
 \end{figure}
 
-In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{Jin:2010}. 
+In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{macqueen:1967}. 
 
 
 \subsection{full information}
@@ -245,7 +245,7 @@ M [10.95 : 28.11] [10.38 : 39.28] [71.90 : 188.50] [361.60 : 2,501.00]
 In \code{breastData}, the only category variable is \code{diagnosis}, which means the diagnosis of breast tissues (M = malignant, B = benign). We put it as an input argument in \code{groupby} for merging different diagnosis results, and the interval-valued data of result sets will display its factor levels in row names.
 
 
-\subsection{user defined}\label{userDef}
+\subsection{user defined}\label{sec:userDef}
 
 In general, users may not always use the aggregation methods we provide, thus, besides generating a particular variable for the group, \pkg{ggESDA} facilitates the process through the min data and max data that user-defined.
 
@@ -274,45 +274,39 @@ For the demonstration, we will build both min data and max data using \code{runi
 
 Then choose the \code{customize} argument in \code{groupby}, input which data are \code{minData} or \code{maxData}, and the transformation will be simply completed.
 
-In order to simplify the process and make the preprocessing friendly, we develop this method and let the people who want to analyze symbolic data easier.
+In order to simplify the process and make the preprocessing friendly, we develop these methods and let the people who want to analyze symbolic data easier. Overall, the conversion and essential concepts can be summarized in table \ref{tab:classic2sym}. 
 
-
-%begin : this is my table for package_compare 
-
+% begin table classic2sym
 \begin{table}[htbp]
   \centering
-  \caption{Compare with \proglang{R} packages}
-  %\rotatebox[origin=c]{90}{
+  \caption{Summary for \code{classic2sym()}}
   \setlength{\extrarowheight}{6pt}
   \resizebox{\textwidth}{!}{
-    \begin{tabular}{|l|l|c|c|ccc|c|c|c|}
-    \hline
+    \begin{tabular}{cccccc}
     \toprule
-    \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ R(4.1.0)}} & \multicolumn{1}{c}{\textbf{Transformation}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
-    \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Reference} & Available & Transform to sym & One variable & Two variables & Multivariable & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
-    RSDA  & Rojas (2015) & V     & V     & 0     & 1     & 0     & 3     & 2*    & 1* \\
-    symbolicDA & Dudek (2013) & V     &       & 0     & 0     & 2*    & 2     & 1     & 1* \\
-    HistDAWass & Irpino (2015) & V     & V     & 4     & 0     & 0     & 3     & 1     & 1* \\\hline
+    \hline
+    \multicolumn{6}{c}{\textbf{\code{classic2sym()}}} \\\hline
     \midrule
-    MAINT.Data & Silva (2011) & V     &       & 0     & 0     & 0     & 7*    & 0     & 1* \\
-    iRegression & Neto (2011) & V     &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    intReg & Toomet (2012) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    ISDA.R & Filho (2012) &       &       & 1     & 0     & 1     & 1     & 0     & 0 \\
-    GPCSIV & Brahim (2013) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    GraphPCA & Brahim (2014) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\\hline
+    \code{groupby} Args. & Transformation & Data Type & Opportune Moment & Cluster Result & Require Other Args.  \\\hline
     \midrule
-    ggESDA & Jiang (2021) & V     & V     & 8*    & 4*    & 2*    & 1     & 0     & 0 \\\hline
+    \code{kmeans} & K-means & Numeric/Category & Smaller data & V     & TRUE \\
+    \code{hclust} & Hierarchical & Numeric/Category & Smaller data & V     & FALSE \\
+    variable name & Variables aggregation & Numeric/Category & Own the pre-clustering group &       & FALSE \\
+    \code{customize} & User-defined & Numeric & Connect with other packages &       & TRUE \\\hline
     \bottomrule
     \end{tabular}}%
-  \label{tab:pkgCompare}%
+  \label{tab:classic2sym}%
 \end{table}%
-%end : this is my table for package_compare 
+% end table classic2sym
+
+
+
 
 \section{Generalization and Extension}
 
 As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. The following will discuss these explicitly. 
 
-\subsection{General principle}\label{genPrin}
+\subsection{General principle}\label{sec:genPrin}
 
 Generally, it is not merely the well-known packages in \proglang{R} that can make a plot using it. As long as keeping some principle, it will be easily performed:
 
@@ -324,7 +318,7 @@ Generally, it is not merely the well-known packages in \proglang{R} that can mak
   \item Visualize the front result using \pgk{ggESDA}.
 \end{enumerate}
 
-Because of the interval-valued data, all SDA packages studying in the same field will store and deal with the min and max data. Hence, the transformation method in section \ref{userDef} plays a important role.
+Because of the interval-valued data, all SDA packages studying in the same field will store and deal with the min and max data. Hence, the transformation method in section \ref{sec:userDef} plays a important role.
 With the connection being built, it can be compatible with all other tools in \proglang{R}.
 
 
@@ -334,7 +328,7 @@ For the demonstration, we consider two famous \proglang{R} packages for SDA, \pk
 
 \subsubsection[HistDAWass]{\pkg{HistDAWass}}
 
-We use the principle in section \ref{genPrin} to process \code{BLOOD} data in \pkg{HistDAWass}, first. With the method \pkg{HistDAWass} provided, it will be more convenient to get min and max data:
+We use the principle in section \ref{sec:genPrin} to process \code{BLOOD} data in \pkg{HistDAWass}, first. With the method \pkg{HistDAWass} provided, it will be more convenient to get min and max data:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -399,18 +393,63 @@ F-23-24 [0.45 : 0.80] [0.38 : 0.63] [0.14 : 0.22] [0.64 : 2.53]
 \end{Soutput}
 \end{Schunk}
 
-In brief, following the general principle in section \ref{genPrin} may facilitate the integration, extend utilize of \pkg{ggESDA} and generalize to all SDA studies.
+In brief, following the general principle in section \ref{sec:genPrin} may facilitate the integration, extend utilize of \pkg{ggESDA} and generalize to all SDA studies.
+
+\section{Prominent SDA Packages}
+
+The most prominent packages on CRAN are commonly used for statistical or machine learning analyze. It can be briefly classified into two parts, one is focused on statistic analysis, and the other is general SDA packages including both analysis method and some graphical technology. Nevertheless, most of their graphical technology tends to use the basic graphics in \proglang{R} rather than \pkg{ggplot2}, or only visualizes univariate distribution which is difficult to present the relationship between variables. 
+
+On the contrary, \pkg{ggESDA} uses a high-level graphic system by \pkg{ggplot2} to solve the problem mentioned above and provides a variety of EDA methods in all kinds of the variate, which can be summarized as the table \ref{tab:pkgCompare}:
+
+%begin : this is my table for package_compare 
+%\begin{table}[htbp]
+\begin{table}[h]
+  \centering
+  \caption{Compare with \proglang{R} packages}
+  %\rotatebox[origin=c]{90}{
+  \setlength{\extrarowheight}{6pt}
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|c|c|ccc|c|c|c|}
+    \hline
+    \toprule
+    \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ R(4.1.0)}} & \multicolumn{1}{c}{\textbf{Transformation}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
+    \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Author} & Available & Transform to sym & Univariate & Bivariate & Multivariate & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
+    RSDA  & Rojas (2015) & V     & V     & 0     & 1     & 0     & 3     & 2*    & 1* \\
+    symbolicDA & Dudek (2013) & V     &       & 0     & 0     & 2*    & 2     & 1     & 1* \\
+    HistDAWass & Irpino (2015) & V     & V     & 4     & 0     & 0     & 3     & 1     & 1* \\
+    \midrule
+    MAINT.Data & Silva (2011) & V     &       & 0     & 0     & 0     & 7*    & 0     & 1* \\\hline
+    iRegression & Neto (2011) & V     &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    intReg & Toomet (2012) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    ISDA.R & Filho (2012) &       &       & 1     & 0     & 1     & 1     & 0     & 0 \\
+    GPCSIV & Brahim (2013) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
+    GraphPCA & Brahim (2014) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\\hline
+    \midrule
+    ggESDA & Jiang (2021) & V     & V     & 8*    & 4*    & 2*    & 1     & 0     & 0 \\\hline
+    \bottomrule
+    \end{tabular}}%
+  \label{tab:pkgCompare}%
+\end{table}%
+%end : this is my table for package_compare 
+
+In \proglang{python}, we can also find the SDA package such as \pkg{iardacil} \cite{umbleja:2020} which is available from the Github at \url{https://github.com/iardacil/SDA}. It is a basic thinking for general radar plot, improved for distinct groups visualization by \pkg{ggESDA}, and implemented in \proglang{R} using \pkg{ggplot2}.
 
 
+ 
+\section{General design}
+
+The \pkg{ggESDA} object is composed of the interval-valued data, statistics data frame, clustering results, and other components from \pkg{R6} class. Based on it, the developed graphical technology can extend three aspects by its variables, univariate, bivariate, and multivariate. The \pkg{ggESDA} aims to convert the traditional data into the \pkg{ggESDA} object and visualizes the symbolic data using \pkg{ggplot2}, which is shown in Figure \ref{fig:pkgStr}.
 
 \begin{figure}[h]	
   		\centering	 			 	
-  		%\includepdf[width=1\textwidth]{doc/packageStructure.pdf}
-  		%\includesvg[width=1\textwidth]{doc/packageStructure.eps}
  	 		\includegraphics[width=1\textwidth]{doc/packageStructure.eps} 
   		\caption{Package Structure and Diagram for the Transformation Flow} 
   		\label{fig:pkgStr}   			 		 
 \end{figure}
+
+As illustrated in Figure \ref{fig:pkgStr}, each row (observation) in the conventional data matrix $X_{p \times p}$ contains a vector of numeric values, $O_i = (x_1,x_2,\cdots,x_n)$, while each row of the interval-valued data matrix $I_{k \times p}$ contains a vector of intervals(ranges), $C_j = ([a_{j1},b_{j1}],[a_{j2},b_{j2}],\cdots,[a_{jp},b_{jp}])$, called a CONCEPT (or UNIT). The CONCEPT describe the behavior of a group of observations. Thus, the aggregation method between them is an essential process in SDA.
+
+
 
 
 
