@@ -39,8 +39,8 @@
 %% - \Plaintitle{} without LaTeX markup (if any)
 %% - \Shorttitle{} with LaTeX markup (if any), used as running title
 \title{ggESDA: An \proglang{R} Package for Exploratory Symbolic Data Analysis using \pkg{ggplot2}}
-\Plaintitle{A Short Demo Article: Regression Models for Count Data in R}
-\Shorttitle{A Short Demo Article in \proglang{R}}
+\Plaintitle{ggESDA: An R Package for Exploratory Symbolic Data Analysis using ggplot2}
+\Shorttitle{ggESDA package in R}
 
 %% - \Abstract{} almost as usual
 \Abstract{
@@ -101,10 +101,11 @@ Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what 
 
 
 \section{why SDA plot (weakness of classical plot)}
+
 \subsection{sol overstike}
 For the conventional exploratory data analysis, it is always a severe challenge to deal with enormous datasets because conventional displays suffered from overstrikes of data points representing the value (scatterplot type displays) or overstrikes of line segments connecting values of neighboring variables. As a consequence, exploratory symbolic data analysis (SDA) becomes a preliminary yet essential tool for summarizing the main characteristics of a data set before appropriate statistical modeling can be applied. Besides escaping the problem mentioned above, SDA can effectively reduce observations in data, which will make the study focus on what we interesting instead of unnecessary information such as Figure~\ref{fig:compare}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics{ggESDA_Jiang&Wu_20210915-compare}
 \caption{\label{fig:compare} Compare classical data and symbolic data}
@@ -130,16 +131,21 @@ We will apply the breast mass dataset, which is computed from a digitized image 
 > colnames(breastData)
 \end{Sinput}
 \begin{Soutput}
- [1] "id"                      "diagnosis"               "radius_mean"            
- [4] "texture_mean"            "perimeter_mean"          "area_mean"              
- [7] "smoothness_mean"         "compactness_mean"        "concavity_mean"         
-[10] "concave points_mean"     "symmetry_mean"           "fractal_dimension_mean" 
-[13] "radius_se"               "texture_se"              "perimeter_se"           
-[16] "area_se"                 "smoothness_se"           "compactness_se"         
-[19] "concavity_se"            "concave points_se"       "symmetry_se"            
-[22] "fractal_dimension_se"    "radius_worst"            "texture_worst"          
-[25] "perimeter_worst"         "area_worst"              "smoothness_worst"       
-[28] "compactness_worst"       "concavity_worst"         "concave points_worst"   
+ [1] "id"                      "diagnosis"              
+ [3] "radius_mean"             "texture_mean"           
+ [5] "perimeter_mean"          "area_mean"              
+ [7] "smoothness_mean"         "compactness_mean"       
+ [9] "concavity_mean"          "concave points_mean"    
+[11] "symmetry_mean"           "fractal_dimension_mean" 
+[13] "radius_se"               "texture_se"             
+[15] "perimeter_se"            "area_se"                
+[17] "smoothness_se"           "compactness_se"         
+[19] "concavity_se"            "concave points_se"      
+[21] "symmetry_se"             "fractal_dimension_se"   
+[23] "radius_worst"            "texture_worst"          
+[25] "perimeter_worst"         "area_worst"             
+[27] "smoothness_worst"        "compactness_worst"      
+[29] "concavity_worst"         "concave points_worst"   
 [31] "symmetry_worst"          "fractal_dimension_worst"
 \end{Soutput}
 \end{Schunk}
@@ -247,7 +253,7 @@ In order to simplify the process and make the preprocessing friendly, we develop
     \hline
     \multicolumn{6}{c}{\textbf{\code{classic2sym()}}} \\\hline
     \midrule
-    \code{groupby} Args. & Transformation & Data Type & Opportune Moment & Cluster Result & Require Other Args.  \\\hline
+    \code{groupby} Args. & Transformation & Data Type & Moment & Cluster Result & Require Other Args.  \\\hline
     \midrule
     \code{kmeans} & K-means & Numeric/Category & Smaller data & V     & TRUE \\
     \code{hclust} & Hierarchical & Numeric/Category & Smaller data & V     & FALSE \\
@@ -421,17 +427,17 @@ To build a statistic chart or analysis, descriptive statistics are necessary to 
 
 \subsubsection{Descriptive statistics}
 
-For the quantile in interval-valued data, summarizing it may seem to be obvious to separate data into a minimum data table and maximum data table, then calculate quantiles of both data tables to build a new interval-valued quantile data table.
+For the quantile in interval-valued data, summarizing it may seem to be obvious to separate data into a minimum and maximum data table, then calculate quantiles of both data tables to build a new interval-valued quantile data table.
 
-In statistics, it may be more interesting to discuss mean and variance in a particular random variable $Z$. The realization of $Z$ for the observation $W_u$ is the interval $Z(W_u) = [a_u,b_u]$.
+In statistics, it may be more interesting to discuss mean and variance in a particular random variable $Z$; see \cite{bertrand:2000}. The realization of $Z$ for the observation $W_u$ is the interval $Z(W_u) = [a_u,b_u]$, where $u=1,2,\cdots,m$ and $m$ is the number of concepts.
 
-First, assume that each object is equally likely to be observed with probability $\frac{1}{m}$($m$ is the number of concepts), and the empirical density function of $Z$ \cite{bertrand:2000} is defined as : 
+First of all, assume that each object is equally likely to be observed with probability $\frac{1}{m}$, and the empirical density function of $Z$ is defined as : 
 
 \begin{equation}\label{eq:dist1}
 f(\xi) = \frac{1}{m} \sum_{u:\xi \in Z(W_u)}(\frac{1}{b_u-a_u})
 \end{equation}
 
-where $\xi$ is the individual descriptions, and $u=1,2,\cdots,m$.
+where $\xi$ is the individual descriptions.
 
 
 The Equation \ref{eq:dist1} is also equivalently to :
@@ -448,10 +454,42 @@ Further, the symbolic sample mean from definition for $Z$ is $\bar{Z} = \int_{-\
 \bar{Z}=\frac{1}{m}\sum_{u \in E}\frac{a_u+b_u}{2}
 \end{equation}
 
+Finally, after getting the sample mean, the symbolic sample variance can be defined as follow:
+
+\begin{equation}\label{eq:varDef}
+\begin{split}
+S^2 & = \int_{-\infty}^{\infty} (\xi - \bar{z})^2f(\xi)\;d\xi \\
+ & = \int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi-\bar{z}
+\end{split}
+\end{equation}
+
+and substituting for $f(\xi)$ from Equation \ref{eq:dist2}, we have 
+\begin{equation}\label{eq:derived}
+\begin{split}
+\int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi &= \frac{1}{m}\sum_{u \in E}\int_{-\infty}^{\infty} \xi^2 \frac{I_u(\xi)}{\lvert\lvert Z(u) \rvert\rvert}\;d\xi \\
+&= \frac{1}{m}\sum_{u \in E} \int_{a_u}^{b_u} \frac{\xi^2}{(b_u-a_u)}\;d\xi \\
+&= \frac{1}{3m} \sum_{u \in E}(\frac{b_u^3 - a_u^3}{b_u-a_u})
+\end{split}
+\end{equation}
+
+Hence,
+\begin{equation}\label{eq:var}
+S^2 = \frac{1}{3m} \sum_{u \in E}(a_u^2+a_ub_u+b_u^2)-\frac{1}{4m^2}\left[ \sum_{u \in E}(a_u+b_u) \right]^2
+\end{equation}
+
+\subsubsection{Histogram Frequency}
+
+For the univariate histogram frequency, assume that we partition the interval $I=[\min_{u \in E} a_u,\\ \max_{u \in E} b_u]$ into $r$ subintervals, and all of them in the histogram are equal distance. That is, $I_g = [\zeta_{g-1},\zeta_{g}),g=1,2,\cdots,r$, then $\lvert\lvert I_j \rvert\rvert = \lvert\lvert I_k \rvert\rvert , j,k=1,2,\cdots,r$. As a consequence, the observed frequency of the interval-valued variate $Z$ for the histogram subinterval $I_g$ from the definitions is
+
+\begin{equation}\label{eq:fg}
+f_g = \sum_{u \in E}\frac{\lvert\lvert Z(u) \cap I_g \rvert\rvert}{\lvert\lvert Z(u) \rvert\rvert}
+\end{equation}
+
+Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation \ref{eq:fg} to get frequency. In most cases, $\lvert\lvert I'_g \rvert\rvert$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
 
-\subsubsection{Non-equidistant Histogram}
+
 
 
 \subsection{Bivariate summaries}

@@ -209,3 +209,6 @@ plot(mydist, type = "VBOXPLOT") # plots a vertical boxplot for mydist
 plot(mydist, type = "CDF") # plots the cumulative distribution function of mydist
 plot(mydist, type = "QF") # plots the quantile function of mydist
 
+library(ggESDA)
+iris.i<-classic2sym(iris)$intervalData
+ggInterval_radar(iris.i,plotPartial = 1)

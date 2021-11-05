@@ -60,3 +60,34 @@ symbolic data type.....)
 # Conclusion
 
 
+
+
+$$
+\begin{split}
+S^2 & = \int_{-\infty}^{\infty} (\xi - \bar{z})^2f(\xi)\;d\xi \\
+ & = \int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi-\bar{z}
+\end{split}
+$$
+$$
+\begin{split}
+\int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi &= \frac{1}{m}\sum_{u \in E}\int_{-\infty}^{\infty} \xi^2 \frac{I_u(\xi)}{\lvert\lvert Z(u) \rvert\rvert}\;d\xi \\
+&= \frac{1}{m}\sum_{u \in E} \int_{a_u}^{b_u} \frac{\xi^2}{(b_u-a_u)}\;d\xi \\
+&= \frac{1}{3m} \sum_{u \in E}(\frac{b_u^3 - a_u^3}{b_u-a_u})
+\end{split}
+$$
+$$
+S^2 = \frac{1}{3m} \sum_{u \in E}(a_u^2+a_ub_u+b_u^2)-\frac{1}{4m^2}\left[ \sum_{u \in E}(a_u+b_u) \right]^2
+$$
+
+$$
+f_g = \sum_{u \in E}\frac{\lvert\lvert Z(u) \cap I_g \rvert\rvert}{\lvert\lvert Z(u) \rvert\rvert}
+
+$$
+
+$$
+I'_g = [x^{(j)},x^{(j+1)})
+$$
+
+
+
+
