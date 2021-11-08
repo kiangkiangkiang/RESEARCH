@@ -510,7 +510,7 @@ For the univariate histogram frequency, assume that we partition the interval $I
 f_g = \sum_{u \in E}\frac{\lvert\lvert Z(u) \cap I_g \rvert\rvert}{\lvert\lvert Z(u) \rvert\rvert}
 \end{equation}
 
-Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation \ref{eq:fg} to get frequency. In most cases, $\lvert\lvert I'_g \rvert\rvert$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
+Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation \ref{eq:fg} to get frequency. In most cases, $\lvert\lvert I'_g \rvert\rvert$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
 \subsection{Bivariate summaries}
