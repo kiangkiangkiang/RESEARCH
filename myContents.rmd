@@ -89,5 +89,20 @@ I'_g = [x^{(j)},x^{(j+1)})
 $$
 
 
+$$
+
+f(\xi_1,\xi_2)=\frac{1}{m}\sum_{u \in E}\frac{I_u(\xi_1,\xi_2)}{\| Z(u) \|}
+
+
+$$
+$$
+cov(Z_1,Z_2)=\frac{1}{4m}\sum_{u \in E}(b_{1u} + a_{1u})(b_{2u} + a_{2u})-\frac{1}{4m^2}\left[ \sum_{u \in E}(b_{1u} + a_{1u}) \right]\left[ \sum_{u \in E}(b_{2u} + a_{2u}) \right]
+
+$$
+
+
+
+
+
 
 

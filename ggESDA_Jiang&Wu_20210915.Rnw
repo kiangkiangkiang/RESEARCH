@@ -515,9 +515,28 @@ Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ f
 
 \subsection{Bivariate summaries}
 
+Many of the principles developed for the univariate case can be expanded to a general $p$-variate case, $p > 1$. We shall focus attention on obtaining joint histograms for $p = 2$. The following will reveal the statistics and bivariate histogram.
+
 \subsubsection{Descriptive statistics}
 
+For bivariates interval-valued variables, $Z_1$ and $Z_2$, the observations $u$, where $u \in E$, on the rectangle $Z(u) = Z_1(u) \times Z_2(u)$ is $([a_{1u}, b_{1u}], [a_{2u}, b_{2u}])$. Assume the individual description vectors $\xi$ are each uniformly distributed over the respective intervals $Z_1(u)$ and $Z_2(u)$.  Define the empirical joint density function for $(Z_1, Z_2)$:
+
+\begin{equation}\label{eq:bi_density}
+f(\xi_1,\xi_2)=\frac{1}{m}\sum_{u \in E}\frac{I_u(\xi_1,\xi_2)}{\| Z(u) \|}
+\end{equation}
+
+where $I_u(\xi_1,\xi_2)$ is the indicator function that $(\xi_1,\xi_2)$ is or is not in the rectangle $Z_u$ and where $\|Z(u)\|$ is the area of this rectangle.
+
+The bivariate interval-valued variables covariance function can be derived as:
+
+\begin{equation}\label{eq:cov}
+cov(Z_1,Z_2)=\frac{1}{4m}\sum_{u \in E}(b_{1u} + a_{1u})(b_{2u} + a_{2u})-\frac{1}{4m^2}\left[ \sum_{u \in E}(b_{1u} + a_{1u}) \right]\left[ \sum_{u \in E}(b_{2u} + a_{2u}) \right]
+\end{equation}
+
+
 \subsubsection{2D-Histogram}
+
+
 
 
 
