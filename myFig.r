@@ -10,18 +10,18 @@ set.seed(20211020)
 myDiamonds.i  <- classic2sym(myDiamonds)$intervalData
 a <- ggplot(myDiamonds, aes(x = carat, y = price))+
   geom_point()
-myOrder <- c(5, 4, 3, 1, 2)
 #RColorBrewer::display.brewer.all()
-myCol <- RColorBrewer::brewer.pal(5, "Blues")
+myCol <- rev(RColorBrewer::brewer.pal(5, "Blues"))
+myDiamonds.i <- myDiamonds.i[c(1, 2, 3, 5, 4),]
 
 b <- ggInterval_scatter(myDiamonds.i, aes(x = carat, y = price)) + 
-  scale_fill_manual(values = myCol[myOrder], 
-                    name="Kmeans-Group", 
-                    labels = c(1:5));b
+  scale_fill_manual(values = myCol, 
+                    name="Kmeans-Group",
+                    label=1:5);b
 
 grid.arrange(a, b, ncol=2)
 marrangeGrob(list(a, b), ncol = 2, nrow = 1)
-plot_grid(a, b, ncol = 2, rel_heights = c(1/4, 1/4, 1/2))
+#plot_grid(a, b, ncol = 2, rel_heights = c(1/4, 1/4, 1/2))
 grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
 #end Fig:compare
 
@@ -212,3 +212,5 @@ plot(mydist, type = "QF") # plots the quantile function of mydist
 library(ggESDA)
 iris.i<-classic2sym(iris)$intervalData
 ggInterval_radar(iris.i,plotPartial = 1)
+
+

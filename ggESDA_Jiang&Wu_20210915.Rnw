@@ -181,15 +181,15 @@ For the conventional exploratory data analysis, it is always a severe challenge 
 \begin{figure}[h]
 \centering
 <<compare, echo=FALSE, fig=TRUE, height=5.2, width=7>>=
-myOrder <- c(5, 4, 3, 1, 2)
-myCol <- RColorBrewer::brewer.pal(5, "Blues")
+myCol <- rev(RColorBrewer::brewer.pal(5, "Blues"))
+myDiamonds.i <- myDiamonds.i[c(1, 2, 3, 5, 4),]
 
 a <- ggplot(myDiamonds, aes(x = carat, y = price))+
   geom_point() + theme_bw()
 b <- ggInterval_scatter(myDiamonds.i, aes(x = carat, y = price)) + 
-  scale_fill_manual(values = myCol[myOrder], 
-                    name="Kmeans-Group", 
-                    labels = c(1:5)) + theme_bw()
+  scale_fill_manual(values = myCol, 
+                    name="Kmeans-Group",
+                    label=1:5) + theme_bw()
 
 grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
 @
@@ -403,27 +403,27 @@ On the contrary, \pkg{ggESDA} uses a high-level graphic system by \pkg{ggplot2} 
     \begin{tabular}{|l|l|c|c|ccc|c|c|c|}
     \hline
     \toprule
-    \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ R(4.1.0)}} & \multicolumn{1}{c}{\textbf{Transformation}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
-    \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Author} & Available & Transform to sym & Univariate & Bivariate & Multivariate & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
-    RSDA  & Rojas (2015) & V     & V     & 0     & 1     & 0     & 3     & 2*    & 1* \\
-    symbolicDA & Dudek (2013) & V     &       & 0     & 0     & 2*    & 2     & 1     & 1* \\
-    HistDAWass & Irpino (2015) & V     & V     & 4     & 0     & 0     & 3     & 1     & 1* \\
+    \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ Available}} & \multicolumn{1}{c}{\textbf{Summarize}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
+    \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Author} & Version & Function & Univariate & Bivariate & Multivariate & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
+    RSDA  & Rojas et al. (2015) & R(4.1.0)     & \code{classic.to.sym()}     & -     & 1     & -     & 3     & \textbf{2}    & \textbf{1} \\
+    symbolicDA & Dudek et al. (2013) & R(4.1.0)     &    -   & -     & -     & \textbf{2}    & 2     & 1     & \textbf{1} \\
+    HistDAWass & Irpino (2015) & R(4.1.0)     & \code{data2hist()}     & 4     & -     & -     & 3     & 1     & \textbf{1} \\
     \midrule
-    MAINT.Data & Silva (2011) & V     &       & 0     & 0     & 0     & 7*    & 0     & 1* \\\hline
-    iRegression & Neto (2011) & V     &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    intReg & Toomet (2012) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    ISDA.R & Filho (2012) &       &       & 1     & 0     & 1     & 1     & 0     & 0 \\
-    GPCSIV & Brahim (2013) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\
-    GraphPCA & Brahim (2014) &       &       & 0     & 0     & 0     & 1     & 0     & 0 \\\hline
+    MAINT.Data & Silva \&  Brito (2011) & R(4.1.0)     &   -    & -     & -     & -     & \textbf{7}    & -     & \textbf{1} \\\hline
+    iRegression & Neto et al. (2011) & R(4.1.0)     &   -    & -     & -     & -     & 1     & -     & - \\
+    intReg & Toomet (2012) & R(3.6.0)      &  -     & -     & -     & -     & 1     & -     & - \\
+    ISDA.R & Filho \&  Fagundes (2012) & R(2.15.2)      &    -   & 1     & -     & 1     & 1     & -     & - \\
+    GPCSIV & Brahim (2013) & R(3.0.2)      &  -     & -    & -     & -     & 1     & -     & - \\
+    GraphPCA & Brahim \& Kallyth (2014) & R(4.1.0)      &   -    & -     & 1     & 1     & 1     & -     & - \\\hline
     \midrule
-    ggESDA & Jiang (2021) & V     & V     & 8*    & 4*    & 2*    & 1     & 0     & 0 \\\hline
+    ggESDA & Jiang (2021) & R(4.1.0)     & \code{classic2sym()}     & \textbf{8}    & \textbf{4}    & \textbf{2}    & 1     & -     & - \\\hline
     \bottomrule
     \end{tabular}}%
   \label{tab:pkgCompare}%
 \end{table}%
 %end : this is my table for package_compare 
 
-In \proglang{python}, we can also find the SDA package such as \pkg{iardacil} \cite{umbleja:2020} which is available from the Github at \url{https://github.com/iardacil/SDA}. It is a basic thinking for general radar plot, improved for distinct groups visualization by \pkg{ggESDA}, and implemented in \proglang{R} using \pkg{ggplot2}.
+In \proglang{python}, we can also find the SDA package such as \pkg{iardacil} \cite{umbleja:2020} which is available from the Github at \url{https://github.com/iardacil/SDA}. The zoomstart software in \pkg{iardacil} is provided with SODAS software project \cite{diday:2008}. It is a basic thinking for general radar plot, improved for distinct groups visualization by \pkg{ggESDA}, and implemented in \proglang{R} using \pkg{ggplot2}.
 
 
  
@@ -433,7 +433,7 @@ The \pkg{ggESDA} object is composed of the interval-valued data, statistics data
 
 \begin{figure}[h]	
   		\centering	 			 	
- 	 		\includegraphics[width=1\textwidth]{doc/packageStructure.eps} 
+ 	 		\includegraphics[width=1\textwidth]{doc/packageStructure2.eps} 
   		\caption{Package Structure and Diagram for the Transformation Flow} 
   		\label{fig:pkgStr}   			 		 
 \end{figure}
@@ -465,13 +465,13 @@ f(\xi) = \frac{1}{m} \sum_{u:\xi \in Z(W_u)}(\frac{1}{b_u-a_u})
 where $\xi$ is the individual descriptions.
 
 
-The Equation \ref{eq:dist1} is also equivalently to :
+The Equation (\ref{eq:dist1}) is also equivalently to :
 
 \begin{equation}\label{eq:dist2}
-f(\xi) = \frac{1}{m}\sum_{u \in E}\frac{I_u(\xi)}{\lvert\lvert Z(u) \rvert\rvert},\xi \in \mathbb{R}
+f(\xi) = \frac{1}{m}\sum_{u \in E}\frac{I_u(\xi)}{\| Z(u) \|},\xi \in \mathbb{R}
 \end{equation}
 
-where $I_u(.)$ is the indicator function that $\xi$ is or is not in the interval $Z(u)$, $\lvert\lvert Z(u) \rvert\rvert$ is the length of that interval, and $E=\{w_1,w_2,\cdots,w_m \}$.
+where $I_u(.)$ is the indicator function that $\xi$ is or is not in the interval $Z(u)$, $\| Z(u) \|$ is the length of that interval, and $E=\{w_1,w_2,\cdots,w_m \}$.
 
 Further, the symbolic sample mean from definition for $Z$ is $\bar{Z} = \int_{-\infty}^{\infty} \xi f(\xi)\;d\xi$, which can be reduced as :
 
@@ -488,10 +488,10 @@ S^2 & = \int_{-\infty}^{\infty} (\xi - \bar{z})^2f(\xi)\;d\xi \\
 \end{split}
 \end{equation}
 
-and substituting for $f(\xi)$ from Equation \ref{eq:dist2}, we have 
+and substituting for $f(\xi)$ from Equation (\ref{eq:dist2}), we have 
 \begin{equation}\label{eq:derived}
 \begin{split}
-\int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi &= \frac{1}{m}\sum_{u \in E}\int_{-\infty}^{\infty} \xi^2 \frac{I_u(\xi)}{\lvert\lvert Z(u) \rvert\rvert}\;d\xi \\
+\int_{-\infty}^{\infty} \xi^2f(\xi)\;d\xi &= \frac{1}{m}\sum_{u \in E}\int_{-\infty}^{\infty} \xi^2 \frac{I_u(\xi)}{\| Z(u) \|}\;d\xi \\
 &= \frac{1}{m}\sum_{u \in E} \int_{a_u}^{b_u} \frac{\xi^2}{(b_u-a_u)}\;d\xi \\
 &= \frac{1}{3m} \sum_{u \in E}(\frac{b_u^3 - a_u^3}{b_u-a_u})
 \end{split}
@@ -504,13 +504,13 @@ S^2 = \frac{1}{3m} \sum_{u \in E}(a_u^2+a_ub_u+b_u^2)-\frac{1}{4m^2}\left[ \sum_
 
 \subsubsection{Histogram Frequency}
 
-For the univariate histogram frequency, assume that we partition the interval $I=[\min_{u \in E} a_u,\\ \max_{u \in E} b_u]$ into $r$ subintervals, and all of them in the histogram are equal distance. That is, $I_g = [\zeta_{g-1},\zeta_{g}),g=1,2,\cdots,r$, then $\lvert\lvert I_j \rvert\rvert = \lvert\lvert I_k \rvert\rvert , j,k=1,2,\cdots,r$. As a consequence, the observed frequency of the interval-valued variate $Z$ for the histogram subinterval $I_g$ from the definitions is
+For the univariate histogram frequency, assume that we partition the interval $I=[\min_{u \in E} a_u,\\ \max_{u \in E} b_u]$ into $r$ subintervals, and all of them in the histogram are equal distance. That is, $I_g = [\zeta_{g-1},\zeta_{g}),g=1,2,\cdots,r$, then $\| I_j \| = \| I_k \| , j,k=1,2,\cdots,r$. As a consequence, the observed frequency of the interval-valued variate $Z$ for the histogram subinterval $I_g$ from the definitions is
 
 \begin{equation}\label{eq:fg}
-f_g = \sum_{u \in E}\frac{\lvert\lvert Z(u) \cap I_g \rvert\rvert}{\lvert\lvert Z(u) \rvert\rvert}
+f_g = \sum_{u \in E}\frac{\| Z(u) \cap I_g \|}{\| Z(u) \|}
 \end{equation}
 
-Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation \ref{eq:fg} to get frequency. In most cases, $\lvert\lvert I'_g \rvert\rvert$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
+Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation (\ref{eq:fg}) to get frequency. In most cases, $\| I'_g \|$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
 \subsection{Bivariate summaries}
@@ -518,6 +518,8 @@ Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ f
 \subsubsection{Descriptive statistics}
 
 \subsubsection{2D-Histogram}
+
+
 
 
 
