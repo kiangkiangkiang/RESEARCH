@@ -294,8 +294,8 @@ In order to simplify the process and make the preprocessing friendly, we develop
     \midrule
     \code{kmeans} & K-means & Numeric/Category & Smaller data & V     & TRUE \\
     \code{hclust} & Hierarchical & Numeric/Category & Smaller data & V     & FALSE \\
-    variable name & Variables aggregation & Numeric/Category & Own the pre-clustering group &       & FALSE \\
-    \code{customize} & User-defined & Numeric & Connect with other packages &       & TRUE \\\hline
+    variable name & Variables aggregation & Numeric/Category & Own the pre-clustering group & -      & FALSE \\
+    \code{customize} & User-defined & Numeric & Connect with other packages &  -     & TRUE \\\hline
     \bottomrule
     \end{tabular}}%
   \label{tab:classic2sym}%
