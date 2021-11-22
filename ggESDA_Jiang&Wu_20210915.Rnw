@@ -7,6 +7,8 @@
 \usepackage{pdfpages} %include pdf
 \usepackage{amsmath} %math equation
 \usepackage{amssymb} %math (real number symbol)
+\usepackage[utf8]{inputenc} %debug for in not ASCII
+
 
 %\usepackage{svg}
 
@@ -64,6 +66,7 @@
 %%   (in the same first line, separated by comma).
 
 <<dataPrepare, echo=FALSE, results=hide>>=
+options(useFancyQuotes=FALSE) #debug for is not ACSII
 myLibrary <- c("ggESDA", "ggplot2", "ggthemes",
                "data.table", "grid", "gridExtra",
                "tibble", "stringr", "dplyr",
@@ -527,11 +530,52 @@ f(\xi_1,\xi_2)=\frac{1}{m}\sum_{u \in E}\frac{I_u(\xi_1,\xi_2)}{\| Z(u) \|}
 
 where $I_u(\xi_1,\xi_2)$ is the indicator function that $(\xi_1,\xi_2)$ is or is not in the rectangle $Z_u$ and where $\|Z(u)\|$ is the area of this rectangle.
 
-The bivariate interval-valued variables covariance function can be derived as:
+There is three methods to calculate bivariate interval-valued variables covariance function. For the first one, it can be derived by \cite{billard:2003} as following:
 
 \begin{equation}\label{eq:cov}
 cov(Z_1,Z_2)=\frac{1}{4m}\sum_{u \in E}(b_{1u} + a_{1u})(b_{2u} + a_{2u})-\frac{1}{4m^2}\left[ \sum_{u \in E}(b_{1u} + a_{1u}) \right]\left[ \sum_{u \in E}(b_{2u} + a_{2u}) \right]
 \end{equation}
+
+Second, an alternative expression of the symbolic sample variance for $Z$ in Equation (\ref{eq:var}) can be expressed as
+
+\[
+S^2 = \frac{1}{3m}\sum_{u \in E}\left[  (a_u-\bar{Z})^2 +(a_u-\bar{Z})(b_u-\bar{Z})+(b_u-\bar{Z})^2 \right]
+\]
+
+The above equation can be generalized by \cite{Billard+Diday:2007} to formulate the form of the symbolic sample covariance for $Z_j$ and $Z_{j\prime}$ as
+
+\begin{equation}\label{eq:gq_cov}
+cov(Z_j,Z_{j^{ \prime}}) = \frac{1}{3m}\sum_{i=1}^{m}G_jG_{j^{\prime}}\left[ Q_jQ_{j^\prime} \right]^{1/2}, \;\;j,j^\prime=1,2,\cdots,p
+\end{equation}
+
+where for $J = j,j^\prime$, 
+
+\[
+\begin{split}
+Q_J &= (a_{iJ} - \bar{Z_J})^2 +(a_{iJ} - \bar{Z_J})(b_{iJ} - \bar{Z_J})+(b_{iJ} - \bar{Z_J})^2,\\
+G_J &= \left\{\begin{array}{l}
+          \begin{split}
+          -1 &, \;\;\mbox{if} \;\; \xi_{iJ}^{c} \leq \bar{Z_J}\\
+           1 &,  \;\;\mbox{if} \;\;  \xi_{iJ}^{c} > \bar{Z_J}
+           \end{split}
+        \end{array}\right.
+\end{split}
+\]
+
+and $\xi_{iJ}^{c}$ is the midpoint of the interval $[a_{iJ},b_{iJ}]$.
+
+Last, it was further demonstrated by \cite{billard:2007} and \cite{billard:2008} that the sample variance in Equation (\ref{eq:var})
+is a function of the total sum of squares (SST) and that the SST can be decomposed into the sum of the internal (within) variation and the between variation. The total sum of products (SPT) is the sum of the within sum of products and the between sum of products. The Equation (\ref{eq:var}) was also extended to the bivariate case to obtain the sample covariance of $Z_j$ and $Z_{j^\prime}$ based on the decomposition of the SPT as
+
+\begin{equation}\label{eq:spt_cov}
+\begin{split}
+cov(Z_j,Z_{j^{ \prime}}) = \frac{1}{6m}\sum_{i = 1}^m \left[ 2(a_{ij}-\bar{Z}_j)(a_{ij^\prime}-\bar{Z}_{j^\prime}) +(a_{ij}-\bar{Z}_j)(b_{ij^\prime}-\bar{Z}_{j^\prime})\\
++(b_{ij}-\bar{Z}_j)(a_{ij^\prime}-\bar{Z}_{j^\prime})+2(b_{ij}-\bar{Z}_j)(b_{ij^\prime}-\bar{Z}_{j^\prime})\right]
+\end{split}
+\end{equation}
+
+The definitions and calculations of the symbolic sample covariance in
+Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
 
 
 \subsubsection{2D-Histogram}

@@ -103,6 +103,46 @@ $$
 
 
 
+$$
+S^2 = \frac{1}{3m}\sum_{u \in E}\left[  (a_u-\bar{Z})^2 +(a_u-\bar{Z})(b_u-\bar{Z})+(b_u-\bar{Z})^2 \right]
+
+
+$$
+
+$$
+cov(Z_j,Z_{j^{ \prime}}) = \frac{1}{3m}\sum_{i=1}^{m}G_jG_{j^{\prime}}\left[ Q_jQ_{j^\prime} \right]^{1/2}，j,j^\prime=1,2,\cdots,p
+
+$$
+
+$$
+\begin{split}
+Q_J &= (a_{iJ} - \bar{Z_J})^2 +(a_{iJ} - \bar{Z_J})(b_{iJ} - \bar{Z_J})+(b_{iJ} - \bar{Z_J})^2,\\
+G_J &= \left\{\begin{array}{l}
+          -1 &, \;\;\mbox{if} \;\; \xi_{iJ}^{c} \leq \bar{Z_J}\\
+           1 &,  \;\;\mbox{if} \;\;  \xi_{iJ}^{c} > \bar{Z_J}
+        \end{array}\right.
+\end{split}
+$$
+\[
+\begin{split}
+Q_J &= (a_{iJ} - \bar{Z_J})^2 +(a_{iJ} - \bar{Z_J})(b_{iJ} - \bar{Z_J})+(b_{iJ} - \bar{Z_J})^2,\\
+G_J &= \left\{\begin{array}{l}
+          \begin{split}
+          -1 &, \;\;\mbox{if} \;\; \xi_{iJ}^{c} \leq \bar{Z_J}\\
+           1 &,  \;\;\mbox{if} \;\;  \xi_{iJ}^{c} > \bar{Z_J}
+           \end{split}
+        \end{array}\right.
+\end{split}
+\]
+
+
+$$
+cov(Z_j,Z_{j^{ \prime}}) = \frac{1}{6m}\sum_{i = 1}^m \left[ 2(a_{ij}-\bar{Z}_j)(a_{ij^\prime}-\bar{Z}_{j^\prime}) +(a_{ij}-\bar{Z}_j)(b_{ij^\prime}-\bar{Z}_{j^\prime})\\
++(b_{ij}-\bar{Z}_j)(a_{ij^\prime}-\bar{Z}_{j^\prime})+2(b_{ij}-\bar{Z}_j)(b_{ij^\prime}-\bar{Z}_{j^\prime})\right]
+$$
+
+
+
 
 
 
