@@ -8,7 +8,7 @@
 \usepackage{amsmath} %math equation
 \usepackage{amssymb} %math (real number symbol)
 \usepackage[utf8]{inputenc} %debug for in not ASCII
-
+\usepackage[]{algorithm2e} % for pseudo code
 
 %\usepackage{svg}
 
@@ -581,7 +581,21 @@ Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in t
 \subsubsection{2D-Histogram}
 
 
-
+\begin{algorithm}[H]
+ \KwData{this text}
+ \KwResult{how to write algorithm with \LaTeX2e }
+ initialization\;
+ \ForEach{ i \in [0,1]} {
+  read current\;
+  \eIf{understand}{
+   go to next section\;
+   current section becomes this one\;
+   }{
+   go back to the beginning of current section\;
+  }
+ }
+ \caption{How to write algorithms}
+\end{algorithm}
 
 
 

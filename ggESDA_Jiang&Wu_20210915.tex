@@ -8,7 +8,7 @@
 \usepackage{amsmath} %math equation
 \usepackage{amssymb} %math (real number symbol)
 \usepackage[utf8]{inputenc} %debug for in not ASCII
-
+\usepackage[]{algorithm2e} % for pseudo code
 
 %\usepackage{svg}
 
@@ -549,13 +549,27 @@ cov(Z_j,Z_{j^{ \prime}}) = \frac{1}{6m}\sum_{i = 1}^m \left[ 2(a_{ij}-\bar{Z}_j)
 \end{equation}
 
 The definitions and calculations of the symbolic sample covariance in
-Equations (\ref{eq:cov})???(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
+Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
 
 
 \subsubsection{2D-Histogram}
 
 
-
+\begin{algorithm}[H]
+ \KwData{this text}
+ \KwResult{how to write algorithm with \LaTeX2e }
+ initialization\;
+ \ForEach{ i \in [0,1]} {
+  read current\;
+  \eIf{understand}{
+   go to next section\;
+   current section becomes this one\;
+   }{
+   go back to the beginning of current section\;
+  }
+ }
+ \caption{How to write algorithms}
+\end{algorithm}
 
 
 
