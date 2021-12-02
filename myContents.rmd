@@ -143,6 +143,24 @@ $$
 
 
 
+\[
+f_g = \sum_{u \in E}\frac{\| Z(u) \cap I_g \|}{\| Z(u) \|}
+\]
+
+
+$$
+R_{g_1g_2} = \{[\zeta_{1,g_1-1},\zeta_{1,g_1}) \times [\zeta_{2,g_2-1},\zeta_{2,g_2}) \},\; g_1 = 1,2,\cdots,r_1, \;g_2=1,2,\cdots,r_2
+
+$$
+
+
+$$
+f_{g_1g_2} = \sum_{u \in E}\frac{\| Z(u) \cap R_{g_1g_2} \|}{\| Z(u) \|}
+
+$$
+
+
+
 
 
 

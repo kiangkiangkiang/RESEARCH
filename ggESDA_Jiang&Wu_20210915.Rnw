@@ -8,7 +8,7 @@
 \usepackage{amsmath} %math equation
 \usepackage{amssymb} %math (real number symbol)
 \usepackage[utf8]{inputenc} %debug for in not ASCII
-\usepackage[]{algorithm2e} % for pseudo code
+%\usepackage[]{algorithm2e} % for pseudo code
 
 %\usepackage{svg}
 
@@ -580,25 +580,18 @@ Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in t
 
 \subsubsection{2D-Histogram}
 
+Analogously with Equation (\ref{eq:fg}), we can find the joint histogram
+for $(Z_1, Z_2)$ by graphically plotting $\{R_{g_1g_2},p_{g_1g_2}\}$ over the rectangles $R_{g_1g_2} = \{[\zeta_{1,g_1-1},\zeta_{1,g_1}) \times [\zeta_{2,g_2-1},\zeta_{2,g_2}) \},\; g_1 = 1,2,\cdots,r_1, \;g_2=1,2,\cdots,r_2$, where
 
-\begin{algorithm}[H]
- \KwData{this text}
- \KwResult{how to write algorithm with \LaTeX2e }
- initialization\;
- \ForEach{ i \in [0,1]} {
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
- \caption{How to write algorithms}
-\end{algorithm}
+\begin{equation}\label{eq:bi_fg}
+f_{g_1g_2} = \sum_{u \in E}\frac{\| Z(u) \cap R_{g_1g_2} \|}{\| Z(u) \|}
+\end{equation}
 
+i.e., $f_{g_1g_2}$ is the number of observations that fall in the rectangle $R_{g_1g_2}$ and is not necessarily an integer value (except in the special case of classical data). The relative frequency that an arbitrary individual description vector lies in the rectangle $R_{g_1g_2}$ is therefore
 
-
+\begin{equation}\label{eq:bi_rel_fg}
+p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
+\end{equation}
 
 \bibliography{refs}
 
