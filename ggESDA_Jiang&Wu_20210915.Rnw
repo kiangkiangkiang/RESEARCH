@@ -70,7 +70,7 @@ options(useFancyQuotes=FALSE) #debug for is not ACSII
 myLibrary <- c("ggESDA", "ggplot2", "ggthemes",
                "data.table", "grid", "gridExtra",
                "tibble", "stringr", "dplyr",
-               "extrafont")
+               "extrafont", "ggpubr")
 lapply(myLibrary, require, character.only = TRUE)
 
 set.seed(20211020)
@@ -592,6 +592,87 @@ i.e., $f_{g_1g_2}$ is the number of observations that fall in the rectangle $R_{
 \begin{equation}\label{eq:bi_rel_fg}
 p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 \end{equation}
+
+
+
+\section{Application to real datasets}
+
+intro datasets, summary datasets with table... , state how does the following section do , or what..... , what we can reveal in EDA...?
+
+
+\subsection{Univariate functions}
+
+
+\begin{figure}[h]
+\centering
+<<box_centerRange, echo=FALSE, fig=TRUE, height=6, width=6>>=
+a <- ggInterval_boxplot(mushroom, plotAll = T) +
+  theme_classic()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_blank())
+b <- ggInterval_centerRange(mushroom, aes(size = 1.5),
+                       plotAll = T)+
+          theme_classic()
+
+gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
+@
+\caption{\label{fig:box_centerRange} Box plot and Center-Range plot}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+<<minmax, echo=FALSE, fig=TRUE, height=6, width=8>>=
+plotLocal <- NULL
+plotGlobal <- NULL
+for(i in 1:4){
+  plotLocal[[i]] <- ggInterval_minmax(oils, aes(oils[[i]], size = 2))+
+    scale_color_manual(values=c("darkblue","darkred"))+
+    guides(colour = F)+theme_bw()
+}
+
+for(i in 1:4){
+  plotGlobal[[i]] <- ggInterval_minmax(oils, aes(oils[[i]], size = 2),
+                                scaleXY = "global")+
+    scale_color_manual(values=c("darkblue","darkred"))+
+    guides(colour = F)+theme_bw()
+}
+a <- ggarrange(plotlist = plotLocal, nrow = 1, ncol = 4, labels = "(a)")
+b <- ggarrange(plotlist = plotGlobal, nrow = 1, ncol = 4, labels = "(b)")
+ggarrange(a, b, nrow = 2)
+@
+\caption{\label{fig:minmax} MM plot}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+<<hist, echo=FALSE, fig=TRUE, height=6, width=8>>=
+a <- ggInterval_hist(facedata, plotAll = T) +
+  theme_stata(scheme = "s1mono")+
+  labs(title = "Equidistant-bin histogram")
+
+
+b<-ggInterval_hist(facedata, plotAll = T,
+                   method="unequal-bin") +
+  theme_stata(scheme = "s1mono")+
+  scale_y_continuous(breaks = c(0, 0.2, 0.4))+
+  labs(title = "Non-equidistant-bin histogram")
+
+ggarrange(a, b, ncol=2)
+@
+\caption{\label{fig:hist} Histogram}
+\end{figure}
+
+
+\subsection{Bivariate functions}
+
+\subsection{Multivariate function}
+
+
+
+
 
 \bibliography{refs}
 

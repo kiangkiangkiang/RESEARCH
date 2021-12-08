@@ -4,6 +4,18 @@ tools::texi2pdf("ggESDA_Jiang&Wu_20210915.tex")
 library(ggESDA)
 library(grid)
 library(gridExtra)
+reinstall <- function(){
+  rm(list=ls())
+  detach("package:ggESDA", unload=TRUE)
+  remove.packages("ggESDA")
+  dir<-"C:/Users/user/Desktop/NTPU/PAPER/myStudy/Produce_R_Package/PackageMaking/"
+  install.packages(paste0(dir,"ggESDA_0.1.0.zip"), repos = NULL, type="source")
+  
+  library(ggESDA)
+}
+
+
+
 #Fig:compare
 myDiamonds <- diamonds
 set.seed(20211020)
@@ -211,6 +223,71 @@ plot(mydist, type = "QF") # plots the quantile function of mydist
 
 library(ggESDA)
 iris.i<-classic2sym(iris)$intervalData
+rownames(facedata)
 ggInterval_radar(iris.i,plotPartial = 1)
+s <- rep(c("FRA", "HUS", "INC", "ISA", "JPL", "KHA",
+           "LOT", "PHI", "ROM"), each = 3)
+p <- ggInterval_PCA(facedata, poly = T,
+                    concepts_group = s);p
+p$ggplotPCA + theme_bw()
+
+
+install.packages("ISDA.R")
+
+
+
+###############################################EDA start
+library(ggESDA)
+dataSetList <- list(AbaloneIdt = AbaloneIdt, BLOOD = BLOOD,
+                    Cardiological = Cardiological,
+                    facedata = facedata,
+                    oils = oils,
+                    mushroom = mushroom)
+
+lapply(dataSetList, FUN = dim)
+
+#1
+# Cap.Widths  Stipe.Lengths Stipe.Thicknesses
+ggInterval_boxplot(mushroom, aes(Cap.Widths))
+reinstall()
+
+
+ggInterval_2DhistMatrix(Cardiological)
+ggInterval_2DhistMatrix(BLOOD)
+ggInterval_2DhistMatrix(mushroom)
+ggInterval_indexImage(AbaloneIdt, useHeatmap = T,
+                      full_strip = T,
+                      column_condition = T)
+ggInterval_indexImage(mtcars.i, useHeatmap = T,
+                      full_strip = T,
+                      column_condition = F)
+ggInterval_index(Cardiological, aes(Pulse, fill = "blue", alpha=0.5))
+
+a <- ggInterval_scaMatrix(oils)
+a + ggplot2::geom_smooth(data = . %>% filter(isPlot),
+                         method = "lm",
+                         se = T,
+                         alpha = 0.3,
+                         level = 0.8)+
+  theme_bw()
+
+ggInterval_minmax(data = oils, aes(SAP,
+                                   size = 3),
+                  scaleXY = "global")+
+  scale_color_manual(values=c("black","green"))
+
+ggInterval_centerRange(mushroom, aes(Cap.Widths))
+
+#######################################################EDA end
+
+
+
+
+
+
+
+
+
+
 
 
