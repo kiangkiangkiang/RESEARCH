@@ -13,7 +13,7 @@ reinstall <- function(){
   
   library(ggESDA)
 }
-
+reinstall()
 
 
 #Fig:compare
@@ -285,6 +285,14 @@ ggInterval_centerRange(mushroom, aes(Cap.Widths))
 
 
 
+\begin{figure}[h]
+\centering
+\subfloat[Column condition]{\includegraphics[scale=0.1]{ggESDA_Jiang&Wu_20210915-imdexImage_col.pdf
+}}
+\subfloat[Matrix condition]{\includegraphics[scale=0.1]{ggESDA_Jiang&Wu_20210915-imdexImage_mat.pdf
+}}
+\caption{\label{fig:imdexImage} Index image - heatmap}
+\end{figure}
 
 
 

@@ -10,6 +10,8 @@
 \usepackage[utf8]{inputenc} %debug for in not ASCII
 %\usepackage[]{algorithm2e} % for pseudo code
 
+\usepackage{subfig}
+
 %\usepackage{svg}
 
 %% recommended packages
@@ -598,8 +600,61 @@ intro datasets, summary datasets with table... , state how does the following se
 \caption{\label{fig:hist} Histogram}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics{ggESDA_Jiang&Wu_20210915-index}
+\caption{\label{fig:index} Index plot for the variables AD}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \scalebox{.6}{
+        \subfloat[Column condition]{
+\includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_col}
+                }}
+                \scalebox{.6}{
+        \subfloat[Matrix condition]{
+\includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_mat}
+        }}
+    \caption{\label{fig:imdexImage} Index image - heatmap}
+\end{figure}
+
+
+
+
+
 
 \subsection{Bivariate functions}
+
+\begin{figure}[h]
+\centering
+\includegraphics{ggESDA_Jiang&Wu_20210915-scaMatrix}
+\caption{\label{fig:scaMatrix} scatter matrix}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA.pdf
+}
+\caption{\label{fig:PCA} PCA}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics{ggESDA_Jiang&Wu_20210915-2Dhist}
+\caption{\label{fig:2Dhist} 2D histogram }
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
+}
+\caption{\label{fig:2DhistMatrix} 2D histogram matrix}
+\end{figure}
 
 \subsection{Multivariate function}
 
