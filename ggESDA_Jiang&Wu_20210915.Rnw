@@ -9,7 +9,7 @@
 \usepackage{amssymb} %math (real number symbol)
 \usepackage[utf8]{inputenc} %debug for in not ASCII
 %\usepackage[]{algorithm2e} % for pseudo code
-
+\usepackage{float} % figure H
 \usepackage{subfig}
 
 %\usepackage{svg}
@@ -83,6 +83,20 @@ set.seed(20211020)
 myDiamonds <- diamonds
 myDiamonds.i <- classic2sym(myDiamonds)$intervalData
 breastData <- data.table::fread("doc/data.csv")
+
+
+scale_sym_table <- function(d){
+  n <- dim(d)[1]
+  p <- dim(d)[2]
+  temp1 <- sapply(1:p, FUN = function(x) unlist(data.frame(d[[x]])))
+  temp2 <- apply(temp1, 2, scale)
+  newd <- data.frame(temp2[1:n, ], temp2[(n+1):(n*2), ])
+  myd <- classic2sym(newd, groupby = "customize",
+                     minData = temp2[1:n, ],
+                     maxData = temp2[(n+1):(n*2), ])
+  colnames(myd$intervalData) <- colnames(d)
+  return(myd$intervalData)
+}
 @
 
 
@@ -511,7 +525,7 @@ Hence,
 S^2 = \frac{1}{3m} \sum_{u \in E}(a_u^2+a_ub_u+b_u^2)-\frac{1}{4m^2}\left[ \sum_{u \in E}(a_u+b_u) \right]^2
 \end{equation}
 
-\subsubsection{Histogram Frequency}
+\subsubsection{Histogram Frequency}\label{sec:hist}
 
 For the univariate histogram frequency, assume that we partition the interval $I=[\min_{u \in E} a_u,\\ \max_{u \in E} b_u]$ into $r$ subintervals, and all of them in the histogram are equal distance. That is, $I_g = [\zeta_{g-1},\zeta_{g}),g=1,2,\cdots,r$, then $\| I_j \| = \| I_k \| , j,k=1,2,\cdots,r$. As a consequence, the observed frequency of the interval-valued variate $Z$ for the histogram subinterval $I_g$ from the definitions is
 
@@ -606,80 +620,82 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 intro datasets, summary datasets with table... , state how does the following section do , or what..... , what we can reveal in EDA...?
 
 
+
+
+
 \subsection{Univariate functions}
 
+The typical graphical techniques of EDA include
+multiple plots for univariate data. In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, it's worth mentioning that there will be some advanced graphics implemented which are called the min-max plot, and center-range plot due to the characteristics of interval-valued data. They help researchers to be able to grasp the relationship between center and range, and the difference of range in data.
+
+
+\subsubsection{Presentation of interval-valued data}
+
+There are many ways to visualize the interval of data. One of the well-known techniques especially in interval-valued data is the min-max plot. As Figure \ref{fig:minmax} shown, we visualize the oils dataset for example. \ref{fig:minmax_local} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself. And represents the range by the connection between minimum and maximum. However, when the unit is considered, the absolute position in the full sample space will display in Figure \ref{fig:minmax_global}. It presents a different boundary in the axis from the previous figure, which makes the researcher know about the actual location in each variable. In this instance, the GRA variable converges into a point because of its tiny unit, and the range of the IOD variable is the largest.
 
 \begin{figure}[h]
-\centering
-<<box_centerRange, echo=FALSE, fig=TRUE, height=6, width=6>>=
-a <- ggInterval_boxplot(mushroom, aes(Cap.Widths),
-                   plotAll = T) +
-  theme_classic()+
-  theme(legend.position = "bottom",
-        axis.text.x = element_blank())
-
-
-b<- ggInterval_centerRange(mushroom, aes(size = 1.5),
-                       plotAll = T)+
-  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
-                                alpha = 0.05, col = "grey")
-gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
-@
-\caption{\label{fig:box_centerRange} Box plot and Center-Range plot}
-\end{figure}
-
-
-
-\begin{figure}[h]
-\centering
-<<minmax, echo=FALSE, fig=TRUE, height=6, width=8>>=
+    \centering
+    \begin{tabular}{c}
+    
+        \subfloat[Condition in each variables]{
+        \label{fig:minmax_local} 
+<<minmax_local, echo=FALSE, fig=TRUE, height=4, width=8>>=
 plotLocal <- NULL
-plotGlobal <- NULL
 for(i in 1:4){
   plotLocal[[i]] <- ggInterval_minmax(oils, aes(oils[[i]], size = 2))+
     scale_color_manual(values=c("darkblue","darkred"))+
     guides(colour = F)+theme_bw()
 }
-
+ggarrange(plotlist = plotLocal, nrow = 1, ncol = 4, labels = "")
+@
+                }
+                \\
+                
+        \subfloat[Condition in all variables]{
+        \label{fig:minmax_global} 
+<<minmax_global, echo=FALSE, fig=TRUE, height=4, width=8>>=
+plotGlobal <- NULL
 for(i in 1:4){
   plotGlobal[[i]] <- ggInterval_minmax(oils, aes(oils[[i]], size = 2),
                                 scaleXY = "global")+
     scale_color_manual(values=c("darkblue","darkred"))+
     guides(colour = F)+theme_bw()
 }
-a <- ggarrange(plotlist = plotLocal, nrow = 1, ncol = 4, labels = "(a)")
-b <- ggarrange(plotlist = plotGlobal, nrow = 1, ncol = 4, labels = "(b)")
-ggarrange(a, b, nrow = 2)
+ggarrange(plotlist = plotGlobal, nrow = 1, ncol = 4, labels = "")
 @
-\caption{\label{fig:minmax} MM plot}
+        }
+        \end{tabular}
+   \caption{\label{fig:minmax} The min-max plot}
 \end{figure}
 
 
-\begin{figure}[h]
-\centering
-<<hist, echo=FALSE, fig=TRUE, height=6, width=8>>=
-a <- ggInterval_hist(facedata, plotAll = T) +
-  theme_hc()+
-  scale_y_continuous(breaks = c(0, 0.1, 0.2))+
-  labs(title = "Equidistant-bin histogram")
+In the same way, through the minimum and maximum, 
 
-
-b<-ggInterval_hist(facedata, plotAll = T,
-                   method="unequal-bin") +
-  theme_hc()+
-  scale_y_continuous(breaks = c(0, 0.2, 0.4))+
-  labs(title = "Non-equidistant-bin histogram")
-
-ggarrange(a, b, ncol=2)
-@
-\caption{\label{fig:hist} Histogram}
-\end{figure}
 
 \begin{figure}[h]
-\centering
-<<index, echo=FALSE, fig=TRUE, height=6, width=6>>=
+    \centering
+    \begin{tabular}{c c}
+    
+        \subfloat[Index plot]{
+        \scalebox{.5}{
+<<index, echo=FALSE, fig=TRUE, height=4, width=4>>=
 m <- mean(facedata$AD)
-p2 <- ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
+ggInterval_index(facedata, aes(AD)) +
+  theme_bw()+
+  scale_y_continuous(breaks = 1:27,
+                     labels = rownames(facedata))+
+  labs(title = "", y = "")+
+  theme(axis.text.y = element_text(size = 6))
+@
+                }}
+                &
+      
+        \subfloat[Index plot with different group and common mean]{
+        \scalebox{.5}{
+        
+<<index_bar, echo=FALSE, fig=TRUE, height=4, width=4>>=
+
+ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
   theme_bw() +
   scale_fill_brewer(palette = "Set1")+
   geom_segment(x = m, xend = m, y = 0, yend = 27,
@@ -695,14 +711,14 @@ p2 <- ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))
 
-p1 <- ggInterval_index(facedata, aes(AD)) +
-  theme_bw()+
-  scale_y_continuous(breaks = 1:27,
-                     labels = rownames(facedata))+
-  labs(title = "", y = "")+
-  theme(axis.text.y = element_text(size = 6))
-
-p3 <- ggInterval_indexImage(facedata, aes(x = AD))+
+@
+        }}
+        \\
+        
+                \subfloat[Index image]{
+                \scalebox{.5}{
+<<index_image1, echo=FALSE, fig=TRUE, height=4, width=4>>=
+ggInterval_indexImage(facedata, aes(x = AD))+
         coord_flip()+
   theme_bw()+
   labs(title = "")+
@@ -713,8 +729,14 @@ p3 <- ggInterval_indexImage(facedata, aes(x = AD))+
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))+
   guides(col=F)
-
-p4 <- ggInterval_indexImage(facedata, aes(x = AD),
+@
+                }}
+                &
+        
+        \subfloat[Index image with extended color]{
+        \scalebox{.5}{
+<<index_image2, echo=FALSE, fig=TRUE, height=4, width=4>>=
+ggInterval_indexImage(facedata, aes(x = AD),
                             full_strip  = T)+
   coord_flip()+
   theme_bw()+
@@ -725,26 +747,27 @@ p4 <- ggInterval_indexImage(facedata, aes(x = AD),
         legend.key.width = unit(0.5, 'cm'),
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))
-
-#ggarrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
-grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2,
-             widths = c(1.5, 2))
 @
-\caption{\label{fig:index} Index plot for the variables AD}
+        }}
+        \end{tabular}
+   \caption{\label{fig:index} Index plot for the variables AD}
 \end{figure}
 
+aaaaa
 
 \begin{figure}[h]
     \centering
-    \scalebox{.6}{
+    \begin{tabular}{c c}
         \subfloat[Column condition]{
+        \scalebox{.6}{
 <<indexImage_col, echo=FALSE, fig=TRUE, height=6, width=8>>=
 ggInterval_indexImage(facedata, plotAll = T,
                       full_strip = T) 
 @
                 }}
-                \scalebox{.6}{
+                &
         \subfloat[Matrix condition]{
+        \scalebox{.6}{
 <<indexImage_mat, echo=FALSE, fig=TRUE, height=6, width=8>>=
 ggInterval_indexImage(facedata, plotAll = T,
                             full_strip = T,
@@ -752,8 +775,91 @@ ggInterval_indexImage(facedata, plotAll = T,
   labs(x = "", y = "")
 @
         }}
+        \end{tabular}
     \caption{\label{fig:imdexImage} Index image - heatmap}
 \end{figure}
+
+
+
+
+\subsubsection{Characteristic of interval-valued data}
+
+Take the mushroom dataset for example, the side-by-side boxplot and center-range plot provide a quick view of data distribution, dispersion, and are particularly useful for comparing distributions between several groups of variables. In Figure \ref{fig:box_centerRange_before}, the dispersion of three variables are obviously distinct. The data in Stipe.Thicknesses variable is more intensive than the first two. However, we take the background knowledge into account, the values of this variable which describes the thicknesses of stipe of mushroom may usually be lower than others. For taking a deep look at the difference between variables, we standardize each of them as shown in Figure \ref{fig:box_centerRange_after}. In the boxplot of this figure, the interval-valued median close to the minimum which has a short interval, and the maximum with a long interval extend the distribution, which implies all variables are right-skewed. Besides, the center-range plot shows centers of them are positive correlation with their range. 
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[mushroom before standardize]{
+        \scalebox{.6}{\label{fig:box_centerRange_before}
+<<box_centerRange_before, echo=FALSE, fig=TRUE, height=6, width=6>>=
+set.seed(20211216)
+a <- ggInterval_boxplot(mushroom, aes(Cap.Widths),
+                   plotAll = T) +
+  theme_classic()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_blank())
+
+
+b<- ggInterval_centerRange(mushroom, aes(size = 1.5),
+                       plotAll = T)+
+  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
+                                alpha = 0.05, col = "grey")
+gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
+@
+
+                }}
+                &
+        \subfloat[mushroom after standardize]{
+        \scalebox{.6}{\label{fig:box_centerRange_after}
+<<box_centerRange_after, echo=FALSE, fig=TRUE, height=6, width=6>>=
+set.seed(20211216)
+mushroom.scale <- scale_sym_table(mushroom)
+a <- ggInterval_boxplot(mushroom.scale, plotAll = T) +
+  theme_classic()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_blank())
+
+
+b<- ggInterval_centerRange(mushroom.scale, aes(size = 1.5),
+                       plotAll = T)+
+  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
+                                alpha = 0.05, col = "grey")
+gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
+@
+        }}
+        \end{tabular}
+    \caption{Box plot and Center-Range plot}
+\end{figure}
+
+In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Use the blood dataset to illustrate, and construct the frequency of data by Section \ref{sec:hist} for the first. Then it depicts the histograms with equidistant and non-equidistant breaks for all six variables in Figure \ref{fig:hist}. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. In this case, the Pulse variable seems to exhibit a bimodal distribution whereas other variables do not have an obvious trend.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[Equidistant-bin histogram]{
+        \scalebox{.6}{
+<<hist_equal, echo=FALSE, fig=TRUE, height=6, width=6>>=
+ggInterval_hist(Cardiological, plotAll = T, bins = 30) +
+  theme_hc()+
+  scale_y_continuous(breaks = c(0, 0.025, 0.05))+
+  labs(title = "")
+@
+                }}
+                &
+        \subfloat[Non-equidistant-bin histogram]{
+        \scalebox{.6}{
+<<hist_unequal, echo=FALSE, fig=TRUE, height=6, width=6>>=
+ggInterval_hist(Cardiological, plotAll = T,
+                   method="unequal-bin") +
+  theme_hc()+
+  scale_y_continuous(breaks = c(0, 0.2, 0.4))+
+  labs(title = "")
+@
+        }}
+        \end{tabular}
+    \caption{\label{fig:hist} Histogram}
+\end{figure}
+
 
 
 
@@ -779,12 +885,39 @@ ggInterval_scaMatrix(oils) +
 \end{figure}
 
 
+
+
+
 \begin{figure}[h]
-\centering
-\includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA.pdf
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[Vertice-PCA (MCAR)]{
+        \scalebox{.6}{
+<<PCA_MCAR, echo=FALSE, fig=TRUE, height=6, width=6>>=
+ggInterval_PCA(facedata, poly = F,
+               concepts_group = Concepts,
+               plot = F)$ggplotPCA+ theme_wsj(color='white')+
+  theme(plot.title = element_text(size=14),
+        legend.key.size = unit(0.5, 'cm'),
+        legend.key.height = unit(0.5, 'cm'),
+        legend.key.width = unit(0.5, 'cm'),
+        legend.title = element_text(size=10),
+        legend.text = element_text(size=10))
+@
+                }}
+                &
+        \subfloat[Vertice-PCA (Polytope)]{
+        \scalebox{.6}{
+        \includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
 }
-\caption{\label{fig:PCA} PCA}
+
+        }}
+        \end{tabular}
+    \caption{\label{fig:PCA} PCA}
 \end{figure}
+
+
+
 
 
 \begin{figure}[h]
@@ -806,6 +939,10 @@ ggInterval_2Dhist(Cardiological, aes(Pulse, Diast, col = "grey30"),
 \end{figure}
 
 \subsection{Multivariate function}
+
+
+
+
 
 
 

@@ -9,7 +9,7 @@
 \usepackage{amssymb} %math (real number symbol)
 \usepackage[utf8]{inputenc} %debug for in not ASCII
 %\usepackage[]{algorithm2e} % for pseudo code
-
+\usepackage{float} % figure H
 \usepackage{subfig}
 
 %\usepackage{svg}
@@ -481,7 +481,7 @@ Hence,
 S^2 = \frac{1}{3m} \sum_{u \in E}(a_u^2+a_ub_u+b_u^2)-\frac{1}{4m^2}\left[ \sum_{u \in E}(a_u+b_u) \right]^2
 \end{equation}
 
-\subsubsection{Histogram Frequency}
+\subsubsection{Histogram Frequency}\label{sec:hist}
 
 For the univariate histogram frequency, assume that we partition the interval $I=[\min_{u \in E} a_u,\\ \max_{u \in E} b_u]$ into $r$ subintervals, and all of them in the histogram are equal distance. That is, $I_g = [\zeta_{g-1},\zeta_{g}),g=1,2,\cdots,r$, then $\| I_j \| = \| I_k \| , j,k=1,2,\cdots,r$. As a consequence, the observed frequency of the interval-valued variate $Z$ for the histogram subinterval $I_g$ from the definitions is
 
@@ -576,49 +576,139 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 intro datasets, summary datasets with table... , state how does the following section do , or what..... , what we can reveal in EDA...?
 
 
+
+
+
 \subsection{Univariate functions}
 
+The typical graphical techniques of EDA include
+multiple plots for univariate data. In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, it's worth mentioning that there will be some advanced graphics implemented which are called the min-max plot, and center-range plot due to the characteristics of interval-valued data. They help researchers to be able to grasp the relationship between center and range, and the difference of range in data.
+
+
+\subsubsection{Presentation of interval-valued data}
+
+There are many ways to visualize the interval of data. One of the well-known techniques especially in interval-valued data is the min-max plot. As Figure \ref{fig:minmax} shown, we visualize the oils dataset for example. \ref{fig:minmax_local} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself. And represents the range by the connection between minimum and maximum. However, when the unit is considered, the absolute position in the full sample space will display in Figure \ref{fig:minmax_global}. It presents a different boundary in the axis from the previous figure, which makes the researcher know about the actual location in each variable. In this instance, the GRA variable converges into a point because of its tiny unit, and the range of the IOD variable is the largest.
 
 \begin{figure}[h]
-\centering
-\includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange}
-\caption{\label{fig:box_centerRange} Box plot and Center-Range plot}
+    \centering
+    \begin{tabular}{c}
+    
+        \subfloat[Condition in each variables]{
+        \label{fig:minmax_local} 
+\includegraphics{ggESDA_Jiang&Wu_20210915-minmax_local}
+                }
+                \\
+                
+        \subfloat[Condition in all variables]{
+        \label{fig:minmax_global} 
+\includegraphics{ggESDA_Jiang&Wu_20210915-minmax_global}
+        }
+        \end{tabular}
+   \caption{\label{fig:minmax} MM plot}
 \end{figure}
 
 
-
-\begin{figure}[h]
-\centering
-\includegraphics{ggESDA_Jiang&Wu_20210915-minmax}
-\caption{\label{fig:minmax} MM plot}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\includegraphics{ggESDA_Jiang&Wu_20210915-hist}
-\caption{\label{fig:hist} Histogram}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics{ggESDA_Jiang&Wu_20210915-index}
-\caption{\label{fig:index} Index plot for the variables AD}
-\end{figure}
+In the same way, .....
 
 
 \begin{figure}[h]
     \centering
-    \scalebox{.6}{
+    \begin{tabular}{c c}
+    
+        \subfloat[Index plot]{
+        \scalebox{.5}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-index}
+                }}
+                &
+      
+        \subfloat[Index plot with different group and common mean]{
+        \scalebox{.5}{
+        
+\includegraphics{ggESDA_Jiang&Wu_20210915-index_bar}
+        }}
+        \\
+        
+                \subfloat[Index image]{
+                \scalebox{.5}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-index_image1}
+                }}
+                &
+        
+        \subfloat[Index image with extended color]{
+        \scalebox{.5}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-index_image2}
+        }}
+        \end{tabular}
+   \caption{\label{fig:index} Index plot for the variables AD}
+\end{figure}
+
+
+furthermore,....
+
+
+eventually,....
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{c c}
         \subfloat[Column condition]{
+        \scalebox{.6}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_col}
                 }}
-                \scalebox{.6}{
+                &
         \subfloat[Matrix condition]{
+        \scalebox{.6}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_mat}
         }}
+        \end{tabular}
     \caption{\label{fig:imdexImage} Index image - heatmap}
 \end{figure}
+
+
+
+
+
+
+
+\subsubsection{Characteristic of interval-valued data}
+
+Take the mushroom dataset for example, the side-by-side boxplot and center-range plot provide a quick view of data distribution, dispersion, and are particularly useful for comparing distributions between several groups of variables. In Figure \ref{fig:box_centerRange_before}, the dispersion of three variables are obviously distinct. The data in Stipe.Thicknesses variable is more intensive than the first two. However, we take the background knowledge into account, the values of this variable which describes the thicknesses of stipe of mushroom may usually be lower than others. For taking a deep look at the difference between variables, we standardize each of them as shown in Figure \ref{fig:box_centerRange_after}. In the boxplot of this figure, the interval-valued median close to the minimum which has a short interval, and the maximum with a long interval extend the distribution, which implies all variables are right-skewed. Besides, the center-range plot shows centers of them are positive correlation with their range. 
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[mushroom before standardize]{
+        \scalebox{.6}{\label{fig:box_centerRange_before}
+\includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_before}
+
+                }}
+                &
+        \subfloat[mushroom after standardize]{
+        \scalebox{.6}{\label{fig:box_centerRange_after}
+\includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_after}
+        }}
+        \end{tabular}
+    \caption{Box plot and Center-Range plot}
+\end{figure}
+
+In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Use the blood dataset to illustrate, and construct the frequency of data by Section \ref{sec:hist} for the first. Then it depicts the histograms with equidistant and non-equidistant breaks for all six variables in Figure \ref{fig:hist}. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. In this case, the Pulse variable seems to exhibit a bimodal distribution whereas other variables do not have an obvious trend.
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[Equidistant-bin histogram]{
+        \scalebox{.6}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-hist_equal}
+                }}
+                &
+        \subfloat[Non-equidistant-bin histogram]{
+        \scalebox{.6}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-hist_unequal}
+        }}
+        \end{tabular}
+    \caption{\label{fig:hist} Histogram}
+\end{figure}
+
 
 
 
@@ -634,12 +724,29 @@ intro datasets, summary datasets with table... , state how does the following se
 \end{figure}
 
 
+
+
+
 \begin{figure}[h]
-\centering
-\includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA.pdf
+    \centering
+    \begin{tabular}{c c}
+        \subfloat[Vertice-PCA (MCAR)]{
+        \scalebox{.6}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-PCA_MCAR}
+                }}
+                &
+        \subfloat[Vertice-PCA (Polytope)]{
+        \scalebox{.6}{
+        \includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
 }
-\caption{\label{fig:PCA} PCA}
+
+        }}
+        \end{tabular}
+    \caption{\label{fig:PCA} PCA}
 \end{figure}
+
+
+
 
 
 \begin{figure}[h]
@@ -657,6 +764,10 @@ intro datasets, summary datasets with table... , state how does the following se
 \end{figure}
 
 \subsection{Multivariate function}
+
+
+
+
 
 
 
