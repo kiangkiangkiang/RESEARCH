@@ -636,7 +636,11 @@ multiple plots for univariate data. In this field, it reveals the trend, distrib
 
 \subsubsection{Presentation of interval-valued data}
 
-There are many ways to visualize the interval of data. One of the well-known techniques especially in interval-valued data is the min-max plot. As Figure \ref{fig:minmax} shown, we visualize the oils dataset for example. Figure \ref{fig:minmax_local} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself. And represents the range by the connection between minimum and maximum. However, when the unit is considered, the absolute position in the full sample space will display in Figure \ref{fig:minmax_global}. It presents a different boundary in the axis from the previous figure, which makes the researcher know about the actual location in each variable. In this instance, the GRA variable converges into a point because of its tiny unit, and the range of the IOD variable is the largest.
+There are many ways to visualize the interval of data. One of the well-known techniques especially in interval-valued data is the min-max plot. As Figure \ref{fig:minmax} shown, we visualize the oils dataset for example by the function \code{ggInterval_minmax()}. 
+
+Figure \ref{fig:minmax_local} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself. And represents the range by the connection between minimum and maximum. 
+
+However, when the unit is considered, the absolute position in the full sample space will display in Figure \ref{fig:minmax_global}. It presents a different boundary in the axis from the previous figure, which makes the researcher know about the actual location in each variable. In this instance, the GRA variable converges into a point because of its tiny unit, and the range of the IOD variable is the largest.
 
 \begin{figure}[h]
     \centering
@@ -674,8 +678,11 @@ ggarrange(plotlist = plotGlobal, nrow = 1, ncol = 4, labels = "")
 \end{figure}
 
 
-In the same way, through the minimum and maximum, 
+Another graphical technique, called index plot, is famous in conventional data as well. It is composed of minimum and maximum in interval-valued data and exhibits the concepts' behavior. Although both of the function \code{ggInterval_index()} and \code{ggInterval_indexImage()} can achieve this objective, there is still a slight difference for visualizing. 
 
+The former function, shown in Figures \ref{fig:index} and \ref{fig:index_bar}, directly displays the interval which is similar to min-max plot. Among these plots, we classify the concepts by the same person and can discover the values of people LOT, KHA, INC, FRA in AD variable are less than others, which easily compares the difference. 
+
+The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, visualizes the interval values using a color mapping. As the legend says, the blue color corresponds to the low values, whereas the red color corresponds to the high. The only difference among these plots is the color bar extension, which will quickly discover concepts' behavior through the visual sense, as Figure \ref{imdexImage} shown.
 
 \begin{figure}[h]
     \centering
@@ -683,6 +690,7 @@ In the same way, through the minimum and maximum,
     
         \subfloat[Index plot]{
         \scalebox{.5}{
+        \label{fig:index}
 <<index, echo=FALSE, fig=TRUE, height=4, width=4>>=
 m <- mean(facedata$AD)
 ggInterval_index(facedata, aes(AD)) +
@@ -697,7 +705,7 @@ ggInterval_index(facedata, aes(AD)) +
       
         \subfloat[Index plot with different group and common mean]{
         \scalebox{.5}{
-        
+        \label{fig:index_bar}
 <<index_bar, echo=FALSE, fig=TRUE, height=4, width=4>>=
 
 ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
@@ -722,6 +730,7 @@ ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
         
                 \subfloat[Index image]{
                 \scalebox{.5}{
+                \label{fig:image}
 <<index_image1, echo=FALSE, fig=TRUE, height=4, width=4>>=
 ggInterval_indexImage(facedata, aes(x = AD))+
         coord_flip()+
@@ -740,6 +749,7 @@ ggInterval_indexImage(facedata, aes(x = AD))+
         
         \subfloat[Index image with extended color]{
         \scalebox{.5}{
+        \label{fig:image_full}
 <<index_image2, echo=FALSE, fig=TRUE, height=4, width=4>>=
 ggInterval_indexImage(facedata, aes(x = AD),
                             full_strip  = T)+
@@ -758,13 +768,16 @@ ggInterval_indexImage(facedata, aes(x = AD),
    \caption{\label{fig:index} Index plot for the variables AD}
 \end{figure}
 
-aaaaa
+For exploring data, we extend the index plot into full variables using the face dataset and visualize by color mapping as we did before. Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method.
+
+
 
 \begin{figure}[h]
     \centering
     \begin{tabular}{c c}
         \subfloat[Column condition]{
         \scalebox{.6}{
+        \label{fig:indexImage_col}
 <<indexImage_col, echo=FALSE, fig=TRUE, height=6, width=8>>=
 ggInterval_indexImage(facedata, plotAll = T,
                       full_strip = T) 
@@ -773,6 +786,7 @@ ggInterval_indexImage(facedata, plotAll = T,
                 &
         \subfloat[Matrix condition]{
         \scalebox{.6}{
+        \label{fig:indexImage_mat}
 <<indexImage_mat, echo=FALSE, fig=TRUE, height=6, width=8>>=
 ggInterval_indexImage(facedata, plotAll = T,
                             full_strip = T,
@@ -789,7 +803,9 @@ ggInterval_indexImage(facedata, plotAll = T,
 
 \subsubsection{Characteristic of interval-valued data}
 
-Take the mushroom dataset for example, the side-by-side boxplot and center-range plot provide a quick view of data distribution, dispersion, and are particularly useful for comparing distributions between several groups of variables. In Figure \ref{fig:box_centerRange_before}, the dispersion of three variables are obviously distinct. The data in Stipe.Thicknesses variable is more intensive than the first two. However, we take the background knowledge into account, the values of this variable which describes the thicknesses of stipe of mushroom may usually be lower than others. For taking a deep look at the difference between variables, we standardize each of them as shown in Figure \ref{fig:box_centerRange_after}. In the boxplot of this figure, the interval-valued median close to the minimum which has a short interval, and the maximum with a long interval extend the distribution, which implies all variables are right-skewed. Besides, the center-range plot shows centers of them are positive correlation with their range. 
+Take the mushroom dataset for example, the side-by-side boxplot and center-range plot provide a quick view of data distribution, dispersion, and are particularly useful for comparing distributions between several groups of variables. Using the function \code{ggInterval_boxplot()} and \code{ggInterval_centerRange()} will easily construct the visualization like Figure \ref{fig:box_centerRange_before}. 
+
+In this Figure, the dispersion of three variables are obviously distinct. The data in Stipe.Thicknesses variable is more intensive than the first two. However, we take the background knowledge into account, the values of this variable which describes the thicknesses of stipe of mushroom may usually be lower than others. For taking a deep look at the difference between variables, we standardize each of them as shown in Figure \ref{fig:box_centerRange_after}. In the boxplot of this figure, the interval-valued median close to the minimum which has a short interval, and the maximum with a long interval extend the distribution, which implies all variables are right-skewed. Besides, the center-range plot shows centers of them are positive correlation with their range. 
 
 \begin{figure}[h]
     \centering
@@ -836,7 +852,9 @@ gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
     \caption{Box plot and Center-Range plot}
 \end{figure}
 
-In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Use the blood dataset to illustrate, and construct the frequency of data by Section \ref{sec:hist} for the first. Then it depicts the histograms with equidistant and non-equidistant breaks for all six variables in Figure \ref{fig:hist}. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. In this case, the Pulse variable seems to exhibit a bimodal distribution whereas other variables do not have an obvious trend.
+In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Use the blood dataset to illustrate, and construct the frequency of data by Section \ref{sec:hist} for the first, which will be processed by \code{ggInterval_hist()} function and the parameter \code{method} is the key for setting whether the histogram bins are equal width. 
+
+Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistant breaks for all six variables. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. In this case, the Pulse variable seems to exhibit a bimodal distribution whereas other variables do not have an obvious trend.
 
 \begin{figure}[h]
     \centering
