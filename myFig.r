@@ -1,7 +1,9 @@
 Sweave("ggESDA_Jiang&Wu_20210915.Rnw")
 tools::texi2pdf("ggESDA_Jiang&Wu_20210915.tex")
 #ref????????????~ 
+dim(Cardiological)
 library(ggESDA)
+library(ggplot2)
 library(grid)
 library(gridExtra)
 reinstall <- function(){
@@ -285,6 +287,28 @@ dim(oils)
 oils
 rownames(oils)
 
+Environment <- a
+
+#usethis::use_data(Environment, Environment)
+save(Environment, file = "Environment.rda")
+myLibrary <- c("ggESDA", "ggplot2", "ggthemes",
+               "data.table", "grid", "gridExtra",
+               "tibble", "stringr", "dplyr",
+               "extrafont", "ggpubr",
+               "RColorBrewer")
+lapply(myLibrary, require, character.only = TRUE)
+
+# pdf(file="test_123.pdf")
+# 
+# dev.off()
+ggInterval_radar(Environment, plotPartial = c(4,6),
+                 showLegend = F,
+                 base_circle = F,
+                 base_lty = 1,
+                 addText = F) +
+  scale_fill_manual(values = c("darkred", "darkblue"))
+#ggsave("aaa.pdf")
+
 
 a <- oils
 a[[2]][1] <- "[-27.00 : -8.00]"
@@ -363,10 +387,30 @@ mtplot = ggplot(mtcars) +
 plot_gg(mtplot, width=3.5, sunangle=225, preview = TRUE)
 
 
+?RSDA::SODAS.to.RSDA()
+RSDA::sodas.ex1
 
-ggInterval_minmax()
+
+?write.sym.table()
+data(example1)
+write.sym.table(example1, file = "temp4.csv", sep = "|",
+                dec = ".", row.names = F, col.names = TRUE)
+
+a <- read.sym.table("C:\\Users\\user\\Desktop\\NTPU\\PAPER\\myStudy\\doc\\environmentData.csv", sep = "|",
+                    dec = ".")
+a
+
+aaa<-"$M|URBANICITY|6|4|5|1|3|2|$M|INCOMELEVEL|25|50|75|90|100|$M|EDUCATION||1|3|5|6|$M|REGIONDEVELOPME|4|3|2|1|$I|CONTROL|CONTROL|$I|SATISFY||SATISFY|$I|INDIVIDUAL|INDIVIDUAL|$I|WELFARE|WELFARE|$I|HUMAN|HUMAN|$I|POLITICS|POLITICS|$I|BURDEN|BURDEN|$I|NOISE|NOISE|$I|NATURE|NATURE|$I|SEASETC|SEASETC|$I|MULTI|MULTI|$I|WATERWASTE||WATERWASTE|$I|VEHICLE|VEHICLE"
+
+
+
+
+In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, it's worth mentioning that there will be some advanced graphics implemented which are called the min-max plot, and center-range plot due to the characteristics of interval-valued data. They help researchers to be able to grasp the relationship between center and range, and the difference of range in data. 
+
+?ggInterval_minmax()
 ggInterval_boxplot()
 ggInterval_centerRange()
+?ggInterval_indexImage
 
 
 
