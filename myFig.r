@@ -301,12 +301,6 @@ lapply(myLibrary, require, character.only = TRUE)
 # pdf(file="test_123.pdf")
 # 
 # dev.off()
-ggInterval_radar(Environment, plotPartial = c(4,6),
-                 showLegend = F,
-                 base_circle = F,
-                 base_lty = 1,
-                 addText = F) +
-  scale_fill_manual(values = c("darkred", "darkblue"))
 #ggsave("aaa.pdf")
 
 
@@ -403,19 +397,42 @@ a
 aaa<-"$M|URBANICITY|6|4|5|1|3|2|$M|INCOMELEVEL|25|50|75|90|100|$M|EDUCATION||1|3|5|6|$M|REGIONDEVELOPME|4|3|2|1|$I|CONTROL|CONTROL|$I|SATISFY||SATISFY|$I|INDIVIDUAL|INDIVIDUAL|$I|WELFARE|WELFARE|$I|HUMAN|HUMAN|$I|POLITICS|POLITICS|$I|BURDEN|BURDEN|$I|NOISE|NOISE|$I|NATURE|NATURE|$I|SEASETC|SEASETC|$I|MULTI|MULTI|$I|WATERWASTE||WATERWASTE|$I|VEHICLE|VEHICLE"
 
 
+# 
+# 
+# In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, it's worth mentioning that there will be some advanced graphics implemented which are called the min-max plot, and center-range plot due to the characteristics of interval-valued data. They help researchers to be able to grasp the relationship between center and range, and the difference of range in data. 
+# 
+# ?ggInterval_minmax()
+# ggInterval_boxplot()
+# ggInterval_centerRange()
+# ?ggInterval_indexImage
+# 
+# 
+# 
+# data.frame(matrix(0, nrow = 6, ncol = 4))
+# 
 
-
-In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, it's worth mentioning that there will be some advanced graphics implemented which are called the min-max plot, and center-range plot due to the characteristics of interval-valued data. They help researchers to be able to grasp the relationship between center and range, and the difference of range in data. 
-
-?ggInterval_minmax()
-ggInterval_boxplot()
-ggInterval_centerRange()
-?ggInterval_indexImage
-
-
-
-data.frame(matrix(0, nrow = 6, ncol = 4))
-
+##############################################################
+library(ggthemes)
+p <- ggInterval_radar(Environment, plotPartial = c(4,6),
+                      showLegend = F,
+                      base_circle = F,
+                      base_lty = 1,
+                      addText = F) +
+  scale_fill_manual(values = c("darkred", "darkblue")) +
+  scale_color_manual(values = c("darkred", "darkblue")) +
+  labs(title = "") +
+  theme_hc()
+p2 <- ggInterval_radar(Environment, plotPartial = c(4,6),
+                      showLegend = F,
+                      base_circle = F,
+                      base_lty = 1,
+                      addText = F,
+                      type = "rect") +
+  scale_fill_manual(values = c("darkred", "darkblue")) +
+  scale_color_manual(values = c("darkred", "darkblue")) +
+  labs(title = "") +
+  theme_hc();p2
+gridExtra::marrangeGrob(list(p, p2), nrow = 1, ncol = 2, top = "")
 
 
 
