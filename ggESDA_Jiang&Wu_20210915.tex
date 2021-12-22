@@ -13,6 +13,8 @@
 \usepackage{subfig}
 \usepackage{enumerate} %i ii iii.....
 \usepackage{listings} %for code chrunk
+\usepackage{ctable} % for \specialrule command
+
 %\usepackage{svg}
 
 %% recommended packages
@@ -260,15 +262,15 @@ In order to simplify the process and make the preprocessing friendly, we develop
   \resizebox{\textwidth}{!}{
     \begin{tabular}{cccccc}
     \toprule
-    \hline
-    \multicolumn{6}{c}{\textbf{\code{classic2sym}}} \\\hline
+    
+    \multicolumn{6}{c}{\textbf{\code{classic2sym}}} \\
     \midrule
-    \code{groupby} Args. & Transformation & Data Type & Moment & Cluster Result & Require Other Args.  \\\hline
+    \code{groupby} Args. & Transformation & Data Type & Moment & Cluster Result & Require Other Args.  \\
     \midrule
     \code{kmeans} & K-means & Numeric/Category & Smaller data & V     & TRUE \\
     \code{hclust} & Hierarchical & Numeric/Category & Smaller data & V     & FALSE \\
     variable name & Variables aggregation & Numeric/Category & Own the pre-clustering group & -      & FALSE \\
-    \code{customize} & User-defined & Numeric & Connect with other packages &  -     & TRUE \\\hline
+    \code{customize} & User-defined & Numeric & Connect with other packages &  -     & TRUE \\
     \bottomrule
     \end{tabular}}%
   \label{tab:classic2sym}%
@@ -388,22 +390,22 @@ On the contrary, \pkg{ggESDA} uses a high-level graphic system by \pkg{ggplot2} 
   \setlength{\extrarowheight}{6pt}
   \resizebox{\textwidth}{!}{
     \begin{tabular}{|l|l|c|c|ccc|c|c|c|}
-    \hline
+    
     \toprule
     \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ Available}} & \multicolumn{1}{c}{\textbf{Summarize}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
     \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Author} & Version & Function & Univariate & Bivariate & Multivariate & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
     RSDA  & Rojas et al. (2015) & R(4.1.0)     & \code{classic.to.sym}     & -     & 1     & -     & 3     & \textbf{2}    & \textbf{1} \\
     symbolicDA & Dudek et al. (2013) & R(4.1.0)     &    -   & -     & -     & \textbf{2}    & 2     & 1     & \textbf{1} \\
     HistDAWass & Irpino (2015) & R(4.1.0)     & \code{data2hist}     & 4     & -     & -     & 3     & 1     & \textbf{1} \\
-    \midrule
+    
     MAINT.Data & Silva \&  Brito (2011) & R(4.1.0)     &   -    & -     & -     & -     & \textbf{7}    & -     & \textbf{1} \\\hline
     iRegression & Neto et al. (2011) & R(4.1.0)     &   -    & -     & -     & -     & 1     & -     & - \\
     intReg & Toomet (2012) & R(3.6.0)      &  -     & -     & -     & -     & 1     & -     & - \\
     ISDA.R & Filho \&  Fagundes (2012) & R(2.15.2)      &    -   & 1     & -     & 1     & 1     & -     & - \\
     GPCSIV & Brahim (2013) & R(3.0.2)      &  -     & -    & -     & -     & 1     & -     & - \\
-    GraphPCA & Brahim \& Kallyth (2014) & R(4.1.0)      &   -    & -     & 1     & 1     & 1     & -     & - \\\hline
+    GraphPCA & Brahim \& Kallyth (2014) & R(4.1.0)      &   -    & -     & 1     & 1     & 1     & -     & - \\
     \midrule
-    ggESDA & Jiang (2021) & R(4.1.0)     & \code{classic2sym}     & \textbf{8}    & \textbf{4}    & \textbf{2}    & 1     & -     & - \\\hline
+    ggESDA & Jiang (2021) & R(4.1.0)     & \code{classic2sym}     & \textbf{8}    & \textbf{4}    & \textbf{2}    & 1     & -     & - \\
     \bottomrule
     \end{tabular}}%
   \label{tab:pkgCompare}%
@@ -579,22 +581,44 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 
 
 
-\section{Application to real datasets}
+\section{Application to Real Symbolic Datasets}
 
-The typical graphical techniques of EDA include the index plot, barplot, boxplot, and histogram for univariate data; the 2D scatterplot, joint
-histogram and double boxplot for bivariate data; and the satterplot matrix, and star plot for multivariate data. Of course, there are many other variants of graphical techniques have been proposed. Our aim in this study is to implement good statistical graphics to display symbolic data accurately and clearly. 
+The typical graphical techniques of EDA include the index plot, barplot, boxplot, and histogram for univariate data; the 2D scatterplot, joint histogram and double boxplot for bivariate data; and the satterplot matrix, and star plot for multivariate data. Of course, there are many other variants of graphical techniques have been proposed. Our aim in this study is to implement good statistical graphics to display symbolic data accurately and clearly. 
 
 \subsection{Example datasets}
 
-In the following, we used the face recognition data to illustrate some graphing functions we have implemented so far.
-intro datasets, summary datasets with table... , state how does the following section do , or what..... , what we can reveal in EDA...?
+In the following, we used the five well-known symbolic datasets, shown in table \ref{tab:datasets}, to illustrate some graphing functions we have implemented so far. 
 
-\begin{itemize}
-  \item \emph{Mushroom data}: 
-  \item \emph{Face recognition data}: 
-  \item \emph{Oils data}: 
-  \item \emph{Blood pressures data}: 
-\end{itemize}
+For the first three datasets, Mushroom \cite{billard:2006}, Face data (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}), Blood pressure, we can see the concepts of them are obviously greater than the number of variables.
+
+
+Oils \cite{ichino:1994}
+
+Environment (from SODAS software package)
+
+\begin{table}[htbp]
+  \centering
+  \caption{Example Symbolic Datasets}
+  \setlength{\extrarowheight}{6pt}
+    \begin{tabular}{llll}
+    \toprule
+    
+          & \multicolumn{1}{l}{N} & \multicolumn{1}{l}{P} & Description \\
+    
+    \specialrule{.1em}{.05em}{.05em} 
+    Mushroom & 23    & 3     & A range of widths, lengths, and thicknesses of species of mushroom. \\
+    Face data & 27    & 6     & Six face measures of nine-man (three observations each). \\
+    Blood pressure & 11    & 3     & A range of pulse, systolic, and diastolic during a time unit. \\
+    Oils  & 8     & 5     & Physicochemical properties of distinct oils. \\
+    Environment & 14    & 17    & Environmental questionnaire summary. \\
+    \bottomrule
+    
+    \end{tabular}%
+  \label{tab:datasets}%
+\end{table}%
+
+
+
 
 
 
@@ -791,10 +815,7 @@ Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistan
 
 %\subsection{Bivariate functions}
 
-\subsection{Bivariate relationships plot}
-
-
-
+\subsection{Bivariate relationship plot}
 
 \begin{figure}[htbp]
 \centering
@@ -848,16 +869,21 @@ Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistan
 \end{figure}
 
 
-
 \subsection{Multivariate visualization}
 
 \begin{figure}[htbp]
 \centering
-
 \includegraphics[width=1\textwidth]{ggESDA_Jiang&Wu_20210915-radar.pdf} 
-
 \caption{\label{fig:radar} Radar}
 \end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{quantile_5data.pdf} 
+\caption{\label{fig:quantile5} Quantile for five symbolic datasets}
+\end{figure}
+
 
 \bibliography{refs}
 

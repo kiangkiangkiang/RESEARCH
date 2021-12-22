@@ -410,6 +410,13 @@ aaa<-"$M|URBANICITY|6|4|5|1|3|2|$M|INCOMELEVEL|25|50|75|90|100|$M|EDUCATION||1|3
 # 
 # data.frame(matrix(0, nrow = 6, ncol = 4))
 # 
+# \begin{itemize}
+# \item \emph{Mushroom data}: 
+#   \item \emph{Face recognition data}: 
+#   \item \emph{Oils data}: 
+#   \item \emph{Blood pressures data}: 
+#   \item \emph{Environment data}: 
+#   \end{itemize}
 
 ##############################################################
 library(ggthemes)
@@ -433,7 +440,16 @@ p2 <- ggInterval_radar(Environment, plotPartial = c(4,6),
   labs(title = "") +
   theme_hc();p2
 gridExtra::marrangeGrob(list(p, p2), nrow = 1, ncol = 2, top = "")
+# Roughly, we classify these datasets into three parts by their
+#dimension, N > P, N ≃ P, and N < P.
 
+library(ggESDA)
+Cardiological
+dim(Cardiological)
+
+HistDAWass::BloodBRITO
+ggInterval_3Dscatter(facedata, aes(AD, BC, AH),
+                     scale = T)
 
 
 
