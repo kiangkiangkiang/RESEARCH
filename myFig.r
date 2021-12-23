@@ -1,5 +1,7 @@
 Sweave("ggESDA_Jiang&Wu_20210915.Rnw")
 tools::texi2pdf("ggESDA_Jiang&Wu_20210915.tex")
+############
+
 #ref????????????~ 
 dim(Cardiological)
 library(ggESDA)
@@ -451,5 +453,134 @@ HistDAWass::BloodBRITO
 ggInterval_3Dscatter(facedata, aes(AD, BC, AH),
                      scale = T)
 
+############
+
+############plot plot plot#################
+library(ggESDA)
+library(ggpubr)
+library(gridExtra)
+#set para
+this.data <- facedata
+p <- dim(this.data)[2]
+
+#### mmplot #####
+ggInterval_minmax(this.data, aes(size = 2), plotAll = T)+
+  scale_color_manual(values=c("darkblue","darkred"))+
+  guides(colour = F)+theme_bw() + coord_fixed(ratio = 1)
+
+plotLocal <- NULL
+for(i in 1:p){
+  plotLocal[[i]] <- ggInterval_minmax(this.data, aes(this.data[[i]], size = 2))+
+    scale_color_manual(values=c("darkblue","darkred"))+
+    guides(colour = F)+theme_bw() + coord_fixed(ratio = 1)
+}
+a <- ggarrange(plotlist = plotLocal, nrow = 1, ncol = p, labels = "") 
+
+
+plotGlobal <- NULL
+for(i in 1:p){
+  plotGlobal[[i]] <- ggInterval_minmax(this.data, aes(this.data[[i]], size = 2),
+                                       scaleXY = "global")+
+    scale_color_manual(values=c("darkblue","darkred"))+
+    guides(colour = F)+theme_bw() + coord_fixed(ratio = 1)
+}
+b <- ggarrange(plotlist = plotGlobal, nrow = 1, ncol = p, labels = "")
+marrangeGrob(list(a, b), nrow = 2, ncol = 1, top = "")
+#ggarrange(a, b)
+#ggarrange(plotlist = c(plotLocal, plotGlobal), nrow = 3, ncol = 4)
+
+#### boxplot centerRange #####
+seed(20211216)
+a <- ggInterval_boxplot(this.data, plotAll = T) +
+  theme_classic()+
+  theme(legend.position = "none",
+        axis.text.x = element_blank())
+
+b <- ggInterval_centerRange(this.data, aes(size = 1.5),
+                           plotAll = T)+
+  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
+                                alpha = 0.05, col = "grey")
+#gridExtra::grid.arrange(a, b, ncol=1, nrow = 2)
+
+
+this.data.scale <- scale_sym_table(this.data)
+c <- ggInterval_boxplot(this.data.scale, plotAll = T) +
+  theme_classic()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_blank())+
+  scale_y_continuous(breaks = c(-2:2), 
+                     labels = c("-2.0", "-1.0", "0", "1.0", "2.0"));c
+
+
+d <- ggInterval_centerRange(this.data.scale, aes(size = 1.5),
+                           plotAll = T)+
+  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
+                                alpha = 0.05, col = "grey")
+#gridExtra::grid.arrange(c, d, ncol=1, nrow = 2)
+
+
+gridExtra::grid.arrange(a, c, ncol=1, nrow = 2)
+gridExtra::grid.arrange(b, d, ncol=1, nrow = 2)
+#end plot
+#### histplot #####
+ggInterval_hist(this.data, plotAll = T, bins = 30) +
+  theme_hc()+
+  scale_y_continuous(breaks = c(0, 0.025, 0.05))+
+  labs(title = "")
+
+ggInterval_hist(this.data, plotAll = T,
+                method="unequal-bin") +
+  theme_hc()+
+  scale_y_continuous(breaks = c(0, 0.2, 0.4))+
+  labs(title = "")
+
+#### scatterplot #####
+#temp <- rep(brewer.pal(9, "Set1"), each = 3)
+#temp2 <- rep(brewer.pal(9, "Paired"), each = 3)
+
+temp <- rep(brewer.pal(9, "Set1"), each = 3)
+ggInterval_scaMatrix(this.data, aes(alpha = 0.4))+
+  scale_fill_manual(values = temp)+
+  theme_bw()+
+  theme(plot.title = element_text(size=14),
+        legend.position = "bottom",
+        legend.key.size = unit(0.4, 'cm'),
+        legend.key.height = unit(0.4, 'cm'),
+        legend.key.width = unit(0.4, 'cm'),
+        legend.title = element_text(size=8.5),
+        legend.text = element_text(size=6.5))+
+  guides(fill=guide_legend(nrow=2,byrow=TRUE))
+
+# ggInterval_scaMatrix(this.data)+
+#   theme_bw()+
+#   theme(legend.position = "none") +
+#   geom_smooth(method = "lm",
+#               col = "red",
+#               se = 0.8,
+#               alpha = 0.2,
+#               fill = "blue")
+#### 2Dhist #####
+p <- ggInterval_2Dhist(this.data, aes(this.data[[1]], this.data[[2]], 
+                                 col = "grey30"),
+                  xBins = 25,
+                  yBins = 25)+ theme_light() + labs(fill='Frequency',
+                                                    title="")+
+  theme(legend.position = "bottom")
+p <- p + coord_fixed(ratio=1)
+marrangeGrob(list(p), nrow = 1, ncol = 1, top = "")
+#### 2DhistMat #####
+facedata.scale <- scale_sym_table(facedata)
+p_mat <- ggInterval_2DhistMatrix(facedata, aes(col = "grey50"),
+                  xBins = 10,
+                  yBins = 10,
+                  removeZero = T,
+                  addFreq = F)
+
+p_mat <- p_mat + theme_light() + 
+  labs(title="") +
+  theme(legend.position = "bottom")
+
+marrangeGrob(list(p_mat), nrow = 1, ncol = 1, top = "")
+#############################
 
 

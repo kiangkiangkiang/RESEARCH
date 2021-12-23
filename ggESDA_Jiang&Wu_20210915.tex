@@ -211,12 +211,9 @@ Using a particular variable to merge different data is a common way for data ana
 > head(breastData.sym.i[, 1:4], 5)
 \end{Sinput}
 \begin{Soutput}
-      radius_mean    texture_mean   perimeter_mean
-B  [6.98 : 17.85]  [9.71 : 33.81] [43.79 : 114.60]
-M [10.95 : 28.11] [10.38 : 39.28] [71.90 : 188.50]
-            area_mean
-B   [143.50 : 992.10]
-M [361.60 : 2,501.00]
+      radius_mean    texture_mean   perimeter_mean           area_mean
+B  [6.98 : 17.85]  [9.71 : 33.81] [43.79 : 114.60]   [143.50 : 992.10]
+M [10.95 : 28.11] [10.38 : 39.28] [71.90 : 188.50] [361.60 : 2,501.00]
 \end{Soutput}
 \end{Schunk}
 
@@ -587,14 +584,16 @@ The typical graphical techniques of EDA include the index plot, barplot, boxplot
 
 \subsection{Example datasets}
 
-In the following, we used the five well-known symbolic datasets, shown in table \ref{tab:datasets}, to illustrate some graphing functions we have implemented so far. 
+In the following, we used the five well-known symbolic datasets, Face data (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}), Mushroom, Blood pressure \cite{billard:2006}, Oils \cite{ichino:1994}, and Environment questionnaire data (from SODAS software package) to illustrate some graphing functions we have implemented so far. 
 
-For the first three datasets, Mushroom \cite{billard:2006}, Face data (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}), Blood pressure, we can see the concepts of them are obviously greater than the number of variables.
+On the whole, we classify these datasets into three parts by their dimension, $N > P$, $N \simeq P$, and $N < P$, roughly.
+Use these properties to observe the performance of the  \pkg{ggESDA} package. 
+
+In table \ref{tab:datasets}, we may see 
 
 
-Oils \cite{ichino:1994}
+the first three datasets, whose dimension are commonly observed in practice, 
 
-Environment (from SODAS software package)
 
 \begin{table}[htbp]
   \centering
@@ -606,8 +605,8 @@ Environment (from SODAS software package)
           & \multicolumn{1}{l}{N} & \multicolumn{1}{l}{P} & Description \\
     
     \specialrule{.1em}{.05em}{.05em} 
-    Mushroom & 23    & 3     & A range of widths, lengths, and thicknesses of species of mushroom. \\
     Face data & 27    & 6     & Six face measures of nine-man (three observations each). \\
+    Mushroom & 23    & 3     & A range of widths, lengths, and thicknesses of species of mushroom. \\
     Blood pressure & 11    & 3     & A range of pulse, systolic, and diastolic during a time unit. \\
     Oils  & 8     & 5     & Physicochemical properties of distinct oils. \\
     Environment & 14    & 17    & Environmental questionnaire summary. \\
@@ -634,37 +633,41 @@ Environment (from SODAS software package)
 
 \subsection{Interval presentation techniques}
 
-For interval-valued data, one of the advanced graphics implemented is called the min-max plot, which shows the interval characteristics of the data. As Figure \ref{fig:minmax} shown, we visualize the oils dataset for example by the function 
+For interval-valued data, one of the advanced graphics implemented is called the min-max plot, which shows the interval characteristics of the data. As Figure \ref{fig:minmax} shown, we visualize the Face data for example by the function 
 
 \begin{verbatim}
 ggInterval_minmax(data = NULL, mapping = aes(NULL), scaleXY = "local",
   plotAll = FALSE)
 \end{verbatim}
 
+For the top six of Figure \ref{fig:minmax} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself (by setting option \code{scaleXY = "local"}). And represents the range by the connected line between minimum and maximum. To design the widely-view exploratory graphic function like this instance, we apply the option \code{plotAll = TRUE} to extend one variable visualization to full variables in the same plot. For examples, the figure constructed by the code
 
-Figure \ref{fig:minmax_local} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself (by setting option \code{scaleXY} with \code{"local"}). And represents the range by the connection between minimum and maximum. To design the widely-view exploratory graphic function, we apply the option \code{plotAll} to extend one variable visualization to full variables in the same plot.
-
-However, when the unit is considered, the absolute position in the full sample space will display in Figure \ref{fig:minmax_global}. It presents a different boundary in the axis from the previous figure, which makes the researcher know about the actual location in each variable. In this instance, the GRA variable converges into a point because of its tiny unit, and the range of the IOD variable is the largest.
+\begin{Schunk}
+\begin{Sinput}
+> relativePos <- ggInterval_minmax(facedata, plotAll = T, scaleXY = "local")+
++       scale_color_manual(values = c("darkblue", "darkred"))+
++       guides(colour = F) + 
++       theme_bw() + 
++       coord_fixed(ratio = 1)
+> absolutePos <- ggInterval_minmax(facedata, plotAll = T, scaleXY = "local")+
++       scale_color_manual(values = c("darkblue", "darkred"))+
++       guides(colour = F) + 
++       theme_bw() + 
++       coord_fixed(ratio = 1)
+> ggarrange(relativePos, absolutePos, nrow = 2, ncol = 1)
+\end{Sinput}
+\end{Schunk}
 
 \begin{figure}[htbp]
     \centering
-    \begin{tabular}{c}
-    \subfloat[Condition in each variables]{
-    \scalebox{.7}{
-        
-        \label{fig:minmax_local} 
-\includegraphics{ggESDA_Jiang&Wu_20210915-minmax_local}
-                }}
-                \\
-        \subfloat[Condition in all variables]{
-        \scalebox{.7}{        
-        
-        \label{fig:minmax_global} 
-\includegraphics{ggESDA_Jiang&Wu_20210915-minmax_global}
-        }}
-        \end{tabular}
-   \caption{\label{fig:minmax} The min-max plot}
+    \includegraphics[trim=5cm 0.5cm 6cm 0.5cm,angle=-90,width=1\textwidth, clip]{mmplot.pdf} 
+   \caption{\label{fig:minmax} The min-max plot. The figure in the top six conditions the axis in their own variables, whereas the bottom six conditions it in all variables.}
 \end{figure}
+
+However, when the unit is considered, the absolute position in the full sample space will display as the bottom six of Figure \ref{fig:minmax}. It presents a different boundary in the axis from the previous figure, which makes researchers know about the actual location in each variable. In this case, we can clearly discover that the sample space changes along with the variables.
+
+To complete the visualization, it actually needs the command \code{ggInterval_minmax(facedata, plotAll = T, scaleXY = "local")}, merely. Other aesthetics can be omitted. Because we now focus on the full variables exploration, the \code{mapping} option for a particular variable is not necessary as well. Thus, in the following, we will pay more attention to the option we changing.
+
 
 
 Another graphical technique, called index plot, is famous in conventional data as well. It is composed of minimum and maximum in interval-valued data and exhibits the concepts' behavior. Both of the function
@@ -682,9 +685,9 @@ ggInterval_indexImage(data = NULL, mapping = aes(NULL), plotAll = FALSE,
 
 can achieve this objective, but there is still a slight difference for visualizing. 
 
-The former function, shown in Figures \ref{fig:index} and \ref{fig:index_bar}, directly displays the interval which is similar to min-max plot. Among these plots, we classify the concepts by the same person and can discover the values of people LOT, KHA, INC, FRA in AD variable are less than others, which easily compares the difference. 
+Take the variable AD for example, and set option \code{mapping = aes(x = AD)}. The former function, shown in Figures \ref{fig:index} and \ref{fig:index_bar}, directly displays the interval which is similar to min-max plot. Among these plots, we classify the concepts by the same person by setting the aesthetics option \code{fill} and can discover the values of people LOT, KHA, INC, FRA in AD variable are less than others, which easily compares the difference. 
 
-The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, visualizes the interval values using a color mapping. As the legend says, the blue color corresponds to the low values, whereas the red color corresponds to the high. The only difference among these plots is the color bar extension (control by the option \code{full_strip}), which will quickly discover concepts' behavior through the visual sense, as Figure \ref{fig:indexImage} shown.
+The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, visualizes the interval values using a color mapping. As the legend says, the blue color corresponds to the low values, whereas the red color corresponds to the high. The only difference among these plots is the color bar extension (control by the option \code{full_strip = TRUE}), which will quickly discover concepts' behavior through the visual sense, as Figure \ref{fig:indexImage} shown.
 
 \begin{figure}[htbp]
     \centering
@@ -720,26 +723,31 @@ The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, v
    \caption{\label{fig:index_full} Index plot for the variable AD}
 \end{figure}
 
-For exploring data, we extend the index plot into full variables using the face dataset and visualize by color mapping as we did before. Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method.
+For exploring data, we extend the index plot into full variables and visualize by color mapping as we did before using the code
 
-\begin{itemize}
-  \item \emph{Column condition}: This technique is to standardize data by each variable, which will be able to compare the observations easily without the unit confounder. Figure \ref{fig:indexImage_col} ,for example, shows the concept JPL has a large value in all variables in contrast with KHA and INC.
-  \item \emph{Matrix condition}: Instead of standardizing variables one by one, this method does it with the full data matrix. That will reveal the different performance between each variable, as Figure \ref{fig:indexImage_mat} shown. The values in variable AD are obviously larger than others, which means the interocular distance is the longest than other distances in the face dataset.
-\end{itemize}
-
+\begin{Schunk}
+\begin{Sinput}
+> colCondition <- ggInterval_indexImage(facedata, plotAll = T,
++                       full_strip = T) 
+> matCondition <- ggInterval_indexImage(facedata, plotAll = T,
++                       full_strip = T,
++                       column_condition = F)
+> ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
+\end{Sinput}
+\end{Schunk}
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{.8}{
+    \scalebox{1}{
     \begin{tabular}{c c}
         \subfloat[Column condition]{
-        \scalebox{.6}{
+        \scalebox{.5}{
         \label{fig:indexImage_col}
 \includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_col}
                 }}
                 &
         \subfloat[Matrix condition]{
-        \scalebox{.6}{
+        \scalebox{.5}{
         \label{fig:indexImage_mat}
 \includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_mat}
         }}
@@ -747,70 +755,87 @@ For exploring data, we extend the index plot into full variables using the face 
     \caption{\label{fig:indexImage} Index image - heatmap}
 \end{figure}
 
+Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method.
+
+\begin{itemize}
+  \item \emph{Column condition}: This technique is to standardize data by each variable, which will be able to compare the observations easily without the unit confounder. Figure \ref{fig:indexImage_col} ,for example, shows the concept JPL has a large value in all variables in contrast with KHA and INC.
+  \item \emph{Matrix condition}: Instead of standardizing variables one by one, this method does it with the full data matrix. That will reveal the different performance between each variable, as Figure \ref{fig:indexImage_mat} shown. The values in variable AD are obviously larger than others, which means the interocular distance is the longest than other distances in the face dataset.
+\end{itemize}
+
 
 \subsection{Statistical graph implementation}
 
 In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, another advanced graphics implemented is called center-range plot, which helps researchers to be able to grasp the relationship between center and range. 
 
-Take the mushroom dataset for example, the side-by-side boxplot and center-range plot provide a quick view of data distribution, dispersion, and are particularly useful for comparing distributions between several groups of variables. It will easily construct the visualization like Figure \ref{fig:box_centerRange_before} using the function 
+The side-by-side boxplot, which provides a quick view of data distribution, dispersion, and is particularly useful for comparing distributions between several groups of variables. Use the function
 
 \begin{verbatim}
 ggInterval_boxplot(data = NULL, mapping = aes(NULL), plotAll = FALSE)
 \end{verbatim}
 
-and 
+By setting option \code{plotAll}, the top panel of Figure \ref{fig:box} will be easily implemented. In this Figure, the dispersion of six variables is obviously distinct. However, it is difficult to compare with their distribution because of the distinct sample space which leaves no room for a suitable presentation. We standardize the Face data, shown in the bottom panel of the figure, and take a deeper look at it.
+
+\begin{figure}[htbp]
+    \centering
+    \scalebox{1}{
+\includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_before}
+    }
+    \caption{The side-by-side box plot. The figure in the top panel is the raw value of its variables, where the bottom panel is to standardize each variables. \label{fig:box}}
+\end{figure}
+
+Clearly, there is a vacancy in the middle of variable AD, AH, and next to the minimum of the variable DH, which indicates the frequency there may be quite low. Especially for AD and AH, this factor may result in a bimodal distribution.
+
+In addition, the overlap of the variables BC, EH, and GH located in the middle of five quantile-box seem larger than others, which is possible to lead a bell-shaped for its distribution.
+
+% center range
+For the center-range plot, it is a special technique for the dispersion observing. The code
 
 \begin{verbatim}
 ggInterval_centerRange(data = NULL, mapping = aes(NULL), plotAll = FALSE)
 \end{verbatim}
 
-In this Figure, the dispersion of three variables are obviously distinct. The data in Stipe.Thicknesses variable is more intensive than the first two. However, we take the background knowledge into account, the values of this variable which describes the thicknesses of stipe of mushroom may usually be lower than others. For taking a deep look at the difference between variables, we standardize each of them as shown in Figure \ref{fig:box_centerRange_after}. In the boxplot of this figure, the interval-valued median close to the minimum which has a short interval, and the maximum with a long interval extend the distribution, which implies all variables are right-skewed. Besides, the center-range plot shows centers of them are positive correlation with their range. 
+Setting options are the same as the former. With the Figure \ref{fig:box} demonstration, we divide the exploration into two parts by standardization, shown in Figure \ref{fig:centerRange}.
+
+With regard to the top panel of Figure \ref{fig:centerRange}, there is no significant difference in the range of all variables. But focusing on a particular variable, the dispersion is quite large. For the bottom panel of Figure \ref{fig:centerRange}, the relationship between center and range is clearly exposed. Among them, there is an obvious relationship in the variable BC, which presents a negative correlation, where others are not significant.
 
 \begin{figure}[htbp]
+    
     \centering
-    \scalebox{.8}{
-    \begin{tabular}{c c}
-        \subfloat[mushroom before standardize]{
-        \scalebox{.6}{\label{fig:box_centerRange_before}
-\includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_before}
-
-                }}
-                &
-        \subfloat[mushroom after standardize]{
-        \scalebox{.6}{\label{fig:box_centerRange_after}
+    \scalebox{1}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_after}
-        }}
-        \end{tabular}}
-    \caption{Box plot and Center-Range plot}
+    }
+    \caption{\label{fig:centerRange}The center-range plot}
 \end{figure}
 
-In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Use the blood dataset to illustrate, and construct the frequency of data by Section \ref{sec:hist} for the first, which will be processed by the function
+
+In the same way, demonstrating the distribution of data by histogram is also one of the most common ways. Construct the frequency of data by Section \ref{sec:hist} for the first, which will be processed by the function
 
 \begin{verbatim}
 ggInterval_hist(data = NULL, mapping = aes(NULL), method = "equal-bin",
   bins = 10, plotAll = FALSE)
 \end{verbatim}
 
-The option \code{method} is the key for setting whether the histogram bins are equal width. 
-
-Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistant breaks for all six variables. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. In this case, the Pulse variable seems to exhibit a bimodal distribution whereas other variables do not have an obvious trend.
+Option \code{method} is the key for setting whether the histogram bins are equal width, detail in Section \ref{sec:hist}, which can be set with \code{"equal-bin"} or \code{"unequal-bin"}. In Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistant breaks for all six variables. Both of them present the location and scale of distribution of each variable, but the non-equidistant-bin histogram whose breaks are obtained by the boundaries of the intervals shows more details about the characteristic of data. As we did before, set \code{plotAll} and \code{method}, and it can be directly completed with one line command. In the figure, we may obtain some similar distribution information conclusion with Figure \ref{fig:box}.
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{.8}{
+    \scalebox{1}{
     \begin{tabular}{c c}
         \subfloat[Equidistant-bin histogram]{
-        \scalebox{.6}{
+        \scalebox{.5}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-hist_equal}
                 }}
                 &
         \subfloat[Non-equidistant-bin histogram]{
-        \scalebox{.6}{
+        \scalebox{0.5}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-hist_unequal}
         }}
         \end{tabular}}
     \caption{\label{fig:hist} Histogram}
 \end{figure}
+
+
+
 
 
 %\subsection{Bivariate functions}
@@ -819,7 +844,7 @@ Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistan
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.8}{
+\scalebox{1}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-scaMatrix}
 }
 \caption{\label{fig:scaMatrix} scatter matrix}
@@ -850,9 +875,7 @@ Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistan
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.8}{
-
-\includegraphics{ggESDA_Jiang&Wu_20210915-2Dhist}
+\includegraphics[width=1\textwidth]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
 }
 \caption{\label{fig:2Dhist} 2D histogram }
 \end{figure}
@@ -860,10 +883,7 @@ Figure \ref{fig:hist} depicts the histograms with equidistant and non-equidistan
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.8}{
-
 \includegraphics[]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
-}
 }
 \caption{\label{fig:2DhistMatrix} 2D histogram matrix}
 \end{figure}
