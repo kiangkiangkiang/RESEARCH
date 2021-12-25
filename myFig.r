@@ -454,9 +454,49 @@ ggInterval_3Dscatter(facedata, aes(AD, BC, AH),
                      scale = T)
 
 ############
+this.data.2 <- Environment
+min(this.data.2[[5]])
+temp <- lapply(5:17, FUN = function(x) round(cbind(min(this.data.2[[x]]),
+                                                   max(this.data.2[[x]])), 2))
+temp[[1]]
+temp2 <- lapply(temp, FUN = function(x) classic2sym(data.frame(x),
+                                                    "customize",
+                                                    minData = x[, 1],
+                                                    maxData = x[, 1])$intervalData )
+temp3 <- matrix(0, nrow = 14, ncol = 1)
+for(i in 1:13){
+  temp3 <- cbind(temp3, temp2[[i]])
+}
+temp3 <- as.data.frame(temp3[, -1])
+colnames(temp3) <- colnames(Environment)[5:17]
+class(temp3) <- c("symbolic_tbl", class(temp3))
+Environment.n <- temp3
+myFill <- c("gray0", "gray10", "gray20",
+            "gray30", "gray40", "gray50",
+            "gray60", "gray70", "gray80",
+            "gray90", "gray100")
+pList <- NULL
+u <- 1
+for(i in useDataSet){
+  p <- ggInterval_radar(i,
+                        plotPartial = 1,
+                        base_circle = F,
+                        base_lty = 1,
+                        type = "quantile",
+                        quantileNum = 10,
+                        showLegend = F,
+                        Drift = 0)+
+    labs(title = names(useDataSet)[u]) +
+    scale_fill_manual(values = rev(myFill)) +
+    theme_hc()
+  pList[[u]] <- p
+  print(u)
+  u <- u + 1
+}
 
 ############plot plot plot#################
 library(ggESDA)
+
 library(ggpubr)
 library(gridExtra)
 #set para
@@ -581,6 +621,133 @@ p_mat <- p_mat + theme_light() +
   theme(legend.position = "bottom")
 
 marrangeGrob(list(p_mat), nrow = 1, ncol = 1, top = "")
+#### radar_typecial, with circle, no text, no nominal####
+
+Environment.n <- Environment[, 5:17]
+p1 <- ggInterval_radar(Environment.n, 
+                 plotPartial = 2,
+                 showLegend = F,
+                 base_circle = T,
+                 base_lty = 2,
+                 addText = F
+                 ) +
+  labs(title = "") +
+  theme_hc() +
+  scale_fill_manual(values = c("gray50")) +
+  scale_color_manual(values = c("red")) 
+
+p2 <- ggInterval_radar(Environment.n, 
+                 plotPartial = 2,
+                 showLegend = F,
+                 base_circle = F,
+                 base_lty = 1,
+                 addText = T
+) +
+  labs(title = "") +
+  theme_hc() +
+  scale_fill_manual(values = c("gray50")) +
+  scale_color_manual(values = c("red")) 
+
+gridExtra::marrangeGrob(list(p1, p2), nrow = 1, ncol = 2, top = "")
+
+
+#### radar_3obs, no circle, add text, no nominal####
+#showN <- dim(Environment)[1]
+showN <- 3
+p <- NULL
+
+for(i in 1:showN){
+  p[[i]] <- ggInterval_radar(Environment, 
+                       plotPartial = i,
+                       showLegend = F,
+                       base_circle = T,
+                       base_lty = 2,
+                       addText = F
+      ) +
+        labs(title = "") +
+        theme_hc() +
+        scale_fill_manual(values = c("gray50")) +
+        scale_color_manual(values = c("gray30")) 
+}
+marrangeGrob(p, nrow = 1, ncol = 3, top = "")
+
+#### radar 2 kind #####
+p <- ggInterval_radar(Environment, plotPartial = c(4,6),
+                      showLegend = F,
+                      base_circle = F,
+                      base_lty = 1,
+                      addText = F) +
+  scale_fill_manual(values = c("darkred", "darkblue")) +
+  scale_color_manual(values = c("darkred", "darkblue")) +
+  labs(title = "") +
+  theme_hc()
+p2 <- ggInterval_radar(Environment, plotPartial = c(4,6),
+                       showLegend = F,
+                       base_circle = F,
+                       base_lty = 1,
+                       addText = F,
+                       type = "rect") +
+  scale_fill_manual(values = c("darkred", "darkblue")) +
+  scale_color_manual(values = c("darkred", "darkblue")) +
+  labs(title = "") +
+  theme_hc();p2
+gridExtra::marrangeGrob(list(p, p2), nrow = 1, ncol = 2, top = "")
+
+
+#### not put in ggESDA radar 3 kind #####
+ggInterval_radar(Environment, plotPartial = c(4,6,14),
+                 showLegend = F,
+                 base_circle = F,
+                 base_lty = 1,
+                 addText = F) +
+  scale_fill_manual(values = c("gray25", "gray50", "gray75")) +
+  scale_color_manual(values = c("gray25", "gray50", "gray75")) +
+  labs(title = "") +
+  theme_hc()
+#### radar quantile #####
+
+myFill <- c("white", "gray20",
+            "gray30", "gray40", "gray50",
+            "gray60", "gray70", "white",
+            "white", "white")
+# ggInterval_radar(Environment,
+#                  base_circle = F,
+#                  base_lty = 1,
+#                  type = "quantile",
+#                  quantileNum = 9,
+#                  showLegend = F,
+#                  Drift = 0) +
+#   scale_fill_manual(values = rev(myFill)) +
+#   scale_colour_manual(values = rev(myFill))+ 
+#   theme_hc()
+
+
+useDataSet <- list(facedata = facedata,
+                   Environment = Environment)
+pList <- NULL
+u <- 1
+for(i in useDataSet){
+  p <- ggInterval_radar(i,
+                        plotPartial = 1,
+                        base_circle = F,
+                        base_lty = 1,
+                        type = "quantile",
+                        quantileNum = 9,
+                        showLegend = F,
+                        Drift = 0)+
+    labs(title = names(useDataSet)[u]) +
+    scale_fill_manual(values = rev(myFill)) +
+    scale_colour_manual(values = rev(myFill))+ 
+    theme_hc()
+  pList[[u]] <- p
+  print(u)
+  u <- u + 1
+}
+marrangeGrob(pList, nrow = 1, ncol = 2, top = "")
 #############################
+
+
+
+
 
 

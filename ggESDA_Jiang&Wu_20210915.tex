@@ -454,7 +454,7 @@ where $\xi$ is the individual descriptions.
 The Equation (\ref{eq:dist1}) is also equivalently to :
 
 \begin{equation}\label{eq:dist2}
-f(\xi) = \frac{1}{m}\sum_{u \in E}\frac{I_u(\xi)}{\| Z(u) \|},\xi \in \mathbb{R}
+f(\xi) = \frac{1}{m}\sum_{u \in E}\frac{I_u(\xi)}{\| Z(u) \|}\;,\xi \in \mathbb{R}
 \end{equation}
 
 where $I_u(.)$ is the indicator function that $\xi$ is or is not in the interval $Z(u)$, $\| Z(u) \|$ is the length of that interval, and $E=\{w_1,w_2,\cdots,w_m \}$.
@@ -561,7 +561,7 @@ The definitions and calculations of the symbolic sample covariance in
 Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
 
 
-\subsubsection{2D-Histogram}
+\subsubsection{2D-Histogram} \label{sec:hist2d}
 
 Analogously with Equation (\ref{eq:fg}), we can find the joint histogram
 for $(Z_1, Z_2)$ by graphically plotting $\{R_{g_1g_2},p_{g_1g_2}\}$ over the rectangles $R_{g_1g_2} = \{[\zeta_{1,g_1-1},\zeta_{1,g_1}) \times [\zeta_{2,g_2-1},\zeta_{2,g_2}) \},\; g_1 = 1,2,\cdots,r_1, \;g_2=1,2,\cdots,r_2$, where
@@ -777,7 +777,7 @@ By setting option \code{plotAll}, the top panel of Figure \ref{fig:box} will be 
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{1}{
+    \scalebox{0.9}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_before}
     }
     \caption{The side-by-side box plot. The figure in the top panel is the raw value of its variables, where the bottom panel is to standardize each variables. \label{fig:box}}
@@ -801,7 +801,7 @@ With regard to the top panel of Figure \ref{fig:centerRange}, there is no signif
 \begin{figure}[htbp]
     
     \centering
-    \scalebox{1}{
+    \scalebox{0.9}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_after}
     }
     \caption{\label{fig:centerRange}The center-range plot}
@@ -842,6 +842,18 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 
 \subsection{Bivariate relationship plot}
 
+The bivariate functions reveal relationships between variables, trends of the regression line, and joint frequency across the sample space. In this field, we design the scatter plot, two-dimension histogram, and also implement the most well-known approach, the vertices method of principal component analysis (V-PCA) \cite{cazes1997extension}. Additionally, these graphic techniques can visualize multiple variables at the same time by matrix type.
+
+For instance, the code of scatter matrix of Figure \ref{fig:scaMatrix}:
+
+\begin{Schunk}
+\begin{Sinput}
+> ggInterval_scaMatrix(data = facedata)+
++   theme_bw()+
++   theme(legend.position = "none")
+\end{Sinput}
+\end{Schunk}
+
 \begin{figure}[htbp]
 \centering
 \scalebox{1}{
@@ -851,27 +863,54 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 \end{figure}
 
 
+In Figure \ref{fig:scaMatrix}, we use grayscale to represent the concepts and the rectangle to display the intersection of two interval-valued observations. The relationship among this graph is clearly depicted. The variables AH and DH are an obvious positive correlation, whereas AD and AH seems to be an exponential relation. Of course, there is an easy way for scatter plot of two particular variables using the function \code{ggInterval_scatter}. With the technique, we can implement the maximum covering area rectangle (MCAR) \cite{cazes1997extension}, which is widely used for graphical representation of interval objects on a DR (dimension reduction) subspace, owing to its simplicity, shown as Figure \ref{fig:mcar}. Nevertheless, the main drawback of MCAR is that the interval objects are oversized in the DR subspace with respect to the real objects in $\mathbb{R}^p$, hence, the polytopes representation \cite{le2012symbolic} for interval data was proposed. 
+
+Although PCA methods are widely applied in \proglang{R}, we still develop the graphic function for them using 
+
+\begin{verbatim}
+ggInterval_PCA(data = NULL, mapping = aes(NULL), plot = TRUE, poly = FALSE, 
+  concepts_group = NULL)
+\end{verbatim}
+
+The control option of PCA visualization method mentioned above is \code{poly}, which can be set with \code{TRUE} for the polytopes representation as shown in Figure \ref{fig:poly}. By the dimension reduction and color mapping on each person, Figure \ref{fig:PCA} shows most of the concepts are clearly separated.
+
 \begin{figure}[htbp]
     \centering
     \scalebox{0.8}{
     \begin{tabular}{c c}
         \subfloat[Vertice-PCA (MCAR)]{
         \scalebox{.6}{
+        \label{fig:mcar}
 \includegraphics{ggESDA_Jiang&Wu_20210915-PCA_MCAR}
                 }}
                 &
         \subfloat[Vertice-PCA (Polytope)]{
         \scalebox{.6}{
+        \label{fig:poly}
         \includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
 }
-
         }}
         \end{tabular}}
-    \caption{\label{fig:PCA} PCA}
+    \caption{\label{fig:PCA} Two kinks of PCA for interval-valued data, where the XY-axis are represent the first principal component and the second principal component, respectively.}
 \end{figure}
 
+Another bivariate relationship plot is two-dimension histogram, which is to calculate joint histogram frequency (details in Section \ref{sec:hist2d}) and using matrix visualization (\cite{chen2002generalized}; \cite{chen2004matrix}) to plot. The code
+
+\begin{Schunk}
+\begin{Sinput}
+> ggInterval_2Dhist(facedata, aes(x = AD, 
++                                 y = BC, 
++                                 col = "grey30"),
++                   xBins = 25,
++                   yBins = 25) + 
++   theme_light() +
++   theme(legend.position = "bottom") + 
++   coord_fixed(ratio = 1)
+\end{Sinput}
+\end{Schunk}
 
 
+uses the joint frequency between the variables AD and BC and makes the XY-axis bins partial into 25 subintervals. As Figure \ref{fig:2Dhist} shown, we can observe that the concepts in these joint sample spaces concentrate on the top-right and bottom-left areas that seem like a slightly positive correlation.
 
 \begin{figure}[htbp]
 \centering
@@ -880,6 +919,22 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 \caption{\label{fig:2Dhist} 2D histogram }
 \end{figure}
 
+In the same way, extend the plot to full variables as matrix type by the code
+
+\begin{Schunk}
+\begin{Sinput}
+> ggInterval_2DhistMatrix(facedata, aes(col = "grey50"),
++                   xBins = 10,
++                   yBins = 10,
++                   removeZero = T,
++                   addFreq = F) + 
++   theme_light() + 
++   labs(title="") +
++   theme(legend.position = "bottom")
+\end{Sinput}
+\end{Schunk}
+
+The addition options \code{removeZero} and \code{addFreq} make zero value and frequency displaying remove, shown as Figure \ref{fig:2DhistMatrix}. Not only the relationship presentation, the graphic technique also depicts the details frequency. Among these, we might get a similar conclusion between variables relation, but for the calculation, this technique may consume a larger time-complexity than scatter plot.
 
 \begin{figure}[htbp]
 \centering
@@ -891,17 +946,71 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 
 \subsection{Multivariate visualization}
 
+In the field of multivariate visualization, the most common graphic technique is radar plot, also known as star plot. In \pkg{ggESDA}, we provide the function
+
+\begin{verbatim}
+ggInterval_radar(data = NULL, layerNumber = 3, inOneFig = TRUE,
+  showLegend = TRUE, showXYLabs = FALSE, plotPartial = NULL, alpha = 0.5, 
+  base_circle = TRUE, base_lty = 2, addText = TRUE, type = "default",
+  quantileNum = 4, Drift = 0.5)
+\end{verbatim}
+
+Except for the aesthetic options \code{layerNumber}, \code{showLegend}, \code{showXYLabs}, \code{alpha}, \code{base_circle}, \code{base_lty}, and \code{addText}, the visualizing key is to determine which concepts are presented through setting \code{plotPartial} with the rows of concepts. In addition, it will be decided to use area (\code{"default"}), rectangle (\code{"rect"}), or quantile (\code{"quantile"}) to represent the interval by option \code{type}.
+
+Above all, take the Environmental questionnaire dataset for example, and a typical multivariate radar plot without modal multi-valued variables is shown in Figure \ref{fig:radar_typical} by the code
+
+\begin{Schunk}
+\begin{Sinput}
+> Environment.i <- Environment[, 5:17] #take interval-valued
+> left.fig <- ggInterval_radar(Environment.i, 
++                  plotPartial = 2,
++                  showLegend = F,
++                  base_circle = T,
++                  base_lty = 2,
++                  addText = F) +
++             labs(title = "") +
++             theme_hc() 
+> right.fig <- ggInterval_radar(Environment.n, 
++                  plotPartial = 2,
++                  showLegend = F,
++                  base_circle = F,
++                  base_lty = 1,
++                  addText = T) +
++             labs(title = "") +
++             theme_hc() 
+> gridExtra::marrangeGrob(list(left.fig, right.fig), 
++                         nrow = 1, ncol = 2, top = "")
+\end{Sinput}
+\end{Schunk}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{radar_typical.pdf} 
+\caption{\label{fig:radar_typical} Typical radar plot with interval-valued variables.}
+\end{figure}
+
+Use the color to represent the interval area, and it can clearly present the behavior of the particular concept in each variable. The figure in the left panel shows the relative position of the interval by the percentage circle, whereas the right one removes it and adds the frequency in the plot.
+
+Secondly, the kind of radar plot is generalized to visualize not only the interval-valued data but the modal multi-valued, which we design a cuboid to represent, and the height will correspond to the probability of the factor in the variable, as Figure \ref{fig:radar_3obs} shown. The technique merges the distinct variable's type in one plot and helps the researcher to compare with concepts easily under multiple variables. 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[trim=0cm 3cm 0cm 3cm,width=1\textwidth, clip]{radar_3obs.pdf} 
+\caption{\label{fig:radar_3obs} Radar}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{ggESDA_Jiang&Wu_20210915-radar.pdf} 
-\caption{\label{fig:radar} Radar}
+\caption{\label{fig:radar} Visualize three distinct observations by the radar plot containing interval-valued and modal multi-valued variables.}
 \end{figure}
+
 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{quantile_5data.pdf} 
-\caption{\label{fig:quantile5} Quantile for five symbolic datasets}
+\includegraphics[width=1\textwidth]{radar_2datasets.pdf} 
+\caption{\label{fig:quantile2} Quantile for two symbolic datasets}
 \end{figure}
 
 
