@@ -636,7 +636,7 @@ p1 <- ggInterval_radar(Environment.n,
   scale_fill_manual(values = c("gray50")) +
   scale_color_manual(values = c("red")) 
 
-p2 <- ggInterval_radar(Environment.n, 
+p2 <- ggInterval_radar(Environment, 
                  plotPartial = 2,
                  showLegend = F,
                  base_circle = F,
@@ -646,7 +646,7 @@ p2 <- ggInterval_radar(Environment.n,
   labs(title = "") +
   theme_hc() +
   scale_fill_manual(values = c("gray50")) +
-  scale_color_manual(values = c("red")) 
+  scale_color_manual(values = c("gray50")) 
 
 gridExtra::marrangeGrob(list(p1, p2), nrow = 1, ncol = 2, top = "")
 
@@ -744,10 +744,48 @@ for(i in useDataSet){
   u <- u + 1
 }
 marrangeGrob(pList, nrow = 1, ncol = 2, top = "")
+#### Example datasets 5 #####
+\begin{table}[htbp]
+\centering
+\caption{Example Symbolic Datasets}
+\setlength{\extrarowheight}{6pt}
+\begin{tabular}{llll}
+\toprule
+
+& \multicolumn{1}{l}{N} & \multicolumn{1}{l}{P} & Description \\
+
+\specialrule{.1em}{.05em}{.05em} 
+Face data & 27    & 6     & Six face measures of nine-man (three observations each). \\
+Mushroom & 23    & 3     & A range of widths, lengths, and thicknesses of species of mushroom. \\
+Blood pressure & 11    & 3     & A range of pulse, systolic, and diastolic during a time unit. \\
+Oils  & 8     & 5     & Physicochemical properties of distinct oils. \\
+Environment & 14    & 17    & Environmental questionnaire summary. \\
+\bottomrule
+
+\end{tabular}%
+\label{tab:datasets}%
+\end{table}%
+
+Mushroom, Blood pressure \cite{billard:2006}, Oils \cite{ichino:1994}
+\ref{tab:datasets}
+
+On the whole, we classify these datasets into three parts by their dimension, $N > P$, $N \simeq P$, and $N < P$, roughly.
+Use these properties to observe the performance of the  \pkg{ggESDA} package. 
+
+In table , we may see 
+
+
+the first three datasets, whose dimension are commonly observed in practice, 
+
 #############################
 
+a <- ggInterval_hist(Environment, aes(WELFARE), bins = 10);a
 
-
+b <- cumsum(a$data$frequency)
+d <- data.frame(s=a$data$start,e= a$data$end, f = b)
+ggplot(d)+
+  geom_rect(aes(xmin = s, ymin = 0, xmax = e, ymax = f))
+a
 
 
 
