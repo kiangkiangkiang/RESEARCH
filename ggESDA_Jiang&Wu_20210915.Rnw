@@ -199,9 +199,11 @@ Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what 
 
 %end introduction
 
-\section{why SDA plot (weakness of classical plot)}
+\section{Advantage of Symbolic Data Analysis}
 
-\subsection{sol overstike}
+
+
+\subsection{Convenience of Exploration}
 
 For the conventional exploratory data analysis, it is always a severe challenge to deal with enormous datasets because conventional displays suffered from overstrikes of data points representing the value (scatterplot type displays) or overstrikes of line segments connecting values of neighboring variables. As a consequence, exploratory symbolic data analysis (SDA) becomes a preliminary yet essential tool for summarizing the main characteristics of a data set before appropriate statistical modeling can be applied. Besides escaping the problem mentioned above, SDA can effectively reduce observations in data, which will make the study focus on what we interesting instead of unnecessary information such as Figure~\ref{fig:compare}.
 
@@ -228,15 +230,13 @@ grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
 In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{macqueen:1967}. 
 
 
-\subsection{full information}
+\subsection{Completeness of Information}
 
 In the past, we would like to use barplot to visualize the frequency of categorical data, but that was merely represented the distribution of full data in that category. It cannot lead researchers to explore more details in what they are interesting such as a particular part of data, so aggregation methods play a vital role to merge the data we interesting.
 
 However, the conventional categorical data after merging will usually be represented by mode, which will be unmeaningful to visualize and cause the loss of information that may become larger when the data or the number of factors in that category is growing on. SDA will build a histogram by calculating each factor of the category of frequency as bins to solve this kind of problem as a result. In that way, a categorical variable will never be shown as a single value at all, instead, a complete information histogram will be substituted.
 
-
-
-\subection{Prominent SDA Packages}
+\subsection{Prominent SDA Packages}
 
 The most prominent packages on CRAN are commonly used for statistical or machine learning analyze. It can be briefly classified into two parts, one is focused on statistic analysis, and the other is general SDA packages including both analysis method and some graphical technology. Nevertheless, most of their graphical technology tends to use the basic graphics in \proglang{R} rather than \pkg{ggplot2}, or only visualizes univariate distribution which is difficult to present the relationship between variables. 
 
@@ -350,11 +350,11 @@ f_g = \sum_{u \in E}\frac{\| Z(u) \cap I_g \|}{\| Z(u) \|}
 Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation (\ref{eq:fg}) to get frequency. In most cases, $\| I'_g \|$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
-\subsection{Bivariate summaries}
+\subsection{Bivariate Summaries}
 
 Many of the principles developed for the univariate case can be expanded to a general $p$-variate case, $p > 1$. We shall focus attention on obtaining joint histograms for $p = 2$. The following will reveal the statistics and bivariate histogram.
 
-\subsubsection{Descriptive statistics}
+\subsubsection{Descriptive Statistics}
 
 For bivariates interval-valued variables, $Z_1$ and $Z_2$, the observations $u$, where $u \in E$, on the rectangle $Z(u) = Z_1(u) \times Z_2(u)$ is $([a_{1u}, b_{1u}], [a_{2u}, b_{2u}])$. Assume the individual description vectors $\xi$ are each uniformly distributed over the respective intervals $Z_1(u)$ and $Z_2(u)$.  Define the empirical joint density function for $(Z_1, Z_2)$:
 
@@ -412,7 +412,7 @@ The definitions and calculations of the symbolic sample covariance in
 Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
 
 
-\subsubsection{2D-Histogram} \label{sec:hist2d}
+\subsubsection{Two-Dimensional Histogram} \label{sec:hist2d}
 
 Analogously with Equation (\ref{eq:fg}), we can find the joint histogram
 for $(Z_1, Z_2)$ by graphically plotting $\{R_{g_1g_2},p_{g_1g_2}\}$ over the rectangles $R_{g_1g_2} = \{[\zeta_{1,g_1-1},\zeta_{1,g_1}) \times [\zeta_{2,g_2-1},\zeta_{2,g_2}) \},\; g_1 = 1,2,\cdots,r_1, \;g_2=1,2,\cdots,r_2$, where
@@ -430,11 +430,11 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 %end basic numeric summarize
 
 
-\section[The ggESDA package]{The \pkg{ggESDA} package}
+\section[The ggESDA Package]{The \pkg{ggESDA} Package}
 
 \pkg{ggESDA} is now available from the Github at \url{https://github.com/kiangkiangkiang/ggESDA}. All reference manual documented by exported functions and introduction vignettes can also be download here. In the following section, we are going to illustrate the functionalities and syntaxes about \pkg{ggESDA}.
  
-\subsection{General design}
+\subsection{General Design}
 
 The \pkg{ggESDA} object is composed of the interval-valued data, statistics data frame, clustering results, and other components from \pkg{R6} class. Based on it, the developed graphical technology can extend three aspects by its variables, univariate, bivariate, and multivariate. The \pkg{ggESDA} aims to convert the traditional data into the \pkg{ggESDA} object and visualizes the symbolic data using \pkg{ggplot2}, which is shown in Figure \ref{fig:pkgStr}.
 
@@ -458,7 +458,7 @@ As illustrated in Figure \ref{fig:pkgStr}, each row (observation) in the convent
 
 The typical graphical techniques of EDA include the index plot, barplot, boxplot, and histogram for univariate data; the 2D scatterplot, joint histogram and double boxplot for bivariate data; and the satterplot matrix, and star plot for multivariate data. Of course, there are many other variants of graphical techniques have been proposed. Our aim in this study is to implement good statistical graphics to display symbolic data accurately and clearly. 
 
-\subsection{Example datasets}
+\subsection{Example Datasets}
 
 In the following, to illustrate some graphing functions we have implemented so far, we will use the two well-known symbolic datasets. One is face recognition data (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}). The dataset gives six face measurements of nine men (Figure \ref{fig:face}), each with three observations, resulting in a total 27 observations. The measurements for each observation came from a sequence of over 1,000 images. They cover a range of values, hence interval-valued variables. 
 
@@ -480,7 +480,7 @@ Environment[1:4, 4:6]
 
 %\subsection{Univariate functions}
 
-\subsection{Interval presentation techniques}
+\subsection{Interval Presentation Techniques}
 
 For interval-valued data, one of the advanced graphics implemented is called the min-max plot, which shows the interval characteristics of the data. As Figure \ref{fig:minmax} shown, we visualize the Face data for example by the function 
 
@@ -669,7 +669,7 @@ Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method
 \end{itemize}
 
 
-\subsection{Statistical graph implementation}
+\subsection{Statistical Graph Implementation}
 
 In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, another advanced graphics implemented is called center-range plot, which helps researchers to be able to grasp the relationship between center and range. 
 
@@ -788,7 +788,7 @@ ggInterval_hist(this.data, plotAll = T,
 
 %\subsection{Bivariate functions}
 
-\subsection{Bivariate relationship plot}
+\subsection{Bivariate Relationship Plot}
 
 The bivariate functions reveal relationships between variables, trends of the regression line, and joint frequency across the sample space. In this field, we design the scatter plot, two-dimension histogram, and also implement the most well-known approach, the vertices method of principal component analysis (V-PCA) \cite{cazes1997extension}. Additionally, these graphic techniques can visualize multiple variables at the same time by matrix type.
 
@@ -894,7 +894,7 @@ The addition options \code{removeZero} and \code{addFreq} make zero value and fr
 \end{figure}
 
 
-\subsection{Multivariate visualization}
+\subsection{Multivariate Visualization}
 
 In the field of multivariate visualization, the most common graphic technique is radar plot, also known as star plot. In \pkg{ggESDA}, we provide the function
 
@@ -990,11 +990,11 @@ Last but not least, we propose a graphic method based on quantiles. The benefit 
 
 As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
 
-\subsection{Generalization with prominent SDA packages}
+\subsection{Generalization with Prominent SDA Packages}
 
 For the demonstration, we consider two famous \proglang{R} packages for SDA, \pkg{HistDAWass} \cite{irpino2015} and \pkg{MAINT.Data} \cite{Silva2011}. Both of these make lots of contributions to the statistics of SDA, so we tend to generalize these data into the \pkg{ggESDA} type, which may help us to visualize.
 
-\subsubsection{General principle}\label{sec:genPrin}
+\subsubsection{General Principle}\label{sec:genPrin}
 
 Generally, it is not merely the well-known packages in \proglang{R} that can make a plot using it. As long as keeping some principle, it will be easily performed:
 
