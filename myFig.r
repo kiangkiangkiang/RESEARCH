@@ -777,6 +777,65 @@ In table , we may see
 
 the first three datasets, whose dimension are commonly observed in practice, 
 
+#### Compare  dimonds #####
+myCol <- rev(RColorBrewer::brewer.pal(5, "Blues"))
+myDiamonds.i <- myDiamonds.i[c(1, 2, 3, 5, 4),]
+
+a <- ggplot(myDiamonds, aes(x = carat, y = price))+
+  geom_point() + theme_bw()
+b <- ggInterval_scatter(myDiamonds.i, aes(x = carat, y = price)) + 
+  scale_fill_manual(values = myCol, 
+                    name="Kmeans-Group",
+                    label=1:5) + theme_bw()
+
+grid.arrange(a, b, ncol=2, widths=c(1.5, 2))
+
+#### index four #####
+m <- mean(facedata$AD)
+ggInterval_index(facedata, aes(AD)) +
+  theme_bw()+
+  scale_y_continuous(breaks = 1:27,
+                     labels = rownames(facedata))+
+  labs(title = "", y = "")+
+  theme(axis.text.y = element_text(size = 6))
+
+ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
+  theme_bw() +
+  scale_fill_brewer(palette = "Set1")+
+  geom_segment(x = m, xend = m, y = 0, yend = 27,
+               lty = 2, col = "red", lwd = 1) +
+  geom_text(aes(x = m, y = 28), label = "Mean")+
+  scale_y_continuous(breaks = 1:27,
+                     labels = rownames(facedata))+
+  labs(title = "", y = "")+
+  theme(axis.text.y = element_text(size = 6),
+        legend.key.size = unit(0.5, 'cm'),
+        legend.key.height = unit(0.5, 'cm'),
+        legend.key.width = unit(0.5, 'cm'),
+        legend.title = element_text(size=10),
+        legend.text = element_text(size=10))
+ggInterval_indexImage(facedata, aes(x = AD))+
+  coord_flip()+
+  theme_bw()+
+  labs(title = "")+
+  theme(axis.text.y = element_text(size = 6),
+        legend.key.size = unit(0.5, 'cm'),
+        legend.key.height = unit(0.5, 'cm'),
+        legend.key.width = unit(0.5, 'cm'),
+        legend.title = element_text(size=10),
+        legend.text = element_text(size=10))+
+  guides(col=F)
+ggInterval_indexImage(facedata, aes(x = AD),
+                      full_strip  = T)+
+  coord_flip()+
+  theme_bw()+
+  labs(title = "")+
+  theme(axis.text.y = element_text(size = 6),
+        legend.key.size = unit(0.5, 'cm'),
+        legend.key.height = unit(0.5, 'cm'),
+        legend.key.width = unit(0.5, 'cm'),
+        legend.title = element_text(size=10),
+        legend.text = element_text(size=10))
 #############################
 
 a <- ggInterval_hist(Environment, aes(WELFARE), bins = 10);a
@@ -786,6 +845,7 @@ d <- data.frame(s=a$data$start,e= a$data$end, f = b)
 ggplot(d)+
   geom_rect(aes(xmin = s, ymin = 0, xmax = e, ymax = f))
 a
-
-
-
+library(ggplot2)
+dim(ggplot2::diamonds)
+stats::kmeans()
+citation("RSDA")

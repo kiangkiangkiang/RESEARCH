@@ -51,7 +51,8 @@
 
 %% - \Abstract{} almost as usual
 \Abstract{
-  This paper presents the \pkg{ggESDA} package, which we developed for exploratory symbolic data analysis in \proglang{R}. Based on \pkg{ggplot2} \cite{Wickham:2009}, the \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, 3D-scatterplot and radar plot. In addition, a general and  customized transformation function \code{classic2sym} is implemented for generating a symbolic data table from classical data frame by clustering algorithm, \pkg{RSDA} \cite{Rojas:2015} function and user-defined method. wait for edit......
+  This paper presents the \pkg{ggESDA} package, which we designed for exploratory symbolic data analysis in \proglang{R}. The \pkg{ggESDA} package developed a general and customized transformation function \code{classic2sym} implemented for generating a symbolic data table from classical data frame by clustering algorithm using the \pkg{RSDA} package \cite{RSDA} form and generalized \pkg{ggESDA} to other prominent SDA packages in \proglang{R}. Based on \pkg{ggplot2} \cite{ggplot2}, \pkg{ggESDA} package which is familiar programming structure with its parent provides a wide variety of graphical techniques such as histogram, center-range plot and radar plot, etc. 
+With the advanced graphic techniques, the multivariate visualization, exhibition with modal multi-valued and interval-valued, and classification by color mapping are combined for exploration of symbolic data in the present paper.
 }
 
 %% - \Keywords{} with LaTeX markup, at least one required
@@ -72,14 +73,15 @@
 \begin{document}
 %\SweaveOpts{concordance=TRUE} 
 \section{Introduction}
-"In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." \cite{Diday:2018}. The statement indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
-
-
+As stated by \cite{Diday:2018} "In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." It indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
 
 \begin{figure}[htbp]	
-  		\centering	 			 	 
+
+  		\centering	 			
+  		\scalebox{1}{
  	 		%\includegraphics[width=1\textwidth]{\imgdir Trend_SDA_1998_to_2020.png} 
 \includegraphics{ggESDA_Jiang&Wu_20210915-TrendFig}
+  		}
   		\caption{The number of "symbolic data analysis" or "interval-valued data" related articles in researches and applications according to PubMed and ScienceDirect online database over time from 1998 to 2020.}   		
   		\label{fig:trend}   			 		 
 \end{figure}
@@ -87,45 +89,50 @@
 Among ScienceDirect, Engineering and Computer Science lead the subject areas obviously, shown in Figure \ref{fig:subjectAreas}.
 
 \begin{figure}[htbp]	
-  		\centering	 			 	 
+  		\centering	 		
+  		\scalebox{1}{
  	 		%\includegraphics[width=1\textwidth]{\imgdir subjectAreas_scienceDirect.png} 
 \includegraphics{ggESDA_Jiang&Wu_20210915-subjectFig}
+  		}
   		\caption{Top 10 researches and applications domains for SDA or interval-valued data (ScienceDirect) from 1998 to 2020} 
   		\label{fig:subjectAreas}   			 		 
 \end{figure}
 
-
 In practice, the symbolic data is often generated by aggregating massive datasets into intervals in order to make the management easy and appropriate. An interval-valued symbolic random variable $X$, taking values in interval, can be denoted such as $X = [a,b] \subset  R^{1}$, where $a \leq b$, and $a, b \in R^{1}$. Let the random variable $X$, for instance, be the weight, then $X = [50,100]$ represents the interval covering the weight of people. With the advent of big data analytic, interval-valued data is becoming more common and accessible than ever. The researches for interval-valued data such as the sign test for COVID-19 data \cite{sherwani:2021}, the prediction via regularized artificial neural network \cite{yang:2019}, a bivariate Bayesian method for regression models \cite{xu:2021}, etc.
 
-Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what data can reveal beyond the formal modeling or hypothesis testing task, provides an overview of raw datasets and obtains a general understanding about the variables and their relationships.
+Exploratory Data Analysis (EDA) \cite{Tukey:1977} is primarily used to see what data can reveal beyond the formal modeling or hypothesis testing task, provides an overview of raw datasets and obtains a general understanding about the variables and their relationships. In this paper, we describe the design and features of an exploratory  symbolic data analysis package, \pkg{ggESDA}, which is composed of the interval-valued data, statistics data frame, clustering results, and other components from \pkg{R6} \cite{R6} class. Based on it, the developed graphical technology can extend three aspects by its variables, univariate, bivariate, and multivariate. The \pkg{ggESDA} aims to convert the traditional data into the \pkg{ggESDA} object and visualizes the symbolic data using \pkg{ggplot2}, which is shown in Figure \ref{fig:pkgStr}. Each row (observation) in the conventional data matrix $X_{p \times p}$ in the figure contains a vector of numeric values, $O_i = (x_1,x_2,\cdots,x_n)$, while each row of the interval-valued data matrix $I_{k \times p}$ contains a vector of intervals (ranges), $C_j = ([a_{j1},b_{j1}],[a_{j2},b_{j2}],\cdots,[a_{jp},b_{jp}])$, called a CONCEPT (or UNIT). The CONCEPT describe the behavior of a group of observations. Thus, the aggregation method between them is an essential process in SDA. The \pkg{ggESDA} is now available from the Github at \url{https://github.com/kiangkiangkiang/ggESDA}. All reference manual documented by exported functions and introduction vignettes can also be download here. In the following section, we are going to illustrate the details of SDA and the functionalities and syntaxes about \pkg{ggESDA}.
+
+\begin{figure}[h]	
+  		\centering	 			 	
+ 	 		\includegraphics[width=1\textwidth]{doc/packageStructure2.eps} 
+  		\caption{Package Structure and Diagram for the Transformation Flow} 
+  		\label{fig:pkgStr}   			 		 
+\end{figure}
 
 %end introduction
 
-\section{why SDA plot (weakness of classical plot)}
+\section{Advantage of Symbolic Data Analysis}
 
-\subsection{sol overstike}
+Modern statistical graphical methods for visualizing big data nowadays we encounter large data sets in many areas, including genomics, finance records, environmental research, and internet logs. In these cases, the size of data is getting larger and the structure is more complicated. Aggregation of these huge (volume) of data into symbolic objects such as histograms or distributions is sometimes necessary. As a consequence, the following will discuss the benefit of the symbolic data after aggregating.
+
+\subsection{Convenience of Exploration}
+
 For the conventional exploratory data analysis, it is always a severe challenge to deal with enormous datasets because conventional displays suffered from overstrikes of data points representing the value (scatterplot type displays) or overstrikes of line segments connecting values of neighboring variables. As a consequence, exploratory symbolic data analysis (SDA) becomes a preliminary yet essential tool for summarizing the main characteristics of a data set before appropriate statistical modeling can be applied. Besides escaping the problem mentioned above, SDA can effectively reduce observations in data, which will make the study focus on what we interesting instead of unnecessary information such as Figure~\ref{fig:compare}.
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.8}{
-\includegraphics{ggESDA_Jiang&Wu_20210915-compare}
-}
+\includegraphics[width=0.6\textwidth]{ggESDA_Jiang&Wu_20210915-compare.pdf} 
 \caption{\label{fig:compare} Compare classical data and symbolic data}
 \end{figure}
 
-In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{macqueen:1967}. 
+In Figure~\ref{fig:compare}, we can clearly visualize the scatter plot in the right hands, which is represented by symbolic data and aggregated by K-means \cite{macqueen:1967}, and effectively reduce the observations from 53940 to 5 groups. 
 
 
-\subsection{full information}
+\subsection{Completeness of Information}
 
-In the past, we would like to use barplot to visualize the frequency of categorical data, but that was merely represented the distribution of full data in that category. It cannot lead researchers to explore more details in what they are interesting such as a particular part of data, so aggregation methods play a vital role to merge the data we interesting.
+To lead researchers to explore more details in what they are interesting such as a particular part of data, aggregation methods play a vital role to merge the data we interesting. However, the conventional data after merging will usually be represented by a single value (especially mode or mean), which will be unmeaningful to visualize and cause the loss of information that may become larger when the data or the number of factors in that category is growing on. For the category data, SDA will build a histogram by calculating each factor of the category of frequency as bins to solve this kind of problem as a result. In the way, a categorical variable will never be shown as a single value at all, instead, a complete information histogram will be substituted. 
 
-However, the conventional categorical data after merging will usually be represented by mode, which will be unmeaningful to visualize and cause the loss of information that may become larger when the data or the number of factors in that category is growing on. SDA will build a histogram by calculating each factor of the category of frequency as bins to solve this kind of problem as a result. In that way, a categorical variable will never be shown as a single value at all, instead, a complete information histogram will be substituted.
-
-
-
-\subection{Prominent SDA Packages}
+\subsection{Prominent SDA Packages}
 
 The most prominent packages on CRAN are commonly used for statistical or machine learning analyze. It can be briefly classified into two parts, one is focused on statistic analysis, and the other is general SDA packages including both analysis method and some graphical technology. Nevertheless, most of their graphical technology tends to use the basic graphics in \proglang{R} rather than \pkg{ggplot2}, or only visualizes univariate distribution which is difficult to present the relationship between variables. 
 
@@ -239,11 +246,11 @@ f_g = \sum_{u \in E}\frac{\| Z(u) \cap I_g \|}{\| Z(u) \|}
 Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation (\ref{eq:fg}) to get frequency. In most cases, $\| I'_g \|$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
-\subsection{Bivariate summaries}
+\subsection{Bivariate Summaries}
 
 Many of the principles developed for the univariate case can be expanded to a general $p$-variate case, $p > 1$. We shall focus attention on obtaining joint histograms for $p = 2$. The following will reveal the statistics and bivariate histogram.
 
-\subsubsection{Descriptive statistics}
+\subsubsection{Descriptive Statistics}
 
 For bivariates interval-valued variables, $Z_1$ and $Z_2$, the observations $u$, where $u \in E$, on the rectangle $Z(u) = Z_1(u) \times Z_2(u)$ is $([a_{1u}, b_{1u}], [a_{2u}, b_{2u}])$. Assume the individual description vectors $\xi$ are each uniformly distributed over the respective intervals $Z_1(u)$ and $Z_2(u)$.  Define the empirical joint density function for $(Z_1, Z_2)$:
 
@@ -301,7 +308,7 @@ The definitions and calculations of the symbolic sample covariance in
 Equations (\ref{eq:cov})-(\ref{eq:spt_cov}) are consistent with the results in the classic data case if $a_{ij}=b_{ij}$ for $i = 1,2,\cdots,m ,\; j = 1,2,\cdots, p$. If $j = j^\prime$, the Equation (\ref{eq:spt_cov}) reduces to the sample variance of the interval-valued variable as given in Equation (\ref{eq:var}).
 
 
-\subsubsection{2D-Histogram} \label{sec:hist2d}
+\subsubsection{Two-Dimensional Histogram} \label{sec:hist2d}
 
 Analogously with Equation (\ref{eq:fg}), we can find the joint histogram
 for $(Z_1, Z_2)$ by graphically plotting $\{R_{g_1g_2},p_{g_1g_2}\}$ over the rectangles $R_{g_1g_2} = \{[\zeta_{1,g_1-1},\zeta_{1,g_1}) \times [\zeta_{2,g_2-1},\zeta_{2,g_2}) \},\; g_1 = 1,2,\cdots,r_1, \;g_2=1,2,\cdots,r_2$, where
@@ -319,26 +326,12 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 %end basic numeric summarize
 
 
-\section[The ggESDA package]{The \pkg{ggESDA} package}
+%\section[The ggESDA Package]{The \pkg{ggESDA} Package}
 
-\pkg{ggESDA} is now available from the Github at \url{https://github.com/kiangkiangkiang/ggESDA}. All reference manual documented by exported functions and introduction vignettes can also be download here. In the following section, we are going to illustrate the functionalities and syntaxes about \pkg{ggESDA}.
- 
-\subsection{General design}
 
-The \pkg{ggESDA} object is composed of the interval-valued data, statistics data frame, clustering results, and other components from \pkg{R6} class. Based on it, the developed graphical technology can extend three aspects by its variables, univariate, bivariate, and multivariate. The \pkg{ggESDA} aims to convert the traditional data into the \pkg{ggESDA} object and visualizes the symbolic data using \pkg{ggplot2}, which is shown in Figure \ref{fig:pkgStr}.
+%\subsection{Features}
 
-\begin{figure}[h]	
-  		\centering	 			 	
- 	 		\includegraphics[width=1\textwidth]{doc/packageStructure2.eps} 
-  		\caption{Package Structure and Diagram for the Transformation Flow} 
-  		\label{fig:pkgStr}   			 		 
-\end{figure}
-
-As illustrated in Figure \ref{fig:pkgStr}, each row (observation) in the conventional data matrix $X_{p \times p}$ contains a vector of numeric values, $O_i = (x_1,x_2,\cdots,x_n)$, while each row of the interval-valued data matrix $I_{k \times p}$ contains a vector of intervals(ranges), $C_j = ([a_{j1},b_{j1}],[a_{j2},b_{j2}],\cdots,[a_{jp},b_{jp}])$, called a CONCEPT (or UNIT). The CONCEPT describe the behavior of a group of observations. Thus, the aggregation method between them is an essential process in SDA.
-
-\subsection{Features}
-
-\subsection{Datasets and Functionality}
+%\subsection{Datasets and Functionality}
 
 
 
@@ -347,14 +340,14 @@ As illustrated in Figure \ref{fig:pkgStr}, each row (observation) in the convent
 
 The typical graphical techniques of EDA include the index plot, barplot, boxplot, and histogram for univariate data; the 2D scatterplot, joint histogram and double boxplot for bivariate data; and the satterplot matrix, and star plot for multivariate data. Of course, there are many other variants of graphical techniques have been proposed. Our aim in this study is to implement good statistical graphics to display symbolic data accurately and clearly. 
 
-\subsection{Example datasets}
+\subsection{Example Datasets}
 
 In the following, to illustrate some graphing functions we have implemented so far, we will use the two well-known symbolic datasets. One is face recognition data (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}). The dataset gives six face measurements of nine men (Figure \ref{fig:face}), each with three observations, resulting in a total 27 observations. The measurements for each observation came from a sequence of over 1,000 images. They cover a range of values, hence interval-valued variables. 
 
 \begin{figure}[htbp]
 \centering
-\scalebox{.8}{
-\includegraphics[width=0.4\textwidth]{face.pdf}
+\scalebox{.7}{
+\includegraphics[trim=0cm 1cm 0cm 1cm,width=0.4\textwidth,clip]{face.pdf}
 }
 \caption{\label{fig:face} The six face measurements for the face recognition dataset}
 \end{figure}
@@ -363,34 +356,32 @@ The other is the Environment questionnaire data (from the SODAS software package
 
 \begin{Schunk}
 \begin{Sinput}
-> facedata[1:4, 1:4]
+> facedata[1:3, 1:4]
 \end{Sinput}
 \begin{Soutput}
-# A tibble: 4 x 4
+# A tibble: 3 x 4
                  AD              BC                AH                DH
          <symblc_n>      <symblc_n>        <symblc_n>        <symblc_n>
 1 [155.00 : 157.00] [58.00 : 61.01] [100.45 : 103.28] [105.00 : 107.30]
 2 [154.00 : 160.01] [57.00 : 64.00] [101.98 : 105.55] [104.35 : 107.30]
 3 [154.01 : 161.00] [57.00 : 63.00]  [99.36 : 105.65] [101.04 : 109.04]
-4 [168.86 : 172.84] [58.55 : 63.39] [102.83 : 106.53] [122.38 : 124.52]
 \end{Soutput}
 \begin{Sinput}
-> Environment[1:4, 4:6]
+> Environment[1:3, 4:6]
 \end{Sinput}
 \begin{Soutput}
-# A tibble: 4 x 3
+# A tibble: 3 x 3
               REGIONDEVELOPME             CONTROL            SATISFY
                    <symblc_m>          <symblc_n>         <symblc_n>
 1 4:0.47 3:0.25 2:0.19 1:0.09 [-723.25 : -339.65] [-133.91 : 250.83]
 2 4:0.49 3:0.32 2:0.08 1:0.10  [-243.86 : 203.99] [-134.15 : 314.80]
 3 4:0.56 3:0.22 2:0.18 1:0.04   [-195.44 : 90.10]  [-75.00 : 191.17]
-4 4:0.64 3:0.21 2:0.14 1:0.01  [-279.12 : 120.61]  [342.58 : 705.03]
 \end{Soutput}
 \end{Schunk}
 
 %\subsection{Univariate functions}
 
-\subsection{Interval presentation techniques}
+\subsection{Interval Presentation Techniques}
 
 For interval-valued data, one of the advanced graphics implemented is called the min-max plot, which shows the interval characteristics of the data. As Figure \ref{fig:minmax} shown, we visualize the Face data for example by the function 
 
@@ -427,8 +418,6 @@ However, when the unit is considered, the absolute position in the full sample s
 
 To complete the visualization, it actually needs the command \code{ggInterval_minmax(facedata, plotAll = T, scaleXY = "local")}, merely. Other aesthetics can be omitted. Because we now focus on the full variables exploration, the \code{mapping} option for a particular variable is not necessary as well. Thus, in the following, we will pay more attention to the option we changing.
 
-
-
 Another graphical technique, called index plot, is famous in conventional data as well. It is composed of minimum and maximum in interval-valued data and exhibits the concepts' behavior. Both of the function
 
 \begin{verbatim}
@@ -444,43 +433,46 @@ ggInterval_indexImage(data = NULL, mapping = aes(NULL), plotAll = FALSE,
 
 can achieve this objective, but there is still a slight difference for visualizing. 
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tabular}{c c c c}
+        \subfloat[Index plot]{
+        \label{fig:index}
+\includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index.pdf} 
+                }
+                &
+      
+        \subfloat[Index plot with different group and common mean]{
+        
+        \label{fig:index_bar}
+        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_bar.pdf} 
+        }
+        &
+        
+                \subfloat[Index image]{
+                
+                \label{fig:image}
+                \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_image1.pdf} 
+
+                }
+                &
+        
+        \subfloat[Index image with extended color]{
+        
+        \label{fig:image_full}
+        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_image2.pdf} 
+}
+        \end{tabular}
+   \caption{\label{fig:index_full} Four kinds of index plot for the variable AD}
+\end{figure}
+
 Take the variable AD for example, and set option \code{mapping = aes(x = AD)}. The former function, shown in Figures \ref{fig:index} and \ref{fig:index_bar}, directly displays the interval which is similar to min-max plot. Among these plots, we classify the concepts by the same person by setting the aesthetics option \code{fill} and can discover the values of people LOT, KHA, INC, FRA in AD variable are less than others, which easily compares the difference. 
 
 The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, visualizes the interval values using a color mapping. As the legend says, the blue color corresponds to the low values, whereas the red color corresponds to the high. The only difference among these plots is the color bar extension (control by the option \code{full_strip = TRUE}), which will quickly discover concepts' behavior through the visual sense, as Figure \ref{fig:indexImage} shown.
 
-\begin{figure}[htbp]
-    \centering
-    \scalebox{0.7}{
-    \begin{tabular}{c c}
-        \subfloat[Index plot]{
-        \scalebox{.5}{
-        \label{fig:index}
-\includegraphics{ggESDA_Jiang&Wu_20210915-index}
-                }}
-                &
-      
-        \subfloat[Index plot with different group and common mean]{
-        \scalebox{.5}{
-        \label{fig:index_bar}
-\includegraphics{ggESDA_Jiang&Wu_20210915-index_bar}
-        }}
-        \\
-        
-                \subfloat[Index image]{
-                \scalebox{.5}{
-                \label{fig:image}
-\includegraphics{ggESDA_Jiang&Wu_20210915-index_image1}
-                }}
-                &
-        
-        \subfloat[Index image with extended color]{
-        \scalebox{.5}{
-        \label{fig:image_full}
-\includegraphics{ggESDA_Jiang&Wu_20210915-index_image2}
-        }}
-        \end{tabular}}
-   \caption{\label{fig:index_full} Index plot for the variable AD}
-\end{figure}
+%trim=5cm 0.5cm 6cm 0.5cm,
+%ggESDA_Jiang&Wu_20210915-index
+
 
 For exploring data, we extend the index plot into full variables and visualize by color mapping as we did before using the code
 
@@ -511,7 +503,7 @@ For exploring data, we extend the index plot into full variables and visualize b
 \includegraphics{ggESDA_Jiang&Wu_20210915-indexImage_mat}
         }}
         \end{tabular}}
-    \caption{\label{fig:indexImage} Index image - heatmap}
+    \caption{\label{fig:indexImage} Index image using a heatmap type.}
 \end{figure}
 
 Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method.
@@ -522,7 +514,7 @@ Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method
 \end{itemize}
 
 
-\subsection{Statistical graph implementation}
+\subsection{Statistical Graph Implementation}
 
 In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, another advanced graphics implemented is called center-range plot, which helps researchers to be able to grasp the relationship between center and range. 
 
@@ -536,7 +528,7 @@ By setting option \code{plotAll}, the top panel of Figure \ref{fig:box} will be 
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{0.8}{
+    \scalebox{1}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_before}
     }
     \caption{The side-by-side box plot. The figure in the top panel is the raw value of its variables, where the bottom panel is to standardize each variables. \label{fig:box}}
@@ -560,7 +552,7 @@ With regard to the top panel of Figure \ref{fig:centerRange}, there is no signif
 \begin{figure}[htbp]
     
     \centering
-    \scalebox{0.8}{
+    \scalebox{1}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-box_centerRange_after}
     }
     \caption{\label{fig:centerRange}The center-range plot}
@@ -578,7 +570,7 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{0.9}{
+    \scalebox{1}{
     \begin{tabular}{c c}
         \subfloat[Equidistant-bin histogram]{
         \scalebox{.5}{
@@ -599,26 +591,24 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 
 %\subsection{Bivariate functions}
 
-\subsection{Bivariate relationship plot}
+\subsection{Bivariate Relationship Plot}
 
-The bivariate functions reveal relationships between variables, trends of the regression line, and joint frequency across the sample space. In this field, we design the scatter plot, two-dimension histogram, and also implement the most well-known approach, the vertices method of principal component analysis (V-PCA) \cite{cazes1997extension}. Additionally, these graphic techniques can visualize multiple variables at the same time by matrix type.
-
-For instance, the code of scatter matrix of Figure \ref{fig:scaMatrix}:
+The bivariate functions reveal relationships between variables, trends of the regression line, and joint frequency across the sample space. In this field, we design the scatter plot, two-dimension histogram, and also implement the most well-known approach, the vertices method of principal component analysis (V-PCA) \cite{cazes1997extension}. Additionally, these graphic techniques can visualize multiple variables at the same time by matrix type. For instance, the code of scatter matrix of Figure \ref{fig:scaMatrix}:
 
 \begin{Schunk}
 \begin{Sinput}
 > ggInterval_scaMatrix(data = facedata)+
-+   theme_bw()+
-+   theme(legend.position = "none")
++   theme_bw()
 \end{Sinput}
 \end{Schunk}
+%+  theme(legend.position = "none")
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.9}{
+\scalebox{0.85}{
 \includegraphics{ggESDA_Jiang&Wu_20210915-scaMatrix}
 }
-\caption{\label{fig:scaMatrix} scatter matrix}
+\caption{\label{fig:scaMatrix} Scatter matrix}
 \end{figure}
 
 
@@ -635,16 +625,16 @@ The control option of PCA visualization method mentioned above is \code{poly}, w
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{0.8}{
+    \scalebox{1}{
     \begin{tabular}{c c}
         \subfloat[Vertice-PCA (MCAR)]{
-        \scalebox{.6}{
+        \scalebox{.5}{
         \label{fig:mcar}
 \includegraphics{ggESDA_Jiang&Wu_20210915-PCA_MCAR}
                 }}
                 &
         \subfloat[Vertice-PCA (Polytope)]{
-        \scalebox{.6}{
+        \scalebox{.5}{
         \label{fig:poly}
         \includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
 }
@@ -660,17 +650,16 @@ Another bivariate relationship plot is two-dimension histogram, which is to calc
 > ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
 +                   xBins = 25, yBins = 25) + 
 +   theme_light() +
-+   theme(legend.position = "bottom") + 
-+   coord_fixed(ratio = 1)
++   theme(legend.position = "bottom")
 \end{Sinput}
 \end{Schunk}
-
+% + coord_fixed(ratio = 1)
 
 uses the joint frequency between the variables AD and BC and makes the XY-axis bins partial into 25 subintervals. As Figure \ref{fig:2Dhist} shown, we can observe that the concepts in these joint sample spaces concentrate on the top-right and bottom-left areas that seem like a slightly positive correlation.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
+\includegraphics[trim=3cm 0.4cm 3cm 1.4cm,width=0.8\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
 }
 \caption{\label{fig:2Dhist} 2D histogram }
 \end{figure}
@@ -680,24 +669,26 @@ In the same way, extend the plot to full variables as matrix type by the code
 \begin{Schunk}
 \begin{Sinput}
 > ggInterval_2DhistMatrix(facedata, aes(col = "grey50"), xBins = 10,
-+                         yBins = 10, removeZero = T, addFreq = F) + 
++                         yBins = 10, removeZero = T, addFreq = F) +
 +   theme_light() + 
-+   labs(title="") +
 +   theme(legend.position = "bottom")
 \end{Sinput}
 \end{Schunk}
-
-The addition options \code{removeZero} and \code{addFreq} make zero value and frequency displaying remove, shown as Figure \ref{fig:2DhistMatrix}. Not only the relationship presentation, the graphic technique also depicts the details frequency. Among these, we might get a similar conclusion between variables relation, but for the calculation, this technique may consume a larger time-complexity than scatter plot.
+%labs(title = "")
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
+\includegraphics[trim=0cm 0.4cm 0cm 1.5cm,width=0.7\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
 }
 \caption{\label{fig:2DhistMatrix} 2D histogram matrix}
 \end{figure}
 
 
-\subsection{Multivariate visualization}
+The addition options \code{removeZero} and \code{addFreq} make zero value and frequency displaying remove, shown as Figure \ref{fig:2DhistMatrix}. Not only the relationship presentation, the graphic technique also depicts the details frequency. Among these, we might get a similar conclusion between variables relation, but for the calculation, this technique may consume a larger time-complexity than scatter plot.
+
+
+
+\subsection{Multivariate Visualization}
 
 In the field of multivariate visualization, the most common graphic technique is radar plot, also known as star plot. In \pkg{ggESDA}, we provide the function
 
@@ -743,7 +734,7 @@ Use the color to represent the interval area, and it can clearly present the beh
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=0cm 3cm 0cm 3cm,width=1\textwidth, clip]{radar_3obs.pdf} 
+\includegraphics[trim=0cm 3cm 0cm 4.5cm,width=1\textwidth, clip]{radar_3obs.pdf} 
 \caption{\label{fig:radar_3obs} Compare three distinct observations by multiple variables.}
 \end{figure}
 
@@ -793,11 +784,11 @@ Last but not least, we propose a graphic method based on quantiles. The benefit 
 
 As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
 
-\subsection{Generalization with prominent SDA packages}
+\subsection{Generalization with Prominent SDA Packages}
 
-For the demonstration, we consider two famous \proglang{R} packages for SDA, \pkg{HistDAWass} \cite{irpino2015} and \pkg{MAINT.Data} \cite{Silva2011}. Both of these make lots of contributions to the statistics of SDA, so we tend to generalize these data into the \pkg{ggESDA} type, which may help us to visualize.
+For the demonstration, we consider two famous \proglang{R} packages for SDA, \pkg{HistDAWass} \cite{HistDAWass} and \pkg{MAINT.Data} \cite{MAINT.Data}. Both of these make lots of contributions to the statistics of SDA, so we tend to generalize these data into the \pkg{ggESDA} type, which may help us to visualize.
 
-\subsubsection{General principle}\label{sec:genPrin}
+\subsubsection{General Principle}\label{sec:genPrin}
 
 Generally, it is not merely the well-known packages in \proglang{R} that can make a plot using it. As long as keeping some principle, it will be easily performed:
 
@@ -936,7 +927,7 @@ K-means clustering is a method of vector quantization, originally from signal pr
 \end{Soutput}
 \end{Schunk}
 
-The \code{id} is unused in this case, so we remove it by \pkg{dplyr}. Then using \code{classic2sym} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
+The \code{id} is unused in this case, so we remove it by \pkg{dplyr} \cite{dplyr}. Then using \code{classic2sym} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
 
 The \code{groupby} is a parameter that determine what kind of aggregation methods will be used. Whenever the K-means method is applied, the consequent \code{k} will become meaningful, whereas the other situation is not. It is also a default method when users have no input arguments in \code{groupby}.
 
@@ -1032,7 +1023,11 @@ In order to simplify the process and make the preprocessing friendly, we develop
 
 %end generalize
 
-\section{Conclusion and Future Work}
+\section{Conclusion and Future Development}
+
+We developed \pkg{ggESDA} to complementary the \pkg{ggESDA} package for symbolic data analysis, especially for interval-valued data. Being an extension of \pkg{ggESDA}, we inherit most of its plot-construction syntax and strict adherence to the rules governed by \emph{The Grammar of Graphics} \cite{wilkinson2012grammar}. So far, we have demonstrated various newly implementations of traditional graphics to symbolic data. As an answer to the challenges of big data and complex data that the traditional data encounter, \pkg{ggESDA} reduces and summarizes by classes into a structured data table with paired symbolic-valued variables, and visualizes symbolic data which are becoming increasingly important in this area.
+
+We are committed to maintaining and developing the \pkg{ggESDA} package in the future. Future versions of the package will contain more multivariate exploratory graphical techniques and methodological improvement, including the revisions of 3D scatter plots, interactive tools, quantile representation, and so on. In order to overcome the constraints of the coordinate system of \pkg{ggESDA} in three dimensions, we will offer new geometries as well. The availability of implementation of these would be desirable for applications.
 
 
 
