@@ -503,6 +503,65 @@ library(gridExtra)
 this.data <- facedata
 p <- dim(this.data)[2]
 
+
+#### index image#####
+#Column Condition
+colCondition <- ggInterval_indexImage(facedata, plotAll = T,
+                                      full_strip = T) +
+  scale_colour_gradient2(low = "green", mid = "gray15", high = "red")
+
+#Matrix Condition
+#Prepare midpoint for scale_colour_gradient2
+ggESDA.facedata <- RSDA2sym(facedata)
+facedata.m <- mean(c(min(ggESDA.facedata$statisticsDF$min),
+                     max(ggESDA.facedata$statisticsDF$max)))
+                                      
+matCondition <- ggInterval_indexImage(facedata, plotAll = T,
+                                      full_strip = T,
+                                      column_condition = F) + 
+  scale_colour_gradient2(low = "green", mid = "gray15", 
+                         high = "red", midpoint = facedata.m)
+
+ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
+
+gridExtra::marrangeGrob(list(colCondition, matCondition),
+                        nrow = 1, ncol = 2, top = "")
+#' \begin{figure}[htbp]
+#' \centering
+#' \scalebox{1}{
+#'   \begin{tabular}{c c}
+#'   \subfloat[Column condition]{
+#'     \scalebox{.65}{
+#'       \label{fig:indexImage_col}
+#'       <<indexImage_col, echo=FALSE, fig=TRUE, height=6, width=8>>=
+#'         ggInterval_indexImage(facedata, plotAll = T,
+#'                               full_strip = T) +
+#'         scale_colour_gradient2(low = "green", mid = "gray15", high = "red")
+#'       
+#'       @
+#'     }}
+#'   &
+#'     \subfloat[Matrix condition]{
+#'       \scalebox{.65}{
+#'         \label{fig:indexImage_mat}
+#'         <<indexImage_mat, echo=FALSE, fig=TRUE, height=6, width=8>>=
+#'           ggESDA.facedata <- RSDA2sym(facedata)
+#'           facedata.m <- mean(c(min(ggESDA.facedata$statisticsDF$min),
+#'                                max(ggESDA.facedata$statisticsDF$max)))
+#'           
+#'           ggInterval_indexImage(facedata, plotAll = T,
+#'                                 full_strip = T,
+#'                                 column_condition = F) + 
+#'             scale_colour_gradient2(low = "green", mid = "gray15", 
+#'                                    high = "red", midpoint = facedata.m) +
+#'             labs(x = "", y = "")
+#'           @
+#'       }}
+#'   \end{tabular}}
+#' \caption{\label{fig:indexImage} Index image using a heatmap type.}
+#' \end{figure}
+
+
 #### mmplot #####
 ggInterval_minmax(this.data, aes(size = 2), plotAll = T)+
   scale_color_manual(values=c("darkblue","darkred"))+
@@ -514,7 +573,20 @@ for(i in 1:p){
     scale_color_manual(values=c("darkblue","darkred"))+
     guides(colour = F)+theme_bw() + coord_fixed(ratio = 1)
 }
-a <- ggarrange(plotlist = plotLocal, nrow = 1, ncol = p, labels = "") 
+
+
+
+lapply(1:6, FUN = function(x){
+  plot.var <<- x
+  ggInterval_minmax(facedata, aes(facedata[[plot.var]], size = 2))+
+    scale_color_manual(values = c("darkblue", "darkred"))+
+    guides(colour = F) + theme_bw() + coord_fixed(ratio = 1)
+}) %>% 
+  ggarrange(plotlist = ., nrow = 1, ncol = ncol(facedata), labels = "")
+
+
+
+ggarrange(plotlist = plotLocal, nrow = 1, ncol = p, labels = "") 
 
 
 plotGlobal <- NULL
@@ -607,6 +679,12 @@ p <- ggInterval_2Dhist(this.data, aes(this.data[[1]], this.data[[2]],
                                                     title="")+
   theme(legend.position = "bottom")
 p <- p + coord_fixed(ratio=1)
+p <- p + scale_fill_gradient(low = "gray95",
+                        high = "red",
+                        limits = c(0, 0.15),
+                        na.value = "red")
+?scale_fill_gradient
+  
 marrangeGrob(list(p), nrow = 1, ncol = 1, top = "")
 #### 2DhistMat #####
 facedata.scale <- scale_sym_table(facedata)
@@ -619,6 +697,11 @@ p_mat <- ggInterval_2DhistMatrix(facedata, aes(col = "grey50"),
 p_mat <- p_mat + theme_light() + 
   labs(title="") +
   theme(legend.position = "bottom")
+
+p_mat<- p_mat + scale_fill_gradient(low = "gray95",
+                            high = "red",
+                            limits = c(0, 1),
+                            na.value = "red") 
 
 marrangeGrob(list(p_mat), nrow = 1, ncol = 1, top = "")
 #### radar_typecial, with circle, no text, no nominal####
@@ -814,7 +897,7 @@ ggInterval_index(facedata, aes(x = AD, fill = Concepts))+
         legend.key.width = unit(0.5, 'cm'),
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))
-ggInterval_indexImage(facedata, aes(x = AD))+
+p <- ggInterval_indexImage(facedata, aes(x = AD))+
   coord_flip()+
   theme_bw()+
   labs(title = "")+
@@ -824,7 +907,11 @@ ggInterval_indexImage(facedata, aes(x = AD))+
         legend.key.width = unit(0.5, 'cm'),
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))+
-  guides(col=F)
+  guides(col=F) 
+p + scale_colour_gradient2(
+  low = "green", mid = "gray15", high = "red",
+  midpoint = mean(p$data$y))
+
 ggInterval_indexImage(facedata, aes(x = AD),
                       full_strip  = T)+
   coord_flip()+
@@ -836,6 +923,16 @@ ggInterval_indexImage(facedata, aes(x = AD),
         legend.key.width = unit(0.5, 'cm'),
         legend.title = element_text(size=10),
         legend.text = element_text(size=10))
+#### PCA #####
+pca.results <- RSDA::sym.pca(facedata, method = "top")
+ConceptCol <- rep(RColorBrewer::brewer.pal(9, "Set1"), each = 3)
+ggInterval_scatter(pca.results$Sym.Components, aes(Dim.1, Dim.2)) +
+  scale_fill_manual(values = Concepts)
+
+library(ggthemes)
+ggInterval_PCA(facedata, poly = F,
+               concepts_group = Concepts,
+               plot = F)$ggplotPCA+ theme_wsj(color='white')
 #############################
 
 a <- ggInterval_hist(Environment, aes(WELFARE), bins = 10);a
@@ -848,4 +945,7 @@ a
 library(ggplot2)
 dim(ggplot2::diamonds)
 stats::kmeans()
-citation("RSDA")
+citation("ggESDA")
+
+
+

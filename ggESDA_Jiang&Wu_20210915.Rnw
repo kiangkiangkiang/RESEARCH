@@ -468,19 +468,22 @@ ggInterval_minmax(data = NULL, mapping = aes(NULL), scaleXY = "local",
 For the top six of Figure \ref{fig:minmax} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself (by setting option \code{scaleXY = "local"}). And represents the range by the connected line between minimum and maximum. To design the widely-view exploratory graphic function like this instance, we apply the option \code{plotAll = TRUE} to extend one variable visualization to full variables in the same plot. For examples, the figure constructed by the code
 
 <<mmplotEx, echo=TRUE, fig=F, eval=F, eval=F>>=
-relativePos <- ggInterval_minmax(facedata, plotAll = T, scaleXY = "local") +
-               scale_color_manual(values = c("darkblue", "darkred")) +
+#One case for plotting all variables (Relative Position)
+lapply(1:6, FUN = function(x){
+  plot.var <<- x
+  ggInterval_minmax(facedata, aes(facedata[[plot.var]]))+
+    scale_color_manual(values = c("darkblue", "darkred"))+
+    guides(colour = F) + 
+    theme_bw() + 
+    coord_fixed(ratio = 1)}) %>%
+  ggarrange(plotlist = ., nrow = 1, ncol = ncol(facedata), labels = "")
+
+#The other case using 'plotAll = T' (Absolute Position)
+ggInterval_minmax(facedata, plotAll = T, scaleXY = "global") +
+  scale_color_manual(values = c("darkblue", "darkred")) +
                guides(colour = F) + 
                theme_bw() + 
                coord_fixed(ratio = 1)
-
-absolutePos <- ggInterval_minmax(facedata, plotAll = T, scaleXY = "local") +
-               scale_color_manual(values = c("darkblue", "darkred")) +
-               guides(colour = F) + 
-               theme_bw() + 
-               coord_fixed(ratio = 1)
-
-ggarrange(relativePos, absolutePos, nrow = 2, ncol = 1)
 @
 
 \begin{figure}[htbp]
@@ -552,40 +555,29 @@ The latter function, shown in Figure \ref{fig:image} and \ref{fig:image_full}, v
 For exploring data, we extend the index plot into full variables and visualize by color mapping as we did before using the code
 
 <<indexImageEx, echo=TRUE, fig=F, eval=F>>=
+#Column Condition
 colCondition <- ggInterval_indexImage(facedata, plotAll = T,
-                                      full_strip = T) 
+                                      full_strip = T) +
+  scale_colour_gradient2(low = "green", mid = "gray15", high = "red")
 
+#Matrix Condition
+#Prepare midpoint for scale_colour_gradient2
+ggESDA.facedata <- RSDA2sym(facedata)
+facedata.m <- mean(c(min(ggESDA.facedata$statisticsDF$min),
+                     max(ggESDA.facedata$statisticsDF$max)))
+                                      
 matCondition <- ggInterval_indexImage(facedata, plotAll = T,
                                       full_strip = T,
-                                      column_condition = F)
+                                      column_condition = F) + 
+  scale_colour_gradient2(low = "green", mid = "gray15", 
+                         high = "red", midpoint = facedata.m)
 
 ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
 @
 
 \begin{figure}[htbp]
-    \centering
-    \scalebox{1}{
-    \begin{tabular}{c c}
-        \subfloat[Column condition]{
-        \scalebox{.5}{
-        \label{fig:indexImage_col}
-<<indexImage_col, echo=FALSE, fig=TRUE, height=6, width=8>>=
-ggInterval_indexImage(facedata, plotAll = T,
-                      full_strip = T) 
-@
-                }}
-                &
-        \subfloat[Matrix condition]{
-        \scalebox{.5}{
-        \label{fig:indexImage_mat}
-<<indexImage_mat, echo=FALSE, fig=TRUE, height=6, width=8>>=
-ggInterval_indexImage(facedata, plotAll = T,
-                            full_strip = T,
-                            column_condition = F)+
-  labs(x = "", y = "")
-@
-        }}
-        \end{tabular}}
+    \centering 
+    \includegraphics[width=0.85\textwidth,clip]{indexImage_2case.pdf}
     \caption{\label{fig:indexImage} Index image using a heatmap type.}
 \end{figure}
 
@@ -607,11 +599,9 @@ The side-by-side boxplot, which provides a quick view of data distribution, disp
 ggInterval_boxplot(data = NULL, mapping = aes(NULL), plotAll = FALSE)
 \end{verbatim}
 
-By setting option \code{plotAll}, the top panel of Figure \ref{fig:box} will be easily implemented. In this Figure, the dispersion of six variables is obviously distinct. However, it is difficult to compare with their distribution because of the distinct sample space which leaves no room for a suitable presentation. We standardize the Face data, shown in the bottom panel of the figure, and take a deeper look at it.
-
 \begin{figure}[htbp]
     \centering
-    \scalebox{1}{
+    \scalebox{0.9}{
 <<box_centerRange_before, echo=FALSE, fig=TRUE, height=6, width=8>>=
 set.seed(20211216)
 a <- ggInterval_boxplot(this.data, plotAll = T) +
@@ -646,6 +636,9 @@ gridExtra::grid.arrange(a, c, ncol=1, nrow = 2)
     \caption{The side-by-side box plot. The figure in the top panel is the raw value of its variables, where the bottom panel is to standardize each variables. \label{fig:box}}
 \end{figure}
 
+By setting option \code{plotAll}, the top panel of Figure \ref{fig:box} will be easily implemented. In this Figure, the dispersion of six variables is obviously distinct. However, it is difficult to compare with their distribution because of the distinct sample space which leaves no room for a suitable presentation. We standardize the Face data, shown in the bottom panel of the figure, and take a deeper look at it.
+
+
 Clearly, there is a vacancy in the middle of variable AD, AH, and next to the minimum of the variable DH, which indicates the frequency there may be quite low. Especially for AD and AH, this factor may result in a bimodal distribution.
 
 In addition, the overlap of the variables BC, EH, and GH located in the middle of five quantile-box seem larger than others, which is possible to lead a bell-shaped for its distribution.
@@ -664,7 +657,7 @@ With regard to the top panel of Figure \ref{fig:centerRange}, there is no signif
 \begin{figure}[htbp]
     
     \centering
-    \scalebox{1}{
+    \scalebox{0.9}{
 <<box_centerRange_after, echo=FALSE, fig=TRUE, height=6, width=8>>=
 gridExtra::grid.arrange(b, d, ncol=1, nrow = 2)
 @
@@ -728,7 +721,7 @@ ggInterval_scaMatrix(data = facedata)+
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.85}{
+\scalebox{0.8}{
 <<scaMatrix, echo=FALSE, fig=TRUE, height=6, width=8>>=
 ggInterval_scaMatrix(data = facedata)+
   theme_bw()+
@@ -739,16 +732,15 @@ ggInterval_scaMatrix(data = facedata)+
 \end{figure}
 
 
-In Figure \ref{fig:scaMatrix}, we use grayscale to represent the concepts and the rectangle to display the intersection of two interval-valued observations. The relationship among this graph is clearly depicted. The variables AH and DH are an obvious positive correlation, whereas AD and AH seems to be an exponential relation. Of course, there is an easy way for scatter plot of two particular variables using the function \code{ggInterval_scatter}. With the technique, we can implement the maximum covering area rectangle (MCAR) \cite{cazes1997extension}, which is widely used for graphical representation of interval objects on a DR (dimension reduction) subspace, owing to its simplicity, shown as Figure \ref{fig:mcar}. Nevertheless, the main drawback of MCAR is that the interval objects are oversized in the DR subspace with respect to the real objects in $\mathbb{R}^p$, hence, the polytopes representation \cite{le2012symbolic} for interval data was proposed. 
+In Figure \ref{fig:scaMatrix}, we use grayscale to represent the concepts and the rectangle to display the intersection of two interval-valued observations. The relationship among this graph is clearly depicted. The variables AH and DH are an obvious positive correlation, whereas AD and AH seems to be an exponential relation. Of course, there is an easy way for scatter plot of two particular variables using the function \code{ggInterval_scatter}. With the technique, we combine the dimension reduction methods that \pkg{RSDA} provides, and implement the maximum covering area rectangle (MCAR) \cite{cazes1997extension} using the code:
 
-Although PCA methods are widely applied in \proglang{R}, we still develop the graphic function for them using 
+<<scaMatrixEx, echo=TRUE, eval=FALSE>>=
+pca.results <- RSDA::sym.pca(facedata, method = "top")
+ggInterval_scatter(pca.results$Sym.Components, aes(Dim.1, Dim.2)) +
+  scale_fill_manual(values = Concepts)
+@
 
-\begin{verbatim}
-ggInterval_PCA(data = NULL, mapping = aes(NULL), plot = TRUE, poly = FALSE, 
-  concepts_group = NULL)
-\end{verbatim}
-
-The control option of PCA visualization method mentioned above is \code{poly}, which can be set with \code{TRUE} for the polytopes representation as shown in Figure \ref{fig:poly}. By the dimension reduction and color mapping on each person, Figure \ref{fig:PCA} shows most of the concepts are clearly separated.
+which is widely used for graphical representation of interval objects on a DR (dimension reduction) subspace, owing to its simplicity, shown as Figure \ref{fig:mcar}. 
 
 \begin{figure}[htbp]
     \centering
@@ -780,24 +772,42 @@ ggInterval_PCA(facedata, poly = F,
     \caption{\label{fig:PCA} Two kinks of PCA for interval-valued data, where the XY-axis are represent the first principal component and the second principal component, respectively.}
 \end{figure}
 
+
+Nevertheless, the main drawback of MCAR is that the interval objects are oversized in the DR subspace with respect to the real objects in $\mathbb{R}^p$, hence, the polytopes representation \cite{le2012symbolic} for interval data was proposed. In \pkg{ggESDA}, we have also developed the graphic function for them using 
+
+\begin{verbatim}
+ggInterval_PCA(data = NULL, mapping = aes(NULL), plot = TRUE, poly = FALSE, 
+               concepts_group = NULL)
+\end{verbatim}
+
+The control option of PCA visualization method mentioned above is \code{poly}, which can be set with \code{TRUE} for the polytopes representation as shown in Figure \ref{fig:poly}. By the dimension reduction and color mapping on each person, Figure \ref{fig:PCA} shows most of the concepts are clearly separated.
+
+
+
 Another bivariate relationship plot is two-dimension histogram, which is to calculate joint histogram frequency (details in Section \ref{sec:hist2d}) and using matrix visualization (\cite{chen2002generalized}; \cite{chen2004matrix}) to plot. The code
 
 <<hist_2d_Ex, echo=TRUE, eval=FALSE>>=
 ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
-                  xBins = 25, yBins = 25) + 
-  theme_light() +
-  theme(legend.position = "bottom")
+                  xBins = 25, yBins = 25) +
+  theme(legend.position = "bottom") +
+  scale_fill_gradient(low = "gray95", high = "red", limits = c(0, 0.15),
+                      na.value = "red")
 @
 % + coord_fixed(ratio = 1)
+% + 
+%  theme_light() +
 
-uses the joint frequency between the variables AD and BC and makes the XY-axis bins partial into 25 subintervals. As Figure \ref{fig:2Dhist} shown, we can observe that the concepts in these joint sample spaces concentrate on the top-right and bottom-left areas that seem like a slightly positive correlation.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=3cm 0.4cm 3cm 1.4cm,width=0.8\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
+\includegraphics[trim=3cm 0.25cm 3cm 0cm,width=1\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
 }
 \caption{\label{fig:2Dhist} 2D histogram }
 \end{figure}
+
+uses the joint frequency between the variables AD and BC and makes the XY-axis bins partial into 25 subintervals. As Figure \ref{fig:2Dhist} shown, we can observe that the concepts in these joint sample spaces concentrate on the top-right and bottom-left areas that seem like a slightly positive correlation.
+
+
 
 In the same way, extend the plot to full variables as matrix type by the code
 
@@ -805,13 +815,17 @@ In the same way, extend the plot to full variables as matrix type by the code
 ggInterval_2DhistMatrix(facedata, aes(col = "grey50"), xBins = 10,
                         yBins = 10, removeZero = T, addFreq = F) +
   theme_light() + 
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") + 
+  scale_fill_gradient(low = "gray95",
+                      high = "red",
+                      limits = c(0, 1),
+                      na.value = "red") 
 @
 %labs(title = "")
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=0cm 0.4cm 0cm 1.5cm,width=0.7\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
+\includegraphics[trim=0cm 0.4cm 0cm 1.5cm,width=0.9\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
 }
 \caption{\label{fig:2DhistMatrix} 2D histogram matrix}
 \end{figure}
@@ -837,25 +851,24 @@ Except for the aesthetic options \code{layerNumber}, \code{showLegend}, \code{sh
 Above all, take the Environmental questionnaire dataset for example, and the variety of typical multivariate radar plots for a specific concept is shown in Figure \ref{fig:radar_typical} by the code
 
 <<radar_typicalEx, echo=TRUE, eval=FALSE>>=
-#Remove the modal multi-valued variables
-Environment.i <- Environment[, 5:17] #take interval-valued
-left.fig <- ggInterval_radar(Environment.i, plotPartial = 2,
-                             showLegend = F, addText = F) +
-            labs(title = "") +
-            theme_hc() 
+#Left fig : Remove the modal multi-valued variables for demo
+ggInterval_radar(Environment[, 5:17], plotPartial = 2, showLegend = F, 
+                 addText = F) 
 
-#Remain the modal multi-valued variables
-right.fig <- ggInterval_radar(Environment, plotPartial = 2,
-                              showLegend = F, base_circle = F,
-                              base_lty = 1) +
-             labs(title = "") +
-             theme_hc() +
-             scale_fill_manual(values = "gray50") +
-             scale_color_manual(values = "gray50") 
-
-gridExtra::marrangeGrob(list(left.fig, right.fig), 
-                        nrow = 1, ncol = 2, top = "")
+#Right fig : Remain the modal multi-valued variables
+ggInterval_radar(Environment, plotPartial = 2, showLegend = F,
+                 base_circle = F, base_lty = 1) +
+  scale_fill_manual(values = "gray50") +
+  scale_color_manual(values = "gray50") 
 @
+
+%1
+%            labs(title = "") +
+%            theme_hc() 
+%2
+%+
+%             labs(title = "") +
+%            theme_hc() +
 
 \begin{figure}[htbp]
 \centering
@@ -867,7 +880,7 @@ Use the color to represent the interval area, and it can clearly present the beh
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=0cm 3cm 0cm 4.5cm,width=1\textwidth, clip]{radar_3obs.pdf} 
+\includegraphics[trim=0cm 2cm 0cm 3.5cm,width=1\textwidth, clip]{radar_3obs.pdf} 
 \caption{\label{fig:radar_3obs} Compare three distinct observations by multiple variables.}
 \end{figure}
 
