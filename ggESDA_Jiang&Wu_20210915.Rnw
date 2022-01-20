@@ -22,11 +22,11 @@
 
 %% another package (only for this demo article)
 \usepackage{framed}
-\usepackage{float} %for figure [H]
+
 %% new custom commands
 \newcommand{\class}[1]{`\code{#1}'}
 \newcommand{\fct}[1]{\code{#1()}}
-\newcommand{\imgdir}{../../../paperImage/}
+%\newcommand{\imgdir}{../../../paperImage/}
 %% For Sweave-based articles about R packages:
 %% need no \usepackage{Sweave}
 %\SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
@@ -73,11 +73,9 @@ With the advanced graphic techniques, the multivariate visualization, exhibition
 
 <<dataPrepare, echo=FALSE, results=hide>>=
 options(useFancyQuotes=FALSE) #debug for is not ACSII
-myLibrary <- c("ggESDA", "ggplot2", "ggthemes",
-               "data.table", "grid", "gridExtra",
-               "tibble", "stringr", "dplyr",
-               "extrafont", "ggpubr",
-               "RColorBrewer")
+myLibrary <- c("ggESDA", "data.table", "dplyr")
+new.packages <- myLibrary[!(myLibrary %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
 lapply(myLibrary, require, character.only = TRUE)
 
 Concepts <- as.factor(rep(c("FRA", "HUS", "INC", "ISA", "JPL", "KHA",
@@ -113,45 +111,8 @@ this.data <- facedata
 As stated by \cite{Diday:2018} "In Data Science the aim is to extract new knowledge from Standard, Big, and complex data. Often these data are unstructured with variables defined on different kinds of units. They can also be multi-sources (as mixtures of numerical and textual data, with images and networks)." It indicates that not only conventional data but the unstructured data, also known as symbolic data, is vital for data science. Rather than the classical data represented by a single value, symbolic data with measurements on $p$ random variables can be $p$-dimensional statistical units such as hypercubes or histograms. The field of symbolic data analysis (SDA) \cite{Billard+Diday:2007} is to broaden the application aspects of statistical methodologies, extend traditional cognition of a form of data unit and build a brand-new analysis system of data science. Recent developments in the field of big data analytics have led to a renewed interest in complex structure data such as symbolic data. As shown in Figure \ref{fig:trend}, the number of researches in SDA represents an increasing trend from 1998 to 2020, which outstands the importance of it during the years.
 
 \begin{figure}[htbp]	
-
-  		\centering	 			
-  		\scalebox{1}{
- 	 		%\includegraphics[width=1\textwidth]{\imgdir Trend_SDA_1998_to_2020.png} 
-<<TrendFig, echo=FALSE, fig=TRUE, height=7, width=14>>=
-mySymTop <- textGrob("Trend of symbolic data analysis", gp=gpar(fontsize=20))
-d1_scienceDirect<-fread("doc\\scienceDirect_full2.csv")
-sd_trend <- as.data.frame(d1_scienceDirect[,2:3])
-sd_trend <- sd_trend[complete.cases(sd_trend),]
-sd_trend <- sd_trend[2:24,]#without 2021
-sd_trend$count <- as.numeric(str_replace(sd_trend$count, ",", ""))
-#sd_trend$count <- as.numeric(sd_trend$count)
-sd_trend_plot<-ggplot(data=sd_trend,aes(x=year,y=count))+geom_line(col="blue",size=1.05)+
-  geom_point(size=1.3)+
-  labs(title="scienceDirect")+
-  scale_x_continuous(breaks=c(1998,2000,2005,2010,2015,2020))+theme_stata()+
-  scale_y_continuous(breaks=c(min(sd_trend$count),400,600,800,1000,max(sd_trend$count)))+
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour="grey"),
-        text = element_text(size=16))
-
-d1_PubMed<-fread("doc\\PubMed_Timeline_Results_by_Year_adjusted.csv")
-PubMed <- as.data.frame(d1_PubMed[4:26,])
-colnames(PubMed) <- c("year","count")
-PubMed$year<-as.numeric(PubMed$year)
-PubMed$count <- as.numeric(PubMed$count)
-PubMed_plot<-ggplot(data=PubMed,aes(x=year,y=count))+geom_line(col="blue",size=1.05)+
-  geom_point(size=1.3)+
-  labs(title="PubMed")+
-  scale_x_continuous(breaks=c(1998,2000,2005,2010,2015,2020))+theme_stata()+
-  scale_y_continuous(breaks=c(min(PubMed$count),15,25,35,max(PubMed$count)))+
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(colour="grey"),
-        text = element_text(size=16))
-marrangeGrob(list(sd_trend_plot,PubMed_plot),nrow=1,ncol=2,top=mySymTop)
-@
-  		}
+  		\centering	 		
+ 	 		\includegraphics[width=0.8\textwidth]{doc/ggESDA_Jiang&Wu_20210915-TrendFig.pdf} 
   		\caption{The number of "symbolic data analysis" or "interval-valued data" related articles in researches and applications according to PubMed and ScienceDirect online database over time from 1998 to 2020.}   		
   		\label{fig:trend}   			 		 
 \end{figure}
@@ -160,34 +121,7 @@ Among ScienceDirect, Engineering and Computer Science lead the subject areas obv
 
 \begin{figure}[htbp]	
   		\centering	 		
-  		\scalebox{1}{
- 	 		%\includegraphics[width=1\textwidth]{\imgdir subjectAreas_scienceDirect.png} 
-<<subjectFig, echo=FALSE, fig=TRUE, height=7, width=14>>=
-subject_areas <- as.data.frame(d1_scienceDirect[,4:5] )
-subject_areas <- subject_areas[1:10,]
-subject_areas$sum <- as.numeric(str_replace(subject_areas$sum, ",", ""))
-subject_areas<-as.data.frame(arrange(subject_areas,sum))
-total<-sum(subject_areas$sum)
-prop<-unlist(lapply(subject_areas$sum,FUN=function(x) round((x/total)*100,2)))
-subject_areas[,"myLabels"] <- paste(subject_areas$sum,paste0("(",paste0(prop,"%"),')'))
-loadfonts(device = "win")
-ggplot(subject_areas,aes(x=as.factor(1:10),y=sum))+
-  geom_bar(stat="identity",col="black",fill="grey70",width=0.8)+
-  geom_text(aes(label=myLabels), hjust=-0.1, size=4)+
-  scale_x_discrete(labels=subject_areas$name)+
-  scale_y_continuous(limits = c(0,5000),breaks=seq(0,5000,500))+
-  coord_flip()+
-  labs(title = "Subject areas of scienceDirect from 1998 to 2020",x="Fields",y="Publish")+
-  theme(panel.grid.major.y = element_blank(),
-         panel.grid.minor.y = element_blank(),
-         panel.grid.major.x = element_line(colour="grey"),
-        panel.grid.minor.x = element_blank(),
-         text = element_text(size=20,family="serif"),
-        plot.background = element_rect(fill = "grey97"),
-        axis.line = element_line(colour = "black",size = 0.4,linetype = "solid"),
-        panel.background = element_rect(fill = "white",linetype = "solid"))
-@
-  		}
+ 	 		\includegraphics[width=0.8\textwidth]{doc/ggESDA_Jiang&Wu_20210915-subjectFig.pdf} 
   		\caption{Top 10 researches and applications domains for SDA or interval-valued data (ScienceDirect) from 1998 to 2020} 
   		\label{fig:subjectAreas}   			 		 
 \end{figure}
@@ -215,7 +149,7 @@ For the conventional exploratory data analysis, it is always a severe challenge 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{ggESDA_Jiang&Wu_20210915-compare.pdf} 
+\includegraphics[width=0.6\textwidth]{doc/ggESDA_Jiang&Wu_20210915-compare.pdf} 
 \caption{\label{fig:compare} Compare classical data and symbolic data}
 \end{figure}
 
@@ -441,7 +375,7 @@ In the following, to illustrate some graphing functions we have implemented so f
 \begin{figure}[htbp]
 \centering
 \scalebox{.7}{
-\includegraphics[trim=0cm 1cm 0cm 1cm,width=0.4\textwidth,clip]{face.pdf}
+\includegraphics[trim=0cm 1cm 0cm 1cm,width=0.4\textwidth,clip]{doc/face.pdf}
 }
 \caption{\label{fig:face} The six face measurements for the face recognition dataset}
 \end{figure}
@@ -488,7 +422,7 @@ ggInterval_minmax(facedata, plotAll = T, scaleXY = "global") +
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[trim=5cm 0.5cm 6cm 0.5cm,angle=-90,width=1\textwidth, clip]{mmplot.pdf} 
+    \includegraphics[trim=5cm 0.5cm 6cm 0.5cm,angle=-90,width=1\textwidth, clip]{doc/mmplot.pdf} 
    \caption{\label{fig:minmax} The min-max plot. The figure in the top six conditions the axis in their own variables, whereas the bottom six conditions it in all variables.}
 \end{figure}
 
@@ -516,21 +450,21 @@ can achieve this objective, but there is still a slight difference for visualizi
     \begin{tabular}{c c c c}
         \subfloat[Index plot]{
         \label{fig:index}
-\includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index.pdf} 
+\includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-index.pdf} 
                 }
                 &
       
         \subfloat[Index plot with different group and common mean]{
         
         \label{fig:index_bar}
-        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_bar.pdf} 
+        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-index_bar.pdf} 
         }
         &
         
                 \subfloat[Index image]{
                 
                 \label{fig:image}
-                \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_image1.pdf} 
+                \includegraphics[trim=0.5cm 0.5cm 0cm 0.5cm,width=0.2\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-index_image1.pdf} 
 
                 }
                 &
@@ -538,7 +472,7 @@ can achieve this objective, but there is still a slight difference for visualizi
         \subfloat[Index image with extended color]{
         
         \label{fig:image_full}
-        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{ggESDA_Jiang&Wu_20210915-index_image2.pdf} 
+        \includegraphics[trim=0.5cm 0.5cm 0.5cm 0.5cm,width=0.2\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-index_image2.pdf} 
 }
         \end{tabular}
    \caption{\label{fig:index_full} Four kinds of index plot for the variable AD}
@@ -577,7 +511,7 @@ ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
 
 \begin{figure}[htbp]
     \centering 
-    \includegraphics[width=0.85\textwidth,clip]{indexImage_2case.pdf}
+    \includegraphics[width=0.85\textwidth,clip]{doc/indexImage_2case.pdf}
     \caption{\label{fig:indexImage} Index image using a heatmap type.}
 \end{figure}
 
@@ -601,38 +535,7 @@ ggInterval_boxplot(data = NULL, mapping = aes(NULL), plotAll = FALSE)
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{0.9}{
-<<box_centerRange_before, echo=FALSE, fig=TRUE, height=6, width=8>>=
-set.seed(20211216)
-a <- ggInterval_boxplot(this.data, plotAll = T) +
-  theme_classic()+
-  theme(legend.position = "none",
-        axis.text.x = element_blank())
-
-b <- ggInterval_centerRange(this.data, aes(size = 1.5),
-                           plotAll = T)+
-  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
-                                alpha = 0.05, col = "grey")
-
-
-this.data.scale <- scale_sym_table(this.data)
-c <- ggInterval_boxplot(this.data.scale, plotAll = T) +
-  theme_classic()+
-  theme(legend.position = "bottom",
-        axis.text.x = element_blank())+
-  scale_y_continuous(breaks = c(-2:2), 
-                     labels = c("-2.0", "-1.0", "0", "1.0", "2.0"))
-
-
-d <- ggInterval_centerRange(this.data.scale, aes(size = 1.5),
-                           plotAll = T)+
-  theme_classic()+ stat_ellipse(geom = "polygon", fill = "blue",
-                                alpha = 0.05, col = "grey")
-
-
-gridExtra::grid.arrange(a, c, ncol=1, nrow = 2)
-@
-    }
+    \includegraphics[width=0.85\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-box_centerRange_before.pdf}
     \caption{The side-by-side box plot. The figure in the top panel is the raw value of its variables, where the bottom panel is to standardize each variables. \label{fig:box}}
 \end{figure}
 
@@ -657,11 +560,7 @@ With regard to the top panel of Figure \ref{fig:centerRange}, there is no signif
 \begin{figure}[htbp]
     
     \centering
-    \scalebox{0.9}{
-<<box_centerRange_after, echo=FALSE, fig=TRUE, height=6, width=8>>=
-gridExtra::grid.arrange(b, d, ncol=1, nrow = 2)
-@
-    }
+\includegraphics[width=0.85\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-box_centerRange_after.pdf}
     \caption{\label{fig:centerRange}The center-range plot}
 \end{figure}
 
@@ -677,33 +576,17 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{1}{
     \begin{tabular}{c c}
         \subfloat[Equidistant-bin histogram]{
-        \scalebox{.5}{
-<<hist_equal, echo=FALSE, fig=TRUE, height=6, width=6>>=
-ggInterval_hist(this.data, plotAll = T, bins = 15) +
-  theme_hc()+
-  scale_y_continuous(breaks = c(0, 0.035, 0.07))+
-  labs(title = "")
-@
-                }}
+        \includegraphics[width=0.5\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-hist_equal.pdf}
+}
                 &
         \subfloat[Non-equidistant-bin histogram]{
-        \scalebox{0.5}{
-<<hist_unequal, echo=FALSE, fig=TRUE, height=6, width=6>>=
-ggInterval_hist(this.data, plotAll = T,
-                method="unequal-bin") +
-  theme_hc()+
-  scale_y_continuous(breaks = c(0, 0.2, 0.4))+
-  labs(title = "")
-@
-        }}
-        \end{tabular}}
+        \includegraphics[width=0.5\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-hist_unequal.pdf}
+}
+        \end{tabular}
     \caption{\label{fig:hist} Histogram}
 \end{figure}
-
-
 
 
 
@@ -721,13 +604,9 @@ ggInterval_scaMatrix(data = facedata)+
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.8}{
-<<scaMatrix, echo=FALSE, fig=TRUE, height=6, width=8>>=
-ggInterval_scaMatrix(data = facedata)+
-  theme_bw()+
-  theme(legend.position = "none")
-@
-}
+
+\includegraphics[width=0.5\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-scaMatrix.pdf}
+
 \caption{\label{fig:scaMatrix} Scatter matrix}
 \end{figure}
 
@@ -744,31 +623,20 @@ which is widely used for graphical representation of interval objects on a DR (d
 
 \begin{figure}[htbp]
     \centering
-    \scalebox{1}{
+    
     \begin{tabular}{c c}
         \subfloat[Vertice-PCA (MCAR)]{
-        \scalebox{.5}{
         \label{fig:mcar}
-<<PCA_MCAR, echo=FALSE, fig=TRUE, height=6, width=6>>=
-ggInterval_PCA(facedata, poly = F,
-               concepts_group = Concepts,
-               plot = F)$ggplotPCA+ theme_wsj(color='white')+
-  theme(plot.title = element_text(size=14),
-        legend.key.size = unit(0.5, 'cm'),
-        legend.key.height = unit(0.5, 'cm'),
-        legend.key.width = unit(0.5, 'cm'),
-        legend.title = element_text(size=10),
-        legend.text = element_text(size=10))
-@
-                }}
+\includegraphics[width=0.4\textwidth]{doc/ggESDA_Jiang&Wu_20210915-PCA_MCAR.pdf
+}
+                }
                 &
         \subfloat[Vertice-PCA (Polytope)]{
-        \scalebox{.5}{
         \label{fig:poly}
-        \includegraphics[]{ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
+        \includegraphics[width=0.4\textwidth]{doc/ggESDA_Jiang&Wu_20210915-PCA_Polytope.pdf
 }
-        }}
-        \end{tabular}}
+        }
+        \end{tabular}
     \caption{\label{fig:PCA} Two kinks of PCA for interval-valued data, where the XY-axis are represent the first principal component and the second principal component, respectively.}
 \end{figure}
 
@@ -800,7 +668,7 @@ ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=3cm 0.25cm 3cm 0cm,width=1\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2Dhist.pdf
+\includegraphics[trim=3cm 0.25cm 3cm 0cm,width=1\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-2Dhist.pdf
 }
 \caption{\label{fig:2Dhist} 2D histogram }
 \end{figure}
@@ -825,7 +693,7 @@ ggInterval_2DhistMatrix(facedata, aes(col = "grey50"), xBins = 10,
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=0cm 0.4cm 0cm 1.5cm,width=0.9\textwidth,clip]{ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
+\includegraphics[trim=0cm 0.4cm 0cm 1.5cm,width=0.9\textwidth,clip]{doc/ggESDA_Jiang&Wu_20210915-2DhistMatrix.pdf
 }
 \caption{\label{fig:2DhistMatrix} 2D histogram matrix}
 \end{figure}
@@ -872,7 +740,7 @@ ggInterval_radar(Environment, plotPartial = 2, showLegend = F,
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{radar_typical.pdf} 
+\includegraphics[width=0.9\textwidth]{doc/radar_typical.pdf} 
 \caption{\label{fig:radar_typical} The variety of typical radar plot which is able to contain interval-valued and modal multi-valued variables.}
 \end{figure}
 
@@ -880,7 +748,7 @@ Use the color to represent the interval area, and it can clearly present the beh
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[trim=0cm 2cm 0cm 3.5cm,width=1\textwidth, clip]{radar_3obs.pdf} 
+\includegraphics[trim=0cm 2cm 0cm 3.5cm,width=1\textwidth, clip]{doc/radar_3obs.pdf} 
 \caption{\label{fig:radar_3obs} Compare three distinct observations by multiple variables.}
 \end{figure}
 
@@ -912,7 +780,7 @@ we can get the Figure \ref{fig:radar}. It's worth mentioning that whenever the u
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{ggESDA_Jiang&Wu_20210915-radar.pdf} 
+\includegraphics[width=0.9\textwidth]{doc/ggESDA_Jiang&Wu_20210915-radar.pdf} 
 \caption{\label{fig:radar}  Compare the distinct observations in the same figure by color mapping.}
 \end{figure}
 
@@ -920,7 +788,7 @@ Last but not least, we propose a graphic method based on quantiles. The benefit 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{radar_2datasets.pdf} 
+\includegraphics[width=0.9\textwidth]{doc/radar_2datasets.pdf} 
 \caption{\label{fig:quantile2} Quantile for two symbolic datasets.}
 \end{figure}
 
@@ -953,6 +821,7 @@ Because of the interval-valued data, all SDA packages studying in the same field
 We further use the principle to process \code{BLOOD} data in \pkg{HistDAWass}, first. With the method \pkg{HistDAWass} provided, it will be more convenient to get min and max data:
 
 <<HistDAWass_getData>>=
+if (!require("HistDAWass")) install.packages("HistDAWass")
 library(HistDAWass)
 # Get min and max data
 BLOOD <- HistDAWass::BLOOD
@@ -979,6 +848,7 @@ After getting the necessary data, classifying data belonging is vital for reorga
 However, it is also a common way to store interval-valued data by median and range. In \pkg{MAINT.Data}, the data will exist in this form. Fortunately, a median-range form is not difficult to deal with. We can do the necessary conversion directly to get the data we expect:
 
 <<MAINT.Data_getData>>=
+if (!require("MAINT.Data")) install.packages("MAINT.Data")
 library(MAINT.Data)
 #get data interval-valued data in AbaloneIdt
 AbaloneIdt <- MAINT.Data::AbaloneIdt
