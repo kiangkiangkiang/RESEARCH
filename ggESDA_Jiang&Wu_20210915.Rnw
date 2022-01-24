@@ -179,12 +179,12 @@ On the contrary, \pkg{ggESDA} uses a high-level graphic system by \pkg{ggplot2} 
     \toprule
     \multicolumn{1}{r}{} & \multicolumn{1}{r}{} & \multicolumn{1}{c}{\textbf{ Available}} & \multicolumn{1}{c}{\textbf{Summarize}} & \multicolumn{3}{c}{\textbf{EDA}} & \multicolumn{1}{c}{\textbf{Statistic}} & \multicolumn{2}{c}{\textbf{Machine learning}} \\\hline
     \multicolumn{1}{c|}{Package} & \multicolumn{1}{c|}{Author} & Version & Function & Univariate & Bivariate & Multivariate & Stat. Method & Supervised & \multicolumn{1}{c}{Unsupervised} \\\hline
-    RSDA  & Rojas et al. (2015) & R(4.1.0)     & \code{classic.to.sym}     & -     & 1     & -     & 3     & \textbf{2}    & \textbf{1} \\
-    symbolicDA & Dudek et al. (2013) & R(4.1.0)     &    -   & -     & -     & \textbf{2}    & 2     & 1     & \textbf{1} \\
+    RSDA  & Rojas \emph{et al}. (2015) & R(4.1.0)     & \code{classic.to.sym}     & -     & 1     & -     & 3     & \textbf{2}    & \textbf{1} \\
+    symbolicDA & Dudek \emph{et al}. (2013) & R(4.1.0)     &    -   & -     & -     & \textbf{2}    & 2     & 1     & \textbf{1} \\
     HistDAWass & Irpino (2015) & R(4.1.0)     & \code{data2hist}     & 4     & -     & -     & 3     & 1     & \textbf{1} \\
     
     MAINT.Data & Silva \&  Brito (2011) & R(4.1.0)     &   -    & -     & -     & -     & \textbf{7}    & -     & \textbf{1} \\\hline
-    iRegression & Neto et al. (2011) & R(4.1.0)     &   -    & -     & -     & -     & 1     & -     & - \\
+    iRegression & Neto \emph{et al}. (2011) & R(4.1.0)     &   -    & -     & -     & -     & 1     & -     & - \\
     intReg & Toomet (2012) & R(3.6.0)      &  -     & -     & -     & -     & 1     & -     & - \\
     ISDA.R & Filho \&  Fagundes (2012) & R(2.15.2)      &    -   & 1     & -     & 1     & 1     & -     & - \\
     GPCSIV & Brahim (2013) & R(3.0.2)      &  -     & -    & -     & -     & 1     & -     & - \\
@@ -641,7 +641,7 @@ which is widely used for graphical representation of interval objects on a DR (d
 \end{figure}
 
 
-Nevertheless, the main drawback of MCAR is that the interval objects are oversized in the DR subspace with respect to the real objects in $\mathbb{R}^p$, hence, the polytopes representation \cite{le2012symbolic} for interval data was proposed. In \pkg{ggESDA}, we have also developed the graphic function for them using 
+Nevertheless, the main drawback of MCAR is that the interval objects are oversized in the DR subspace with respect to the real objects in $\mathbb{R}^p$, hence, the polytopes representation \cite{le:2012} for interval data was proposed. In \pkg{ggESDA}, we have also developed the graphic function for them using 
 
 \begin{verbatim}
 ggInterval_PCA(data = NULL, mapping = aes(NULL), plot = TRUE, poly = FALSE, 
@@ -984,10 +984,6 @@ In order to simplify the process and make the preprocessing friendly, we develop
 We developed \pkg{ggESDA} to complementary the \pkg{ggESDA} package for symbolic data analysis, especially for interval-valued data. Being an extension of \pkg{ggESDA}, we inherit most of its plot-construction syntax and strict adherence to the rules governed by \emph{The Grammar of Graphics} \cite{wilkinson2012grammar}. So far, we have demonstrated various newly implementations of traditional graphics to symbolic data. As an answer to the challenges of big data and complex data that the traditional data encounter, \pkg{ggESDA} reduces and summarizes by classes into a structured data table with paired symbolic-valued variables, and visualizes symbolic data which are becoming increasingly important in this area.
 
 We are committed to maintaining and developing the \pkg{ggESDA} package in the future. Future versions of the package will contain more multivariate exploratory graphical techniques and methodological improvement, including the revisions of 3D scatter plots, interactive tools, quantile representation, and so on. In order to overcome the constraints of the coordinate system of \pkg{ggESDA} in three dimensions, we will offer new geometries as well. The availability of implementation of these would be desirable for applications.
-
-
-
-
 
 
 
