@@ -271,7 +271,7 @@ For the univariate histogram frequency, assume that we partition the interval $I
 f_g = \sum_{u \in E}\frac{\| Z(u) \cap I_g \|}{\| Z(u) \|}
 \end{equation}
 
-Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\ctors,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation (\ref{eq:fg}) to get frequency. In most cases, $\| I'_g \|$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
+Moreover, for the interval-valued variate $Z$, we can pool the $a_u$ and $b_u$ from the interval of all observations, and sort it as a new vector $(x^{(1)},x^{(2)},\cdots,x^{(2m)})$ to represent the cut of a histogram. The subinterval from the cut is then defined as $I'_g = [x^{(j)},x^{(j+1)})$, where $j = 1,2,\cdots, 2m-1$, and apply the Equation (\ref{eq:fg}) to get frequency. In most cases, $\| I'_g \|$ will not be equal to another, so we can get another histogram type, called non-equidistant-bin histogram.
 
 
 \subsection{Bivariate Summaries}
@@ -796,7 +796,7 @@ Last but not least, we propose a graphic method based on quantiles. The benefit 
 
 \section{Generalization and Extension}
 
-As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
+As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pkg{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
 
 \subsection{Generalization with Prominent SDA Packages}
 
@@ -811,7 +811,7 @@ Generally, it is not merely the well-known packages in \proglang{R} that can mak
   \item Extract the min data and max data from it or make some necessary transformation.
   \item Classify the data you extract belong.
   \item Reorganized it and use \code{classic2sym} for the final transformation.
-  \item Visualize the front result using \pgk{ggESDA}.
+  \item Visualize the front result using \pkg{ggESDA}.
 \end{enumerate}
 
 Because of the interval-valued data, all SDA packages studying in the same field will store and deal with the min and max data. Hence, the transformation method in section \ref{sec:userDef} plays a important role. With the connection being built, it can be compatible with all other tools in \proglang{R}.

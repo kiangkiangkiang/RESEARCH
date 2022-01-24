@@ -790,7 +790,7 @@ Last but not least, we propose a graphic method based on quantiles. The benefit 
 
 \section{Generalization and Extension}
 
-As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pgk{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
+As far as generalization and extension are concerned, the package provides a simple way for making connections with other useful packages, so that the result of common statistical or machine learning methods on other packages may be visualized as well using \pkg{ggESDA} if it is interval-valued. In addition, we may get the classical data most of the time, so summarization between classical to interval-valued data becomes important. The following will discuss these explicitly. 
 
 \subsection{Generalization with Prominent SDA Packages}
 
@@ -805,7 +805,7 @@ Generally, it is not merely the well-known packages in \proglang{R} that can mak
   \item Extract the min data and max data from it or make some necessary transformation.
   \item Classify the data you extract belong.
   \item Reorganized it and use \code{classic2sym} for the final transformation.
-  \item Visualize the front result using \pgk{ggESDA}.
+  \item Visualize the front result using \pkg{ggESDA}.
 \end{enumerate}
 
 Because of the interval-valued data, all SDA packages studying in the same field will store and deal with the min and max data. Hence, the transformation method in section \ref{sec:userDef} plays a important role. With the connection being built, it can be compatible with all other tools in \proglang{R}.
@@ -1041,7 +1041,6 @@ In order to simplify the process and make the preprocessing friendly, we develop
 We developed \pkg{ggESDA} to complementary the \pkg{ggESDA} package for symbolic data analysis, especially for interval-valued data. Being an extension of \pkg{ggESDA}, we inherit most of its plot-construction syntax and strict adherence to the rules governed by \emph{The Grammar of Graphics} \cite{wilkinson2012grammar}. So far, we have demonstrated various newly implementations of traditional graphics to symbolic data. As an answer to the challenges of big data and complex data that the traditional data encounter, \pkg{ggESDA} reduces and summarizes by classes into a structured data table with paired symbolic-valued variables, and visualizes symbolic data which are becoming increasingly important in this area.
 
 We are committed to maintaining and developing the \pkg{ggESDA} package in the future. Future versions of the package will contain more multivariate exploratory graphical techniques and methodological improvement, including the revisions of 3D scatter plots, interactive tools, quantile representation, and so on. In order to overcome the constraints of the coordinate system of \pkg{ggESDA} in three dimensions, we will offer new geometries as well. The availability of implementation of these would be desirable for applications.
-
 
 
 
