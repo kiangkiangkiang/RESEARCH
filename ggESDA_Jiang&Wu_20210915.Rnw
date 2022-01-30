@@ -989,12 +989,6 @@ We are committed to maintaining and developing the \pkg{ggESDA} package in the f
 
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> Jiang_start_0120
 \bibliography{refs}
 
 \end{document}
