@@ -365,11 +365,12 @@ The other is the Environment questionnaire data (from the SODAS software package
 \end{Sinput}
 \begin{Soutput}
 # A tibble: 3 x 3
-              REGIONDEVELOPME             CONTROL            SATISFY
-                   <symblc_m>          <symblc_n>         <symblc_n>
-1 4:0.47 3:0.25 2:0.19 1:0.09 [-723.25 : -339.65] [-133.91 : 250.83]
-2 4:0.49 3:0.32 2:0.08 1:0.10  [-243.86 : 203.99] [-134.15 : 314.80]
-3 4:0.56 3:0.22 2:0.18 1:0.04   [-195.44 : 90.10]  [-75.00 : 191.17]
+              REGIONDEVELOPME             CONTROL
+                   <symblc_m>          <symblc_n>
+1 4:0.47 3:0.25 2:0.19 1:0.09 [-723.25 : -339.65]
+2 4:0.49 3:0.32 2:0.08 1:0.10  [-243.86 : 203.99]
+3 4:0.56 3:0.22 2:0.18 1:0.04   [-195.44 : 90.10]
+# ... with 1 more variable: SATISFY <symblc_n>
 \end{Soutput}
 \end{Schunk}
 
@@ -1043,6 +1044,30 @@ We developed \pkg{ggESDA} to complementary the \pkg{ggESDA} package for symbolic
 We are committed to maintaining and developing the \pkg{ggESDA} package in the future. Future versions of the package will contain more multivariate exploratory graphical techniques and methodological improvement, including the revisions of 3D scatter plots, interactive tools, quantile representation, and so on. In order to overcome the constraints of the coordinate system of \pkg{ggESDA} in three dimensions, we will offer new geometries as well. The availability of implementation of these would be desirable for applications.
 
 
+
+
+\begin{table}[htbp]
+\centering
+\caption{Fields of the built-in datasets of \pkg{ggESDA}}
+\setlength{\extrarowheight}{6pt}
+\resizebox{\textwidth}{!}{
+  \begin{tabular}{ll}
+  \toprule
+  \multicolumn{2}{c}{Built-In interval-valued data set} \\
+  \hline
+  Data  & Reference: methods \\
+  \hline
+  facedata & \cite{douzal:2011}; \cite{le:2012}: iPCA \\
+  oils  & \cite{lauro2000principal}; \cite{lauro2008principal}: iPCA \\
+  mushroom & \cite{neto2011bivariate}; \cite{domingues2010robust}: iRegression \\
+  Cardiological (blood pressure) & \cite{billard2000regression}; \cite{xu2010symbolic}: iRegression \\
+  AbaloneIdt & \cite{malerba2001comparing}: Dissimilarity measure \\
+  Environment & \cite{umbleja:2020}: EDA \\
+  \bottomrule
+  \end{tabular}%
+}
+\label{tab:built-in}%
+\end{table}%
 
 
 
