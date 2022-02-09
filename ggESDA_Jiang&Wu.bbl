@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{33}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -26,6 +26,12 @@ Billard L (2008).
 \newblock \enquote{Sample covariance functions for complex quantitative data.}
 \newblock In \emph{Proceedings of World IASC Conference, Yokohama, Japan}, pp.
   157--163.
+
+\bibitem[{Billard and Diday(2000)}]{billard2000regression}
+Billard L, Diday E (2000).
+\newblock \enquote{Regression analysis for interval-valued data.}
+\newblock In \emph{Data Analysis, Classification, and Related Methods}, pp.
+  369--374. Springer.
 
 \bibitem[{Billard and Diday(2003)}]{billard:2003}
 Billard L, Diday E (2003).
@@ -77,6 +83,13 @@ Diday E, Noirhomme-Fraiture M (2008).
 \newblock \emph{Symbolic data analysis and the SODAS software}.
 \newblock John Wiley \& Sons.
 
+\bibitem[{Domingues \emph{et~al.}(2010)Domingues, de~Souza, and
+  Cysneiros}]{domingues2010robust}
+Domingues MA, de~Souza RM, Cysneiros FJA (2010).
+\newblock \enquote{A robust method for linear regression of symbolic interval
+  data.}
+\newblock \emph{Pattern Recognition Letters}, \textbf{31}(13), 1991--1996.
+
 \bibitem[{Douzal-Chouakria \emph{et~al.}(2011)Douzal-Chouakria, Billard, and
   Diday}]{douzal:2011}
 Douzal-Chouakria A, Billard L, Diday E (2011).
@@ -90,6 +103,20 @@ Irpino A (2021).
 \newblock \emph{HistDAWass: Histogram-Valued Data Analysis}.
 \newblock R package version 1.0.6,
   \urlprefix\url{https://CRAN.R-project.org/package=HistDAWass}.
+
+\bibitem[{Lauro and Palumbo(2000)}]{lauro2000principal}
+Lauro CN, Palumbo F (2000).
+\newblock \enquote{Principal component analysis of interval data: a symbolic
+  data analysis approach.}
+\newblock \emph{Computational statistics}, \textbf{15}(1), 73--87.
+
+\bibitem[{Lauro \emph{et~al.}(2008)Lauro, Verde, and
+  Irpino}]{lauro2008principal}
+Lauro NC, Verde R, Irpino A (2008).
+\newblock \enquote{Principal component analysis of symbolic data described by
+  intervals.}
+\newblock \emph{Symbolic Data Analysis and the SODAS Software, ed. E. Diday and
+  M. Noirhomme-Fraiture}, pp. 279--312.
 
 \bibitem[{Le-Rademacher and Billard(2012{\natexlab{a}})}]{le:2012}
 Le-Rademacher J, Billard L (2012{\natexlab{a}}).
@@ -120,6 +147,22 @@ MacQueen J, \emph{et~al.} (1967).
 \newblock In \emph{Proceedings of the fifth Berkeley symposium on mathematical
   statistics and probability}, volume~1, pp. 281--297. Oakland, CA, USA.
 
+\bibitem[{Malerba \emph{et~al.}(2001)Malerba, Esposito, Gioviale, and
+  Tamma}]{malerba2001comparing}
+Malerba D, Esposito F, Gioviale V, Tamma V (2001).
+\newblock \enquote{Comparing dissimilarity measures for symbolic data
+  analysis.}
+\newblock \emph{Proceedings of Exchange of Technology and Know-how and New
+  Techniques and Technologies for Statistics}, \textbf{1}, 473--481.
+
+\bibitem[{Neto \emph{et~al.}(2011)Neto, Cordeiro, and
+  de~Carvalho}]{neto2011bivariate}
+Neto EdAL, Cordeiro GM, de~Carvalho FdA (2011).
+\newblock \enquote{Bivariate symbolic regression models for interval-valued
+  variables.}
+\newblock \emph{Journal of Statistical Computation and Simulation},
+  \textbf{81}(11), 1727--1744.
+
 \bibitem[{Rodriguez(2021)}]{RSDA}
 Rodriguez O (2021).
 \newblock \emph{RSDA: R to Symbolic Data Analysis}.
@@ -146,6 +189,13 @@ Umbleja K, Ichino M, Yaguchi H (2020).
   recognition and knowledge discovery.}
 \newblock \emph{Visual Informatics}, \textbf{4}(1), 23--31.
 
+\bibitem[{Wickham(2016)}]{ggplot2}
+Wickham H (2016).
+\newblock \emph{ggplot2: Elegant Graphics for Data Analysis}.
+\newblock Springer-Verlag New York.
+\newblock ISBN 978-3-319-24277-4.
+\newblock \urlprefix\url{https://ggplot2.tidyverse.org}.
+
 \bibitem[{Wickham \emph{et~al.}(2021)Wickham, Francois, Henry, and
   Muller}]{dplyr}
 Wickham H, Francois R, Henry L, Muller K (2021).
@@ -164,6 +214,11 @@ Xu M, Qin Z (2021).
 \newblock \enquote{A bivariate Bayesian method for interval-valued regression
   models.}
 \newblock \emph{Knowledge-Based Systems}, p. 107396.
+
+\bibitem[{Xu(2010)}]{xu2010symbolic}
+Xu W (2010).
+\newblock \emph{Symbolic data analysis: interval-valued data regression}.
+\newblock Ph.D. thesis, University of Georgia Athens, GA.
 
 \bibitem[{Yang \emph{et~al.}(2019)Yang, Lin, and Zhang}]{yang:2019}
 Yang Z, Lin DK, Zhang A (2019).

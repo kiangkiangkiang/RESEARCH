@@ -172,7 +172,7 @@ the symbolic data analysis (see Table \ref{tab:sda_packages}). The
 contexts include the formal statistical modeling and inference.
 However, little work has been conducted on the exploratory analysis
 and visualization. This motivates us to develop an \proglang{R}
-package, namely \pkg{ggSEDA}, aiming at exploring symbolic data
+package, namely \pkg{ggESDA}, aiming at exploring symbolic data
 graphically. \pkg{ggESDA} is composed of the features to deal with the
 interval-valued data, statistics data frame, clustering results, and
 other components from \pkg{R6} \cite{R6} class. The graphical
@@ -235,7 +235,7 @@ the relationship between variables.
 Exploratory data analysis is cross-classified in two different ways
 where each method is either graphical or non-graphical. And then, each
 method is either univariate, bivariate or multivariate. \pkg{ggESDA}
-uses a high-level graphic system by \pkg{ggplot2} to solve the problem
+uses a high-level graphic system by \pkg{ggplot2} \cite{ggplot2} to solve the problem
 mentioned above and provides a variety of EDA methods in all kinds of
 the variate.
 
@@ -255,23 +255,31 @@ implemented in \proglang{R} using \pkg{ggplot2}.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Main Features
 \begin{table}[t!]
 \centering{\scriptsize
 \begin{tabular}{|l|c|l|l|l|} \hline
-Package & Symbolic & Main Features & Plots &  Reference \\
+Package & Symbolic & Description & Plots &  Reference \\
         & Object$^*$   &               &       &           \\
  \hline 
-\pkg{RSDA}  & I & & scatterplot, histogram & Rojas {\it et al.} (2015)\\
-\pkg{symbolicDA} & I & & & Dudek {\it et al.} (2013) \\
-\pkg{HistDAWass} & H& & & Irpino (2015) \\
-\pkg{MAINT.Data} & & & & Silva \&  Brito (2011) \\
-\pkg{iRegression} & & & & Neto {\it et al.} (2011)  \\
-\pkg{intReg} & & & & Toomet (2012)  \\
-\pkg{ISDA.R} & & & & Filho \&  Fagundes (2012) \\
-\pkg{GPCSIV} & & & & Brahim (2013) \\
-\pkg{GraphPCA} & & & & Brahim \& Kallyth (2014) \\
-\pkg{ggESDA} & & & & Jiang (2021) \\ \hline
+\pkg{RSDA}  & I & R to Symbolic Data Analysis
+ & scatterplot & Rojas {\it et al.} (2015)\\
+\pkg{symbolicDA} & I & Analysis of Symbolic Data
+ & radar & Dudek {\it et al.} (2013) \\
+\pkg{HistDAWass} & H & Histogram-Valued Data Analysis & histogram, box, index& Irpino (2015) \\
+\pkg{MAINT.Data} & I & Model and Analyse Interval Data
+ & - & Silva \&  Brito (2011) \\
+\pkg{iRegression} & I & Regression Methods for Interval-Valued Variables
+ & - & Neto {\it et al.} (2011)  \\
+\pkg{intReg} & I & Interval Regression
+ & - & Toomet (2012)  \\
+\pkg{ISDA.R} & I & interval symbolic data analysis for R
+ & histogram & Filho \&  Fagundes (2012) \\
+\pkg{GPCSIV} & I & Generalized Principal Component of Symbolic Interval variables
+ & - & Brahim (2013) \\
+\pkg{GraphPCA} & H & Graphical Tools of Histogram PCA
+ & - & Brahim \& Kallyth (2014) \\
+\pkg{ggESDA} & I & Exploratory Symbolic Data Analysis with 'ggplot2' & index, scatter, radar, etc. & Jiang (2021) \\ \hline
 \multicolumn{5}{l}{\footnotesize{$^*$I for the interval-valued objects, H for the histogram-valued objects.}}
 \end{tabular}}%
 \caption{\label{tab:sda_packages} The main features and the 
@@ -344,9 +352,8 @@ interval-valued quantile data table.
 \centering
 \begin{tabular}{|l|l|} \hline
             & Statistics    \\ \hline
-Univariate  & internal mean, grand mean, range, median, mode, sd, variance, quantile  \\ \hline
+Univariate  & internal mean, grand mean, range, sd, variance, quantile  \\ \hline
 Bivariate & covariance, correlation ($r, \rho, \tau$)\\ \hline
-Multivariate & \\ \hline
 \end{tabular}
 \caption{\label{tab:stat} The implemented summary statistics.}
 \end{table}
@@ -368,7 +375,7 @@ graphics to display symbolic data accurately and clearly.
 A good picture is worth a 1,000 words. The typical graphical
 techniques of EDA include the index plot, barplot, boxplot, and
 histogram for univariate data; the 2D scatterplot, joint histogram and
-double boxplot for bivariate data; and the satterplot matrix, and star
+double boxplot for bivariate data; and the scatterplot matrix, and star
 plot for multivariate data. Of course, there are many other variants
 of graphical techniques have been proposed. Our aim in this study is
 to implement the good statistical graphics to display symbolic data
@@ -397,8 +404,8 @@ ggplot(data, aes(...)) + geom() + ... + stat() + ...
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggplot2)
-R> ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) +
-         geom_point(size=3)
+R> ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+         geom_point(size = 3)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -411,25 +418,33 @@ generalized \pkg{ggESDA} to other prominent SDA packages in
 \proglang{R}.
 
 General \pkg{ggESDA} syntax
+
 \begin{verbatim}
-ggInterval(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
+ggInterval_*(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
 \end{verbatim}
-or
-\begin{verbatim}
-ggplot(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
-\end{verbatim}
+
+\begin{footnotesize}
+$^*$ The graphical types are shown in Table \ref{tab:graphics}.
+\end{footnotesize}
+
+
+%can delete : cannot use
+%or
+%\begin{verbatim}
+%ggplot(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
+%\end{verbatim}
 
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggESDA)
-R> ggInterval(data = facedata, aes(x = AD, y = BC, color = IND)) +
+R> ggInterval_index(data = facedata, aes(x = AD, fill = IND)) +
          geom_point()
-#or
-R> ggplot(data = facedata, aes(x = AD, y = BC, color = IND)) +
-         geom_I_point()
 \end{CodeInput}
 \end{CodeChunk}
- 
+%can delete
+% #or
+%R> ggplot(data = facedata, aes(x = AD, y = BC, color = IND)) +
+%         geom_I_point()
 
 Table \ref{tab:stat} lists the implemented summary statistics.
 The implemented graphics are given in Table \ref{tab:graphics}.
@@ -447,7 +462,7 @@ advantage is that a large dataset can be summarized into a more
 manageable size, the interval-valued symbolic data still retaining as
 much knowledge inherent to the entire dataset as possible. The
 aggregation of an object with data.frame class into an object of the
-IntervalData class is by the function \fct{ToIntervalData}.
+IntervalData class is by the function \fct{classic2sym()}.
 
 The \pkg{ggESDA}
 aims to convert the traditional data into the \pkg{ggESDA} object and
@@ -471,9 +486,9 @@ essential process in SDA. See Section \ref{sec:aggregation} for details.
 \centering
 \begin{tabular}{|l|l|} \hline
 Variate          & Graphics    \\ \hline
-Univariate  & index plot, histogram, piechart,  \\ \hline
-Bivariate & scatterplot, \\ \hline
-Multivariate & \\ \hline
+Univariate  & index plot, histogram, box plot, min-max plot, center-range plot \\ \hline
+Bivariate & scatterplot, 2D-histogram \\ \hline
+Multivariate & radar, scatterplot matrix, 2D-histogram matrix, image\\ \hline
 \end{tabular}
 \caption{\label{tab:graphics} The implemented graphics.}
 \end{table}
@@ -487,10 +502,8 @@ Multivariate & \\ \hline
 In the following, we used the face recognition
 data to illustrate some graphing functions we have implemented so far.
 
-The face recognition data is widely used in the SDA literature (Leroy
-et al., 1996; Douzal-Chouakria, Billard and Diday, 2011; Le-Rademacher
-and Billard, 2012). The dataset gives six face measurements of nine
-men (Figure \ref{face}), each with three observations, resulting in a
+The face recognition data is widely used in the SDA literature (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}). The dataset gives six face measurements of nine
+men (Figure \ref{fig:face}), each with three observations, resulting in a
 total 27 observations (Table \ref{facedata}). The measurements for
 each observation came from a sequence of over 1,000 images. They cover
 a range of values, hence interval-valued variables.
@@ -499,35 +512,16 @@ a range of values, hence interval-valued variables.
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggESDA)
-R> data(face)
-R> face
+R> data(facedata)
+R> facedata
 \end{CodeInput}
 \begin{CodeOutput}
-$x
-, , min
-
-         AD    BC     AH     DH    EH    GH
-FRA1 155.00 58.00 100.45 105.00 61.40 64.20
-FRA2 154.00 57.00 101.98 104.35 60.88 62.94
-FRA3 154.01 57.00  99.36 101.04 60.95 60.42
-HUS1 168.86 58.55 102.83 122.38 56.73 60.44
+                 AD              BC                AH
+         <symblc_n>      <symblc_n>        <symblc_n>
+1 [155.00 : 157.00] [58.00 : 61.01] [100.45 : 103.28]
+2 [154.00 : 160.01] [57.00 : 64.00] [101.98 : 105.55]
+3 [154.01 : 161.00] [57.00 : 63.00]  [99.36 : 105.65]
 ...
-, , max
-
-         AD    BC     AH     DH    EH    GH
-FRA1 157.00 61.01 103.28 107.30 65.73 67.80
-FRA2 160.01 64.00 105.55 107.30 63.03 66.47
-FRA3 161.00 63.00 105.65 109.04 65.60 66.40
-HUS1 172.84 63.39 106.53 124.52 61.07 64.54
-...
-$y
-FRA1 FRA2 FRA3 HUS1 HUS2 HUS3 INC1 INC2 INC3 ISA1 ISA2 ISA3 JPL1 JPL2 JPL3 KHA1 
-   1    1    1    2    2    2    3    3    3    4    4    4    5    5    5    6 
-KHA2 KHA3 LOT1 LOT2 LOT3 PHI1 PHI2 PHI3 ROM1 ROM2 ROM3 
-   6    6    7    7    7    8    8    8    9    9    9 
-
-attr(,"class")
-[1] "IntervalData"
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -544,11 +538,16 @@ The other is the Environment questionnaire data (from the SODAS software package
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[t!]
 \centering {\scriptsize
-\begin{tabular}{cccccc}\hline
-Data & Reference & Usage \\ \hline
-face &     A and B (2002)      & IPCA \\  
-     &     C, D, and E         & ... \\
-mushroom &       & PCA \\ \hline
+\begin{tabular}{lll}\hline
+  Data  & Reference& Usage \\
+  \hline
+  facedata & \cite{douzal:2011}; \cite{le:2012}& iPCA \\
+  oils  & \cite{lauro2000principal}; \cite{lauro2008principal}& iPCA \\
+  mushroom & \cite{neto2011bivariate}; \cite{domingues2010robust}& iRegression \\
+  Cardiological (blood pressure) & \cite{billard2000regression}; \cite{xu2010symbolic}& iRegression \\
+  AbaloneIdt & \cite{malerba2001comparing}& Dissimilarity measure \\
+  Environment & \cite{umbleja:2020}& EDA \\
+   \hline
 \end{tabular}}
 \caption{\label{tab:classic2sym} Summaries of the built-in interval-valued data.}
 \end{table}%
