@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: ggESDA_Jiang&Wu.aux
+Reallocating 'name_of_file' (item size: 1) to 4 items.
+The style file: jss.bst
+Reallocating 'name_of_file' (item size: 1) to 5 items.
+Database file #1: refs.bib
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Warning--can't use both volume and number fields in macqueen:1967
+You've used 25 entries,
+            3215 wiz_defined-function locations,
+            793 strings with 9325 characters,
+and the built_in function-call counts, 23949 in all, are:
+= -- 2320
+> -- 548
+< -- 27
++ -- 212
+- -- 181
+* -- 1666
+:= -- 2870
+add.period$ -- 100
+call.type$ -- 25
+change.case$ -- 179
+chr.to.int$ -- 26
+cite$ -- 26
+duplicate$ -- 2450
+empty$ -- 1978
+format.name$ -- 256
+if$ -- 4946
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 264
+newline$ -- 138
+num.names$ -- 100
+pop$ -- 1174
+preamble$ -- 1
+purify$ -- 160
+quote$ -- 0
+skip$ -- 567
+stack$ -- 0
+substring$ -- 2302
+swap$ -- 681
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 219
+warning$ -- 1
+while$ -- 176
+width$ -- 0
+write$ -- 343
+(There was 1 warning)
