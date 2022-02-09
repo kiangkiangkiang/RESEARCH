@@ -263,7 +263,7 @@ Package & Symbolic & Description & Plots &  Reference \\
         & Object$^*$   &               &       &           \\
  \hline 
 \pkg{RSDA}  & I & R to Symbolic Data Analysis
- & scatterplot & Rojas {\it et al.} (2015)\\
+ & scatterplot, radar& Rojas {\it et al.} (2015)\\
 \pkg{symbolicDA} & I & Analysis of Symbolic Data
  & radar & Dudek {\it et al.} (2013) \\
 \pkg{HistDAWass} & H & Histogram-Valued Data Analysis & histogram, box, index& Irpino (2015) \\
@@ -701,15 +701,22 @@ Equation (\ref{sj}).
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> summary(facedata)
 R> mean(facedata)
-R> sd(facedata)
-R> scale(facedata)
 \end{CodeInput}
-\end{CodeChunk}
+\begin{CodeOutput}
+	    AD    BC    AH    DH    EH    GH
+	  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+1  	163.  60.0  113.  113.  59.8  57.7
+\end{CodeOutput}
 
+\begin{CodeInput}
+R> mean(sd(facedata$AD))
+\end{CodeInput}
+\begin{CodeOutput}
+[1] 6.816762
+\end{CodeOutput}
 
-
+%$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                         %
 %                                                         %
@@ -859,24 +866,14 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{An example}
 
-
-\begin{verbatim}
-cov(x, y = NULL, use = "everything",
-    method = c("pearson", "kendall", "spearman"))
-
-cor(x, y = NULL, use = "everything",
-    method = c("pearson", "kendall", "spearman"))
-\end{verbatim}
-
-\begin{CodeChunk}
+% Equation (\ref{eq:gq_cov})
 \begin{CodeInput}
-R> cov(facedata)
-R> cor(facedata)
+R> cov(facedata$AD, facedata$BC, method = "billard")
 \end{CodeInput}
+\begin{CodeOutput}
+[1] 21.47015
+\end{CodeOutput}
 \end{CodeChunk}
-
-
-
 
 
 
