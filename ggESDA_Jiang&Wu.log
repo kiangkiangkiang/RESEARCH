@@ -1,0 +1,1725 @@
+This is XeTeX, Version 3.141592653-2.6-0.999993 (MiKTeX 21.8) (preloaded format=xelatex 2021.11.30)  9 FEB 2022 09:03
+entering extended mode
+**./ggESDA_Jiang&Wu.tex
+(ggESDA_Jiang&Wu.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-08-27> (jss.cls
+Document Class: jss 2021/05/23 3.3 jss class by Achim Zeileis
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count178
+\c@section=\count179
+\c@subsection=\count180
+\c@subsubsection=\count181
+\c@paragraph=\count182
+\c@subparagraph=\count183
+\c@figure=\count184
+\c@table=\count185
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.def
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/ae\ae.sty
+Package: ae 2001/02/12 1.3 Almost European Computer Modern
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2021/08/12 v3.8 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count186
+\FV@InFile=\read2
+\FV@TabBox=\box50
+\c@FancyVerbLine=\count187
+\FV@StepNumber=\count188
+\FV@OutFile=\write3
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+aer on input line 11
+2.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/ae\t1aer.fd
+File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count189
+)
+\footerskip=\skip51
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.
+sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.st
+y
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.st
+y
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinek
+eys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.st
+y
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro.
+sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen141
+\Hy@linkcounter=\count190
+\Hy@pagecounter=\count191
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref-langpa
+tches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count192
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count193
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen142
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.
+sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count194
+\Field@Width=\dimen143
+\Fld@charsize=\dimen144
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count195
+\c@Item=\count196
+\c@Hfootnote=\count197
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hxetex.def
+File: hxetex.def 2021-06-07 v7.00m Hyperref driver for XeTeX
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.st
+y
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box51
+\c@Hy@AnnotLevel=\count198
+\HyField@AnnotCount=\count199
+\Fld@listcount=\count266
+\c@bookmark@seq@number=\count267
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfile
+check.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqueco
+unter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+)
+\preXLskip=\skip53
+\preLskip=\skip54
+\preMskip=\skip55
+\preSskip=\skip56
+\postMskip=\skip57
+\postSskip=\skip58
+
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 447.
+
+Package hyperref Info: Option `colorlinks' set `true' on input line 447.
+Package hyperref Info: Option `linktocpage' set `true' on input line 447.
+Package hyperref Info: Option `plainpages' set `false' on input line 447.
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
+\@mathmargin=\skip59
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen145
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen146
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count268
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count269
+\leftroot@=\count270
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count271
+\DOTSCASE@=\count272
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box52
+\strutbox@=\box53
+\big@size=\dimen147
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count273
+\c@MaxMatrixCols=\count274
+\dotsspace@=\muskip17
+\c@parentequation=\count275
+\dspbrk@lvl=\count276
+\tag@help=\toks18
+\row@=\count277
+\column@=\count278
+\maxfields@=\count279
+\andhelp@=\toks19
+\eqnshift@=\dimen148
+\alignsep@=\dimen149
+\tagshift@=\dimen150
+\tagwidth@=\dimen151
+\totwidth@=\dimen152
+\lineht@=\dimen153
+\@envbody=\toks20
+\multlinegap=\skip60
+\multlinetaggap=\skip61
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/orcidlink\orcidlink.sty
+Package: orcidlink 2021/06/11 v1.0.4 Linked ORCiD logo macro package
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.s
+ty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-
+common.tex
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen154
+\pgfutil@tempdimb=\dimen155
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-
+common-lists.tex))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-
+latex.def
+\pgfutil@abb=\box54
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.c
+ode.tex
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.s
+ty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.s
+ty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.
+code.tex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeysf
+iltered.code.tex
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen156
+\pgf@y=\dimen157
+\pgf@xa=\dimen158
+\pgf@ya=\dimen159
+\pgf@xb=\dimen160
+\pgf@yb=\dimen161
+\pgf@xc=\dimen162
+\pgf@yc=\dimen163
+\pgf@xd=\dimen164
+\pgf@yd=\dimen165
+\w@pgf@writea=\write4
+\r@pgf@reada=\read3
+\c@pgf@counta=\count280
+\c@pgf@countb=\count281
+\c@pgf@countc=\count282
+\c@pgf@countd=\count283
+\t@pgf@toka=\toks26
+\t@pgf@tokb=\toks27
+\t@pgf@tokc=\toks28
+\pgf@sys@id@count=\count284
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cf
+g
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-xetex.def
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+-xetex.def
+File: pgfsys-xetex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)
+\pgfsys@objnum=\count285
+)))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+softpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count286
+\pgfsyssoftpath@bigbuffer@items=\count287
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys
+protocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.
+tex
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.c
+ode.tex
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.c
+ode.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser
+.code.tex
+\pgfmath@dimen=\dimen166
+\pgfmath@count=\count288
+\pgfmath@box=\box55
+\pgfmath@toks=\toks29
+\pgfmath@stack@operand=\toks30
+\pgfmath@stack@operation=\toks31
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.code.tex
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.basic.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.trigonometric.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.random.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.comparison.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.base.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.round.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.misc.code.tex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfuncti
+ons.integerarithmetics.code.tex)))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.
+code.tex
+\c@pgfmathroundto@lastzeros=\count289
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.t
+ex)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+points.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen167
+\pgf@picmaxx=\dimen168
+\pgf@picminy=\dimen169
+\pgf@picmaxy=\dimen170
+\pgf@pathminx=\dimen171
+\pgf@pathmaxx=\dimen172
+\pgf@pathminy=\dimen173
+\pgf@pathmaxy=\dimen174
+\pgf@xx=\dimen175
+\pgf@xy=\dimen176
+\pgf@yx=\dimen177
+\pgf@yy=\dimen178
+\pgf@zx=\dimen179
+\pgf@zy=\dimen180
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+pathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen181
+\pgf@path@lasty=\dimen182
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+pathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen183
+\pgf@shorten@start@additional=\dimen184
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+scopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box56
+\pgf@hbox=\box57
+\pgf@layerbox@main=\box58
+\pgf@picture@serial@count=\count290
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+graphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen185
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+transformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen186
+\pgf@pt@y=\dimen187
+\pgf@pt@temp=\dimen188
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+quick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+objects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+pathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+arrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen189
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+shade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen190
+\pgf@sys@shading@range@num=\count291
+\pgf@shadingcount=\count292
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+image.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+external.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box59
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+layers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+transparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+patterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore
+rdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodules
+hapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box60
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulep
+lot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcom
+p-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen191
+\pgf@nodesepend=\dimen192
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcom
+p-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.st
+y
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.
+code.tex))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.
+tex))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.c
+ode.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.
+tex)
+\pgffor@iter=\dimen193
+\pgffor@skip=\dimen194
+\pgffor@stack=\toks32
+\pgffor@toks=\toks33
+))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz
+\tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibra
+ryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count293
+\pgfplotmarksize=\dimen195
+)
+\tikz@lastx=\dimen196
+\tikz@lasty=\dimen197
+\tikz@lastxsaved=\dimen198
+\tikz@lastysaved=\dimen199
+\tikz@lastmovetox=\dimen256
+\tikz@lastmovetoy=\dimen257
+\tikzleveldistance=\dimen258
+\tikzsiblingdistance=\dimen259
+\tikz@figbox=\box61
+\tikz@figbox@bg=\box62
+\tikz@tempbox=\box63
+\tikz@tempbox@bg=\box64
+\tikztreelevel=\count294
+\tikznumberofchildren=\count295
+\tikznumberofcurrentchild=\count296
+\tikz@fig@count=\count297
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulem
+atrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count298
+\pgfmatrixcurrentcolumn=\count299
+\pgf@matrix@numberofcolumns=\count300
+)
+\tikz@expandcount=\count301
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz
+/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz
+/libraries\tikzlibrarysvg.path.code.tex
+File: tikzlibrarysvg.path.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibra
+rysvg.path.code.tex
+File: pgflibrarysvg.path.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulep
+arser.code.tex
+File: pgfmoduleparser.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfparserdef@arg@count=\count302
+)
+\pgf@lib@svg@last@x=\dimen260
+\pgf@lib@svg@last@y=\dimen261
+\pgf@lib@svg@last@c@x=\dimen262
+\pgf@lib@svg@last@c@y=\dimen263
+\pgf@lib@svg@count=\count303
+\pgf@lib@svg@max@num=\count304
+))
+\@curXheight=\skip62
+) (thumbpdf.sty
+Package: thumbpdf 2018/09/07 v3.17 Inclusion of thumbnails (HO)
+
+
+Package thumbpdf Warning: Missing driver name.
+
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen264
+\ar@mcellbox=\box65
+\extrarowheight=\dimen265
+\NC@list=\toks34
+\extratabsurround=\skip63
+\backup@length=\skip64
+\ar@cellbox=\box66
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
+Package: pdfpages 2021/03/06 v0.5t Insert pages of external PDF documents (AM)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count305
+\calc@Bcount=\count306
+\calc@Adimen=\dimen266
+\calc@Bdimen=\dimen267
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count307
+\calc@Cskip=\skip67
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen268
+\ESO@tempdimb=\dimen269
+)
+\AM@pagewidth=\dimen270
+\AM@pageheight=\dimen271
+\AM@fboxrule=\dimen272
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\ppxetex.def
+File: ppxetex.def 2021/03/06 v0.5t Pdfpages driver for XeTeX (AM)
+)
+\pdfpages@includegraphics@status=\count308
+\AM@pagebox=\box67
+\AM@global@opts=\toks35
+\AM@pagecnt=\count309
+\AM@toc@title=\toks36
+\c@AM@survey=\count310
+\AM@templatesizebox=\box68
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xete
+x.def
+File: l3backend-xetex.def 2021-08-04 L3 backend support: XeTeX
+ ()
+\c__kernel_sys_dvipdfmx_version_int=\count311
+\l__color_backend_stack_int=\count312
+\g__color_backend_stack_int=\count313
+\g__graphics_track_int=\count314
+\l__pdf_internal_box=\box69
+\g__pdf_backend_object_int=\count315
+\g__pdf_backend_annotation_int=\count316
+\g__pdf_backend_link_int=\count317
+) (ggESDA_Jiang&Wu.aux)
+\openout1 = `ggESDA_Jiang&Wu.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
+4.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+Package hyperref Info: Link coloring ON on input line 94.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitl
+estring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count318
+)
+LaTeX Info: Redefining \ref on input line 94.
+LaTeX Info: Redefining \pageref on input line 94.
+LaTeX Info: Redefining \nameref on input line 94.
+ (ggESDA_Jiang&Wu.out) (ggESDA_Jiang&Wu.out)
+\@outlinefile=\write5
+\openout5 = `ggESDA_Jiang&Wu.out'.
+
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+File: jsslogo.jpg Graphic file (type bmp)
+<jsslogo.jpg>
+LaTeX Font Info:    Trying to load font information for T1+pzc on input line 94
+.
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pzc.fd
+File: t1pzc.fd 2020/03/25 font definitions for T1/pzc.
+)
+LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <28> not available
+(Font)              Font shape `T1/pzc/m/it' tried instead on input line 94.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 9
+4.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
+4.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
+4.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+94.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+94.
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 94.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 94.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 94.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 94.
+
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 94.
+
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 94.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 94.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 94.
+
+Overfull \hbox (1.6821pt too wide) in paragraph at lines 94--94
+[]\T1/lmr/m/it/10.95 Keywords\T1/lmr/m/n/10.95 : data vi-su-al-iza-tion, ex-plo
+ratory data anal-y-sis, interval-valued data, sta-tis-ti-cal graph-
+ []
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
+
+)
+
+Package natbib Warning: Citation `sherwani:2021' on page 1 undefined on input l
+ine 130.
+
+
+Package natbib Warning: Citation `yang:2019' on page 1 undefined on input line 
+131.
+
+
+Package natbib Warning: Citation `xu:2021' on page 1 undefined on input line 13
+2.
+
+
+LaTeX Warning: Reference `fig:trend' on page 1 undefined on input line 132.
+
+
+LaTeX Warning: Reference `fig:subjectAreas' on page 1 undefined on input line 1
+38.
+
+[1
+
+]
+
+LaTeX Warning: Reference `tab:sda_packages' on page 2 undefined on input line 1
+71.
+
+
+Package natbib Warning: Citation `R6' on page 2 undefined on input line 178.
+
+
+LaTeX Warning: Reference `sec:design' on page 2 undefined on input line 186.
+
+
+LaTeX Warning: Reference `sec:graphics' on page 2 undefined on input line 188.
+
+
+LaTeX Warning: Reference `sec:pca' on page 2 undefined on input line 192.
+
+
+LaTeX Warning: Reference `sec:others' on page 2 undefined on input line 192.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 2 undefined on input line 193
+.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 2 []
+ []
+
+[2]
+
+LaTeX Warning: Reference `tab:sda_packages' on page 3 undefined on input line 2
+21.
+
+
+Package natbib Warning: Citation `umbleja:2020' on page 3 undefined on input li
+ne 249.
+
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
+50.
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+Package natbib Warning: Citation `diday:2008' on page 3 undefined on input line
+ 252.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 275.
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 3
+ []
+
+[3]
+
+LaTeX Warning: Reference `ipca' on page 4 undefined on input line 310.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 4 []
+ []
+
+[4]
+
+Package natbib Warning: Citation `RSDA' on page 5 undefined on input line 409.
+
+
+Overfull \hbox (45.9886pt too wide) in paragraph at lines 416--416
+[]\T1/lmtt/m/n/10.95 ggInterval(data = intervaldata, mapping = aes(...)) + geom
+_I() + ... + stat_I() + ...[] 
+ []
+
+
+Overfull \hbox (22.99367pt too wide) in paragraph at lines 420--420
+[]\T1/lmtt/m/n/10.95 ggplot(data = intervaldata, mapping = aes(...)) + geom_I()
+ + ... + stat_I() + ...[] 
+ []
+
+
+LaTeX Warning: Reference `tab:stat' on page 5 undefined on input line 434.
+
+
+LaTeX Warning: Reference `tab:graphics' on page 5 undefined on input line 435.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 5
+ []
+
+[5]
+
+LaTeX Warning: Reference `fig:pkgStr' on page 6 undefined on input line 455.
+
+
+LaTeX Warning: Reference `sec:aggregation' on page 6 undefined on input line 46
+3.
+
+
+LaTeX Warning: Reference `face' on page 6 undefined on input line 493.
+
+
+LaTeX Warning: Reference `facedata' on page 6 undefined on input line 494.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 6 []
+ []
+
+[6]
+
+Package natbib Warning: Citation `leroy:1996' on page 7 undefined on input line
+ 537.
+
+
+Package natbib Warning: Citation `douzal:2011' on page 7 undefined on input lin
+e 537.
+
+
+Package natbib Warning: Citation `le:2012' on page 7 undefined on input line 53
+7.
+
+
+LaTeX Warning: Reference `fig:face' on page 7 undefined on input line 537.
+
+
+Package natbib Warning: Citation `diday:2008' on page 7 undefined on input line
+ 539.
+
+
+Package natbib Warning: Citation `bertrand:2000' on page 7 undefined on input l
+ine 579.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 7
+ []
+
+[7]
+
+LaTeX Warning: Reference `eq:dist1' on page 8 undefined on input line 599.
+
+
+LaTeX Warning: Reference `eq:dist2' on page 8 undefined on input line 622.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 8 []
+ []
+
+[8]
+
+LaTeX Warning: Reference `eq:fg' on page 9 undefined on input line 650.
+
+
+LaTeX Warning: Reference `xi.mean' on page 9 undefined on input line 679.
+
+
+LaTeX Warning: Reference `sj' on page 9 undefined on input line 694.
+
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 9
+ []
+
+[9]
+
+Package natbib Warning: Citation `billard:2003' on page 10 undefined on input l
+ine 775.
+
+
+LaTeX Warning: Reference `eq:var' on page 10 undefined on input line 788.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 10 []
+ []
+
+[10]
+
+Package natbib Warning: Citation `Billard+Diday:2007' on page 11 undefined on i
+nput line 794.
+
+
+Package natbib Warning: Citation `billard:2007' on page 11 undefined on input l
+ine 823.
+
+
+Package natbib Warning: Citation `billard:2008' on page 11 undefined on input l
+ine 823.
+
+
+LaTeX Warning: Reference `eq:var' on page 11 undefined on input line 823.
+
+
+LaTeX Warning: Reference `eq:var' on page 11 undefined on input line 824.
+
+
+Overfull \hbox (115.6817pt too wide) detected at line 831
+\OML/lmm/m/it/10.95 cov\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 Z[]; Z[]\OT1/lmr
+/m/n/10.95 ) = [] [] []
+ []
+
+
+LaTeX Warning: Reference `eq:cov' on page 11 undefined on input line 834.
+
+
+LaTeX Warning: Reference `eq:spt_cov' on page 11 undefined on input line 834.
+
+
+LaTeX Warning: Reference `eq:spt_cov' on page 11 undefined on input line 834.
+
+
+LaTeX Warning: Reference `eq:var' on page 11 undefined on input line 834.
+
+
+LaTeX Warning: Reference `eq:fg' on page 11 undefined on input line 843.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 11
+ []
+
+[11]
+
+LaTeX Warning: Reference `fig:index' on page 12 undefined on input line 925.
+
+
+LaTeX Warning: Reference `fig:index_bar' on page 12 undefined on input line 925
+.
+
+
+LaTeX Warning: Reference `index-plot-i' on page 12 undefined on input line 928.
+
+
+
+LaTeX Warning: Reference `index-plot-i' on page 12 undefined on input line 943.
+
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 12 []
+ []
+
+[12]
+
+LaTeX Warning: Reference `boxplot-sbs-i' on page 13 undefined on input line 955
+.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 13
+ []
+
+[13]
+
+LaTeX Warning: Reference `hist-i' on page 14 undefined on input line 1035.
+
+
+LaTeX Warning: Reference `sec:hist' on page 14 undefined on input line 1056.
+
+
+LaTeX Warning: Reference `sec:hist' on page 14 undefined on input line 1063.
+
+
+LaTeX Warning: Reference `fig:hist' on page 14 undefined on input line 1063.
+
+
+LaTeX Warning: Reference `fig:box' on page 14 undefined on input line 1063.
+
+
+LaTeX Warning: Reference `mmplot' on page 14 undefined on input line 1070.
+
+
+LaTeX Warning: Reference `fig:minmax' on page 14 undefined on input line 1079.
+
+
+LaTeX Warning: Reference `fig:minmax' on page 14 undefined on input line 1091.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 14 []
+ []
+
+[14]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+1105.
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+LaTeX Warning: Reference `fig:minmax' on page 15 undefined on input line 1116.
+
+
+Overfull \hbox (0.97229pt too wide) in paragraph at lines 1118--1119
+[]\T1/lmr/m/n/10.95 To com-plete the vi-su-al-iza-tion, it ac-tu-ally needs the
+ com-mand \T1/lmtt/m/n/10.95 ggInterval_minmax(facedata,
+ []
+
+
+LaTeX Warning: Reference `RCplot' on page 15 undefined on input line 1127.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 15
+ []
+
+[15]
+
+LaTeX Warning: Reference `fig:box' on page 16 undefined on input line 1145.
+
+
+LaTeX Warning: Reference `fig:box' on page 16 undefined on input line 1159.
+
+
+LaTeX Warning: Reference `fig:centerRange' on page 16 undefined on input line 1
+159.
+
+
+LaTeX Warning: Reference `fig:centerRange' on page 16 undefined on input line 1
+161.
+
+
+LaTeX Warning: Reference `fig:centerRange' on page 16 undefined on input line 1
+161.
+
+
+Package natbib Warning: Citation `cazes1997extension' on page 16 undefined on i
+nput line 1171.
+
+
+LaTeX Warning: Reference `plot-2d-i' on page 16 undefined on input line 1179.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 16 []
+ []
+
+[16]
+
+LaTeX Warning: Reference `hist-overlap-2d-i' on page 17 undefined on input line
+ 1230.
+
+
+LaTeX Warning: Reference `sec:hist2d' on page 17 undefined on input line 1243.
+
+
+Package natbib Warning: Citation `chen2002generalized' on page 17 undefined on 
+input line 1243.
+
+
+Package natbib Warning: Citation `chen2004matrix' on page 17 undefined on input
+ line 1243.
+
+
+LaTeX Warning: Reference `fig:2Dhist' on page 17 undefined on input line 1260.
+
+
+LaTeX Warning: Reference `fig:2DhistMatrix' on page 17 undefined on input line 
+1276.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 17
+ []
+
+[17]
+
+LaTeX Warning: Reference `pairs-i' on page 18 undefined on input line 1305.
+
+
+LaTeX Warning: Reference `fig:scaMatrix' on page 18 undefined on input line 131
+2.
+
+
+LaTeX Warning: Reference `fig:scaMatrix' on page 18 undefined on input line 132
+4.
+
+
+LaTeX Warning: Reference `radar-i' on page 18 undefined on input line 1333.
+
+
+Overfull \hbox (4.01477pt too wide) in paragraph at lines 1349--1350
+[]\T1/lmr/m/n/10.95 Except for the aes-thetic op-tions \T1/lmtt/m/n/10.95 layer
+Number\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 showLegend\T1/lmr/m/n/10.95 , \T1/
+lmtt/m/n/10.95 showXYLabs\T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 alpha\T1/lmr/m/
+n/10.95 , \T1/lmtt/m/n/10.95 base_circle\T1/lmr/m/n/10.95 ,
+ []
+
+
+LaTeX Warning: Reference `fig:radar_typical' on page 18 undefined on input line
+ 1351.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 18 []
+ []
+
+[18]
+
+LaTeX Warning: Reference `fig:radar_3obs' on page 19 undefined on input line 13
+75.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 19
+ []
+
+[19]
+
+LaTeX Warning: Reference `fig:radar' on page 20 undefined on input line 1404.
+
+
+LaTeX Warning: Reference `fig:quantile2' on page 20 undefined on input line 141
+3.
+
+
+LaTeX Warning: Reference `image-i' on page 20 undefined on input line 1427.
+
+
+LaTeX Warning: Reference `image-i' on page 20 undefined on input line 1441.
+
+
+LaTeX Warning: Reference `fig:image' on page 20 undefined on input line 1443.
+
+
+LaTeX Warning: Reference `fig:image_full' on page 20 undefined on input line 14
+43.
+
+
+LaTeX Warning: Reference `fig:indexImage' on page 20 undefined on input line 14
+43.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 20 []
+ []
+
+[20]
+
+LaTeX Warning: Reference `fig:indexImage' on page 21 undefined on input line 14
+84.
+
+
+LaTeX Warning: Reference `fig:indexImage_col' on page 21 undefined on input lin
+e 1487.
+
+
+LaTeX Warning: Reference `fig:indexImage_mat' on page 21 undefined on input lin
+e 1488.
+
+
+LaTeX Warning: Reference `image-h' on page 21 undefined on input line 1497.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 21
+ []
+
+[21]
+
+LaTeX Warning: Reference `viz_proj' on page 22 undefined on input line 1565.
+
+
+LaTeX Warning: Reference `viz_proj' on page 22 undefined on input line 1569.
+
+
+LaTeX Warning: Reference `viz_proj' on page 22 undefined on input line 1592.
+
+
+LaTeX Warning: Reference `viz_proj' on page 22 undefined on input line 1621.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 22 []
+ []
+
+[22]
+
+LaTeX Warning: Reference `polytope' on page 23 undefined on input line 1628.
+
+
+LaTeX Warning: Reference `polytope' on page 23 undefined on input line 1633.
+
+
+LaTeX Warning: Reference `polytope' on page 23 undefined on input line 1641.
+
+
+LaTeX Warning: Reference `polytope' on page 23 undefined on input line 1643.
+
+
+LaTeX Warning: Reference `pca-face' on page 23 undefined on input line 1644.
+
+
+Overfull \hbox (6.23323pt too wide) in paragraph at lines 1637--1650
+[]\T1/lmr/m/n/10.95 A more re-cent method, called the poly-tope rep-re-sen-ta-t
+ion, which is pro-posed by Le-Rademacher
+ []
+
+
+Package natbib Warning: Citation `cazes1997extension' on page 23 undefined on i
+nput line 1695.
+
+
+LaTeX Warning: Reference `fig:mcar' on page 23 undefined on input line 1705.
+
+
+Package natbib Warning: Citation `le2012symbolic' on page 23 undefined on input
+ line 1708.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 23
+ []
+
+[23]
+
+LaTeX Warning: Reference `fig:poly' on page 24 undefined on input line 1715.
+
+
+LaTeX Warning: Reference `fig:PCA' on page 24 undefined on input line 1715.
+
+
+Package natbib Warning: Citation `HistDAWass' on page 24 undefined on input lin
+e 1784.
+
+
+Package natbib Warning: Citation `MAINT.Data' on page 24 undefined on input lin
+e 1784.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 24 []
+ []
+
+[24]
+
+LaTeX Warning: Reference `sec:userDef' on page 25 undefined on input line 1801.
+
+
+
+LaTeX Font Warning: Font shape `T1/lmr/b/it' in size <12> not available
+(Font)              Font shape `T1/lmr/b/sl' tried instead on input line 1807.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 25
+ []
+
+[25]
+
+LaTeX Warning: Reference `sec:genPrin' on page 26 undefined on input line 1875.
+
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 26 []
+ []
+
+[26]
+
+Package natbib Warning: Citation `dplyr' on page 27 undefined on input line 193
+4.
+
+
+LaTeX Warning: Reference `fig:compare' on page 27 undefined on input line 1951.
+
+
+
+LaTeX Warning: Reference `fig:compare' on page 27 undefined on input line 1953.
+
+
+
+Package natbib Warning: Citation `macqueen:1967' on page 27 undefined on input 
+line 1955.
+
+
+Package natbib Warning: Citation `Cecil:1966' on page 27 undefined on input lin
+e 1964.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 27
+ []
+
+[27]
+
+LaTeX Warning: Reference `tab:classic2sym' on page 28 undefined on input line 2
+018.
+
+
+Overfull \hbox (69.79193pt too wide) in paragraph at lines 2025--2033
+ [][] 
+ []
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 28 []
+ []
+
+[28]
+
+Package natbib Warning: Citation `wilkinson2012grammar' on page 29 undefined on
+ input line 2049.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 29
+ []
+
+[29]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 30 []
+ []
+
+[30]
+No file ggESDA_Jiang&Wu.bbl.
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 31
+ []
+
+[31]
+File: pic/TrendFig.pdf Graphic file (type pdf)
+<use pic/TrendFig.pdf>
+File: pic/subjectFig.pdf Graphic file (type pdf)
+<use pic/subjectFig.pdf>
+File: pic/packageStructure2.pdf Graphic file (type pdf)
+<use pic/packageStructure2.pdf>
+File: pic/compare.pdf Graphic file (type pdf)
+<use pic/compare.pdf>
+File: pic/face.pdf Graphic file (type pdf)
+<use pic/face.pdf>
+File: pic/mmplot.pdf Graphic file (type pdf)
+<use pic/mmplot.pdf>
+
+
+LaTeX Warning: Float too large for page by 28.76295pt on input line 2295.
+
+File: pic/index_bar.pdf Graphic file (type pdf)
+<use pic/index_bar.pdf>
+File: pic/index.pdf Graphic file (type pdf)
+<use pic/index.pdf>
+File: pic/index_image1.pdf Graphic file (type pdf)
+<use pic/index_image1.pdf>
+File: pic/index_image2.pdf Graphic file (type pdf)
+<use pic/index_image2.pdf>
+
+Overfull \hbox (24.00003pt too wide) in paragraph at lines 2305--2315
+ [][] 
+ []
+
+File: pic/indexImage_2case.pdf Graphic file (type pdf)
+<use pic/indexImage_2case.pdf>
+File: pic/box_centerRange_before.pdf Graphic file (type pdf)
+<use pic/box_centerRange_before.pdf>
+File: pic/box_centerRange_after.pdf Graphic file (type pdf)
+<use pic/box_centerRange_after.pdf>
+File: pic/hist_equal.pdf Graphic file (type pdf)
+<use pic/hist_equal.pdf>
+File: pic/hist_unequal.pdf Graphic file (type pdf)
+<use pic/hist_unequal.pdf>
+
+Overfull \hbox (24.00003pt too wide) in paragraph at lines 2358--2363
+ [][] 
+ []
+
+File: pic/scaMatrix.pdf Graphic file (type pdf)
+<use pic/scaMatrix.pdf>
+File: pic/PCA_MCAR.pdf Graphic file (type pdf)
+<use pic/PCA_MCAR.pdf>
+File: pic/PCA_Polytope.pdf Graphic file (type pdf)
+<use pic/PCA_Polytope.pdf>
+
+Overfull \hbox (24.00003pt too wide) in paragraph at lines 2384--2390
+ [] 
+ []
+
+File: pic/2Dhist.pdf Graphic file (type pdf)
+<use pic/2Dhist.pdf>
+File: pic/2DhistMatrix.pdf Graphic file (type pdf)
+<use pic/2DhistMatrix.pdf>
+File: pic/radar_typical.pdf Graphic file (type pdf)
+<use pic/radar_typical.pdf>
+File: pic/radar_3obs.pdf Graphic file (type pdf)
+<use pic/radar_3obs.pdf>
+File: pic/radar.pdf Graphic file (type pdf)
+<use pic/radar.pdf>
+File: pic/radar_2datasets.pdf Graphic file (type pdf)
+<use pic/radar_2datasets.pdf>
+
+Package natbib Warning: There were undefined citations.
+
+LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
+(Font)              Font shape `T1/pzc/m/it' tried instead on input line 2463.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 32 []
+ []
+
+[32
+
+]
+
+LaTeX Warning: Text page 33 contains only floats.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 33
+ []
+
+[33]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 34 []
+ []
+
+[34]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 35
+ []
+
+[35]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 36 []
+ []
+
+[36]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 37
+ []
+
+[37]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 38 []
+ []
+
+[38]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 39
+ []
+
+[39]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 40 []
+ []
+
+[40]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 41
+ []
+
+[41]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 42 []
+ []
+
+[42]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/lmr/m/n/10.95 43
+ []
+
+[43]
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 44 []
+ []
+
+[44] (ggESDA_Jiang&Wu.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `ggESDA_Jiang&Wu.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ggESDA_Jiang&Wu.out':
+(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
+(rerunfilecheck)             After:  E10243FECBB355E4DF96147909E9E97B;10931.
+ ) 
+Here is how much of TeX's memory you used:
+ 22177 strings out of 411335
+ 395840 string characters out of 2832919
+ 689082 words of memory out of 3000000
+ 42108 multiletter control sequences out of 15000+600000
+ 533654 words of font info for 109 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 99i,28n,97p,879b,831s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on ggESDA_Jiang&Wu.pdf (44 pages).
