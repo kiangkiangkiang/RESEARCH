@@ -987,6 +987,7 @@ We are committed to maintaining and developing the \pkg{ggESDA} package in the f
 
 
 
+<<<<<<< HEAD
 
 \begin{table}[htbp]
 \centering
@@ -1014,6 +1015,8 @@ We are committed to maintaining and developing the \pkg{ggESDA} package in the f
 
 
 
+=======
+>>>>>>> 898d21a39c4cfdfcf9ad04236fabc09f5f5b326e
 \bibliography{refs}
 
 \end{document}
