@@ -987,6 +987,36 @@ We are committed to maintaining and developing the \pkg{ggESDA} package in the f
 
 
 
+<<<<<<< HEAD
+
+\begin{table}[htbp]
+\centering
+\caption{Fields of the built-in datasets of \pkg{ggESDA}}
+\setlength{\extrarowheight}{6pt}
+\resizebox{\textwidth}{!}{
+  \begin{tabular}{ll}
+  \toprule
+  \multicolumn{2}{c}{Built-In interval-valued data set} \\
+  \hline
+  Data  & Reference: methods \\
+  \hline
+  facedata & \cite{douzal:2011}; \cite{le:2012}: iPCA \\
+  oils  & \cite{lauro2000principal}; \cite{lauro2008principal}: iPCA \\
+  mushroom & \cite{neto2011bivariate}; \cite{domingues2010robust}: iRegression \\
+  Cardiological (blood pressure) & \cite{billard2000regression}; \cite{xu2010symbolic}: iRegression \\
+  AbaloneIdt & \cite{malerba2001comparing}: Dissimilarity measure \\
+  Environment & \cite{umbleja:2020}: EDA \\
+  \bottomrule
+  \end{tabular}%
+}
+\label{tab:built-in}%
+\end{table}%
+
+
+
+
+=======
+>>>>>>> 898d21a39c4cfdfcf9ad04236fabc09f5f5b326e
 \bibliography{refs}
 
 \end{document}
