@@ -1,0 +1,229 @@
+\begin{thebibliography}{33}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Bertrand and Goupil(2000)}]{bertrand:2000}
+Bertrand P, Goupil F (2000).
+\newblock \enquote{Descriptive statistics for symbolic data.}
+\newblock In \emph{Analysis of symbolic data}, pp. 106--124. Springer.
+
+\bibitem[{Billard(2007)}]{billard:2007}
+Billard L (2007).
+\newblock \enquote{Dependencies and variation components of symbolic
+  interval-valued data.}
+\newblock In \emph{Selected contributions in data analysis and classification},
+  pp. 3--12. Springer.
+
+\bibitem[{Billard(2008)}]{billard:2008}
+Billard L (2008).
+\newblock \enquote{Sample covariance functions for complex quantitative data.}
+\newblock In \emph{Proceedings of World IASC Conference, Yokohama, Japan}, pp.
+  157--163.
+
+\bibitem[{Billard and Diday(2000)}]{billard2000regression}
+Billard L, Diday E (2000).
+\newblock \enquote{Regression analysis for interval-valued data.}
+\newblock In \emph{Data Analysis, Classification, and Related Methods}, pp.
+  369--374. Springer.
+
+\bibitem[{Billard and Diday(2003)}]{billard:2003}
+Billard L, Diday E (2003).
+\newblock \enquote{From the statistics of data to the statistics of knowledge:
+  symbolic data analysis.}
+\newblock \emph{Journal of the American Statistical Association},
+  \textbf{98}(462), 470--487.
+
+\bibitem[{Billard and Diday(2007)}]{Billard+Diday:2007}
+Billard L, Diday E (2007).
+\newblock \emph{Symbolic Data Analysis: Conceptual Statistics and Data Mining}.
+\newblock Wiley, New Jersey.
+
+\bibitem[{Cazes \emph{et~al.}(1997)Cazes, Chouakria, Diday, and
+  Schektman}]{cazes1997extension}
+Cazes P, Chouakria A, Diday E, Schektman Y (1997).
+\newblock \enquote{Extension de l'analyse en composantes principales {\`a} des
+  donn{\'e}es de type intervalle.}
+\newblock \emph{Revue de Statistique appliqu{\'e}e}, \textbf{45}(3), 5--24.
+
+\bibitem[{Cecil C.~Bridges(1966)}]{Cecil:1966}
+Cecil C~Bridges J (1966).
+\newblock \enquote{Hierarchical Cluster Analysis.}
+\newblock \emph{Psychological Reports}, \textbf{18}(3), 851--854.
+\newblock \doi{10.2466/pr0.1966.18.3.851}.
+\newblock \urlprefix\url{https://doi.org/10.2466/pr0.1966.18.3.851}.
+
+\bibitem[{Chang(2021)}]{R6}
+Chang W (2021).
+\newblock \emph{R6: Encapsulated Classes with Reference Semantics}.
+\newblock R package version 2.5.1,
+  \urlprefix\url{https://CRAN.R-project.org/package=R6}.
+
+\bibitem[{Chen(2002)}]{chen2002generalized}
+Chen CH (2002).
+\newblock \enquote{Generalized association plots: Information visualization via
+  iteratively generated correlation matrices.}
+\newblock \emph{Statistica Sinica}, pp. 7--29.
+
+\bibitem[{Chen \emph{et~al.}(2004)Chen, Hwu, Jang, Kao, Tien, Tzeng, and
+  Wu}]{chen2004matrix}
+Chen CH, Hwu HG, Jang WJ, Kao CH, Tien YJ, Tzeng S, Wu HM (2004).
+\newblock \enquote{Matrix visualization and information mining.}
+\newblock In \emph{COMPSTAT 2004—Proceedings in Computational Statistics},
+  pp. 85--100. Springer.
+
+\bibitem[{Diday and Noirhomme-Fraiture(2008)}]{diday:2008}
+Diday E, Noirhomme-Fraiture M (2008).
+\newblock \emph{Symbolic data analysis and the SODAS software}.
+\newblock John Wiley \& Sons.
+
+\bibitem[{Domingues \emph{et~al.}(2010)Domingues, de~Souza, and
+  Cysneiros}]{domingues2010robust}
+Domingues MA, de~Souza RM, Cysneiros FJA (2010).
+\newblock \enquote{A robust method for linear regression of symbolic interval
+  data.}
+\newblock \emph{Pattern Recognition Letters}, \textbf{31}(13), 1991--1996.
+
+\bibitem[{Douzal-Chouakria \emph{et~al.}(2011)Douzal-Chouakria, Billard, and
+  Diday}]{douzal:2011}
+Douzal-Chouakria A, Billard L, Diday E (2011).
+\newblock \enquote{Principal component analysis for interval-valued
+  observations.}
+\newblock \emph{Statistical Analysis and Data Mining: The ASA Data Science
+  Journal}, \textbf{4}(2), 229--246.
+
+\bibitem[{Irpino(2021)}]{HistDAWass}
+Irpino A (2021).
+\newblock \emph{HistDAWass: Histogram-Valued Data Analysis}.
+\newblock R package version 1.0.6,
+  \urlprefix\url{https://CRAN.R-project.org/package=HistDAWass}.
+
+\bibitem[{Lauro and Palumbo(2000)}]{lauro2000principal}
+Lauro CN, Palumbo F (2000).
+\newblock \enquote{Principal component analysis of interval data: a symbolic
+  data analysis approach.}
+\newblock \emph{Computational statistics}, \textbf{15}(1), 73--87.
+
+\bibitem[{Lauro \emph{et~al.}(2008)Lauro, Verde, and
+  Irpino}]{lauro2008principal}
+Lauro NC, Verde R, Irpino A (2008).
+\newblock \enquote{Principal component analysis of symbolic data described by
+  intervals.}
+\newblock \emph{Symbolic Data Analysis and the SODAS Software, ed. E. Diday and
+  M. Noirhomme-Fraiture}, pp. 279--312.
+
+\bibitem[{Le-Rademacher and Billard(2012{\natexlab{a}})}]{le:2012}
+Le-Rademacher J, Billard L (2012{\natexlab{a}}).
+\newblock \enquote{Symbolic covariance principal component analysis and
+  visualization for interval-valued data.}
+\newblock \emph{Journal of Computational and Graphical Statistics},
+  \textbf{21}(2), 413--432.
+
+\bibitem[{Le-Rademacher and Billard(2012{\natexlab{b}})}]{le2012symbolic}
+Le-Rademacher J, Billard L (2012{\natexlab{b}}).
+\newblock \enquote{Symbolic covariance principal component analysis and
+  visualization for interval-valued data.}
+\newblock \emph{Journal of Computational and Graphical Statistics},
+  \textbf{21}(2), 413--432.
+
+\bibitem[{Leroy \emph{et~al.}(1996)Leroy, Chouakria, Herlin, and
+  Diday}]{leroy:1996}
+Leroy B, Chouakria A, Herlin I, Diday E (1996).
+\newblock \enquote{Approche g{\'e}om{\'e}trique et classification pour la
+  reconnaissance de visage.}
+\newblock In \emph{Congr{\`e}s de Reconnaissance des Formes et Intelligence
+  Artificielle}, pp. 548--557.
+
+\bibitem[{MacQueen \emph{et~al.}(1967)}]{macqueen:1967}
+MacQueen J, \emph{et~al.} (1967).
+\newblock \enquote{Some methods for classification and analysis of multivariate
+  observations.}
+\newblock In \emph{Proceedings of the fifth Berkeley symposium on mathematical
+  statistics and probability}, volume~1, pp. 281--297. Oakland, CA, USA.
+
+\bibitem[{Malerba \emph{et~al.}(2001)Malerba, Esposito, Gioviale, and
+  Tamma}]{malerba2001comparing}
+Malerba D, Esposito F, Gioviale V, Tamma V (2001).
+\newblock \enquote{Comparing dissimilarity measures for symbolic data
+  analysis.}
+\newblock \emph{Proceedings of Exchange of Technology and Know-how and New
+  Techniques and Technologies for Statistics}, \textbf{1}, 473--481.
+
+\bibitem[{Neto \emph{et~al.}(2011)Neto, Cordeiro, and
+  de~Carvalho}]{neto2011bivariate}
+Neto EdAL, Cordeiro GM, de~Carvalho FdA (2011).
+\newblock \enquote{Bivariate symbolic regression models for interval-valued
+  variables.}
+\newblock \emph{Journal of Statistical Computation and Simulation},
+  \textbf{81}(11), 1727--1744.
+
+\bibitem[{Rodriguez(2021)}]{RSDA}
+Rodriguez O (2021).
+\newblock \emph{RSDA: R to Symbolic Data Analysis}.
+\newblock R package version 3.0.9,
+  \urlprefix\url{https://CRAN.R-project.org/package=RSDA}.
+
+\bibitem[{Sherwani \emph{et~al.}(2021)Sherwani, Shakeel, Saleem, Awan, Aslam,
+  and Farooq}]{sherwani:2021}
+Sherwani RAK, Shakeel H, Saleem M, Awan WB, Aslam M, Farooq M (2021).
+\newblock \enquote{A new neutrosophic sign test: An application to COVID-19
+  data.}
+\newblock \emph{Plos one}, \textbf{16}(8), e0255671.
+
+\bibitem[{Silva and Brito(2021)}]{MAINT.Data}
+Silva PD, Brito P (2021).
+\newblock \emph{MAINT.Data: Model and Analyse Interval Data}.
+\newblock R package version 2.6.1,
+  \urlprefix\url{https://CRAN.R-project.org/package=MAINT.Data}.
+
+\bibitem[{Umbleja \emph{et~al.}(2020)Umbleja, Ichino, and
+  Yaguchi}]{umbleja:2020}
+Umbleja K, Ichino M, Yaguchi H (2020).
+\newblock \enquote{Improving symbolic data visualization for pattern
+  recognition and knowledge discovery.}
+\newblock \emph{Visual Informatics}, \textbf{4}(1), 23--31.
+
+\bibitem[{Wickham(2016)}]{ggplot2}
+Wickham H (2016).
+\newblock \emph{ggplot2: Elegant Graphics for Data Analysis}.
+\newblock Springer-Verlag New York.
+\newblock ISBN 978-3-319-24277-4.
+\newblock \urlprefix\url{https://ggplot2.tidyverse.org}.
+
+\bibitem[{Wickham \emph{et~al.}(2021)Wickham, Francois, Henry, and
+  Muller}]{dplyr}
+Wickham H, Francois R, Henry L, Muller K (2021).
+\newblock \emph{dplyr: A Grammar of Data Manipulation}.
+\newblock R package version 1.0.7,
+  \urlprefix\url{https://CRAN.R-project.org/package=dplyr}.
+
+\bibitem[{Wilkinson(2012)}]{wilkinson2012grammar}
+Wilkinson L (2012).
+\newblock \enquote{The grammar of graphics.}
+\newblock In \emph{Handbook of computational statistics}, pp. 375--414.
+  Springer.
+
+\bibitem[{Xu and Qin(2021)}]{xu:2021}
+Xu M, Qin Z (2021).
+\newblock \enquote{A bivariate Bayesian method for interval-valued regression
+  models.}
+\newblock \emph{Knowledge-Based Systems}, p. 107396.
+
+\bibitem[{Xu(2010)}]{xu2010symbolic}
+Xu W (2010).
+\newblock \emph{Symbolic data analysis: interval-valued data regression}.
+\newblock Ph.D. thesis, University of Georgia Athens, GA.
+
+\bibitem[{Yang \emph{et~al.}(2019)Yang, Lin, and Zhang}]{yang:2019}
+Yang Z, Lin DK, Zhang A (2019).
+\newblock \enquote{Interval-valued data prediction via regularized artificial
+  neural network.}
+\newblock \emph{Neurocomputing}, \textbf{331}, 336--345.
+
+\end{thebibliography}
