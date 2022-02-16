@@ -2247,6 +2247,29 @@ sophisticated analyses. It should have an important place."
 %of variables or large in both
 
 
+\paragraph{why ggInterval}
+In order to implement the \code{symbolic_tbl} class data and the \code{symbolic_interval} class variables in \pkg{ggplot2}. It encounters some difficult issues to overcome. Specifically, \pkg{ggplot2} makes no consideration on what is required for a complex data to remain valid. We attempt to demonstrate this by using the facedata with the interval-valued variables input as following:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> ggplot(facedata, aes(x = AD))
+\end{CodeInput}
+\begin{CodeOutput}
+Error: `vec_math.symbolic_interval()` not implemented.
+\end{CodeOutput}
+\end{CodeChunk}
+
+To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> # (1) Difficult to implement the symbolic_interval class
+R> ggplot(facedata) + geom_I(aes(x = AD))
+R> # (2) Easy to implement the symbolic_interval class
+R> ggInterval_foo(facedata, aes(x = AD))
+\end{CodeInput}
+\end{CodeChunk}
+
+Furthermore, unlike \pkg{ggplot} with a certain format for the data, the SDA packages in R have been full of the data form itself. There is no standard to stipulate this at all. So, the latter programming syntax may be better to generalize the data to the complex form and benefit to the future maintenance and extension.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2745,3 +2768,32 @@ measures in the data and to gain an insight on the trends, patterns,
 and relationships among various entities present in the data set with
 the help of statistics and visualization tools is called Exploratory
 Data Analysis (EDA).
+
+
+%%%% ggplot() + geom_I()...  vs  ggInterval() + ...
+% 格式1 ggplot() + geom_I() + stat_I()...
+% 格式2 ggInterval_*() + geom() + stat()...
+
+1. 格式2語法 : 大致上與ggplot雷同，ggplot有的我都有，但增加更多參數設定，如同一般的geom_()... 一樣，會有本身的data, aes, 也有其他跟geom_()本身相關的參數，因此語法可以完全跟ggplot熟悉的方式一樣，不須另外再熟悉新的程式寫法
+
+2. 為甚麼要用格式2 : 主要因為data已經不是傳統資料，而是更複雜型態的資料，雖然資料本身繼承data.frame(class(facedata) 有data.frame的物件類別存在)可以使用ggplot(data = facedata)，但因為區間變數形式複雜，因而無法直接指派參數(如ggplot(facedata, aes(x = AD, y = BC)) 這樣直接指派x,y會有ERROR)，所以若要以完全和ggplot相同語法寫的話，勢必在底圖(ggplot())就要做修改(前處理資料)，因此透過新的函式ggInterval來做，如此便可兼容區間變數(ggInterval_*(facedata, aes(x = AD, y = BC)成立)。**geom_I()好像也不能讓aes去兼容這樣型態的資料**
+2.QA
+Q: 那是不是每個圖都要記一個新的函數名字。A: 就算用geom_I()...，例如geom_Ihist()還是一樣每個不同的圖形要記自己的函數名字，如geom_errorbar(index plot)，geom_histogram(hist)，geom_rect(scatter)等等。
+Q: 那這樣和傳統圖形的寫法不是一樣嗎? A: 如1.所說，語法和ggplot2本身還是一樣，但會有添加那個圖形本身需要的參數，這樣的寫法跟geom_()一樣，geom也是除了data,aes還是會有自己需要的參數，如geom_histogram(..., position = "identity")，所以語法跟ggplot2一樣，而圖形本身是屬於ggplot2物件，因此可以疊加其他圖形，如geom_point，如stat(...)(centerRange有實作)，或是可以添加額外的extension，如大部分的圖都有添加ggthemes內的theme。
+
+3. 格式1 VS 格式2 : 我覺得沒有誰優誰劣，兩者都有好有壞，只是想法不同程式邏輯架構不同而已，但如果用格式1的寫法的話，便會把aes相關的參數寫入自己的geom內，如
+ggplot(facedata) + geom_Ihist(aes(x = AD))，因為ggplot本身無法generalize到區間變數上，因此區間變數處理的部分一定要是自己寫的函數來前處理。
+3.Q: 市面上有哪些跟我一樣用格式2的方式的package呢? A: ggraph, ggpubr, ggdag, ggpage, ggradar, ggtern, ggTimeSeries...， 大部分只要動到整體圖形結構的通常都用格式2比較多，例如ggpage, ggradar, ggraph等等，其實上述整個圖形結構都相對複雜，不在僅僅只是傳統圖形那樣單純，而大部分只是在原本圖形上面添加新的圖層的都會用格式1比較多。
+
+4. 格式2的優點呢 : 因為不再受限於ggplot()本身函數，因此對於data掌控度更高，例如不僅僅是RSDA型態的物件資料能夠吃，傳統資料對於其實ggInterval_()也是可以吃的(他會有自動判別 防呆 預處理的過程)，如ggInterval_index(data = iris)是可行的，也因為這個優點，未來更可以改進能夠吃更多其他的物件型態，如symbolicDA物件等等，尤其現在R的symbolic data格式並不統一，1個套件可能就有1種自己顯示的格式，那如果都用ggplot()這種已經被統一化通用的格式來寫，可能也不太方便
+
+總結 : 
+以概念上來說，格式1的概念偏向沿用原始資料，而進一步去添加圖層，格式2的概念偏向直接新增一個圖形，當然也可以新增其他圖層，而對於這兩者來說，其實都是常見的ggplot2 extension，但通常複雜圖形，整體結構和傳統圖形不太一樣的，會偏向用格式2居多，因為這樣方便從"data"或"aes"本身就做前處理，或是做更general的相容，好讓隨後圖層內的aes參數也不受限於data本身，而是可以吃更多前處理完的變數，讓圖形能夠更複雜化，完成原本ggplot2設計上未考量的事情(如ggtern的多維三角圖)，簡而言之就是畫的圖形不是完全從data所來，而是data會經由一系列處理後得到一個新的data，而這個新的data才是要被畫的圖，然而這一系列的處理可能相對複雜，且處理完的資料ggplot也不一定能包容，因此允許使用者輸入一個還沒被處理過，但是是比較廣泛，常見的資料格式。而這些常見的資料格式可能因為複雜的關係可能不是屬於data.frame，因而無法受到ggplot接受，因此透過新的自創函式(如ggInterval)便可接受各式各樣比較複雜型態的資料。
+
+
+"Specifically, ggplot2 makes no consideration on what is required for a particular geometry to remain valid within a potentially higher-dimensional coordinate system"
+
+
+
+
+
