@@ -172,7 +172,7 @@ the symbolic data analysis (see Table \ref{tab:sda_packages}). The
 contexts include the formal statistical modeling and inference.
 However, little work has been conducted on the exploratory analysis
 and visualization. This motivates us to develop an \proglang{R}
-package, namely \pkg{ggSEDA}, aiming at exploring symbolic data
+package, namely \pkg{ggESDA}, aiming at exploring symbolic data
 graphically. \pkg{ggESDA} is composed of the features to deal with the
 interval-valued data, statistics data frame, clustering results, and
 other components from \pkg{R6} \cite{R6} class. The graphical
@@ -235,7 +235,7 @@ the relationship between variables.
 Exploratory data analysis is cross-classified in two different ways
 where each method is either graphical or non-graphical. And then, each
 method is either univariate, bivariate or multivariate. \pkg{ggESDA}
-uses a high-level graphic system by \pkg{ggplot2} to solve the problem
+uses a high-level graphic system by \pkg{ggplot2} \cite{ggplot2} to solve the problem
 mentioned above and provides a variety of EDA methods in all kinds of
 the variate.
 
@@ -255,23 +255,31 @@ implemented in \proglang{R} using \pkg{ggplot2}.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Main Features
 \begin{table}[t!]
 \centering{\scriptsize
-\begin{tabular}{|l|c|l|l|l|} \hline
-Package & Symbolic & Main Features & Plots &  Reference \\
-        & Object$^*$   &               &       &           \\
+\begin{tabular}{|l|c|l|l|l|l} \hline
+Package & Symbolic & Description & Plots &  Reference & Data Analysis Functionality \\
+        & Object$^*$   &               &       &      &     \\
  \hline 
-\pkg{RSDA}  & I & & scatterplot, histogram & Rojas {\it et al.} (2015)\\
-\pkg{symbolicDA} & I & & & Dudek {\it et al.} (2013) \\
-\pkg{HistDAWass} & H& & & Irpino (2015) \\
-\pkg{MAINT.Data} & & & & Silva \&  Brito (2011) \\
-\pkg{iRegression} & & & & Neto {\it et al.} (2011)  \\
-\pkg{intReg} & & & & Toomet (2012)  \\
-\pkg{ISDA.R} & & & & Filho \&  Fagundes (2012) \\
-\pkg{GPCSIV} & & & & Brahim (2013) \\
-\pkg{GraphPCA} & & & & Brahim \& Kallyth (2014) \\
-\pkg{ggESDA} & & & & Jiang (2021) \\ \hline
+\pkg{RSDA}  & I & R to Symbolic Data Analysis
+ & scatterplot, radar& Rojas {\it et al.} (2015) & GLM, Kmeans, Regression, PCA, KNN, Neural Networks, FA(factor analysis), RF, SVM, GBM\\
+\pkg{symbolicDA} & I & Analysis of Symbolic Data
+ & radar & Dudek {\it et al.} (2013)& Dynamical clustering, Decision Tree, HINoV,  pseudo F-statistic, Kernel, Discriminant analysis, Kohonen's self-organizing maps, PCA, RF \\
+\pkg{HistDAWass} & H & Histogram-Valued Data Analysis & histogram, box, index& Irpino (2015) & Ramer-Douglas-Peucke, Moving average smoothing, KNN, Kurthosis, Quantile-Quantile correlation, Skewness, PCA, Multiple regression, K-means, Fuzzy c-means, Hierarchical clustering\\
+\pkg{MAINT.Data} & I & Model and Analyse Interval Data
+ & - & Silva \&  Brito (2011)&  LRT, Discriminant Analysis, MANOVA, Mixture model estimation, MLE \\
+\pkg{iRegression} & I & Regression Methods for Interval-Valued Variables
+ & - & Neto {\it et al.} (2011) & Regression, Bivariate regression \\
+\pkg{intReg} & I & Interval Regression
+ & - & Toomet (2012)  & Regression\\
+\pkg{ISDA.R} & I & interval symbolic data analysis for R
+ & histogram & Filho \&  Fagundes (2012) & Regression\\
+\pkg{GPCSIV} & H & Generalized Principal Component of Symbolic Interval variables
+ & - & Brahim (2013) & PCA\\
+\pkg{GraphPCA} & H & Graphical Tools of Histogram PCA
+ & - & Brahim \& Kallyth (2014) & PCA\\
+\pkg{ggESDA} & I & Exploratory Symbolic Data Analysis with 'ggplot2' & index, scatter, radar, etc. & Jiang (2022) & PCA \\ \hline
 \multicolumn{5}{l}{\footnotesize{$^*$I for the interval-valued objects, H for the histogram-valued objects.}}
 \end{tabular}}%
 \caption{\label{tab:sda_packages} The main features and the 
@@ -344,9 +352,8 @@ interval-valued quantile data table.
 \centering
 \begin{tabular}{|l|l|} \hline
             & Statistics    \\ \hline
-Univariate  & internal mean, grand mean, range, median, mode, sd, variance, quantile  \\ \hline
+Univariate  & internal mean, grand mean, range, sd, variance, quantile  \\ \hline
 Bivariate & covariance, correlation ($r, \rho, \tau$)\\ \hline
-Multivariate & \\ \hline
 \end{tabular}
 \caption{\label{tab:stat} The implemented summary statistics.}
 \end{table}
@@ -368,7 +375,7 @@ graphics to display symbolic data accurately and clearly.
 A good picture is worth a 1,000 words. The typical graphical
 techniques of EDA include the index plot, barplot, boxplot, and
 histogram for univariate data; the 2D scatterplot, joint histogram and
-double boxplot for bivariate data; and the satterplot matrix, and star
+double boxplot for bivariate data; and the scatterplot matrix, and star
 plot for multivariate data. Of course, there are many other variants
 of graphical techniques have been proposed. Our aim in this study is
 to implement the good statistical graphics to display symbolic data
@@ -397,8 +404,8 @@ ggplot(data, aes(...)) + geom() + ... + stat() + ...
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggplot2)
-R> ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) +
-         geom_point(size=3)
+R> ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+         geom_point(size = 3)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -411,25 +418,33 @@ generalized \pkg{ggESDA} to other prominent SDA packages in
 \proglang{R}.
 
 General \pkg{ggESDA} syntax
+
 \begin{verbatim}
-ggInterval(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
+ggInterval_*(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
 \end{verbatim}
-or
-\begin{verbatim}
-ggplot(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
-\end{verbatim}
+
+\begin{footnotesize}
+$^*$ The graphical types are shown in Table \ref{tab:graphics}.
+\end{footnotesize}
+
+
+%can delete : cannot use
+%or
+%\begin{verbatim}
+%ggplot(data = intervaldata, mapping = aes(...)) + geom_I() + ... + stat_I() + ...
+%\end{verbatim}
 
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggESDA)
-R> ggInterval(data = facedata, aes(x = AD, y = BC, color = IND)) +
+R> ggInterval_index(data = facedata, aes(x = AD, fill = IND)) +
          geom_point()
-#or
-R> ggplot(data = facedata, aes(x = AD, y = BC, color = IND)) +
-         geom_I_point()
 \end{CodeInput}
 \end{CodeChunk}
- 
+%can delete
+% #or
+%R> ggplot(data = facedata, aes(x = AD, y = BC, color = IND)) +
+%         geom_I_point()
 
 Table \ref{tab:stat} lists the implemented summary statistics.
 The implemented graphics are given in Table \ref{tab:graphics}.
@@ -447,7 +462,7 @@ advantage is that a large dataset can be summarized into a more
 manageable size, the interval-valued symbolic data still retaining as
 much knowledge inherent to the entire dataset as possible. The
 aggregation of an object with data.frame class into an object of the
-IntervalData class is by the function \fct{ToIntervalData}.
+IntervalData class is by the function \fct{classic2sym()}.
 
 The \pkg{ggESDA}
 aims to convert the traditional data into the \pkg{ggESDA} object and
@@ -471,9 +486,9 @@ essential process in SDA. See Section \ref{sec:aggregation} for details.
 \centering
 \begin{tabular}{|l|l|} \hline
 Variate          & Graphics    \\ \hline
-Univariate  & index plot, histogram, piechart,  \\ \hline
-Bivariate & scatterplot, \\ \hline
-Multivariate & \\ \hline
+Univariate  & index plot, histogram, box plot, min-max plot, center-range plot \\ \hline
+Bivariate & scatterplot, 2D-histogram \\ \hline
+Multivariate & radar, scatterplot matrix, 2D-histogram matrix, image\\ \hline
 \end{tabular}
 \caption{\label{tab:graphics} The implemented graphics.}
 \end{table}
@@ -487,10 +502,8 @@ Multivariate & \\ \hline
 In the following, we used the face recognition
 data to illustrate some graphing functions we have implemented so far.
 
-The face recognition data is widely used in the SDA literature (Leroy
-et al., 1996; Douzal-Chouakria, Billard and Diday, 2011; Le-Rademacher
-and Billard, 2012). The dataset gives six face measurements of nine
-men (Figure \ref{face}), each with three observations, resulting in a
+The face recognition data is widely used in the SDA literature (\cite{leroy:1996}; \cite{douzal:2011}; \cite{le:2012}). The dataset gives six face measurements of nine
+men (Figure \ref{fig:face}), each with three observations, resulting in a
 total 27 observations (Table \ref{facedata}). The measurements for
 each observation came from a sequence of over 1,000 images. They cover
 a range of values, hence interval-valued variables.
@@ -499,35 +512,16 @@ a range of values, hence interval-valued variables.
 \begin{CodeChunk}
 \begin{CodeInput}
 R> library(ggESDA)
-R> data(face)
-R> face
+R> data(facedata)
+R> facedata
 \end{CodeInput}
 \begin{CodeOutput}
-$x
-, , min
-
-         AD    BC     AH     DH    EH    GH
-FRA1 155.00 58.00 100.45 105.00 61.40 64.20
-FRA2 154.00 57.00 101.98 104.35 60.88 62.94
-FRA3 154.01 57.00  99.36 101.04 60.95 60.42
-HUS1 168.86 58.55 102.83 122.38 56.73 60.44
+                 AD              BC                AH
+         <symblc_n>      <symblc_n>        <symblc_n>
+1 [155.00 : 157.00] [58.00 : 61.01] [100.45 : 103.28]
+2 [154.00 : 160.01] [57.00 : 64.00] [101.98 : 105.55]
+3 [154.01 : 161.00] [57.00 : 63.00]  [99.36 : 105.65]
 ...
-, , max
-
-         AD    BC     AH     DH    EH    GH
-FRA1 157.00 61.01 103.28 107.30 65.73 67.80
-FRA2 160.01 64.00 105.55 107.30 63.03 66.47
-FRA3 161.00 63.00 105.65 109.04 65.60 66.40
-HUS1 172.84 63.39 106.53 124.52 61.07 64.54
-...
-$y
-FRA1 FRA2 FRA3 HUS1 HUS2 HUS3 INC1 INC2 INC3 ISA1 ISA2 ISA3 JPL1 JPL2 JPL3 KHA1 
-   1    1    1    2    2    2    3    3    3    4    4    4    5    5    5    6 
-KHA2 KHA3 LOT1 LOT2 LOT3 PHI1 PHI2 PHI3 ROM1 ROM2 ROM3 
-   6    6    7    7    7    8    8    8    9    9    9 
-
-attr(,"class")
-[1] "IntervalData"
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -544,11 +538,16 @@ The other is the Environment questionnaire data (from the SODAS software package
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[t!]
 \centering {\scriptsize
-\begin{tabular}{cccccc}\hline
-Data & Reference & Usage \\ \hline
-face &     A and B (2002)      & IPCA \\  
-     &     C, D, and E         & ... \\
-mushroom &       & PCA \\ \hline
+\begin{tabular}{lll}\hline
+  Data  & Reference& Usage \\
+  \hline
+  facedata & \cite{douzal:2011}; \cite{le:2012}& iPCA \\
+  oils  & \cite{lauro2000principal}; \cite{lauro2008principal}& iPCA \\
+  mushroom & \cite{neto2011bivariate}; \cite{domingues2010robust}& iRegression \\
+  Cardiological (blood pressure) & \cite{billard2000regression}; \cite{xu2010symbolic}& iRegression \\
+  AbaloneIdt & \cite{malerba2001comparing}& Dissimilarity measure \\
+  Environment & \cite{umbleja:2020}& EDA \\
+   \hline
 \end{tabular}}
 \caption{\label{tab:classic2sym} Summaries of the built-in interval-valued data.}
 \end{table}%
@@ -702,15 +701,22 @@ Equation (\ref{sj}).
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> summary(facedata)
 R> mean(facedata)
-R> sd(facedata)
-R> scale(facedata)
 \end{CodeInput}
-\end{CodeChunk}
+\begin{CodeOutput}
+	    AD    BC    AH    DH    EH    GH
+	  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+1  	163.  60.0  113.  113.  59.8  57.7
+\end{CodeOutput}
 
+\begin{CodeInput}
+R> sd(facedata$AD)
+\end{CodeInput}
+\begin{CodeOutput}
+[1] 6.816762
+\end{CodeOutput}
 
-
+%$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                         %
 %                                                         %
@@ -860,24 +866,14 @@ p_{g_1g_2} = \frac{f_{g_1g_2}}{m}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{An example}
 
-
-\begin{verbatim}
-cov(x, y = NULL, use = "everything",
-    method = c("pearson", "kendall", "spearman"))
-
-cor(x, y = NULL, use = "everything",
-    method = c("pearson", "kendall", "spearman"))
-\end{verbatim}
-
-\begin{CodeChunk}
+% Equation (\ref{eq:gq_cov})
 \begin{CodeInput}
-R> cov(facedata)
-R> cor(facedata)
+R> cov(facedata$AD, facedata$BC, method = "billard")
 \end{CodeInput}
+\begin{CodeOutput}
+[1] 21.47015
+\end{CodeOutput}
 \end{CodeChunk}
-
-
-
 
 
 
@@ -917,7 +913,7 @@ Another graphical technique, called index plot, is famous in conventional data a
 
 \begin{CodeChunk}
 \begin{CodeInput}
-ggInterval_index(data = NULL, mapping = aes(NULL))
+ggInterval_index(data = NULL, mapping = aes(NULL), plotAll = FALSE)
 \end{CodeInput}
 \end{CodeChunk}
 can achieve this objective, but there is still a slight difference for visualizing. 
@@ -925,24 +921,29 @@ can achieve this objective, but there is still a slight difference for visualizi
 Take the variable AD for example, and set option \code{mapping = aes(x = AD)}. The former function, shown in Figures \ref{fig:index} and \ref{fig:index_bar}, directly displays the interval which is similar to min-max plot. Among these plots, we classify the concepts by the same person by setting the aesthetics option \code{fill} and can discover the values of people LOT, KHA, INC, FRA in AD variable are less than others, which easily compares the difference. 
 
 
-Figure \ref{index-plot-i} shows two representations 
+Figure \ref{fig:index_allvar} shows two representations 
 of index plots for all six variables. The index plot (also
 called the run sequence plot ($x_i$ vs $i$)) takes a single
 argument which is a continuous variable and plots the
 values on the $y$ axis, with the $x$ coordinate determined
-by the position of the number in the vector. It is useful
-for error checking. 
-\begin{CodeChunk}
-\begin{CodeInput}
-R> plot.index.i(idata.x, fill.col=y.C)
-R> plot.index.i(idata.x, type="rect", vertical=T, fill.col=y.C)
-R> plot.index.i(idata.x, type="rect", vertical=T, align="c", fill.col=y.C)
-R> plot.index.i(idata.x, type="rect", vertical=T, align="range", fill.col=y.C)
-\end{CodeInput}
-\end{CodeChunk}
-Figure \ref{index-plot-i} displays the index plots for the face recognition 
-dataset with different representations: (a) horizontal representation; (b) 
-vertical representation; (c) vertical representation with 
+by the position of the number in the vector. 
+
+%作法不同 程式碼可能偏長
+%It is useful
+%for error checking. 
+%\begin{CodeChunk}
+%\begin{CodeInput}
+%R> plot.index.i(idata.x, fill.col=y.C)
+%R> plot.index.i(idata.x, type="rect", vertical=T, fill.col=y.C)
+%R> plot.index.i(idata.x, type="rect", vertical=T, align="c", fill.col=y.C)
+%R> plot.index.i(idata.x, type="rect", vertical=T, align="range", fill.col=y.C)
+%\end{CodeInput}
+%\end{CodeChunk}
+
+
+Figure \ref{fig:index_allvar} displays the index plots for the face recognition 
+dataset with different representations: (a) vertical representation; (b) 
+vertical representation with color mapping; (c) vertical representation with 
 ordering by the centers of each variable; (d) vertical representation with 
 ordering by the ranges of each variable. According to the symmetric of facial
 characteristics for a normal person, we observed that two
@@ -952,7 +953,7 @@ measurements.
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
-\paragraph{Boxplot} Figure \ref{boxplot-sbs-i} shows
+\paragraph{Boxplot} Figure \ref{fig:box} shows
 the boxplot side-by-side for all six variables. For each
 quantile box, the locations of the bottom and top of the
 box are calculated form the minima and maxima of
@@ -963,10 +964,11 @@ can see that AD (the length of outer corner of eyes) is the
 longest length than other measurements. AH and DH (EH and
 GH) are similar as they are expected to be symmetric for the facial
 characteristics.
+
+%fig:box 裡面包含有標準化過(top)和沒標準化過(bottom)
 \begin{CodeChunk}
 \begin{CodeInput}
-R> boxplot.i(idata.x)
-R> boxplot.sbs.i(idata.x)
+R> ggInterval_boxplot(facedata, plotAll = T)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -974,12 +976,14 @@ R> boxplot.sbs.i(idata.x)
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%bar chart 目前沒實作
 \paragraph{Bar chart} 
 "The bar graph is very convenient while comparing categories of data or different groups of data. It helps to track changes over time. It is best for visualizing discrete data."
 
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%目前沒實作 (只有stacked histogram)
 \paragraph{Segmented or stacked bars} 
 
 
@@ -987,6 +991,7 @@ R> boxplot.sbs.i(idata.x)
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%目前沒實作 (quantile已有在boxplot和radar內)
 \paragraph{Quantile plot} 
 
 
@@ -996,9 +1001,12 @@ R> boxplot.sbs.i(idata.x)
 %%%%%%%%%%%%%%%%%%%%
 \paragraph{Time series plot} 
 
+Figure \ref{fig:ts}
+
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%目前沒實作
 \paragraph{Pie charts} 
 "Pie charts are mainly used to comprehend how a group is broken down into smaller pieces. The whole pie represents 100 percent, and the slices denote the relative size of that particular category."
 
@@ -1032,7 +1040,7 @@ If we want to plot the histogram
 with height $f_g$ on the interval $i_g$ so that the "area" is $p_g$, then
 $p_g = (\xi_g -\xi_{g-1}) \times f_g$.  
 \end{enumerate}
-Figure \ref{hist-i} shows
+Figure \ref{fig:hist} shows
 the histograms with non-equidistant breaks for all six
 variables. The breaks are obtained by the boundaries of the
 intervals. That is, all the minima and maxima of
@@ -1042,13 +1050,15 @@ similar to those from above plots.
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> hist.i(idata.x[,1,], main=colnames(idata.x)[1])
-R> #hist.i(idata.x[,1,], breaks=20)
-R> #hist.i(idata.x[,1,], breaks= c(140, 150, 155, 160, 165, 180))
-R> hist.i(idata.x)
-R> hist.overlap.i(idata.x[,1,], main=colnames(idata.x)[1])
-R> hist.overlap.i(idata.x)
-R> hist.sbs.i(idata.x, grid.col=NA, col="rb130")
+R> ggInterval_hist(facedata, plotAll = T, bins = 15) +
+R>     theme_hc()+
+R>     scale_y_continuous(breaks = c(0, 0.035, 0.07))+
+R>     labs(title = "")
+R> ggInterval_hist(this.data, plotAll = T,
+R>                   method = "unequal-bin") +
+R>     theme_hc()+
+R>     scale_y_continuous(breaks = c(0, 0.2, 0.4))+
+R>     labs(title = "")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1067,12 +1077,25 @@ Option \code{method} is the key for setting whether the histogram bins are equal
 %                  %
 %%%%%%%%%%%%%%%%%%%%
 \paragraph{Min-max plot}
-Figure \ref{mmplot} shows the min-max plot for face recognition data.
+Figure \ref{fig:minmax} shows the min-max plot for face recognition data.
 \begin{CodeChunk}
 \begin{CodeInput}
-R> MMplot(idata.x, col = y.C)
-R> MMplot(idata.x, col = y.C, scale=T)
-R> MMplot(idata.x, plot.type=1)
+R> #One case for plotting all variables (Relative Position)
+R> lapply(1:6, FUN = function(x){
+R>   plot.var <<- x
+R>   ggInterval_minmax(facedata, aes(facedata[[plot.var]]))+
+R>     scale_color_manual(values = c("darkblue", "darkred"))+
+R>     guides(colour = F) + 
+R>     theme_bw() + 
+R>     coord_fixed(ratio = 1)}) %>%
+R>   ggarrange(plotlist = ., nrow = 1, ncol = ncol(facedata), labels = "")
+
+R> #The other case using 'plotAll = T' (Absolute Position)
+R> ggInterval_minmax(facedata, plotAll = T, scaleXY = "global") +
+R>   scale_color_manual(values = c("darkblue", "darkred")) +
+R>                guides(colour = F) + 
+R>                theme_bw() + 
+R>                coord_fixed(ratio = 1)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1090,26 +1113,7 @@ ggInterval_minmax(data = NULL, mapping = aes(NULL), scaleXY = "local",
 
 For the top six of Figure \ref{fig:minmax} shows the difference between each location of concept in each variable through the 45-degree line, which is a relative position of the variable itself (by setting option \code{scaleXY = "local"}). And represents the range by the connected line between minimum and maximum. To design the widely-view exploratory graphic function like this instance, we apply the option \code{plotAll = TRUE} to extend one variable visualization to full variables in the same plot. For examples, the figure constructed by the code
 
-\begin{CodeChunk}
-\begin{CodeInput}
-#One case for plotting all variables (Relative Position)
-lapply(1:6, FUN = function(x){
-  plot.var <<- x
-  ggInterval_minmax(facedata, aes(facedata[[plot.var]]))+
-    scale_color_manual(values = c("darkblue", "darkred"))+
-    guides(colour = F) + 
-    theme_bw() + 
-    coord_fixed(ratio = 1)}) %>%
-  ggarrange(plotlist = ., nrow = 1, ncol = ncol(facedata), labels = "")
 
-#The other case using 'plotAll = T' (Absolute Position)
-ggInterval_minmax(facedata, plotAll = T, scaleXY = "global") +
-  scale_color_manual(values = c("darkblue", "darkred")) +
-               guides(colour = F) + 
-               theme_bw() + 
-               coord_fixed(ratio = 1)
-\end{CodeInput}
-\end{CodeChunk}
 
 
 
@@ -1124,15 +1128,25 @@ To complete the visualization, it actually needs the command \code{ggInterval_mi
 %                  %
 %%%%%%%%%%%%%%%%%%%%
 \paragraph{Center-range plot}
-Figure \ref{RCplot} shows the center-range plot for face recognition data.
+Figure \ref{fig:centerRange} shows the center-range plot for face recognition data.
 \begin{CodeChunk}
 \begin{CodeInput}
-R> RCplot(idata.x)
-R> RCplot(idata.x, scale=T)
-R> RCplot(idata.x, plot.type=1) #all in one plot
-R> RCplot(idata.x, plot.type=2, scale=T)
+R> ggInterval_centerRange(facedata, aes(size = 1.5),
+R>                             plotAll = T)+
+R>   theme_classic() + 
+R>   stat_ellipse(geom = "polygon", fill = "blue",
+R>                alpha = 0.05, col = "grey")
+                                
+R> face.scale <- scale_sym(facedata)$intervalData #scale
+                                
+R> ggInterval_centerRange(face.scale, aes(size = 1.5),
+                            plotAll = T)+
+R>   theme_classic()+ 
+R>   stat_ellipse(geom = "polygon", fill = "blue",
+                  alpha = 0.05, col = "grey")
 \end{CodeInput}
 \end{CodeChunk}
+%$
 
 In this field, it reveals the trend, distribution, how large the data spread, etc, for a particular variable. Moreover, another advanced graphics implemented is called center-range plot, which helps researchers to be able to grasp the relationship between center and range. 
 
@@ -1176,7 +1190,8 @@ The bivariate functions reveal relationships between variables, trends of the re
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
-\paragraph{The 2D scatterplot} Figure \ref{plot-2d-i} shows
+%目前沒有overlap指標
+\paragraph{The 2D scatterplot} Figure \ref{fig:scatter} shows
 two representations of 2D scatterplot for variables of AD and
 BC. The color within the rectangles of 2D scatterplot
 reflects the degree of overlapping. The darker blue
@@ -1187,11 +1202,9 @@ groups. One group has both larger AD and BC measurements
 while the other group has both smaller AD and BC measurements.
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plot.2d.i(idata.x[,1:2,], col=NA)
-R> plot.2d.i(idata.x[,1:2,])
-R> plot.2d.i(idata.x[,1:2,], border.col=y.C)
-R> plot.2d.i(idata.x[,1:2,], show.object=F, xylim=T)
-R> plot.2d.i(idata.x[,1:2,], border.col=y.C, xlim=c(140, 180), ylim=c(50, 90))
+R> ggInterval_scatter(facedata, aes(x = AD, y = BC, fill = "gray80")) +
+R    theme_bw() +
+R>   theme(legend.position = "None")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1231,11 +1244,14 @@ Figure \ref{hist-overlap-2d-i} shows the 2D histogram matrices for face
 recognition data.
 \begin{CodeChunk}
 \begin{CodeInput}
-R> hist.overlap.2d.i(idata.x[,1:2,])    
-R> hist.overlap.2d.i(idata.x[,1:2,], col="rb", grid=T)    
-R> #take a long time to display
-R> #hist.overlap.2d.i(idata.x, col="rb130")
-R> hist.overlap.2d.i(idata.x[,1:3,], col="rb130")   
+R> ggInterval_2DhistMatrix(facedata, aes(col = "grey50"), xBins = 10,
+R>                         yBins = 10, removeZero = T, addFreq = F) +
+R>   theme_light() + 
+R>   theme(legend.position = "bottom") + 
+R>   scale_fill_gradient(low = "gray95",
+R>                       high = "red",
+R>                       limits = c(0, 1),
+R>                       na.value = "red") 
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1244,10 +1260,10 @@ Another bivariate relationship plot is two-dimension histogram, which is to calc
 
 \begin{CodeChunk}
 \begin{CodeInput}
-ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
-                  xBins = 25, yBins = 25) +
-  theme(legend.position = "bottom") +
-  scale_fill_gradient(low = "gray95", high = "red", limits = c(0, 0.15),
+R> ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
+R>                   xBins = 25, yBins = 25) +
+R>   theme(legend.position = "bottom") +
+R>   scale_fill_gradient(low = "gray95", high = "red", limits = c(0, 0.15),
                       na.value = "red")
 \end{CodeInput}
 \end{CodeChunk}
@@ -1260,19 +1276,8 @@ ggInterval_2Dhist(facedata, aes(x = AD, y = BC, col = "grey30"),
 uses the joint frequency between the variables AD and BC and makes the XY-axis bins partial into 25 subintervals. As Figure \ref{fig:2Dhist} shown, we can observe that the concepts in these joint sample spaces concentrate on the top-right and bottom-left areas that seem like a slightly positive correlation.
 
 
-In the same way, extend the plot to full variables as matrix type by the code
-\begin{CodeChunk}
-\begin{CodeInput}
-ggInterval_2DhistMatrix(facedata, aes(col = "grey50"), xBins = 10,
-                        yBins = 10, removeZero = T, addFreq = F) +
-  theme_light() + 
-  theme(legend.position = "bottom") + 
-  scale_fill_gradient(low = "gray95",
-                      high = "red",
-                      limits = c(0, 1),
-                      na.value = "red") 
-\end{CodeInput}
-\end{CodeChunk}
+
+%補充說明 2Dhist matrix
 The addition options \code{removeZero} and \code{addFreq} make zero value and frequency displaying remove, shown as Figure \ref{fig:2DhistMatrix}. Not only the relationship presentation, the graphic technique also depicts the details frequency. Among these, we might get a similar conclusion between variables relation, but for the calculation, this technique may consume a larger time-complexity than scatter plot.
 
 
@@ -1302,7 +1307,7 @@ The addition options \code{removeZero} and \code{addFreq} make zero value and fr
 %                  %
 %%%%%%%%%%%%%%%%%%%%
 \paragraph{Scatterplot matrix}
-Figure \ref{pairs-i} shows
+Figure \ref{fig:scaMatrix} shows
 the the scatterplot matrix for face data. The rectangles with
 the same color present the same subject. The association between any pair
 of two variables can be investigated from the scatterplot
@@ -1313,8 +1318,7 @@ Additionally, these graphic techniques can visualize multiple variables at the s
 
 \begin{CodeChunk}
 \begin{CodeInput}
-ggInterval_scaMatrix(data = facedata)+
-  theme_bw()
+R> ggInterval_scaMatrix(data = facedata)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1329,6 +1333,7 @@ In Figure \ref{fig:scaMatrix}, we use grayscale to represent the concepts and th
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%畫所有obs的話 圖可能會太小，不太清楚，所以我的radar圖是畫特定的obs
 \paragraph{Radar plot}
 Figure \ref{radar-i} shows
 the starplot for all observations of the face data. For
@@ -1352,15 +1357,17 @@ Above all, take the Environmental questionnaire dataset for example, and the var
 
 \begin{CodeChunk}
 \begin{CodeInput}
-#Left fig : Remove the modal multi-valued variables for demo
-ggInterval_radar(Environment[, 5:17], plotPartial = 2, showLegend = F, 
-                 addText = F) 
+R> #Left fig : Remove the modal multi-valued variables for demo
+R> ggInterval_radar(Environment[, 5:17], plotPartial = 2, showLegend = F, 
+R>                  addText = F) 
 
-#Right fig : Remain the modal multi-valued variables
-ggInterval_radar(Environment, plotPartial = 2, showLegend = F,
-                 base_circle = F, base_lty = 1) +
-  scale_fill_manual(values = "gray50") +
-  scale_color_manual(values = "gray50") 
+R> #Right fig : Remain the modal multi-valued variables
+R> ggInterval_radar(Environment, plotPartial = 2, showLegend = F,
+R>                  base_circle = F, base_lty = 1) +
+R>   scale_fill_manual(values = "gray50") +
+R>   scale_color_manual(values = "gray50") 
+\end{CodeInput}
+\end{CodeChunk}
 %1
 %            labs(title = "") +
 %            theme_hc() 
@@ -1369,35 +1376,32 @@ ggInterval_radar(Environment, plotPartial = 2, showLegend = F,
 %             labs(title = "") +
 %            theme_hc() +
 
-\end{CodeInput}
-\end{CodeChunk}
-
 Use the color to represent the interval area, and it can clearly present the behavior of the particular concept in each variable. The figure in the left panel shows the relative position of the interval by the percentage circle, whereas the right one removes it and adds the frequency in the plot. Additionally, the kind of radar plot is generalized to visualize not only the interval-valued data but the modal multi-valued, which we design a cuboid to represent, and the height will correspond to the probability of the factor in the variable, as the right panel in the figure. The technique not just merges the distinct variable's type in one plot but even helps the researcher to compare with concepts easily under multiple variables. Figure \ref{fig:radar_3obs} shows the three observations presented by the different plot. 
 
 Moreover, another advanced implemented graphic technique of radar plot is classification by different concepts using a color mapping. By the code:
 
 \begin{CodeChunk}
 \begin{CodeInput}
-area.fig <- ggInterval_radar(Environment, plotPartial = c(4, 6),
-                             showLegend = F, base_circle = F,
-                             base_lty = 1, addText = F,
-                             addText_modal = F) +
-            scale_fill_manual(values = c("darkred", "darkblue")) +
-            scale_color_manual(values = c("darkred", "darkblue")) +
-            labs(title = "") +
-            theme_hc()
+R> area.fig <- ggInterval_radar(Environment, plotPartial = c(4, 6),
+R>                              showLegend = F, base_circle = F,
+R>                              base_lty = 1, addText = F,
+R>                              addText_modal = F) +
+R>             scale_fill_manual(values = c("darkred", "darkblue")) +
+R>             scale_color_manual(values = c("darkred", "darkblue")) +
+R>             labs(title = "") +
+R>             theme_hc()
 
-rect.fig <- ggInterval_radar(Environment, plotPartial = c(4, 6),
-                             showLegend = F, base_circle = F,
-                             base_lty = 1, addText = F, type = "rect",
-                             addText_modal = F) +
-            scale_fill_manual(values = c("darkred", "darkblue")) +
-            scale_color_manual(values = c("darkred", "darkblue")) +
-            labs(title = "") +
-            theme_hc()
+R> rect.fig <- ggInterval_radar(Environment, plotPartial = c(4, 6),
+R>                              showLegend = F, base_circle = F,
+R>                              base_lty = 1, addText = F, type = "rect",
+R>                              addText_modal = F) +
+R>             scale_fill_manual(values = c("darkred", "darkblue")) +
+R>             scale_color_manual(values = c("darkred", "darkblue")) +
+R>             labs(title = "") +
+R>             theme_hc()
 
-gridExtra::marrangeGrob(list(area.fig, rect.fig), 
-                        nrow = 1, ncol = 2, top = "")
+R> gridExtra::marrangeGrob(list(area.fig, rect.fig), 
+R>                         nrow = 1, ncol = 2, top = "")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1458,24 +1462,24 @@ For exploring data, we extend the index plot into full variables and visualize b
 
 \begin{CodeChunk}
 \begin{CodeInput}
-#Column Condition
-colCondition <- ggInterval_indexImage(facedata, plotAll = T,
-                                      full_strip = T) +
-  scale_colour_gradient2(low = "green", mid = "gray15", high = "red")
+R> #Column Condition
+R> colCondition <- ggInterval_indexImage(facedata, plotAll = T,
+                                      R> full_strip = T) +
+R>   scale_colour_gradient2(low = "green", mid = "gray15", high = "red")
 
-#Matrix Condition
-#Prepare midpoint for scale_colour_gradient2
-ggESDA.facedata <- RSDA2sym(facedata)
-facedata.m <- mean(c(min(ggESDA.facedata$statisticsDF$min),
-                     max(ggESDA.facedata$statisticsDF$max)))
+R> #Matrix Condition
+R> #Prepare midpoint for scale_colour_gradient2
+R> ggESDA.facedata <- RSDA2sym(facedata)
+R> facedata.m <- mean(c(min(ggESDA.facedata$statisticsDF$min),
+R>                      max(ggESDA.facedata$statisticsDF$max)))
                                       
-matCondition <- ggInterval_indexImage(facedata, plotAll = T,
-                                      full_strip = T,
-                                      column_condition = F) + 
-  scale_colour_gradient2(low = "green", mid = "gray15", 
-                         high = "red", midpoint = facedata.m)
+R> matCondition <- ggInterval_indexImage(facedata, plotAll = T,
+R>                                       full_strip = T,
+R>                                       column_condition = F) + 
+R>   scale_colour_gradient2(low = "green", mid = "gray15", 
+R>                          high = "red", midpoint = facedata.m)
 
-ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
+R> ggarrange(colCondition, matCondition, nrow = 1, ncol = 2)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -1493,6 +1497,7 @@ Figure \ref{fig:indexImage} shows two kinds of presentation ways for this method
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%剛剛在4.2有寫過2D hist matrix了
 \paragraph{2D histogram matrices}
 \ref{image-h} The index plot and the image plot for the aggregated histograms 
 of 
@@ -1504,6 +1509,7 @@ iris data.
 %%%%%%%%%%%%%%%%%%%%
 %                  %
 %%%%%%%%%%%%%%%%%%%%
+%目前沒實作，ggplot2本身不支援3D (ggESDA有3D圖 只是比較醜，不比傳統圖好)
 \paragraph{The scatterplots3d and dynamic graphics}
 Other than the static visualization, using computers and
 mobile devices to interact with charts and graphs can aid
@@ -1696,11 +1702,12 @@ With the technique, we combine the dimension reduction methods that \pkg{RSDA} p
 
 \begin{CodeChunk}
 \begin{CodeInput}
-pca.results <- RSDA::sym.pca(facedata, method = "top")
-ggInterval_scatter(pca.results$Sym.Components, aes(Dim.1, Dim.2)) +
-  scale_fill_manual(values = Concepts)
+R> pca.results <- RSDA::sym.pca(facedata, method = "top")
+R> ggInterval_scatter(pca.results$Sym.Components, aes(Dim.1, Dim.2)) +
+R>   scale_fill_manual(values = Concepts)
 \end{CodeInput}
 \end{CodeChunk}
+%$
 
 which is widely used for graphical representation of interval objects on a DR (dimension reduction) subspace, owing to its simplicity, shown as Figure \ref{fig:mcar}. 
 
@@ -1737,6 +1744,7 @@ interval-valued data becomes important. The following will discuss
 these explicitly.
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1744,9 +1752,10 @@ these explicitly.
 \centering
 \begin{tabular}{|l|l|} \hline
 Function            & Description    \\ \hline
-\code{getCenter}  &   \\ \hline
-\code{getRange}  & \\ \hline
-\code{abcd...} & \\ \hline
+\code{classic2sym}  & Convert the classical data to symbolic data \\ \hline
+\code{RSDA2sym}  & Convert the \pkg{RSDA} object to \pkg{ggESDA} object \\ \hline
+\code{scale_sym} & standardize the symbolic data  \\ \hline
+\code{cov} & Covariance of interval-valued variables  \\ \hline
 \end{tabular}
 \caption{\label{tab:utility} Utility.}
 \end{table}
@@ -1756,6 +1765,8 @@ Function            & Description    \\ \hline
 %                                                         %
 %                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%目前主要以畫圖的function為主，這類的fun在ggESDA內好像沒有(可能只有cov()算吧?)
 \subsection{Generic functions}
 Support for common generic functions, such as \code{summary} or \code{print}.
 \code{write.table}
@@ -1773,6 +1784,23 @@ log scales, color, fill with selected spectrum
 add text, lines, labeling, title, tick marks, font
 (give a example here)
  
+Figure \ref{fig:customize}
+ 
+\begin{CodeChunk}
+\begin{CodeInput}
+R> ggInterval_index(d, aes(y = AD, fill = Concepts)) +
+R>   geom_text(aes(x = 1:27,
+R>                 y = .data$AD$min,
+R>                 label = rownames(facedata),
+R>                 vjust = 1.5), col = "red") +
+R>   geom_line() +
+R>   labs(title = "Customize plot", fill = "Concepts") +
+R>   scale_fill_brewer(palette = "Set1") +
+R>   facet_grid(. ~ d$g, scales = "free") +
+R>   theme_economist_white()
+\end{CodeInput}
+\end{CodeChunk}
+%$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1807,28 +1835,35 @@ Because of the interval-valued data, all SDA packages studying in the same field
 \subsubsection[HistDAWass]{\pkg{HistDAWass}}
 
 We further use the principle to process \code{BLOOD} data in \pkg{HistDAWass}, first. With the method \pkg{HistDAWass} provided, it will be more convenient to get min and max data:
-
+%if (!require("HistDAWass")) install.packages("HistDAWass")
 \begin{CodeChunk}
 \begin{CodeInput}
-if (!require("HistDAWass")) install.packages("HistDAWass")
-library(HistDAWass)
-# Get min and max data
-BLOOD <- HistDAWass::BLOOD
-blood.min <- get.MatH.stats(BLOOD, stat = "min")
-blood.max <- get.MatH.stats(BLOOD, stat = "max")
-blood <- data.frame(blood.min, blood.max)
+R> library(HistDAWass)
+R> # Get min and max data
+R> BLOOD <- HistDAWass::BLOOD
+R> blood.min <- get.MatH.stats(BLOOD, stat = "min")
+R> blood.max <- get.MatH.stats(BLOOD, stat = "max")
+R> blood <- data.frame(blood.min, blood.max)
 
-# Reorganized and Build ggESDA obj.
-blood.sym <- classic2sym(blood, groupby = "customize",
-                     minData = blood[, 2:4],
-                     maxData = blood[, 6:8])
+R> # Reorganized and Build ggESDA obj.
+R> blood.sym <- classic2sym(blood, groupby = "customize",
+R>                      minData = blood[, 2:4],
+R>                      maxData = blood[, 6:8])
 
-# Make names
-blood.names <- get.MatH.main.info(BLOOD)$varnames
-blood.i <- blood.sym$intervalData
-colnames(blood.i) <- blood.names
-head(as.data.frame(blood.i), 5)
+R> # Make names
+R> blood.names <- get.MatH.main.info(BLOOD)$varnames
+R> blood.i <- blood.sym$intervalData
+R> colnames(blood.i) <- blood.names
+R> head(as.data.frame(blood.i), 5)
 \end{CodeInput}
+\begin{CodeOutput}
+  Cholesterol      Hemoglobin      Hematocrit
+1 [80.00 : 240.00] [12.00 : 15.00] [35.00 : 47.00]
+2 [80.00 : 240.00] [10.50 : 14.00] [31.00 : 44.00]
+3 [95.00 : 245.00] [10.50 : 14.00] [31.00 : 43.50]
+4 [105.00 : 260.00] [10.50 : 14.00] [31.00 : 42.50]
+5 [115.00 : 260.00] [10.80 : 13.60] [31.00 : 42.50]
+\end{CodeOutput}
 \end{CodeChunk}
 
 After getting the necessary data, classifying data belonging is vital for reorganization, which means that differentiating the min data and max data. For instance, \code{minData = blood[, 2:4]} represents the min data are the columns of $2,3,4$ in this case.
@@ -1841,35 +1876,42 @@ After getting the necessary data, classifying data belonging is vital for reorga
 \subsubsection[MAINT.Data]{\pkg{MAINT.Data}}
 
 However, it is also a common way to store interval-valued data by median and range. In \pkg{MAINT.Data}, the data will exist in this form. Fortunately, a median-range form is not difficult to deal with. We can do the necessary conversion directly to get the data we expect:
-
+%if (!require("MAINT.Data")) install.packages("MAINT.Data")
 \begin{CodeChunk}
 \begin{CodeInput}
-if (!require("MAINT.Data")) install.packages("MAINT.Data")
-library(MAINT.Data)
-#get data interval-valued data in AbaloneIdt
-AbaloneIdt <- MAINT.Data::AbaloneIdt
-Aba.range <- AbaloneIdt@LogR
-Aba.mid <- AbaloneIdt@MidP
+R> library(MAINT.Data)
+R> #get data interval-valued data in AbaloneIdt
+R> AbaloneIdt <- MAINT.Data::AbaloneIdt
+R> Aba.range <- AbaloneIdt@LogR
+R> Aba.mid <- AbaloneIdt@MidP
 
 
-#make a necessary transformation for build min max data
-Aba <- data.frame(Aba.min = Aba.mid - exp(Aba.range) / 2,
-                  Aba.max = Aba.mid + exp(Aba.range) / 2)
+R> #make a necessary transformation for build min max data
+R> Aba <- data.frame(Aba.min = Aba.mid - exp(Aba.range) / 2,
+R>                   Aba.max = Aba.mid + exp(Aba.range) / 2)
 
 
-# Reorganized and Build ggESDA obj.
-Aba.sym<- classic2sym(Aba, groupby = "customize",
-                      minData = Aba[, 1:7],
-                      maxData = Aba[, 8:14])
+R> # Reorganized and Build ggESDA obj.
+R> Aba.sym<- classic2sym(Aba, groupby = "customize",
+R>                       minData = Aba[, 1:7],
+R>                       maxData = Aba[, 8:14])
 
 
 # Make names
-colnames(Aba.sym$intervalData) <- AbaloneIdt@VarNames
-Aba.i <- Aba.sym$intervalData %>% 
-  cbind(Aba.obs = AbaloneIdt@ObsNames) %>% 
-  column_to_rownames(var = "Aba.obs")
-head(Aba.i[, 1:4], 5)
+R> colnames(Aba.sym$intervalData) <- AbaloneIdt@VarNames
+R> Aba.i <- Aba.sym$intervalData %>% 
+R>   cbind(Aba.obs = AbaloneIdt@ObsNames) %>% 
+R>   column_to_rownames(var = "Aba.obs")
+R> head(Aba.i[, 1:4], 5)
 \end{CodeInput}
+\begin{CodeOutput}
+        Length         Diameter      Height        Whole_weight
+F-10-12 [0.34 : 0.78] [0.26 : 0.63] [0.06 : 0.23] [0.21 : 2.66]
+F-13-15 [0.39 : 0.82] [0.30 : 0.65] [0.10 : 0.25] [0.27 : 2.51]
+F-16-18 [0.40 : 0.74] [0.32 : 0.60] [0.10 : 0.24] [0.35 : 2.20]
+F-19-21 [0.49 : 0.72] [0.36 : 0.58] [0.12 : 0.21] [0.68 : 2.12]
+F-23-24 [0.45 : 0.80] [0.38 : 0.63] [0.14 : 0.22] [0.64 : 2.53]
+\end{CodeOutput}
 \end{CodeChunk}
 
 In brief, following the general principle in section \ref{sec:genPrin} may facilitate the integration, extend utilize of \pkg{ggESDA} and generalize to all SDA studies.
@@ -1910,6 +1952,14 @@ We will apply the breast mass dataset, which is computed from a digitized image 
 \begin{CodeInput}
 colnames(breastData)
 \end{CodeInput}
+\begin{CodeOutput}
+[1] "id"               "diagnosis"
+[3] "radius_mean"      "texture_mean"
+[5] "perimeter_mean"   "area_mean"
+[7] "smoothness_mean"  "compactness_mean"
+[9] "concavity_mean"   "concave points_mean"
+...
+\end{CodeOutput}
 \end{CodeChunk}
 
 Except for the first two variables, they are all composed of mean, standard error, and "worst" in their own field respectively.
@@ -1924,14 +1974,25 @@ K-means clustering is a method of vector quantization, originally from signal pr
 
 \begin{CodeChunk}
 \begin{CodeInput}
-breastData <- dplyr::select(breastData, -id)
-breastData.sym <- classic2sym(breastData, groupby = "kmeans", k = 5)
-breastData.sym.i <- breastData.sym$intervalData
-as.data.frame(head(breastData.sym.i[, 1:4], 5))
+R> breastData <- dplyr::select(breastData, -id)
+R> breastData.sym <- classic2sym(breastData, groupby = "kmeans", k = 5)
+R> breastData.sym.i <- breastData.sym$intervalData
+R> as.data.frame(head(breastData.sym.i[, 1:4], 5))
 \end{CodeInput}
+\begin{CodeOutput}
+  diagnosis     radius_mean     texture_mean    perimeter_mean
+1 B:0.04 M:0.96 [13.81 : 19.59] [11.89 : 39.28] [91.56 : 132.40]
+2 B:0.00 M:1.00 [15.50 : 24.25] [10.38 : 32.47] [102.90 : 166.20]
+3 B:0.00 M:1.00 [20.73 : 28.11] [17.25 : 31.12] [135.70 : 188.50]
+4 B:0.68 M:0.32 [11.84 : 16.30] [10.89 : 30.72] [77.93 : 109.80]
+5 B:0.98 M:0.02 [6.98 : 13.05]  [9.71 : 33.81]  [43.79 : 85.09]
+\end{CodeOutput}
 \end{CodeChunk}
+%$
 
 The \code{id} is unused in this case, so we remove it by \pkg{dplyr} \cite{dplyr}. Then using \code{classic2sym} to aggregate \code{breastData}. It will return several result sets include clustering result and interval-valued data, etc. The interval-valued data can be extracted by \code{$intervalData}, and it will be presented by the package of \pkg{RSDA} type.
+
+%$
 
 The \code{groupby} is a parameter that determine what kind of aggregation methods will be used. Whenever the K-means method is applied, the consequent \code{k} will become meaningful, whereas the other situation is not. It is also a default method when users have no input arguments in \code{groupby}.
 
@@ -1982,11 +2043,21 @@ Using a particular variable to merge different data is a common way for data ana
 
 \begin{CodeChunk}
 \begin{CodeInput}
-breastData.sym <- classic2sym(breastData, groupby = "diagnosis")
-breastData.sym.i <- breastData.sym$intervalData
-head(breastData.sym.i[, 1:4], 5)
+R> breastData.sym <- classic2sym(breastData, groupby = "diagnosis")
+R> breastData.sym.i <- breastData.sym$intervalData
+R> head(breastData.sym.i[, 1:4], 5)
 \end{CodeInput}
+\begin{CodeOutput}
+  radius_mean     texture_mean    perimeter_mean
+B [6.98 : 17.85]  [9.71 : 33.81]  [43.79 : 114.60]
+M [10.95 : 28.11] [10.38 : 39.28] [71.90 : 188.50]
+  area_mean
+B [143.50 : 992.10]
+M [361.60 : 2,501.00]
+
+\end{CodeOutput}
 \end{CodeChunk}
+%$
 
 In \code{breastData}, the only category variable is \code{diagnosis}, which means the diagnosis of breast tissues (M = malignant, B = benign). We put it as an input argument in \code{groupby} for merging different diagnosis results, and the interval-valued data of result sets will display its factor levels in row names.
 
@@ -2001,18 +2072,28 @@ For the demonstration, we will build both min data and max data using \code{runi
 
 \begin{CodeChunk}
 \begin{CodeInput}
-minData <- runif(100, -100, -50)
-maxData <- runif(100, 50, 100)
-demoData <- data.frame(min = minData, max = maxData)
-demoData.sym <- classic2sym(demoData, groupby = "customize", 
-                            minData = demoData$min,
-                            maxData = demoData$max)
+R> minData <- runif(100, -100, -50)
+R> maxData <- runif(100, 50, 100)
+R> demoData <- data.frame(min = minData, max = maxData)
+R> demoData.sym <- classic2sym(demoData, groupby = "customize", 
+R>                             minData = demoData$min,
+R>                             maxData = demoData$max)
 
-demoData.sym.i <- demoData.sym$intervalData
-as.data.frame(head(demoData.sym.i, 5))
+R> demoData.sym.i <- demoData.sym$intervalData
+R> as.data.frame(head(demoData.sym.i, 5))
 \end{CodeInput}
-\end{CodeChunk}
+\begin{CodeOutput}
+	V1
+1 [-75.85 : 63.98]
+2 [-93.71 : 85.33]
+3 [-64.99 : 94.69]
+4 [-57.34 : 66.03]
+5 [-66.02 : 50.95]
 
+
+\end{CodeOutput}
+\end{CodeChunk}
+%$
 Then choose the \code{customize} argument in \code{groupby}, input which data are \code{minData} or \code{maxData}, and the transformation will be simply completed.
 
 In order to simplify the process and make the preprocessing friendly, we develop these methods and let the people who want to analyze symbolic data easier. Overall, the conversion and essential concepts can be summarized in table \ref{tab:classic2sym}. 
@@ -2166,6 +2247,29 @@ sophisticated analyses. It should have an important place."
 %of variables or large in both
 
 
+\paragraph{why ggInterval}
+In order to implement the \code{symbolic_tbl} class data and the \code{symbolic_interval} class variables in \pkg{ggplot2}. It encounters some difficult issues to overcome. Specifically, \pkg{ggplot2} makes no consideration on what is required for a complex data to remain valid. We attempt to demonstrate this by using the facedata with the interval-valued variables input as following:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> ggplot(facedata, aes(x = AD))
+\end{CodeInput}
+\begin{CodeOutput}
+Error: `vec_math.symbolic_interval()` not implemented.
+\end{CodeOutput}
+\end{CodeChunk}
+
+To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> # (1) Difficult to implement the symbolic_interval class
+R> ggplot(facedata) + geom_I(aes(x = AD))
+R> # (2) Easy to implement the symbolic_interval class
+R> ggInterval_foo(facedata, aes(x = AD))
+\end{CodeInput}
+\end{CodeChunk}
+
+Furthermore, unlike \pkg{ggplot} with a certain format for the data, the SDA packages in R have been full of the data form itself. There is no standard to stipulate this at all. So, the latter programming syntax may be better to generalize the data to the complex form and benefit to the future maintenance and extension.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2196,6 +2300,8 @@ vignettes can also be download here.
 %%information such as relative contributions of the authors may be added here
 %%(if any).
 \section*{Acknowledgments}
+
+The authors wish to thank Oldemar Rodriguez and Hadley Wickham for their excellent package about \pkg{RSDA} and \pkg{ggplot2} . Furthermore, The authors also wish to gratefully acknowledge Diday and others authors about the methods of SDA provided.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2458,6 +2564,55 @@ and (d) Index image with extended color.}
 \end{figure}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/ts_3company} 
+\caption{\label{fig:ts}}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/scatter} 
+\caption{\label{fig:scatter}}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/customize} 
+\caption{\label{fig:customize}}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+	\centering
+	\begin{tabular}{cc}
+		(a) & (b) \\ 
+		\includegraphics[width=0.5\textwidth]{pic/index_allvar_origin} &
+		\includegraphics[width=0.5\textwidth]{pic/index_allvar} \\ 
+		(c) & (d) \\
+		\includegraphics[width=0.5\textwidth]{pic/index_allvar_sort_c} &
+		\includegraphics[width=0.5\textwidth]{pic/index_allvar_sort_r} 
+	\end{tabular}
+	\caption{\label{fig:index_allvar} }
+\end{figure}
+
+
 \end{appendix}
 
 \end{document}
@@ -2615,3 +2770,32 @@ measures in the data and to gain an insight on the trends, patterns,
 and relationships among various entities present in the data set with
 the help of statistics and visualization tools is called Exploratory
 Data Analysis (EDA).
+
+
+%%%% ggplot() + geom_I()...  vs  ggInterval() + ...
+% 格式1 ggplot() + geom_I() + stat_I()...
+% 格式2 ggInterval_*() + geom() + stat()...
+
+1. 格式2語法 : 大致上與ggplot雷同，ggplot有的我都有，但增加更多參數設定，如同一般的geom_()... 一樣，會有本身的data, aes, 也有其他跟geom_()本身相關的參數，因此語法可以完全跟ggplot熟悉的方式一樣，不須另外再熟悉新的程式寫法
+
+2. 為甚麼要用格式2 : 主要因為data已經不是傳統資料，而是更複雜型態的資料，雖然資料本身繼承data.frame(class(facedata) 有data.frame的物件類別存在)可以使用ggplot(data = facedata)，但因為區間變數形式複雜，因而無法直接指派參數(如ggplot(facedata, aes(x = AD, y = BC)) 這樣直接指派x,y會有ERROR)，所以若要以完全和ggplot相同語法寫的話，勢必在底圖(ggplot())就要做修改(前處理資料)，因此透過新的函式ggInterval來做，如此便可兼容區間變數(ggInterval_*(facedata, aes(x = AD, y = BC)成立)。**geom_I()好像也不能讓aes去兼容這樣型態的資料**
+2.QA
+Q: 那是不是每個圖都要記一個新的函數名字。A: 就算用geom_I()...，例如geom_Ihist()還是一樣每個不同的圖形要記自己的函數名字，如geom_errorbar(index plot)，geom_histogram(hist)，geom_rect(scatter)等等。
+Q: 那這樣和傳統圖形的寫法不是一樣嗎? A: 如1.所說，語法和ggplot2本身還是一樣，但會有添加那個圖形本身需要的參數，這樣的寫法跟geom_()一樣，geom也是除了data,aes還是會有自己需要的參數，如geom_histogram(..., position = "identity")，所以語法跟ggplot2一樣，而圖形本身是屬於ggplot2物件，因此可以疊加其他圖形，如geom_point，如stat(...)(centerRange有實作)，或是可以添加額外的extension，如大部分的圖都有添加ggthemes內的theme。
+
+3. 格式1 VS 格式2 : 我覺得沒有誰優誰劣，兩者都有好有壞，只是想法不同程式邏輯架構不同而已，但如果用格式1的寫法的話，便會把aes相關的參數寫入自己的geom內，如
+ggplot(facedata) + geom_Ihist(aes(x = AD))，因為ggplot本身無法generalize到區間變數上，因此區間變數處理的部分一定要是自己寫的函數來前處理。
+3.Q: 市面上有哪些跟我一樣用格式2的方式的package呢? A: ggraph, ggpubr, ggdag, ggpage, ggradar, ggtern, ggTimeSeries...， 大部分只要動到整體圖形結構的通常都用格式2比較多，例如ggpage, ggradar, ggraph等等，其實上述整個圖形結構都相對複雜，不在僅僅只是傳統圖形那樣單純，而大部分只是在原本圖形上面添加新的圖層的都會用格式1比較多。
+
+4. 格式2的優點呢 : 因為不再受限於ggplot()本身函數，因此對於data掌控度更高，例如不僅僅是RSDA型態的物件資料能夠吃，傳統資料對於其實ggInterval_()也是可以吃的(他會有自動判別 防呆 預處理的過程)，如ggInterval_index(data = iris)是可行的，也因為這個優點，未來更可以改進能夠吃更多其他的物件型態，如symbolicDA物件等等，尤其現在R的symbolic data格式並不統一，1個套件可能就有1種自己顯示的格式，那如果都用ggplot()這種已經被統一化通用的格式來寫，可能也不太方便
+
+總結 : 
+以概念上來說，格式1的概念偏向沿用原始資料，而進一步去添加圖層，格式2的概念偏向直接新增一個圖形，當然也可以新增其他圖層，而對於這兩者來說，其實都是常見的ggplot2 extension，但通常複雜圖形，整體結構和傳統圖形不太一樣的，會偏向用格式2居多，因為這樣方便從"data"或"aes"本身就做前處理，或是做更general的相容，好讓隨後圖層內的aes參數也不受限於data本身，而是可以吃更多前處理完的變數，讓圖形能夠更複雜化，完成原本ggplot2設計上未考量的事情(如ggtern的多維三角圖)，簡而言之就是畫的圖形不是完全從data所來，而是data會經由一系列處理後得到一個新的data，而這個新的data才是要被畫的圖，然而這一系列的處理可能相對複雜，且處理完的資料ggplot也不一定能包容，因此允許使用者輸入一個還沒被處理過，但是是比較廣泛，常見的資料格式。而這些常見的資料格式可能因為複雜的關係可能不是屬於data.frame，因而無法受到ggplot接受，因此透過新的自創函式(如ggInterval)便可接受各式各樣比較複雜型態的資料。
+
+
+"Specifically, ggplot2 makes no consideration on what is required for a particular geometry to remain valid within a potentially higher-dimensional coordinate system"
+
+
+
+
+
