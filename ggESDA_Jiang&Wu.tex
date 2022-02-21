@@ -258,28 +258,28 @@ implemented in \proglang{R} using \pkg{ggplot2}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Main Features
 \begin{table}[t!]
 \centering{\scriptsize
-\begin{tabular}{|l|c|l|l|l|} \hline
-Package & Symbolic & Description & Plots &  Reference \\
-        & Object$^*$   &               &       &           \\
+\begin{tabular}{|l|c|l|l|l|l} \hline
+Package & Symbolic & Description & Plots &  Reference & Data Analysis Functionality \\
+        & Object$^*$   &               &       &      &     \\
  \hline 
 \pkg{RSDA}  & I & R to Symbolic Data Analysis
- & scatterplot, radar& Rojas {\it et al.} (2015)\\
+ & scatterplot, radar& Rojas {\it et al.} (2015) & GLM, Kmeans, Regression, PCA, KNN, Neural Networks, FA(factor analysis), RF, SVM, GBM\\
 \pkg{symbolicDA} & I & Analysis of Symbolic Data
- & radar & Dudek {\it et al.} (2013) \\
-\pkg{HistDAWass} & H & Histogram-Valued Data Analysis & histogram, box, index& Irpino (2015) \\
+ & radar & Dudek {\it et al.} (2013)& Dynamical clustering, Decision Tree, HINoV,  pseudo F-statistic, Kernel, Discriminant analysis, Kohonen's self-organizing maps, PCA, RF \\
+\pkg{HistDAWass} & H & Histogram-Valued Data Analysis & histogram, box, index& Irpino (2015) & Ramer-Douglas-Peucke, Moving average smoothing, KNN, Kurthosis, Quantile-Quantile correlation, Skewness, PCA, Multiple regression, K-means, Fuzzy c-means, Hierarchical clustering\\
 \pkg{MAINT.Data} & I & Model and Analyse Interval Data
- & - & Silva \&  Brito (2011) \\
+ & - & Silva \&  Brito (2011)&  LRT, Discriminant Analysis, MANOVA, Mixture model estimation, MLE \\
 \pkg{iRegression} & I & Regression Methods for Interval-Valued Variables
- & - & Neto {\it et al.} (2011)  \\
+ & - & Neto {\it et al.} (2011) & Regression, Bivariate regression \\
 \pkg{intReg} & I & Interval Regression
- & - & Toomet (2012)  \\
+ & - & Toomet (2012)  & Regression\\
 \pkg{ISDA.R} & I & interval symbolic data analysis for R
- & histogram & Filho \&  Fagundes (2012) \\
+ & histogram & Filho \&  Fagundes (2012) & Regression\\
 \pkg{GPCSIV} & H & Generalized Principal Component of Symbolic Interval variables
- & - & Brahim (2013) \\
+ & - & Brahim (2013) & PCA\\
 \pkg{GraphPCA} & H & Graphical Tools of Histogram PCA
- & - & Brahim \& Kallyth (2014) \\
-\pkg{ggESDA} & I & Exploratory Symbolic Data Analysis with 'ggplot2' & index, scatter, radar, etc. & Jiang (2021) \\ \hline
+ & - & Brahim \& Kallyth (2014) & PCA\\
+\pkg{ggESDA} & I & Exploratory Symbolic Data Analysis with 'ggplot2' & index, scatter, radar, etc. & Jiang (2022) & PCA \\ \hline
 \multicolumn{5}{l}{\footnotesize{$^*$I for the interval-valued objects, H for the histogram-valued objects.}}
 \end{tabular}}%
 \caption{\label{tab:sda_packages} The main features and the 
