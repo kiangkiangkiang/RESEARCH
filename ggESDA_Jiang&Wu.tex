@@ -9,7 +9,7 @@
 \usepackage{orcidlink, thumbpdf, lmodern}
 \usepackage{array} 
 \usepackage{pdfpages} 
-
+\usepackage{multirow} % for multirow
 \newcommand{\class}[1]{`\code{#1}'}
 \newcommand{\fct}[1]{\code{#1()}}
 \newcommand{\mbf }[1]{\mbox{\boldmath ${#1}$}}
@@ -420,11 +420,11 @@ generalized \pkg{ggESDA} to other prominent SDA packages in
 General \pkg{ggESDA} syntax
 
 \begin{verbatim}
-ggInterval_*(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
+ggInterval_foo(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
 \end{verbatim}
 
 \begin{footnotesize}
-$^*$ The graphical types are shown in Table \ref{tab:graphics}.
+The graphical types \code{foo} are shown in Table \ref{tab:graphics}.
 \end{footnotesize}
 
 
@@ -2258,7 +2258,8 @@ Error: `vec_math.symbolic_interval()` not implemented.
 \end{CodeOutput}
 \end{CodeChunk}
 
-To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently.
+To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently. This kind of programming syntax is also a common way for the \pkg{ggplot2} extensions. For instance, the \pkg{ggtern} package \cite{ggtern}, the \pkg{gganatogram} package \cite{maag2018gganatogram},
+the \pkg{ggstatsplot} package \cite{patil2018ggstatsplot}, etc.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -2302,6 +2303,33 @@ vignettes can also be download here.
 \section*{Acknowledgments}
 
 The authors wish to thank Oldemar Rodriguez and Hadley Wickham for their excellent package about \pkg{RSDA} and \pkg{ggplot2} . Furthermore, The authors also wish to gratefully acknowledge Diday and others authors about the methods of SDA provided.
+
+
+
+% 還沒改好
+\begin{table}[htbp]
+  \centering
+  \caption{Add caption}
+    \begin{tabular}{|l|c|p{13.19em}|p{21em}|p{16.5em}|l|}
+    \hline
+    \multicolumn{1}{|c|}{\multirow{2}[2]{*}{Package}} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{Symbolic Object*}} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{Description}} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{Methods}} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{Plots}} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{Reference}} \\
+          &       & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} &  \\
+    \hline
+    RSDA  & I     & R to Symbolic Data Analysis & GLM, Kmeans, Regression, PCA, KNN, Neural Networks, FA, RF, SVM, GBM. & scatter, radar. & Rojas et al. (2015) \\
+    symbolicDA & I     & Analysis of Symbolic Data & Dynamical clustering, Decision Tree, HINoV,  pseudo F-statistic, Kernel, LDA, QDA, Kohonen's self-organizing maps, PCA, RF. & radar. & Dudek et al. (2013) \\
+    HistDAWass & H     & Histogram-Valued Data Analysis & Ramer-Douglas-Peucke, Moving average smoothing, KNN, Kurthosis, Quantile-Quantile correlation, Skewness, PCA, Multiple regression, Kmeans, Fuzzy c-means, Hierarchical. & histogram, box, index. & Irpino (2015) \\
+    MAINT.Data & I     & Model and Analyse Interval Data & LRT, LDA, QDA, MANOVA, mixture model estimation, MLE. & -     & Brito (2011) \\
+    iRegression & I     & Regression Methods for Interval-Valued Variables & Regression, Bivariate Regression. & -     & Neto et al. (2011) \\
+    intReg & I     & Interval Regression & Regression. & -     & Toomet (2012) \\
+    ISDA.R & I     & interval symbolic data analysis for R & Regression. & histogram. & Filho \&  Fagundes (2012) \\
+    GPCSIV & H     & Generalized Principal Component of Symbolic Interval variables & PCA.  & -     & Brahim (2013) \\
+    GraphPCA & H     & Graphical Tools of Histogram PCA & PCA.  & -     & Brahim \& Kallyth (2014) \\
+    ggESDA & I     & Exploratory Symbolic Data Analysis with "ggplot2" & PCA.  & index, boxplot, min-max, center-range, equaldistance-bins histogram, non-equaldistance-bins histogram, 2D-histogram, scatter, scatter matrix, 2D-histogram matrix, radar, data image. & Jiang (2022) \\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
