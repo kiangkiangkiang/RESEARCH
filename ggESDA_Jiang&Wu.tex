@@ -420,11 +420,11 @@ generalized \pkg{ggESDA} to other prominent SDA packages in
 General \pkg{ggESDA} syntax
 
 \begin{verbatim}
-ggInterval_foo(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
+ggInterval_<graphtype>(data = intervaldata, mapping = aes(...)) + geom() + ... + stat() + ...
 \end{verbatim}
 
 \begin{footnotesize}
-The graphical types \code{foo} are shown in Table \ref{tab:graphics}.
+The graphical types are shown in Table \ref{tab:graphics}.
 \end{footnotesize}
 
 
@@ -1010,6 +1010,11 @@ Figure \ref{fig:ts}
 \paragraph{Pie charts} 
 "Pie charts are mainly used to comprehend how a group is broken down into smaller pieces. The whole pie represents 100 percent, and the slices denote the relative size of that particular category."
 
+%%%%%%%%%%%%%%%%%%%%
+%                  %
+%%%%%%%%%%%%%%%%%%%%
+%目前沒實作
+\paragraph{spine plot} 
 
 %%%%%%%%%%%%%%%%%%%%
 %                  %
@@ -2247,30 +2252,6 @@ sophisticated analyses. It should have an important place."
 %of variables or large in both
 
 
-\paragraph{why ggInterval}
-In order to implement the \code{symbolic_tbl} class data and the \code{symbolic_interval} class variables in \pkg{ggplot2}. It encounters some difficult issues to overcome. Specifically, \pkg{ggplot2} makes no consideration on what is required for a complex data to remain valid. We attempt to demonstrate this by using the facedata with the interval-valued variables input as following:
-\begin{CodeChunk}
-\begin{CodeInput}
-R> ggplot(facedata, aes(x = AD))
-\end{CodeInput}
-\begin{CodeOutput}
-Error: `vec_math.symbolic_interval()` not implemented.
-\end{CodeOutput}
-\end{CodeChunk}
-
-To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently. This kind of programming syntax is also a common way for the \pkg{ggplot2} extensions. For instance, the \pkg{ggtern} package \cite{ggtern}, the \pkg{gganatogram} package \cite{maag2018gganatogram},
-the \pkg{ggstatsplot} package \cite{patil2018ggstatsplot}, etc.
-
-\begin{CodeChunk}
-\begin{CodeInput}
-R> # (1) Difficult to implement the symbolic_interval class
-R> ggplot(facedata) + geom_I(aes(x = AD))
-R> # (2) Easy to implement the symbolic_interval class
-R> ggInterval_foo(facedata, aes(x = AD))
-\end{CodeInput}
-\end{CodeChunk}
-
-Furthermore, unlike \pkg{ggplot} with a certain format for the data, the SDA packages in R have been full of the data form itself. There is no standard to stipulate this at all. So, the latter programming syntax may be better to generalize the data to the complex form and benefit to the future maintenance and extension.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2303,6 +2284,43 @@ vignettes can also be download here.
 \section*{Acknowledgments}
 
 The authors wish to thank Oldemar Rodriguez and Hadley Wickham for their excellent package about \pkg{RSDA} and \pkg{ggplot2} . Furthermore, The authors also wish to gratefully acknowledge Diday and others authors about the methods of SDA provided.
+
+\section*{why ggInterval}
+In order to implement the \code{symbolic_tbl} class data and the \code{symbolic_interval} class variables in \pkg{ggplot2}. It encounters some difficult issues to overcome. Specifically, \pkg{ggplot2} makes no consideration on what is required for a complex data to remain valid. We attempt to demonstrate this by using the facedata with the interval-valued variables input as following:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> ggplot(facedata, aes(x = AD))
+\end{CodeInput}
+\begin{CodeOutput}
+Error: `vec_math.symbolic_interval()` not implemented.
+\end{CodeOutput}
+\end{CodeChunk}
+
+To escape the problem, two design thinking can be considered. One is using a new geometric to compatible the kind of variables. But the overloading in \pkg{ggplot2} internal and the extension with other layers is difficult to implement. The other improvement that has been the syntax of \pkg{ggESDA} is to generate the figure directly with the beginning command \code{ggInterval_} and the graphical name subsequently. This kind of programming syntax is also a common way for the \pkg{ggplot2} extensions. For instance, the \pkg{ggtern} package \cite{ggtern}, the \pkg{gganatogram} package \cite{maag2018gganatogram},
+the \pkg{ggstatsplot} package \cite{patil2018ggstatsplot}, etc.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> # (1) Difficult to implement the symbolic_interval class
+R> ggplot(facedata) + geom_I(aes(x = AD))
+R> # (2) Easy to implement the symbolic_interval class
+R> ggInterval_foo(facedata, aes(x = AD))
+\end{CodeInput}
+\end{CodeChunk}
+
+Furthermore, unlike \pkg{ggplot} with a certain format for the data, the SDA packages in R have been full of the data form itself. There is no standard to stipulate this at all. So, the latter programming syntax may be better to generalize the data to the complex form and benefit to the future maintenance and extension.
+
+
+\section*{Packages dependency}
+"GeoXp depends on several packages. The spdep package contains classes for spatial weight
+matrices which are used in GeoXp for its econometrics functions. spdep depends itself on
+the sp and maptools packages described above, necessary for the Spatial class definition and
+for importing Spatial format files like shapefiles. The qsreg function of the fields package
+(Furrer, Nychka, and Sain 2012) is necessary for drawing a quantile spline regression which
+is an option common to scatterplot graphics. The bkde function of the KernSmooth package
+(Wand 2011) is used for distribution density plot. Finally, the inout function of the splancs
+package (Rowlingson, Diggle, and Bivand 2012) is used for selection, to test point inclusion
+in a polygon."
 
 
 
