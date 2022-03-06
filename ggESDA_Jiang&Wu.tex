@@ -2360,8 +2360,48 @@ numbers.
 "
 
 
-
+\section*{other addition}
+描述函數的表格? (from Sim.DiffProc)
+function    Main arguments    Description
+-----
+...
  
+
+
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{aaa}
+    \begin{tabular}{clp{12em}p{17.19em}}
+    \hline
+    Type  & Function & \multicolumn{1}{l}{ Main arguments} & \multicolumn{1}{l}{Description} \\
+    \hline
+    \multirow{15}[2]{*}{Univariate} & \code{index()} & \code{fill}: clustering with color. \code{plotAll}: logical, whether plot all variables. & Visualize the interval, usually clustering by the color mapping or arranging by the specific align. \\
+          & \code{boxplot()} & \code{plotAll}: logical, whether plot all variables. & Visualize the quantile of interval-valued variables. \\
+          & \code{hist(}) & \code{method}: determine graph type. \code{position}: "identity" or "stack", graph type on multi-groups. & Visualize the distribution of interval-valued variables with the predefined subintervals or generate by itself. \\
+          & \code{centerRange()} & \code{plotAll}: logical, whether plot all variables. & Visualize the relationship between center and range by characteristics of interval-valued data. \\
+          & \code{minmax()} & \code{scaleXY}: "local" or "global", limitation of axes. & Visualize the interval and compare the difference of observations through the specific line. \\
+    \hline
+    \multirow{5}[2]{*}{Bivariate} & \code{scatter()} & \code{geom\_rect output}. \code{x}, \code{y}: determine the interval of rectangle. & Visualize the area formed by two interval-valued variables. \\
+          & \code{2Dhist()} & \code{xBins}, \code{yBins}: number of subintervals. & Visualize the frequency of the intersection of two predefined subintervals. \\
+    \hline
+    \multirow{15}[2]{*}{Multivariate} & \code{radar()} & \code{inOneFig}: logical, whether plot in the same figure. \code{plotPartial}: specify the observations to plot. & Visualize multiple interval-valued and modal multi-valued variables using a radar (star) type. \\
+          & \code{indexImage()} & \code{column\_condition}: logical, condition type. & Visualize the interval data by gradient color mapped by the value in the interval and usually form as a heatmap visualization. \\
+          & \code{scaMatrix()} & \code{showLegend}: logical, determine the legend visible. & Extend the \code{scatter()} to all variables visualization using matrix type. \\
+          & \code{2DhistMatrix()} & \code{addFreq}: logical, whether add frequency in cells. & Extend the \code{2Dhist()} to all variables visualization using matrix type. \\
+          & \code{3Dscatter()} & \code{scale}: logical, whether standardize data. & Visualize the projection of the area formed by three interval-valued variables. \\
+    \hline
+    \multirow{10}[2]{*}{Others} & \code{classic2sym()} &  \code{groupby}: aggregation methods. \code{minData}, \code{maxData}: customize aggregation. & Aggregate classical data frame to a ggESDA object which contains various presentation types of a symbolic object, mostly an RSDA object. \\
+          & \code{RSDA2sym()} & \code{data}: an \pkg{RSDA} object data. & Transform the \pkg{RSDA} object into a \pkg{ggESDA} object. \\
+          & \code{cov()} & \code{x}, \code{y}: a \code{symbolic\_interval} type data. & Calculate the covariance between two interval-valued variables. \\
+          & \code{scale\_sym()} & \code{data}: an \pkg{RSDA} object data. & Standardize the symbolic data. \\
+    \hline
+    \end{tabular}%
+  \label{tab:function_summary}%
+\end{table}%
+
+
 
 
 
