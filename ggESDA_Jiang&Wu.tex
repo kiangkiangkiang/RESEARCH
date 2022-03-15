@@ -2406,43 +2406,51 @@ function    Main arguments    Description
 \subsection{段落}
 \subsubsection{introduction}
 \subsubsection{Example data}
-介紹這篇論文用哪些資料集展示
+%介紹這篇論文用哪些資料集展示
 \subsubsection{Design and implementation}
-介紹設計邏輯, 設計架構, 
+%介紹設計邏輯, 設計架構, 
 1. Data
 
-(因為不好直接使用ggplot2中的原生function所以覆寫掉)
-2. Scales: 介紹這篇自己寫的scale_*，覆寫了ggplot2的sec_axis(),scale_(x|y)_continuous()，以及使用
-3. Geometries: 介紹這篇自己寫的geom_*... geom_col(), geom_area(),
-geom_point(), and geom_line()
-4. Facets: 介紹這篇自己寫的facet_* ...
+%(因為不好直接使用ggplot2中的原生function所以覆寫掉)
+%2. Scales: 介紹這篇自己寫的scale_*，覆寫了ggplot2的sec_axis(),scale_(x|y)_continuous()，以及使用
+%3. Geometries: 介紹這篇自己寫的geom_*... geom_col(), geom_area(),
+%geom_point(), and geom_line()
+%4. Facets: 介紹這篇自己寫的facet_* ...
 
 
 5. Theme elements
-6. Statistical helpers (視覺化其他套件的分析結果)
+6. Statistical helpers %(視覺化其他套件的分析結果)
 \subsubsection{Example}
 \subsubsection{Discussion}
 \subsubsection{Conclusions}
 
 \subsection{可用文句}
-介紹facet使用
+%介紹facet使用
 "enable the use of the ggplot2 facet mechanism to display multi-parameter
 data."
+"In the Grammar of Graphics, facets are defined as displaying subsets of a data set in panels
+of the same graphic (Wilkinson 2005). Using a data structure with one row per measurement,
+plotting multiple parameters on same plot using facets is a natural way to represent these
+data. In ggplot2, facets also coordinate the scales and labels for each panel."
 
-"In the Grammar of Graphics, facets are defined as displaying subsets of a data set in panels of the same graphic (Wilkinson 2005). Using a data structure with one row per measurement, plotting multiple parameters on same plot using facets is a natural way to represent these data. In ggplot2, facets also coordinate the scales and labels for each panel."
 
-視覺化複雜資料很重要
+
+%視覺化複雜資料很重要
 "Effective visualization of these complex, multivariate data matters. "
 
-先前套件都不是用ggplot2, 但這個是用ggplot2
-"Whereas previous software packages for creating stratigraphic diagrams (e.g., C2, Tillia*Graph, rioja, and analogue) use a graphical user interface or base R plotting approach (Grimm 2016; Juggins 2011, 2020; Simpson 2007), in the tidypaleo package, we use the defaults and flexible interface of the ggplot2 package (Wickham 2016) as a base on which effective paleoenvironmental diagrams can be built."
+%先前套件都不是用ggplot2, 但這個是用ggplot2
+"Whereas previous software packages for creating stratigraphic diagrams (e.g., C2, Tillia*Graph, rioja,
+and analogue) use a graphical user interface or base R plotting approach (Grimm 2016; Juggins
+2011, 2020; Simpson 2007), in the tidypaleo package, we use the defaults and flexible interface of the ggplot2 package (Wickham 2016) as a base on which effective paleoenvironmental
+diagrams can be built."
 
-介紹怎麼讀檔案 (ggESDA可透過RSDA提供的function讀寫檔案)
+%介紹怎麼讀檔案 (ggESDA可透過RSDA提供的function讀寫檔案, 或symbolicDA中有介紹如何將symbolicDA物件轉換成RSDA版本, 再用)
 "To read and convert a spreadsheet to the form required by tidypaleo, one can use the readxl and tidyr packages."
 
 
-用ggplot2的概念就可以創建圖形
-"While tidypaleo does require coding to make a publishable diagram, there are a large number of resources from which users can draw to learn ggplot2. We think this also benefits users, who can re-use ggplot2 concepts from tidypaleo to create high-quality diagrams in other disciplines."
+%用ggplot2的概念就可以創建圖形
+"While tidypaleo does require coding to make a publishable diagram, there are a large number of resources from which users can draw to learn ggplot2. We think this also benefits users, who can re-use ggplot2 concepts from tidypaleo to
+create high-quality diagrams in other disciplines."
 
 
 
