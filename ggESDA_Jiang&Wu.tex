@@ -2424,7 +2424,7 @@ function    Main arguments    Description
 \subsubsection{Discussion}
 \subsubsection{Conclusions}
 
-\subsection{Usable sentence}}
+\subsection{Usable sentence}
 %介紹facet使用
 "enable the use of the ggplot2 facet mechanism to display multi-parameter
 data."
@@ -2508,10 +2508,46 @@ However, not all functions in \pkg{ggESDA} can use the method to classify by gro
 
 \section*{read and write file}
 
-The \pkg{ggESDA} package remains the usage of \pkg{RSDA} including the I/O (input/output) functions, such as \code{read.sym.table} or \code{write.sym.table}. To access a CSV (Comma-Separated Values) file, here we can see some essential parameters like \code{file}, \code{sep}, or \code{dec} that allow users to construct their own file with a specific format. Most of these cases follow the rules of the common \prolang{R} function, \code{read.table}. It's also worth mentioning that the format of each variable in the output file starts with the sign \$, and the consequent is the variable-defined sign M/I (M = Modal Multi-Valued, I = Interval-Valued). If the variable is modal multi-valued type, the follow-up value will be the number of modal and probability of each modal. If not, the follow-up value will be its interval. All values will be separated by \code{sep}.
+The \pkg{ggESDA} package remains the usage of \pkg{RSDA} including the I/O (input/output) functions, such as \code{read.sym.table} or \code{write.sym.table}. To access a CSV (Comma-Separated Values) file, here we can see some essential parameters like \code{file}, \code{sep}, or \code{dec} that allow users to construct their own file with a specific format. Most of these cases follow the rules of the common \proglang{R} function, \code{read.table}. It's also worth mentioning that the format of each variable in the output file starts with the sign \$, and the consequent is the variable-defined sign M/I (M = Modal Multi-Valued, I = Interval-Valued). If the variable is modal multi-valued type, the follow-up value will be the number of modal and probability of each modal. If not, the follow-up value will be its interval. All values will be separated by \code{sep}.
 
+\section*{Deom graph}
 
+%Symbolic.Data.Analysis.and.the.SODAS.Software
+We use \pkg{ggESDA} to demonstrate the basic plot in some famous SDA books. (1) Histogram: In the chapter 3 of \cite{billard:2006}, we see how to calculate the frequency of a histogram. On page 84 of the book, the histogram of mushroom dataset can be simply implemented by the following code and shown as Figure \ref{fig:demo_book_hist}:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> ggInterval_hist(mushroom, aes(x = Stipe.Lengths), bins = 6)
+\end{CodeInput}
+\end{CodeChunk}
 
+(2) 2D-histogram: In chapter 4, calculating the frequency of the joint histogram is mentioned. On page 111, we can see the 3D histogram of blood pressure datasets. Unfortunately, \pkg{ggplot2} does not implement the 3D plot, so we substitute the z-axis as the color. By the following code and shown as Figure \ref{fig:demo_book_2dhist}:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> p <- ggInterval_2Dhist(Cardiological2[-11, ], 
++                       aes(x = Syst ,y = Diast, col = "gray70"),
++                       xBins = 6,
++                       yBins = 4)
+R> p + scale_fill_gradient2(low = "white",
++                         high = "red",
++                         limits = c(0, 1.8),
++                         na.value = "red") +
++      theme_bw()
+\end{CodeInput}
+\end{CodeChunk}
+
+(3) Zoomstar: We also use \pkg{ggESDA} demonstrate the zoomstar (radar) plot in the chapter 7 of \cite{diday:2008} (page 113) shown as Figure \ref{fig:book_demo_radar} by the code:
+\begin{CodeChunk}
+\begin{CodeInput}
+R> p <- ggInterval_radar(Environment, plotPartial = 5,
++                        type = "rect", showLegend = F,
++                        addText = T, base_lty = 1,
++                        base_circle = F)
+
+R> p + scale_fill_manual(values = "gray50") +
++      scale_colour_manual(values = "gray30")
+
+\end{CodeInput}
+\end{CodeChunk}
 
 
 
@@ -2796,6 +2832,7 @@ and (d) Index image with extended color.}
 \end{figure}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figure                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2804,6 +2841,7 @@ and (d) Index image with extended color.}
 \includegraphics[width=1\textwidth]{pic/scatter} 
 \caption{\label{fig:scatter}}
 \end{figure}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2833,6 +2871,38 @@ and (d) Index image with extended color.}
 	\caption{\label{fig:index_allvar} }
 \end{figure}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/demo_book_hist} 
+\caption{\label{fig:demo_book_hist}}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/demo_book_2dhist} 
+\caption{\label{fig:demo_book_2dhist}}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1\textwidth]{pic/demo_book_radar} 
+\caption{\label{fig:demo_book_radar}}
+\end{figure}
 
 \end{appendix}
 
