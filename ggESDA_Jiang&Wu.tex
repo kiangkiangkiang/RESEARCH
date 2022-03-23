@@ -2506,19 +2506,19 @@ R> ggInterval_scatter(demo_data, aes(x = AD, y= BC)) +
 However, not all functions in \pkg{ggESDA} can use the method to classify by group. Because of the algorithm processing, the data user input may change into different types. For instance, in order to obtain the frequency of a histogram, the quantile of a boxplot, or a normalized data of radar, it becomes difficult to remain the raw face of data. To solve the problem, one simple way to classify these cases is via aesthetic \code{fill}. The other is via the \code{plotAll} argument and adjust the input data appropriately.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 \section*{read and write file}
+
+The \pkg{ggESDA} package remains the usage of \pkg{RSDA} including the I/O (input/output) functions, such as \code{read.sym.table} or \code{write.sym.table}. To access a CSV (Comma-Separated Values) file, here we can see some essential parameters like \code{file}, \code{sep}, or \code{dec} that allow users to construct their own file with a specific format. Most of these cases follow the rules of the common \prolang{R} function, \code{read.table}. It's also worth mentioning that the format of each variable in the output file starts with the sign \$, and the consequent is the variable-defined sign M/I (M = Modal Multi-Valued, I = Interval-Valued). If the variable is modal multi-valued type, the follow-up value will be the number of modal and probability of each modal. If not, the follow-up value will be its interval. All values will be separated by \code{sep}.
+
+
+
+
+
+
+
+
+
+
 
 
 
