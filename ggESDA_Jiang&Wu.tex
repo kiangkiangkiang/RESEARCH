@@ -2281,7 +2281,7 @@ vignettes can also be download here.
 
 The authors wish to thank Oldemar Rodriguez and Hadley Wickham for their excellent package about \pkg{RSDA} and \pkg{ggplot2} . Furthermore, The authors also wish to gratefully acknowledge Diday and others authors about the methods of SDA provided.
 
-\section*{why ggInterval}
+\section*{why ggInterval}\label{sec:pkg_problem}
 In order to implement the \code{symbolic_tbl} class data and the \code{symbolic_interval} class variables in \pkg{ggplot2}. It encounters some difficult issues to overcome. Specifically, \pkg{ggplot2} makes no consideration on what is required for a complex data to remain valid. We attempt to demonstrate this by using the facedata with the interval-valued variables input as following:
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -2468,7 +2468,7 @@ R> ggInterval_hist(facedata, aes(x = AD)) +
 \end{CodeChunk}
 
 % Geometries
-The common visual representations of \pkg{ggplot2} geometries can easily add to the existing graphic created by \pkg{ggESDA}. Such as \code{geom_point}, \code{geom_line}, or \code{geom_area}.
+The common visual representations of \pkg{ggplot2} geometries can easily add to the existing graphic created by \pkg{ggESDA}. Such as \code{geom_point}, \code{geom_line}, \code{geom_text}, or \code{geom_area}.
 \begin{CodeChunk}
 \begin{CodeInput}
 R> ggInterval_index(facedata, aes(y = AD)) +
@@ -2503,8 +2503,17 @@ R> ggInterval_scatter(demo_data, aes(x = AD, y= BC)) +
 \end{CodeInput}
 \end{CodeChunk}
 
-However, not all functions in \pkg{ggESDA} can use the method to classify by group. Because of the algorithm processing, the data user input may change into different types. For instance, in order to obtain the frequency of a histogram, the quantile of a boxplot, or a normalized data of radar, it becomes difficult to remain the raw face of data. To solve the problem, one simple way to classify these cases is via aesthetic \code{fill}. The other is via the \code{plotAll} argument and adjust the input data appropriately.
+In general, most additional layers or scales can be added to the existing \pkg{ggESDA} graph, but there is still some case that may conflict with the basic plot. The inherit problem due to the complex data type mentioned in Section \ref{sec:pkg_problem} may cause some issues that we were difficult to combine with default aesthetics. For instance, \code{geom_bar}, \code{geom_count},  \code{geom_density}, \code{geom_dotplot}, etc. The graphic concept of these cases mostly comes from the thinking that generating a basic plot rather than an additional layer. Therefore, the traditional plotting algorithm receiving the symbolic data becomes the crucial conflict.
 
+
+Furthermore, not all functions in \pkg{ggESDA} can use the method to classify by group. Because of the algorithm processing, the data user input may change into different types. For instance, in order to obtain the frequency of a histogram, the quantile of a boxplot, or a normalized data of radar, it becomes difficult to remain the raw face of data. To solve the problem, one simple way to classify these cases is via aesthetic \code{fill}. The other is via the \code{plotAll} argument and adjust the input data appropriately.
+
+
+\begin{description}
+     \item[Scales:] I would like to describe something here
+     \item[Geometries:] \code{geom_bar}, \code{geom_count},  \code{geom_density}, \code{geom_dotplot}, etc.
+     \item[Facets:] And give a warning here
+\end{description}
 
 \section*{read and write file}
 
