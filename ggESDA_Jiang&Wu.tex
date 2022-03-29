@@ -2544,6 +2544,8 @@ R> p + scale_fill_gradient2(low = "white",
 \end{CodeInput}
 \end{CodeChunk}
 
+The frequency of the 2D-histogram is shown as Table \ref{tab:demo_book}. There is a slight difference with the book, due to the division of subintervals. In the demonstration, the division rule of subintervals is to keep all lengths of intervals equal. Also, the minimum and maximum values of subintervals are defined by the sample space as mentioned by \cite{billard:2006}.
+
 (3) Zoomstar: We also use \pkg{ggESDA} demonstrate the zoomstar (radar) plot in the chapter 7 of \cite{diday:2008} (page 113) shown as Figure \ref{fig:book_demo_radar} by the code:
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -2560,6 +2562,25 @@ R> p + scale_fill_manual(values = "gray50") +
 
 
 
+
+\begin{table}[htbp]
+  \centering
+  \caption{Joint Frequency (X = Syst, Y = Diast)}
+    \begin{tabular}{rccccccc}
+              & Y     & 1     & 2     & 3     & 4     &       &  \\
+    \multicolumn{1}{c}{X} & X\textbackslash Y & [50, 69) & [69,   88) & [88, 106) & [106, 125) & Frequency of Y & Margin of Y \\
+    \hline
+    \multicolumn{1}{c}{1} & [90, 108) & 1.875  & 0.859  & 0.057  & 0.000  & 2.791 & 0.199  \\
+    \multicolumn{1}{c}{2} & [108, 127) & 0.000  & 1.536  & 0.811  & 0.052  & 2.399 & 0.171  \\
+    \multicolumn{1}{c}{3} & [127, 145) & 0.000  & 1.555  & 2.151  & 0.208  & 3.914 & 0.280  \\
+    \multicolumn{1}{c}{4} & [145, 163) & 0.000  & 0.565  & 1.081  & 0.103  & 1.749 & 0.125  \\
+    \multicolumn{1}{c}{5} & [163, 182) & 0.000  & 0.100  & 1.197  & 0.179  & 1.476 & 0.105  \\
+    \multicolumn{1}{c}{6} & [182, 200) & 0.000  & 0.046  & 0.698  & 0.926  & 1.67  & 0.119  \\
+          & Frequency of X & 1.875  & 4.661  & 5.995  & 1.468  & 14    &  \\
+          & Margin of X & 0.134  & 0.333  & 0.428  & 0.105  &       & 1.000  \\
+    \end{tabular}%
+  \label{tab:demo_book}%
+\end{table}%
 
 
 
