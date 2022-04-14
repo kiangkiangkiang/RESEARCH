@@ -1138,7 +1138,7 @@ R>   theme_classic() +
 R>   stat_ellipse(geom = "polygon", fill = "blue",
 R>                alpha = 0.05, col = "grey")
                                 
-R> face.scale <- scale_sym(facedata)$intervalData #scale
+R> face.scale <- scale(facedata)$intervalData #scale
                                 
 R> ggInterval_centerRange(face.scale, aes(size = 1.5),
                             plotAll = T)+
@@ -1755,8 +1755,9 @@ these explicitly.
 Function            & Description    \\ \hline
 \code{classic2sym}  & Convert the classical data to symbolic data \\ \hline
 \code{RSDA2sym}  & Convert the \pkg{RSDA} object to \pkg{ggESDA} object \\ \hline
-\code{scale_sym} & standardize the symbolic data  \\ \hline
+\code{scale} & standardize the symbolic data  \\ \hline
 \code{cov} & Covariance of interval-valued variables  \\ \hline
+\code{summary} & Summary of the symbolic data table \\ \hline
 \end{tabular}
 \caption{\label{tab:utility} Utility.}
 \end{table}
@@ -2394,7 +2395,8 @@ function    Main arguments    Description
     \multirow{10}[2]{*}{Others} & \code{classic2sym} &  \code{groupby}: aggregation methods. \code{minData}, \code{maxData}: customize aggregation. & Aggregate classical data frame to a ggESDA object which contains various presentation types of a symbolic object, mostly an RSDA object. \\
           & \code{RSDA2sym} & \code{data}: an \pkg{RSDA} object data. & Transform the \pkg{RSDA} object into a \pkg{ggESDA} object. \\
           & \code{cov} & \code{x}, \code{y}: a \code{symbolic\_interval} type data. & Calculate the covariance between two interval-valued variables. \\
-          & \code{scale\_sym} & \code{data}: an \pkg{RSDA} object data. & Standardize the symbolic data. \\
+          & \code{scale} & \code{x}: an \pkg{RSDA} object data. & Standardize the symbolic data. \\
+          & \code{summary} & \code{object}: an \pkg{RSDA} object data. & Summary of the symbolic data table. \\
     \hline
     \end{tabular}%
   \label{tab:function_summary}%
@@ -2544,7 +2546,28 @@ R> p + scale_fill_gradient2(low = "white",
 \end{CodeInput}
 \end{CodeChunk}
 
-The frequency of the 2D-histogram is shown as Table \ref{tab:demo_book}. There is a slight difference with the book, due to the division of subintervals. In the demonstration, the division rule of subintervals is to keep all lengths of intervals equal. Also, the minimum and maximum values of subintervals are defined by the sample space as mentioned by \cite{billard:2006}.
+The frequency of the 2D-histogram is shown as follow. There is a slight difference with the book, due to the division of subintervals. In the demonstration, the division rule of subintervals is to keep all lengths of intervals equal.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> p$`Table (Syst, Diast)`
+\end{CodeInput}
+\end{CodeChunk}%$
+
+\begin{CodeChunk}
+\begin{CodeOutput}
+                  [50:68.75] [69:87.5] [88:106.25] [106:125] Frequency of Diast Margin of Diast
+[90:108.33]            1.875     0.859       0.057         0              2.791           0.199
+[108:126.67]               0     1.536       0.811     0.052              2.399           0.171
+[127:145]                  0     1.555       2.151     0.208              3.914            0.28
+[145:163.33]               0     0.565       1.081     0.103              1.749           0.125
+[163:181.67]               0       0.1       1.197     0.179              1.476           0.105
+[182:200]                  0     0.046       0.698     0.926               1.67           0.119
+Frequency of Syst      1.875     4.661       5.995     1.468                 14                
+Margin of Syst         0.134     0.333       0.428     0.105                                  1
+\end{CodeOutput}
+\end{CodeChunk}
+
 
 (3) Zoomstar: We also use \pkg{ggESDA} demonstrate the zoomstar (radar) plot in the chapter 7 of \cite{diday:2008} (page 113) shown as Figure \ref{fig:book_demo_radar} by the code:
 \begin{CodeChunk}
@@ -2561,35 +2584,73 @@ R> p + scale_fill_manual(values = "gray50") +
 \end{CodeChunk}
 
 
+\section*{demo ggESDAsummary function}
 
+\subsection*{Symbolic data table object}
+%讓output少一點比較簡潔所以設定1:8
+\begin{CodeChunk}
+\begin{CodeInput}
+R> summary(Environment[1:8])
+\end{CodeInput}
+\end{CodeChunk}
 
-\begin{table}[htbp]
-  \centering
-  \caption{Joint Frequency (X = Syst, Y = Diast)}
-    \begin{tabular}{rccccccc}
-              & Y     & 1     & 2     & 3     & 4     &       &  \\
-    \multicolumn{1}{c}{X} & X\textbackslash Y & [50, 69) & [69,   88) & [88, 106) & [106, 125) & Frequency of Y & Margin of Y \\
-    \hline
-    \multicolumn{1}{c}{1} & [90, 108) & 1.875  & 0.859  & 0.057  & 0.000  & 2.791 & 0.199  \\
-    \multicolumn{1}{c}{2} & [108, 127) & 0.000  & 1.536  & 0.811  & 0.052  & 2.399 & 0.171  \\
-    \multicolumn{1}{c}{3} & [127, 145) & 0.000  & 1.555  & 2.151  & 0.208  & 3.914 & 0.280  \\
-    \multicolumn{1}{c}{4} & [145, 163) & 0.000  & 0.565  & 1.081  & 0.103  & 1.749 & 0.125  \\
-    \multicolumn{1}{c}{5} & [163, 182) & 0.000  & 0.100  & 1.197  & 0.179  & 1.476 & 0.105  \\
-    \multicolumn{1}{c}{6} & [182, 200) & 0.000  & 0.046  & 0.698  & 0.926  & 1.67  & 0.119  \\
-          & Frequency of X & 1.875  & 4.661  & 5.995  & 1.468  & 14    &  \\
-          & Margin of X & 0.134  & 0.333  & 0.428  & 0.105  &       & 1.000  \\
-    \end{tabular}%
-  \label{tab:demo_book}%
-\end{table}%
+\begin{CodeChunk}
+\begin{CodeOutput}
+$symbolic_interval
+                    CONTROL             SATISFY          INDIVIDUAL               WELFARE
+Min.    [-723.25 : -339.65] [-570.57 : -259.45] [-826.25 : -484.48] [-1,117.93 : -607.36]
+1st Qu.   [-270.31 : 83.66]  [-355.04 : -60.17]  [-508.97 : -88.07]     [-218.83 : 83.58]
+Median   [-189.18 : 188.39]  [-176.68 : 189.71]  [-202.13 : 132.72]    [-121.10 : 211.53]
+Mean        [-9.75 : -9.75]     [10.97 : 10.97]   [-31.16 : -31.16]       [11.02 : 11.02]
+3rd Qu.   [-28.26 : 307.38]    [20.92 : 328.60]   [120.46 : 394.34]      [80.50 : 443.49]
+Max.      [133.40 : 478.04]   [342.58 : 705.03]   [484.35 : 817.59]     [210.84 : 576.22]
+Std.      [209.53 : 209.53]   [287.41 : 287.41]   [377.18 : 377.18]     [341.97 : 341.97]
 
+$symbolic_modal
+     URBANICITY INCOMELEVEL EDUCATION REGIONDEVELOPME
+[1,] 6: 0.15    25: 0.32    1: 0.37   4: 0.54        
+[2,] 4: 0.44    50: 0.20    3: 0.34   3: 0.23        
+[3,] 5: 0.10    75: 0.25    5: 0.16   2: 0.15        
+[4,] 1: 0.19    90: 0.13    6: 0.13   1: 0.07        
+[5,] 3: 0.07    100: 0.10                            
+[6,] 2: 0.04                                         
 
+\end{CodeOutput}
+\end{CodeChunk}
 
+\subsection*{Symbolic interval object}
 
+\begin{CodeChunk}
+\begin{CodeInput}
+R> summary(facedata$AD)
+\end{CodeInput}
+\end{CodeChunk}
 
+\begin{CodeChunk}
+\begin{CodeOutput}
+<symbolic_interval[7]>
+             Min.           1st Qu.            Median              Mean           3rd Qu. 
+[149.34 : 155.32] [154.56 : 158.91] [163.00 : 167.07] [162.90 : 162.90] [167.13 : 171.19] 
+             Max.              Std. 
+[169.85 : 175.15]     [6.82 : 6.82] 
+\end{CodeOutput}
+\end{CodeChunk}
 
+\subsection*{Symbolic modal object}
 
-\section*{ggtern: Ternary Diagrams Using ggplot2}
+\begin{CodeChunk}
+\begin{CodeInput}
+R> summary(Environment$URBANICITY)
+\end{CodeInput}
+\end{CodeChunk}
 
+%modal 順序是依照原本data給的順序
+\begin{CodeChunk}
+\begin{CodeOutput}
+   6    4    5    1    3    2 
+0.15 0.44 0.10 0.19 0.07 0.04 
+\end{CodeOutput}
+\end{CodeChunk}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Reference                                                                  %%
